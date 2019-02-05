@@ -13,6 +13,13 @@
 # dNTP        0.5       48
 # TaqGold     0.5       48
 
+h20.reagent=
+buffer.reagent=
+mgcl.reagent=
+bsa.reagent=
+dntp.reagent=
+taq.reagent=
+
 ####################################
 # To be added later (to each well) #
 ####################################
