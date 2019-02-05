@@ -45,6 +45,15 @@ metadata = {
 # MODULES
 temp_deck = modules.load('tempdeck', '9')
 temp_plate = labware.load('opentrons-aluminum-block-2ml-eppendorf', '9', share=True)
+    #Accessing Wells: single channel ['A1']-['D6']
+    #A1     H20         1500 ul 
+    #A2     10x buffer  260 ul
+    #A3     MgCl2       260 ul
+    #A4     BSA         150 ul
+    #A5     dNTP        50 ul
+    #A6     Taq         50 ul
+    #C1     Mastermix1
+    #C2     Mastermix2
 temp_plate.set_temperature(4)
 temp_deck.wait_for_temp()
 
@@ -53,8 +62,8 @@ tipracks_300 = [labware.load('tiprack-200ul', slot, share=True) for slot in ['1'
 tipracks_50 = [labware.load('tiprack-200ul', slot, share=True) for slot in ['1','2','4','5','6	']]
 
 # PIPETTES
-m300 = instruments.P300_Single(mount='left', tip_racks=tipracks_300)
-s50 = instruments.P50_Multi(mount='right', tip_racks=tipracks_50)
+s300 = instruments.P300_Single(mount='left', tip_racks=tipracks_300)
+m50 = instruments.P50_Multi(mount='right', tip_racks=tipracks_50)
 
 # PROTOCOL
 
@@ -66,6 +75,84 @@ bsa_tot= bsa * nsamples
 dntp_tot= dntp * nsamples
 taq_tot= taq * nsamples
 
+#Transfer water
+dispvol = h20_tot/2
+s300.pick_up_tip(tipracks_300.wells('A1'))
+if dispvol < 300:
+    s300.transfer(dispvol, temp_plate.wells('A1'), temp_plate.wells('C1'), mix_before=(2, 50))
+    s300.transfer(dispvol, temp_plate.wells('A1'), temp_plate.wells('C2'))
+elif dispvol < 600:
+    s300.transfer(dispvol/2, temp_plate.wells('A1'), temp_plate.wells('C1'), mix_before=(2, 50))
+    s300.transfer(dispvol/2, temp_plate.wells('A1'), temp_plate.wells('C1'))
+    s300.transfer(dispvol/2, temp_plate.wells('A1'), temp_plate.wells('C2'))
+    s300.transfer(dispvol/2, temp_plate.wells('A1'), temp_plate.wells('C2'))
+elif dispvol < 900:
+    s300.transfer(dispvol/3, temp_plate.wells('A1'), temp_plate.wells('C1'), mix_before=(2, 50))
+    s300.transfer(dispvol/3, temp_plate.wells('A1'), temp_plate.wells('C1'))
+    s300.transfer(dispvol/3, temp_plate.wells('A1'), temp_plate.wells('C1'))
+    s300.transfer(dispvol/3, temp_plate.wells('A1'), temp_plate.wells('C2'))
+    s300.transfer(dispvol/3, temp_plate.wells('A1'), temp_plate.wells('C2'))
+    s300.transfer(dispvol/3, temp_plate.wells('A1'), temp_plate.wells('C2'))
+s300.drop_tip(trash)
 
-s50.transfer(100, temp_plate.wells('A1'), temp_plate.wells('B2'))
+#Transfer 10x buffer
+dispvol = buffer_tot/2
+s300.pick_up_tip(tipracks_300.wells('A2'))
+if dispvol < 300:
+    s300.transfer(dispvol, temp_plate.wells('A2'), temp_plate.wells('C1'), mix_before=(2, 50))
+    s300.transfer(dispvol, temp_plate.wells('A2'), temp_plate.wells('C2'))
+elif dispvol < 600:
+    s300.transfer(dispvol/2, temp_plate.wells('A2'), temp_plate.wells('C1'), mix_before=(2, 50))
+    s300.transfer(dispvol/2, temp_plate.wells('A2'), temp_plate.wells('C1'))
+    s300.transfer(dispvol/2, temp_plate.wells('A2'), temp_plate.wells('C2'))
+    s300.transfer(dispvol/2, temp_plate.wells('A2'), temp_plate.wells('C2'))
+elif dispvol < 900:
+    s300.transfer(dispvol/3, temp_plate.wells('A2'), temp_plate.wells('C1'), mix_before=(2, 50))
+    s300.transfer(dispvol/3, temp_plate.wells('A2'), temp_plate.wells('C1'))
+    s300.transfer(dispvol/3, temp_plate.wells('A2'), temp_plate.wells('C1'))
+    s300.transfer(dispvol/3, temp_plate.wells('A2'), temp_plate.wells('C2'))
+    s300.transfer(dispvol/3, temp_plate.wells('A2'), temp_plate.wells('C2'))
+    s300.transfer(dispvol/3, temp_plate.wells('A2'), temp_plate.wells('C2'))
+s300.drop_tip(trash)
+
+#Transfer MgCl2
+dispvol = mgcl_tot/2
+s300.pick_up_tip(tipracks_300.wells('A3'))
+if dispvol < 300:
+    s300.transfer(dispvol, temp_plate.wells('A3'), temp_plate.wells('C1'), mix_before=(2, 50))
+    s300.transfer(dispvol, temp_plate.wells('A3'), temp_plate.wells('C2'))
+elif dispvol < 600:
+    s300.transfer(dispvol/2, temp_plate.wells('A3'), temp_plate.wells('C1'), mix_before=(2, 50))
+    s300.transfer(dispvol/2, temp_plate.wells('A3'), temp_plate.wells('C1'))
+    s300.transfer(dispvol/2, temp_plate.wells('A3'), temp_plate.wells('C2'))
+    s300.transfer(dispvol/2, temp_plate.wells('A3'), temp_plate.wells('C2'))
+elif dispvol < 900:
+    s300.transfer(dispvol/3, temp_plate.wells('A3'), temp_plate.wells('C1'), mix_before=(2, 50))
+    s300.transfer(dispvol/3, temp_plate.wells('A3'), temp_plate.wells('C1'))
+    s300.transfer(dispvol/3, temp_plate.wells('A3'), temp_plate.wells('C1'))
+    s300.transfer(dispvol/3, temp_plate.wells('A3'), temp_plate.wells('C2'))
+    s300.transfer(dispvol/3, temp_plate.wells('A3'), temp_plate.wells('C2'))
+    s300.transfer(dispvol/3, temp_plate.wells('A3'), temp_plate.wells('C2'))
+s300.drop_tip(trash)
+
+#Transfer BSA
+dispvol = bsa_tot/2
+s300.pick_up_tip(tipracks_300.wells('A4'))
+if dispvol < 300:
+    s300.transfer(dispvol, temp_plate.wells('A4'), temp_plate.wells('C1'), mix_before=(2, 50))
+    s300.transfer(dispvol, temp_plate.wells('A4'), temp_plate.wells('C2'), )
+elif dispvol < 600:
+    s300.transfer(dispvol/2, temp_plate.wells('A4'), temp_plate.wells('C1'), mix_before=(2, 50))
+    s300.transfer(dispvol/2, temp_plate.wells('A4'), temp_plate.wells('C1'))
+    s300.transfer(dispvol/2, temp_plate.wells('A4'), temp_plate.wells('C2'))
+    s300.transfer(dispvol/2, temp_plate.wells('A4'), temp_plate.wells('C2')
+elif dispvol < 900:
+    s300.transfer(dispvol/3, temp_plate.wells('A4'), temp_plate.wells('C1'), mix_before=(2, 50))
+    s300.transfer(dispvol/3, temp_plate.wells('A4'), temp_plate.wells('C1'))
+    s300.transfer(dispvol/3, temp_plate.wells('A4'), temp_plate.wells('C1'))
+    s300.transfer(dispvol/3, temp_plate.wells('A4'), temp_plate.wells('C2'))
+    s300.transfer(dispvol/3, temp_plate.wells('A4'), temp_plate.wells('C2'))
+    s300.transfer(dispvol/3, temp_plate.wells('A4'), temp_plate.wells('C2'))
+s300.drop_tip(trash)
+
 
