@@ -15,12 +15,12 @@ nsamples=96
 # dNTP        0.5       48
 # TaqGold     0.5       48
 
-h20=
-buffer=
-mgcl=
-bsa=
-dntp=
-taq=
+h20=13.5
+buffer=2.5
+mgcl=2.5
+bsa=1.5
+dntp=0.5
+taq=0.5
 
 ####################################
 # To be added later (to each well) #
@@ -139,7 +139,6 @@ s300.drop_tip(trash)
 #Transfer dNTPs
 dispvol = bsa_tot/2
 s300.pick_up_tip(tipracks_300.wells('A4'))
-s300.set_flow_rate(aspirate=50, dispense=50) # change aspiration and dispensation speed to better handle biscosity
 if dispvol < 300:
     s300.transfer(dispvol, temp_plate.wells('A4'), temp_plate.wells('C1'), mix_before=(2, 50), mix_after=(3, 100))
     s300.transfer(dispvol, temp_plate.wells('A4'), temp_plate.wells('C2'), mix_after=(3, 100))
@@ -160,6 +159,7 @@ s300.drop_tip(trash)
 #Transfer BSA
 dispvol = dntp_tot/2
 s300.pick_up_tip(tipracks_300.wells('A4'))
+s300.set_flow_rate(aspirate=50, dispense=50) # change aspiration and dispensation speed to better handle biscosity
 if dispvol < 300:
     s300.transfer(dispvol, temp_plate.wells('A5'), temp_plate.wells('C1'), mix_before=(2, 50), mix_after=(3, 100))
     s300.transfer(dispvol, temp_plate.wells('A5'), temp_plate.wells('C2'), mix_after=(3, 100))
@@ -180,7 +180,6 @@ s300.drop_tip(trash)
 #Transfer taq
 dispvol = taq_tot/2
 s300.pick_up_tip(tipracks_300.wells('A4'))
-s300.set_flow_rate(aspirate=50, dispense=50) # change aspiration and dispensation speed to better handle biscosity
 if dispvol < 300:
     s300.transfer(dispvol, temp_plate.wells('A6'), temp_plate.wells('C1'), mix_before=(2, 50), mix_after=(3, 100))
     s300.transfer(dispvol, temp_plate.wells('A6'), temp_plate.wells('C2'), mix_after=(3, 100))
@@ -197,3 +196,4 @@ elif dispvol < 900:
     s300.transfer(dispvol/3, temp_plate.wells('A6'), temp_plate.wells('C2'))
     s300.transfer(dispvol/3, temp_plate.wells('A6'), temp_plate.wells('C2'), mix_after=(3, 100))
 s300.drop_tip(trash)
+s300.set_flow_rate(aspirate=None, dispense=None) #return to normal aspiration and dispensation speed
