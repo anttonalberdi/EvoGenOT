@@ -13,9 +13,9 @@
 # dNTP        0.5       48
 # TaqGold     0.5       48
 
-#####################
-# To be added later #
-#####################
+####################################
+# To be added later (to each well) #
+####################################
 # Primer-F    1
 # Primer-R    1
 # DNA         2
@@ -33,40 +33,21 @@ metadata = {
     'primers': 'Forward: 341F (CCTAYGGGRBGCASCAG), Reverse: R806 (GGACTACNNGGGTATCTAAT)',
 }
 
+# MODULES
+temp_deck = modules.load('tempdeck', '9')
+temp_plate = labware.load('opentrons-aluminum-block-2ml-eppendorf', '9', share=True)
+temp_plate.set_temperature(4)
+temp_deck.wait_for_temp()
 
-# LABWARE
-elution_plate = labware.load('96-flat', '3')
+# TIP RACKS
+tipracks_300 = [labware.load('tiprack-200ul', slot, share=True) for slot in ['1','2','4','5','6	']]
+tipracks_50 = [labware.load('tiprack-200ul', slot, share=True) for slot in ['1','2','4','5','6	']]
 
 # PIPETTES
-m300 = instruments.P300_Multi(mount='left', tip_racks=tipracks_300)
+m300 = instruments.P300_Single(mount='left', tip_racks=tipracks_300)
+s50 = instruments.P50_Multi(mount='right', tip_racks=tipracks_50)
 
+# PROTOCOL
 
+s50.transfer(100, temp_plate.wells('A1'), temp_plate.wells('B2'))
 
-
-
-
-trough = labware.load('trough-12row', '9')
-mag_deck = modules.load('magdeck', '7')
-mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
-
-tipracks_300 = [labware.load('tiprack-200ul', slot, share=True)
-                for slot in ['1','2','4','5','6	']]
-
-# pipette setup
-
-m300 = instruments.P300_Multi(
-    mount='left',
-    tip_racks=tipracks_300)
-
-SPRI_beads = trough.wells('A1')
-ethanol = trough.wells('A2')
-elution_buffer = trough.wells('A3')
-liquid_trash = trough.wells('A12')
-liquid_trash = trough.wells('A11')
-liquid_trash = trough.wells('A10')
-
-sample_vol = 50
-bead_vol = sample_vol * 1.5
-remove_vol = sample_vol + bead_vol
-ethanol_vol = 3.5 * sample_vol
-elution_vol = 40
