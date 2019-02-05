@@ -2,13 +2,49 @@
 # PCR MIX PROTOCOL FOR OPENTRONS 2 #
 ####################################
 
-#By: Antton Alberdi
-#Version: 1.0
-#Date: 2019/02/05
+#############
+# Mastermix #
+#############
+#             1x        96x
+# ddH20       13.50     1296
+# 10x buffer  2.5       240
+# MgCl2       2.5       240
+# BSA         1.5       144
+# dNTP        0.5       48
+# TaqGold     0.5       48
+
+#####################
+# To be added later #
+#####################
+# Primer-F    1
+# Primer-R    1
+# DNA         2
+####################
 
 from opentrons import labware, instruments, modules, robot
 
+# METADATA
+metadata = {
+    'protocolName': '16S_v3-v4.tagsteady.96',
+    'author': 'Antton Alberdi <anttonalberdi@gmail.com>',
+    'version': '1.0',
+    'date': '2019/02/05',
+    'description': 'PCR mix for 16S rRNA (v3-v4) metabarcoding of bacteria',
+    'primers': 'Forward: 341F (CCTAYGGGRBGCASCAG), Reverse: R806 (GGACTACNNGGGTATCTAAT)',
+}
+
+
+# LABWARE
 elution_plate = labware.load('96-flat', '3')
+
+# PIPETTES
+m300 = instruments.P300_Multi(mount='left', tip_racks=tipracks_300)
+
+
+
+
+
+
 trough = labware.load('trough-12row', '9')
 mag_deck = modules.load('magdeck', '7')
 mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
