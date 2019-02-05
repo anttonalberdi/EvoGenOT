@@ -2,6 +2,8 @@
 # PCR MIX PROTOCOL FOR OPENTRONS 2 #
 ####################################
 
+nsamples=96
+
 #############
 # Mastermix #
 #############
@@ -55,6 +57,15 @@ m300 = instruments.P300_Single(mount='left', tip_racks=tipracks_300)
 s50 = instruments.P50_Multi(mount='right', tip_racks=tipracks_50)
 
 # PROTOCOL
+
+#Calculate total volumes
+h20_tot= h20 * nsamples
+buffer_tot= buffer * nsamples
+mgcl_tot= mgcl * nsamples
+bsa_tot= bsa * nsamples
+dntp_tot= dntp * nsamples
+taq_tot= taq * nsamples
+
 
 s50.transfer(100, temp_plate.wells('A1'), temp_plate.wells('B2'))
 
