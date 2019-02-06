@@ -32,7 +32,8 @@ taq=0.5
 
 from opentrons import labware, instruments, modules, robot
 
-# METADATA
+#### METADATA ####
+
 metadata = {
     'protocolName': '16S_v3-v4.tagsteady.96',
     'author': 'Antton Alberdi <anttonalberdi@gmail.com>',
@@ -42,9 +43,11 @@ metadata = {
     'primers': 'Forward: 341F (CCTAYGGGRBGCASCAG), Reverse: R806 (GGACTACNNGGGTATCTAAT)',
 }
 
-# MODULES
+#### MODULES ####
+
+#Deck 1 - Reagents and mastermixes
 temp_deck1 = modules.load('tempdeck', '9')
-temp_plate1 = labware.load('opentrons-aluminum-block-2ml-eppendorf', '9', share=True)
+temp_plate1 = labware.load('opentrons-aluminum-block-2ml-screwcap', '9', share=True)
     #Accessing Wells: single channel ['A1']-['D6']
     #Spin down all reagents before placing them in the temp deck
     #A1     H20         1500 ul 
@@ -55,20 +58,29 @@ temp_plate1 = labware.load('opentrons-aluminum-block-2ml-eppendorf', '9', share=
     #A6     Taq         50 ul
     #C1     Mastermix1  empty
     #C2     Mastermix2  empty
-temp_deck2 = modules.load('tempdeck', '6')
-temp_plate2 = labware.load('opentrons-aluminum-block-2ml-eppendorf', '9', share=True)
-   
-  
 temp_plate1.set_temperature(4)
 temp_deck.wait_for_temp()
 
-# TIP RACKS (to be updated)
-tipracks_300 = [labware.load('tiprack-200ul', slot, share=True) for slot in ['1','2','4','5','6	']]
-tipracks_50 = [labware.load('tiprack-200ul', slot, share=True) for slot in ['1','2','4','5','6	']]
+#Deck 2 - PCR plate
+temp_deck2 = modules.load('tempdeck', '6')
+temp_plate2 = labware.load('opentrons-aluminum-block-PCR-strips-200ul', '9', share=True)
+temp_plate2.set_temperature(4)
+temp_deck2.wait_for_temp()
+
+#Deck 3 - Primer combinations
+temp_deck3 = modules.load('tempdeck', '3')
+temp_plate3 = labware.load('opentrons-aluminum-block-PCR-strips-200ul', '9', share=True)
+temp_plate3.set_temperature(4)
+temp_deck3.wait_for_temp()
+
+#### TIP RACKS ####
+#(to be updated)
+tipracks_300 = labware.load('tiprack-200ul', '11', share=True)
+tipracks_10 = labware.load('tiprack-200ul', '8', share=True)
 
 # PIPETTES
 s300 = instruments.P300_Single(mount='left', tip_racks=tipracks_300)
-m50 = instruments.P50_Multi(mount='right', tip_racks=tipracks_50)
+m10 = instruments.P10_Multi(mount='right', tip_racks=tipracks_10)
 
 ############
 # PROTOCOL #
@@ -82,7 +94,10 @@ bsa_tot= bsa * nsamples
 dntp_tot= dntp * nsamples
 taq_tot= taq * nsamples
 
-# 1) MASTERMIX PREPARATION #
+mmvol = (h20_tot+buffer_tot+mgcl_tot+bsa_tot+dntp_tot+taq_tot)/2 #mastermix volume per tube
+samplevol= h20+buffer+mgcl+bsa+dntp+taq #mastermix volume per well (sample)
+
+#### 1) MASTERMIX PREPARATION ####
 
 #Transfer water
 dispvol = h20_tot/2
@@ -166,7 +181,7 @@ s300.drop_tip(trash)
 
 #Transfer BSA
 dispvol = dntp_tot/2
-s300.pick_up_tip(tipracks_300.wells('A4'))
+s300.pick_up_tip(tipracks_300.wells('A5'))
 s300.set_flow_rate(aspirate=50, dispense=50) # change aspiration and dispensation speed to better handle biscosity
 if dispvol < 300:
     s300.transfer(dispvol, temp_plate1.wells('A5'), temp_plate1.wells('C1'), mix_before=(2, 50), mix_after=(3, 100))
@@ -187,7 +202,7 @@ s300.drop_tip(trash)
 
 #Transfer taq
 dispvol = taq_tot/2
-s300.pick_up_tip(tipracks_300.wells('A4'))
+s300.pick_up_tip(tipracks_300.wells('A6'))
 if dispvol < 300:
     s300.transfer(dispvol, temp_plate1.wells('A6'), temp_plate1.wells('C1'), mix_before=(2, 50), mix_after=(3, 100))
     s300.transfer(dispvol, temp_plate1.wells('A6'), temp_plate1.wells('C2'), mix_after=(3, 100))
@@ -206,4 +221,11 @@ elif dispvol < 900:
 s300.drop_tip(trash)
 s300.set_flow_rate(aspirate=None, dispense=None) #return to normal aspiration and dispensation speed
 
-# 2) MASTERMIX DISPENSATION #
+#### 2) MASTERMIX DISTRIBUTION ####
+
+s300.pick_up_tip(tipracks_300.wells('A7'))
+
+#set number of steps
+if samplevol < 25:
+    disp_steps = 8
+
