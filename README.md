@@ -14,4 +14,5 @@ UCPH's EvoGenomics section's Opentrons protocol library.
 ### Pipettes
 Code | Description 
 ------------ | -------------
+s10 | 1-10 ul single channel pipette
 m300 | 30-300 ul multichannel pipette
