@@ -223,9 +223,59 @@ s300.set_flow_rate(aspirate=None, dispense=None) #return to normal aspiration an
 
 #### 2) MASTERMIX DISTRIBUTION ####
 
+#Calculate volume per column
+colvol = samplevol * 8
+
 s300.pick_up_tip(tipracks_300.wells('A7'))
 
-#set number of steps
-if samplevol < 25:
-    disp_steps = 8
+#Fill PCR plate column 1
+s300.aspirate(colvol, temp_plate1.wells('C1'))
+s300.dispense(samplevol, temp_plate2.cols('1'))
+
+#Fill PCR plate column 2
+s300.aspirate(colvol, temp_plate1.wells('C1'))
+s300.dispense(samplevol, temp_plate2.cols('2'))
+
+#Fill PCR plate column 3
+s300.aspirate(colvol, temp_plate1.wells('C1'))
+s300.dispense(samplevol, temp_plate2.cols('3'))
+
+#Fill PCR plate column 4
+s300.aspirate(colvol, temp_plate1.wells('C1'))
+s300.dispense(samplevol, temp_plate2.cols('4'))
+
+#Fill PCR plate column 5
+s300.aspirate(colvol, temp_plate1.wells('C1'))
+s300.dispense(samplevol, temp_plate2.cols('5'))
+
+#Fill PCR plate column 6
+s300.aspirate(colvol, temp_plate1.wells('C1'))
+s300.dispense(samplevol, temp_plate2.cols('6'))
+
+s300.drop_tip(trash)
+s300.pick_up_tip(tipracks_300.wells('A8'))
+
+#Fill PCR plate column 7
+s300.aspirate(colvol, temp_plate1.wells('C1'))
+s300.dispense(samplevol, temp_plate2.cols('7'))
+
+#Fill PCR plate column 8
+s300.aspirate(colvol, temp_plate1.wells('C1'))
+s300.dispense(samplevol, temp_plate2.cols('8'))
+
+#Fill PCR plate column 9
+s300.aspirate(colvol, temp_plate1.wells('C1'))
+s300.dispense(samplevol, temp_plate2.cols('9'))
+
+#Fill PCR plate column 10
+s300.aspirate(colvol, temp_plate1.wells('C1'))
+s300.dispense(samplevol, temp_plate2.cols('10'))
+
+#Fill PCR plate column 11
+s300.aspirate(colvol, temp_plate1.wells('C1'))
+s300.dispense(samplevol, temp_plate2.cols('11'))
+
+#Fill PCR plate column 12
+s300.aspirate(colvol, temp_plate1.wells('C1'))
+s300.dispense(samplevol, temp_plate2.cols('12'))
 
