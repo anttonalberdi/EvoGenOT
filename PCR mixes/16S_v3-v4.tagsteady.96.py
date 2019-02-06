@@ -25,8 +25,7 @@ taq=0.5
 ####################################
 # To be added later (to each well) #
 ####################################
-# Primer-F    1
-# Primer-R    1
+# Primer-F+R  2
 # DNA         2
 ####################
 
@@ -64,12 +63,18 @@ temp_deck.wait_for_temp()
 #Deck 2 - PCR plate
 temp_deck2 = modules.load('tempdeck', '6')
 temp_plate2 = labware.load('opentrons-aluminum-block-PCR-strips-200ul', '9', share=True)
+    #Accessing Wells: single channel ['A1']-['H12'], 8-channel ['A1']-['A12']
 temp_plate2.set_temperature(4)
 temp_deck2.wait_for_temp()
 
-#Deck 3 - Primer combinations
+#Deck 3 - Primer combinations (combined F and R primers)
 temp_deck3 = modules.load('tempdeck', '3')
 temp_plate3 = labware.load('opentrons-aluminum-block-PCR-strips-200ul', '9', share=True)
+    #Accessing Wells: single channel ['A1']-['H12'], 8-channel ['A1']-['A12']
+    #A1     Tags 1-8
+    #A2     Tags 9-16
+    #A3     Tags 17-24
+    #A4     Tags 25-32
 temp_plate3.set_temperature(4)
 temp_deck3.wait_for_temp()
 
@@ -256,26 +261,27 @@ s300.drop_tip(trash)
 s300.pick_up_tip(tipracks_300.wells('A8'))
 
 #Fill PCR plate column 7
-s300.aspirate(colvol, temp_plate1.wells('C1'))
+s300.aspirate(colvol, temp_plate1.wells('C2'))
 s300.dispense(samplevol, temp_plate2.cols('7'))
 
 #Fill PCR plate column 8
-s300.aspirate(colvol, temp_plate1.wells('C1'))
+s300.aspirate(colvol, temp_plate1.wells('C2'))
 s300.dispense(samplevol, temp_plate2.cols('8'))
 
 #Fill PCR plate column 9
-s300.aspirate(colvol, temp_plate1.wells('C1'))
+s300.aspirate(colvol, temp_plate1.wells('C2'))
 s300.dispense(samplevol, temp_plate2.cols('9'))
 
 #Fill PCR plate column 10
-s300.aspirate(colvol, temp_plate1.wells('C1'))
+s300.aspirate(colvol, temp_plate1.wells('C2'))
 s300.dispense(samplevol, temp_plate2.cols('10'))
 
 #Fill PCR plate column 11
-s300.aspirate(colvol, temp_plate1.wells('C1'))
+s300.aspirate(colvol, temp_plate1.wells('C2'))
 s300.dispense(samplevol, temp_plate2.cols('11'))
 
 #Fill PCR plate column 12
-s300.aspirate(colvol, temp_plate1.wells('C1'))
+s300.aspirate(colvol, temp_plate1.wells('C2'))
 s300.dispense(samplevol, temp_plate2.cols('12'))
 
+#### 3) PRIMER DISTRIBUTION ####
