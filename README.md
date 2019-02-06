@@ -12,5 +12,6 @@ UCPH's EvoGenomics section's Opentrons protocol library.
 ## Common nomenclature
 
 ### Pipettes
-| Code | Description 
-| m300 | 30-300 ul multichannel pipette
+Code | Description 
+------------ | -------------
+m300 | 30-300 ul multichannel pipette
