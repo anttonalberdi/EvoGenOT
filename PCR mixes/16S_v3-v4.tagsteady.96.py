@@ -47,7 +47,7 @@ metadata = {
 #### MODULES ####
 
 #Deck 1 - Reagents and mastermixes
-temp_deck1 = modules.load('tempdeck', '9')
+#temp_deck1 = modules.load('tempdeck', '9')
 temp_plate1 = labware.load('opentrons-aluminum-block-2ml-screwcap', '9', share=True)
     #Accessing Wells: single channel ['A1']-['D6']
     #Spin down all reagents before placing them in the temp deck
@@ -59,26 +59,26 @@ temp_plate1 = labware.load('opentrons-aluminum-block-2ml-screwcap', '9', share=T
     #A6     Taq         50 ul
     #C1     Mastermix1  empty
     #C2     Mastermix2  empty
-temp_plate1.set_temperature(4)
-temp_deck.wait_for_temp()
+#temp_deck1.set_temperature(4)
+#temp_deck1.wait_for_temp()
 
 #Deck 2 - PCR plate
-temp_deck2 = modules.load('tempdeck', '6')
-temp_plate2 = labware.load('opentrons-aluminum-block-PCR-strips-200ul', '9', share=True)
+#temp_deck2 = modules.load('tempdeck', '6')
+temp_plate2 = labware.load('opentrons-aluminum-block-PCR-strips-200ul', '6', share=True)
     #Accessing Wells: single channel ['A1']-['H12'], 8-channel ['A1']-['A12']
-temp_plate2.set_temperature(4)
-temp_deck2.wait_for_temp()
+#temp_deck2.set_temperature(4)
+#temp_deck2.wait_for_temp()
 
 #Deck 3 - Primer combinations (combined F and R primers)
-temp_deck3 = modules.load('tempdeck', '3')
-temp_plate3 = labware.load('opentrons-aluminum-block-PCR-strips-200ul', '9', share=True)
+#temp_deck3 = modules.load('tempdeck', '3')
+temp_plate3 = labware.load('opentrons-aluminum-block-PCR-strips-200ul', '3', share=True)
     #Accessing Wells: single channel ['A1']-['H12'], 8-channel ['A1']-['A12']
     #A1     Tags 1-8
     #A2     Tags 9-16
     #A3     Tags 17-24
     #A4     Tags 25-32
-temp_plate3.set_temperature(4)
-temp_deck3.wait_for_temp()
+#temp_deck3.set_temperature(4)
+#temp_deck3.wait_for_temp()
 
 #### TIP RACKS ####
 tipracks_300 = labware.load('tiprack-200ul', '11', share=True)
@@ -123,7 +123,7 @@ elif dispvol < 900:
     s300.transfer(dispvol/3, temp_plate1.wells('A1'), temp_plate1.wells('C2'))
     s300.transfer(dispvol/3, temp_plate1.wells('A1'), temp_plate1.wells('C2'))
     s300.transfer(dispvol/3, temp_plate1.wells('A1'), temp_plate1.wells('C2'))
-s300.drop_tip(trash)
+s300.drop_tip()
 
 #Transfer 10x buffer
 dispvol = buffer_tot/2
@@ -143,7 +143,7 @@ elif dispvol < 900:
     s300.transfer(dispvol/3, temp_plate1.wells('A2'), temp_plate1.wells('C2'))
     s300.transfer(dispvol/3, temp_plate1.wells('A2'), temp_plate1.wells('C2'))
     s300.transfer(dispvol/3, temp_plate1.wells('A2'), temp_plate1.wells('C2'))
-s300.drop_tip(trash)
+s300.drop_tip()
 
 #Transfer MgCl2
 dispvol = mgcl_tot/2
@@ -163,7 +163,7 @@ elif dispvol < 900:
     s300.transfer(dispvol/3, temp_plate1.wells('A3'), temp_plate1.wells('C2'))
     s300.transfer(dispvol/3, temp_plate1.wells('A3'), temp_plate1.wells('C2'))
     s300.transfer(dispvol/3, temp_plate1.wells('A3'), temp_plate1.wells('C2'), mix_after=(3, 100))
-s300.drop_tip(trash)
+s300.drop_tip()
 
 #Transfer dNTPs
 dispvol = bsa_tot/2
@@ -183,7 +183,7 @@ elif dispvol < 900:
     s300.transfer(dispvol/3, temp_plate1.wells('A4'), temp_plate1.wells('C2'))
     s300.transfer(dispvol/3, temp_plate1.wells('A4'), temp_plate1.wells('C2'))
     s300.transfer(dispvol/3, temp_plate1.wells('A4'), temp_plate1.wells('C2'), mix_after=(3, 100))
-s300.drop_tip(trash)
+s300.drop_tip()
 
 #Transfer BSA
 dispvol = dntp_tot/2
@@ -204,7 +204,7 @@ elif dispvol < 900:
     s300.transfer(dispvol/3, temp_plate1.wells('A5'), temp_plate1.wells('C2'))
     s300.transfer(dispvol/3, temp_plate1.wells('A5'), temp_plate1.wells('C2'))
     s300.transfer(dispvol/3, temp_plate1.wells('A5'), temp_plate1.wells('C2'), mix_after=(3, 100))
-s300.drop_tip(trash)
+s300.drop_tip()
 
 #Transfer taq
 dispvol = taq_tot/2
@@ -224,7 +224,7 @@ elif dispvol < 900:
     s300.transfer(dispvol/3, temp_plate1.wells('A6'), temp_plate1.wells('C2'))
     s300.transfer(dispvol/3, temp_plate1.wells('A6'), temp_plate1.wells('C2'))
     s300.transfer(dispvol/3, temp_plate1.wells('A6'), temp_plate1.wells('C2'), mix_after=(3, 100))
-s300.drop_tip(trash)
+s300.drop_tip()
 s300.set_flow_rate(aspirate=None, dispense=None) #return to normal aspiration and dispensation speed
 
 #### 2) MASTERMIX DISTRIBUTION ####
