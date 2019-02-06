@@ -81,11 +81,10 @@ temp_plate3.set_temperature(4)
 temp_deck3.wait_for_temp()
 
 #### TIP RACKS ####
-#(to be updated)
 tipracks_300 = labware.load('tiprack-200ul', '11', share=True)
-tipracks_10 = labware.load('tiprack-200ul', '8', share=True)
+tipracks_10 = labware.load('tiprack-10ul', '8', share=True)
 
-# PIPETTES
+#### PIPETTES ####
 s300 = instruments.P300_Single(mount='left', tip_racks=tipracks_300)
 m10 = instruments.P10_Multi(mount='right', tip_racks=tipracks_10)
 
@@ -289,54 +288,52 @@ s300.dispense(samplevol, temp_plate2.cols('12'))
 #### 3) PRIMER DISTRIBUTION ####
 
 #Tags1-8 to columns 1, 4, 7, 10
-m10.pick_up_tip(tipracks_10.col('1'))
-m10.transfer(primermix, temp_plate3.col('1'), temp_plate2.col('1'))
+m10.pick_up_tip(tipracks_10.wells('A1'))
+m10.transfer(primermix, temp_plate3.wells('A1'), temp_plate2.wells('A1'))
 s300.drop_tip(trash)
 
 m10.pick_up_tip(tipracks_10.col('2'))
-m10.transfer(primermix, temp_plate3.col('1'), temp_plate2.col('4'))
+m10.transfer(primermix, temp_plate3.wells('A1'), temp_plate2.wells('A4'))
 s300.drop_tip(trash)
 
 m10.pick_up_tip(tipracks_10.col('3'))
-m10.transfer(primermix, temp_plate3.col('1'), temp_plate2.col('7'))
+m10.transfer(primermix, temp_plate3.wells('A1'), temp_plate2.wells('A7'))
 s300.drop_tip(trash)
 
 m10.pick_up_tip(tipracks_10.col('4'))
-m10.transfer(primermix, temp_plate3.col('1'), temp_plate2.col('10'))
+m10.transfer(primermix, temp_plate3.wells('A1'), temp_plate2.wells('A10'))
 s300.drop_tip(trash)
 
 #Tags9-16 to columns 2, 5, 8, 11
-m10.pick_up_tip(tipracks_10.col('5'))
-m10.transfer(primermix, temp_plate3.col('2'), temp_plate2.col('2'))
+m10.pick_up_tip(tipracks_10.wells('A5'))
+m10.transfer(primermix, temp_plate3.wells('A2'), temp_plate2.wells('A2'))
 s300.drop_tip(trash)
 
-m10.pick_up_tip(tipracks_10.col('6'))
-m10.transfer(primermix, temp_plate3.col('2'), temp_plate2.col('5'))
+m10.pick_up_tip(tipracks_10.wells('A6'))
+m10.transfer(primermix, temp_plate3.wells('A2'), temp_plate2.wells('A5'))
 s300.drop_tip(trash)
 
-m10.pick_up_tip(tipracks_10.col('7'))
-m10.transfer(primermix, temp_plate3.col('2'), temp_plate2.col('8'))
+m10.pick_up_tip(tipracks_10.wells('A7'))
+m10.transfer(primermix, temp_plate3.wells('A2'), temp_plate2.wells('A8'))
 s300.drop_tip(trash)
 
-m10.pick_up_tip(tipracks_10.col('8'))
-m10.transfer(primermix, temp_plate3.col('2'), temp_plate2.col('11'))
+m10.pick_up_tip(tipracks_10.wells('A8'))
+m10.transfer(primermix, temp_plate3.wells('A2'), temp_plate2.wells('A11'))
 s300.drop_tip(trash)
 
 #Tags17-24 to columns 3, 6, 9, 12
-m10.pick_up_tip(tipracks_10.col('9'))
-m10.transfer(primermix, temp_plate3.col('3'), temp_plate2.col('3'))
+m10.pick_up_tip(tipracks_10.wells('A9'))
+m10.transfer(primermix, temp_plate3.wells('A3'), temp_plate2.wells('A3'))
 s300.drop_tip(trash)
 
-m10.pick_up_tip(tipracks_10.col('10'))
-m10.transfer(primermix, temp_plate3.col('3'), temp_plate2.col('6'))
+m10.pick_up_tip(tipracks_10.wells('A10'))
+m10.transfer(primermix, temp_plate3.wells('A3'), temp_plate2.wells('A6'))
 s300.drop_tip(trash)
 
-m10.pick_up_tip(tipracks_10.col('11'))
-m10.transfer(primermix, temp_plate3.col('3'), temp_plate2.col('9'))
+m10.pick_up_tip(tipracks_10.wells('A11'))
+m10.transfer(primermix, temp_plate3.wells('A3'), temp_plate2.wells('A9'))
 s300.drop_tip(trash)
 
-m10.pick_up_tip(tipracks_10.col('12'))
-m10.transfer(primermix, temp_plate3.col('3'), temp_plate2.col('12'))
+m10.pick_up_tip(tipracks_10.wells('A12'))
+m10.transfer(primermix, temp_plate3.wells('A3'), temp_plate2.wells('A12'))
 s300.drop_tip(trash)
-
-
