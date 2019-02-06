@@ -22,6 +22,8 @@ bsa=1.5
 dntp=0.5
 taq=0.5
 
+primermix=2
+
 ####################################
 # To be added later (to each well) #
 ####################################
@@ -285,3 +287,56 @@ s300.aspirate(colvol, temp_plate1.wells('C2'))
 s300.dispense(samplevol, temp_plate2.cols('12'))
 
 #### 3) PRIMER DISTRIBUTION ####
+
+#Tags1-8 to columns 1, 4, 7, 10
+m10.pick_up_tip(tipracks_10.col('1'))
+m10.transfer(primermix, temp_plate3.col('1'), temp_plate2.col('1'))
+s300.drop_tip(trash)
+
+m10.pick_up_tip(tipracks_10.col('2'))
+m10.transfer(primermix, temp_plate3.col('1'), temp_plate2.col('4'))
+s300.drop_tip(trash)
+
+m10.pick_up_tip(tipracks_10.col('3'))
+m10.transfer(primermix, temp_plate3.col('1'), temp_plate2.col('7'))
+s300.drop_tip(trash)
+
+m10.pick_up_tip(tipracks_10.col('4'))
+m10.transfer(primermix, temp_plate3.col('1'), temp_plate2.col('10'))
+s300.drop_tip(trash)
+
+#Tags9-16 to columns 2, 5, 8, 11
+m10.pick_up_tip(tipracks_10.col('5'))
+m10.transfer(primermix, temp_plate3.col('2'), temp_plate2.col('2'))
+s300.drop_tip(trash)
+
+m10.pick_up_tip(tipracks_10.col('6'))
+m10.transfer(primermix, temp_plate3.col('2'), temp_plate2.col('5'))
+s300.drop_tip(trash)
+
+m10.pick_up_tip(tipracks_10.col('7'))
+m10.transfer(primermix, temp_plate3.col('2'), temp_plate2.col('8'))
+s300.drop_tip(trash)
+
+m10.pick_up_tip(tipracks_10.col('8'))
+m10.transfer(primermix, temp_plate3.col('2'), temp_plate2.col('11'))
+s300.drop_tip(trash)
+
+#Tags17-24 to columns 3, 6, 9, 12
+m10.pick_up_tip(tipracks_10.col('9'))
+m10.transfer(primermix, temp_plate3.col('3'), temp_plate2.col('3'))
+s300.drop_tip(trash)
+
+m10.pick_up_tip(tipracks_10.col('10'))
+m10.transfer(primermix, temp_plate3.col('3'), temp_plate2.col('6'))
+s300.drop_tip(trash)
+
+m10.pick_up_tip(tipracks_10.col('11'))
+m10.transfer(primermix, temp_plate3.col('3'), temp_plate2.col('9'))
+s300.drop_tip(trash)
+
+m10.pick_up_tip(tipracks_10.col('12'))
+m10.transfer(primermix, temp_plate3.col('3'), temp_plate2.col('12'))
+s300.drop_tip(trash)
+
+
