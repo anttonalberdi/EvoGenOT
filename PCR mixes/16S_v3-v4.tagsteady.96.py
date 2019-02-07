@@ -11,15 +11,15 @@ nsamples=96
 # ddH20       13.50     1296
 # 10x buffer  2.5       240
 # MgCl2       2.5       240
-# BSA         1.5       144
 # dNTP        0.5       48
+# BSA         1.5       144
 # TaqGold     0.5       48
 
 h20=13.5
 buffer=2.5
 mgcl=2.5
-bsa=1.5
 dntp=0.5
+bsa=1.5
 taq=0.5
 
 primermix=2
@@ -108,124 +108,46 @@ samplevol= h20+buffer+mgcl+bsa+dntp+taq #mastermix volume per well (sample)
 #Transfer water
 dispvol = h20_tot/2
 s50.pick_up_tip(tipracks_200.wells('A1'))
-if dispvol < 300:
-    s50.transfer(dispvol, temp_plate1.wells('A1'), temp_plate1.wells('C1'), mix_before=(2, 50))
-    s50.transfer(dispvol, temp_plate1.wells('A1'), temp_plate1.wells('C2'))
-elif dispvol < 600:
-    s50.transfer(dispvol/2, temp_plate1.wells('A1'), temp_plate1.wells('C1'), mix_before=(2, 50))
-    s50.transfer(dispvol/2, temp_plate1.wells('A1'), temp_plate1.wells('C1'))
-    s50.transfer(dispvol/2, temp_plate1.wells('A1'), temp_plate1.wells('C2'))
-    s50.transfer(dispvol/2, temp_plate1.wells('A1'), temp_plate1.wells('C2'))
-elif dispvol < 900:
-    s50.transfer(dispvol/3, temp_plate1.wells('A1'), temp_plate1.wells('C1'), mix_before=(2, 50))
-    s50.transfer(dispvol/3, temp_plate1.wells('A1'), temp_plate1.wells('C1'))
-    s50.transfer(dispvol/3, temp_plate1.wells('A1'), temp_plate1.wells('C1'))
-    s50.transfer(dispvol/3, temp_plate1.wells('A1'), temp_plate1.wells('C2'))
-    s50.transfer(dispvol/3, temp_plate1.wells('A1'), temp_plate1.wells('C2'))
-    s50.transfer(dispvol/3, temp_plate1.wells('A1'), temp_plate1.wells('C2'))
+s50.transfer(dispvol, plate.wells('A1'), plate.wells('C1')) #if larger volume it will automatically divide into smaller transfers. 
+s50.transfer(dispvol, plate.wells('A1'), plate.wells('C2'))
 s50.drop_tip()
 
 #Transfer 10x buffer
 dispvol = buffer_tot/2
-s300.pick_up_tip(tipracks_300.wells('A2'))
-if dispvol < 300:
-    s300.transfer(dispvol, temp_plate1.wells('A2'), temp_plate1.wells('C1'), mix_before=(2, 50))
-    s300.transfer(dispvol, temp_plate1.wells('A2'), temp_plate1.wells('C2'))
-elif dispvol < 600:
-    s300.transfer(dispvol/2, temp_plate1.wells('A2'), temp_plate1.wells('C1'), mix_before=(2, 50))
-    s300.transfer(dispvol/2, temp_plate1.wells('A2'), temp_plate1.wells('C1'))
-    s300.transfer(dispvol/2, temp_plate1.wells('A2'), temp_plate1.wells('C2'))
-    s300.transfer(dispvol/2, temp_plate1.wells('A2'), temp_plate1.wells('C2'))
-elif dispvol < 900:
-    s300.transfer(dispvol/3, temp_plate1.wells('A2'), temp_plate1.wells('C1'), mix_before=(2, 50))
-    s300.transfer(dispvol/3, temp_plate1.wells('A2'), temp_plate1.wells('C1'))
-    s300.transfer(dispvol/3, temp_plate1.wells('A2'), temp_plate1.wells('C1'))
-    s300.transfer(dispvol/3, temp_plate1.wells('A2'), temp_plate1.wells('C2'))
-    s300.transfer(dispvol/3, temp_plate1.wells('A2'), temp_plate1.wells('C2'))
-    s300.transfer(dispvol/3, temp_plate1.wells('A2'), temp_plate1.wells('C2'))
-s300.drop_tip()
+s50.pick_up_tip(tipracks_300.wells('A2'))
+s50.transfer(dispvol, plate.wells('A2'), plate.wells('C1'))
+s50.transfer(dispvol, plate.wells('A2'), plate.wells('C2'))
+s50.drop_tip()
 
 #Transfer MgCl2
 dispvol = mgcl_tot/2
-s300.pick_up_tip(tipracks_300.wells('A3'))
-if dispvol < 300:
-    s300.transfer(dispvol, temp_plate1.wells('A3'), temp_plate1.wells('C1'), mix_before=(2, 50), mix_after=(3, 100))
-    s300.transfer(dispvol, temp_plate1.wells('A3'), temp_plate1.wells('C2'), mix_after=(3, 100))
-elif dispvol < 600:
-    s300.transfer(dispvol/2, temp_plate1.wells('A3'), temp_plate1.wells('C1'), mix_before=(2, 50))
-    s300.transfer(dispvol/2, temp_plate1.wells('A3'), temp_plate1.wells('C1'), mix_after=(3, 100))
-    s300.transfer(dispvol/2, temp_plate1.wells('A3'), temp_plate1.wells('C2'))
-    s300.transfer(dispvol/2, temp_plate1.wells('A3'), temp_plate1.wells('C2'), mix_after=(3, 100))
-elif dispvol < 900:
-    s300.transfer(dispvol/3, temp_plate1.wells('A3'), temp_plate1.wells('C1'), mix_before=(2, 50))
-    s300.transfer(dispvol/3, temp_plate1.wells('A3'), temp_plate1.wells('C1'))
-    s300.transfer(dispvol/3, temp_plate1.wells('A3'), temp_plate1.wells('C1'), mix_after=(3, 100))
-    s300.transfer(dispvol/3, temp_plate1.wells('A3'), temp_plate1.wells('C2'))
-    s300.transfer(dispvol/3, temp_plate1.wells('A3'), temp_plate1.wells('C2'))
-    s300.transfer(dispvol/3, temp_plate1.wells('A3'), temp_plate1.wells('C2'), mix_after=(3, 100))
-s300.drop_tip()
+s50.pick_up_tip(tipracks_300.wells('A3'))
+s50.transfer(dispvol, plate.wells('A3'), plate.wells('C1'))
+s50.transfer(dispvol, plate.wells('A3'), plate.wells('C2'))
+s50.drop_tip()
 
 #Transfer dNTPs
-dispvol = bsa_tot/2
-s300.pick_up_tip(tipracks_300.wells('A4'))
-if dispvol < 300:
-    s300.transfer(dispvol, temp_plate1.wells('A4'), temp_plate1.wells('C1'), mix_before=(2, 50), mix_after=(3, 100))
-    s300.transfer(dispvol, temp_plate1.wells('A4'), temp_plate1.wells('C2'), mix_after=(3, 100))
-elif dispvol < 600:
-    s300.transfer(dispvol/2, temp_plate1.wells('A4'), temp_plate1.wells('C1'), mix_before=(2, 50))
-    s300.transfer(dispvol/2, temp_plate1.wells('A4'), temp_plate1.wells('C1'), mix_after=(3, 100))
-    s300.transfer(dispvol/2, temp_plate1.wells('A4'), temp_plate1.wells('C2'))
-    s300.transfer(dispvol/2, temp_plate1.wells('A4'), temp_plate1.wells('C2'), mix_after=(3, 100))
-elif dispvol < 900:
-    s300.transfer(dispvol/3, temp_plate1.wells('A4'), temp_plate1.wells('C1'), mix_before=(2, 50))
-    s300.transfer(dispvol/3, temp_plate1.wells('A4'), temp_plate1.wells('C1'))
-    s300.transfer(dispvol/3, temp_plate1.wells('A4'), temp_plate1.wells('C1'), mix_after=(3, 100))
-    s300.transfer(dispvol/3, temp_plate1.wells('A4'), temp_plate1.wells('C2'))
-    s300.transfer(dispvol/3, temp_plate1.wells('A4'), temp_plate1.wells('C2'))
-    s300.transfer(dispvol/3, temp_plate1.wells('A4'), temp_plate1.wells('C2'), mix_after=(3, 100))
-s300.drop_tip()
+dispvol = dntp_tot/2
+s50.pick_up_tip(tipracks_300.wells('A4'))
+s50.transfer(dispvol, plate.wells('A4'), plate.wells('C1'))
+s50.transfer(dispvol, plate.wells('A4'), plate.wells('C2'))
+s50.drop_tip()
 
 #Transfer BSA
-dispvol = dntp_tot/2
-s300.pick_up_tip(tipracks_300.wells('A5'))
-s300.set_flow_rate(aspirate=50, dispense=50) # change aspiration and dispensation speed to better handle biscosity
-if dispvol < 300:
-    s300.transfer(dispvol, temp_plate1.wells('A5'), temp_plate1.wells('C1'), mix_before=(2, 50), mix_after=(3, 100))
-    s300.transfer(dispvol, temp_plate1.wells('A5'), temp_plate1.wells('C2'), mix_after=(3, 100))
-elif dispvol < 600:
-    s300.transfer(dispvol/2, temp_plate1.wells('A5'), temp_plate1.wells('C1'), mix_before=(2, 50))
-    s300.transfer(dispvol/2, temp_plate1.wells('A5'), temp_plate1.wells('C1'), mix_after=(3, 100))
-    s300.transfer(dispvol/2, temp_plate1.wells('A5'), temp_plate1.wells('C2'))
-    s300.transfer(dispvol/2, temp_plate1.wells('A5'), temp_plate1.wells('C2'), mix_after=(3, 100))
-elif dispvol < 900:
-    s300.transfer(dispvol/3, temp_plate1.wells('A5'), temp_plate1.wells('C1'), mix_before=(2, 50))
-    s300.transfer(dispvol/3, temp_plate1.wells('A5'), temp_plate1.wells('C1'))
-    s300.transfer(dispvol/3, temp_plate1.wells('A5'), temp_plate1.wells('C1'), mix_after=(3, 100))
-    s300.transfer(dispvol/3, temp_plate1.wells('A5'), temp_plate1.wells('C2'))
-    s300.transfer(dispvol/3, temp_plate1.wells('A5'), temp_plate1.wells('C2'))
-    s300.transfer(dispvol/3, temp_plate1.wells('A5'), temp_plate1.wells('C2'), mix_after=(3, 100))
-s300.drop_tip()
+dispvol = bsa_tot/2
+s50.set_flow_rate(aspirate=50, dispense=50) # change aspiration and dispensation speed to better handle biscosity
+s50.pick_up_tip(tipracks_300.wells('A5'))
+s50.transfer(dispvol, plate.wells('A5'), plate.wells('C1'))
+s50.transfer(dispvol, plate.wells('A5'), plate.wells('C2'))
+s50.drop_tip()
 
 #Transfer taq
 dispvol = taq_tot/2
-s300.pick_up_tip(tipracks_300.wells('A6'))
-if dispvol < 300:
-    s300.transfer(dispvol, temp_plate1.wells('A6'), temp_plate1.wells('C1'), mix_before=(2, 50), mix_after=(3, 100))
-    s300.transfer(dispvol, temp_plate1.wells('A6'), temp_plate1.wells('C2'), mix_after=(3, 100))
-elif dispvol < 600:
-    s300.transfer(dispvol/2, temp_plate1.wells('A6'), temp_plate1.wells('C1'), mix_before=(2, 50))
-    s300.transfer(dispvol/2, temp_plate1.wells('A6'), temp_plate1.wells('C1'), mix_after=(3, 100))
-    s300.transfer(dispvol/2, temp_plate1.wells('A6'), temp_plate1.wells('C2'))
-    s300.transfer(dispvol/2, temp_plate1.wells('A6'), temp_plate1.wells('C2'), mix_after=(3, 100))
-elif dispvol < 900:
-    s300.transfer(dispvol/3, temp_plate1.wells('A6'), temp_plate1.wells('C1'), mix_before=(2, 50))
-    s300.transfer(dispvol/3, temp_plate1.wells('A6'), temp_plate1.wells('C1'))
-    s300.transfer(dispvol/3, temp_plate1.wells('A6'), temp_plate1.wells('C1'), mix_after=(3, 100))
-    s300.transfer(dispvol/3, temp_plate1.wells('A6'), temp_plate1.wells('C2'))
-    s300.transfer(dispvol/3, temp_plate1.wells('A6'), temp_plate1.wells('C2'))
-    s300.transfer(dispvol/3, temp_plate1.wells('A6'), temp_plate1.wells('C2'), mix_after=(3, 100))
-s300.drop_tip()
-s300.set_flow_rate(aspirate=None, dispense=None) #return to normal aspiration and dispensation speed
+s50.pick_up_tip(tipracks_300.wells('A6'))
+s50.transfer(dispvol, plate.wells('A6'), plate.wells('C1'))
+s50.transfer(dispvol, plate.wells('A6'), plate.wells('C2'))
+s50.drop_tip()
+s50.set_flow_rate(aspirate=None, dispense=None) #return to normal aspiration and dispensation speed
 
 #### 2) MASTERMIX DISTRIBUTION ####
 
