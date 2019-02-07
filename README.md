@@ -11,6 +11,12 @@ UCPH's EvoGenomics section's Opentrons protocol library.
 
 ## Common nomenclature
 
+### Modules
+* temp_deck[1-n] 
+* temp_plate[1-n] 
+* mag_deck[1-n] 
+* mag_plate[1-n] 
+
 ### Pipettes
 Code | Description 
 ------------ | -------------
