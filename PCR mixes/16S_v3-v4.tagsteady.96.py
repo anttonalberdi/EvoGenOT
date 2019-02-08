@@ -54,7 +54,7 @@ metadata = {
 
 #Deck 1 - Reagents and mastermixes
 #temp_deck1 = modules.load('tempdeck', '9')
-temp_plate1 = labware.load('opentrons-aluminum-block-2ml-screwcap', '9', share=True)
+temp_plate1 = labware.load('opentrons-tuberack-2ml-eppendorf', '9', share=True)
     #Accessing Wells: single channel ['A1']-['D6']
     #Spin down all reagents before placing them in the temp deck
     #A1     H20         1500 ul 
@@ -70,7 +70,7 @@ temp_plate1 = labware.load('opentrons-aluminum-block-2ml-screwcap', '9', share=T
 
 #Deck 2 - PCR plate
 #temp_deck2 = modules.load('tempdeck', '6')
-temp_plate2 = labware.load('opentrons-aluminum-block-PCR-strips-200ul', '6', share=True)
+temp_plate2 = labware.load('96-PCR-flat', '6', share=True)
     #Accessing Wells: single channel ['A1']-['H12'], 8-channel ['A1']-['A12']
 #temp_deck2.set_temperature(4)
 #temp_deck2.wait_for_temp()
@@ -87,12 +87,12 @@ temp_plate3 = labware.load('opentrons-aluminum-block-PCR-strips-200ul', '3', sha
 #temp_deck3.wait_for_temp()
 
 #### TIP RACKS ####
-tipracks_200 = labware.load('tiprack-200ul', '11', share=True)
+tipracks_200 = labware.load('opentrons-tiprack-300ul', '11')
 tipracks_10 = labware.load('tiprack-10ul', '8', share=True)
 
 #### PIPETTES ####
-s50 = instruments.P50_Single(mount='left', tip_racks=tipracks_200)
-m10 = instruments.P10_Multi(mount='right', tip_racks=tipracks_10)
+s50 = instruments.P50_Single(mount='left', tip_racks=[tipracks_200])
+m10 = instruments.P10_Multi(mount='right', tip_racks=[tipracks_10])
 
 ############
 # PROTOCOL #
@@ -111,72 +111,44 @@ samplevol= h20+buffer+mgcl+bsa+dntp+taq #mastermix volume per well (sample)
 
 #### 1) MASTERMIX PREPARATION ####
 
-#Transfer water
+#Transfer water (it goes too deep, move 3-4 mm upwards)
 dispvol = h20_tot/2
-s50.pick_up_tip(tipracks_200.wells('A1'))
-s50.transfer(dispvol, temp_plate1.wells('A1'), temp_plate1.wells('C1')) #if larger volume it will automatically divide into smaller transfers. 
-s50.transfer(dispvol, temp_plate1.wells('A1'), temp_plate1.wells('C2'))
-s50.drop_tip()
+s50.transfer(dispvol, temp_plate1.wells('A1'), temp_plate1.wells('C1','C2'), new_tip='never') #if larger volume it will automatically divide into smaller transfers. 
 
 #Transfer 10x buffer
 dispvol = buffer_tot/2
-s50.pick_up_tip(tipracks_300.wells('A2'))
-s50.transfer(dispvol, temp_plate1.wells('A2'), temp_plate1.wells('C1'), mix_before(2,20))
-s50.drop_tip()
-s50.pick_up_tip(tipracks_300.wells('A3'))
-s50.transfer(dispvol, temp_plate1.wells('A2'), temp_plate1.wells('C2'))
-s50.drop_tip()
+s50.transfer(dispvol, temp_plate1.wells('A2'), temp_plate1.wells('C1','C2'), new_tip='always')
 
 #Transfer MgCl2
 dispvol = mgcl_tot/2
-s50.pick_up_tip(tipracks_300.wells('A4'))
-s50.transfer(dispvol, temp_plate1.wells('A3'), temp_plate1.wells('C1'), mix_before(2,20))
-s50.drop_tip()
-s50.pick_up_tip(tipracks_300.wells('A5'))
-s50.transfer(dispvol, temp_plate1.wells('A3'), temp_plate1.wells('C2'))
-s50.drop_tip()
+s50.transfer(dispvol, temp_plate1.wells('A3'), temp_plate1.wells('C1','C2'), new_tip='always')
 
 #Transfer dNTPs
 dispvol = dntp_tot/2
-s50.pick_up_tip(tipracks_300.wells('A6'))
-s50.transfer(dispvol, temp_plate1.wells('A4'), temp_plate1.wells('C1'), mix_before(2,20))
-s50.drop_tip()
-s50.pick_up_tip(tipracks_300.wells('A7'))
-s50.transfer(dispvol, temp_plate1.wells('A4'), temp_plate1.wells('C2'))
-s50.drop_tip()
+s50.transfer(dispvol, temp_plate1.wells('A4'), temp_plate1.wells('C1','C2'), new_tip='always')
 
 #Transfer BSA
 dispvol = bsa_tot/2
 s50.set_flow_rate(aspirate=5, dispense=15) # change aspiration and dispensation speed to better handle viscosity
-s50.pick_up_tip(tipracks_300.wells('A8'))
-s50.transfer(dispvol, temp_plate1.wells('A5'), temp_plate1.wells('C1'), air_gap=10, mix_after(2,20))
-s50.drop_tip()
-s50.pick_up_tip(tipracks_300.wells('A9'))
-s50.transfer(dispvol, temp_plate1.wells('A5'), temp_plate1.wells('C2'), air_gap=10, mix_after(2,20))
-s50.drop_tip()
+s50.transfer(dispvol, temp_plate1.wells('A5'), temp_plate1.wells('C1','C2'), air_gap=10, new_tip='always')
 
 #Transfer taq
 dispvol = taq_tot/2
-s50.pick_up_tip(tipracks_300.wells('A10'))
-s50.transfer(dispvol, temp_plate1.wells('A6'), temp_plate1.wells('C1'), air_gap=10, mix_before(2,5), mix_after(2,20))
-s50.drop_tip()
-s50.pick_up_tip(tipracks_300.wells('A11'))
-s50.transfer(dispvol, temp_plate1.wells('A6'), temp_plate1.wells('C2'), air_gap=10, mix_before(2,5), mix_after(2,20))
-s50.drop_tip()
+s50.transfer(dispvol, temp_plate1.wells('A6'), temp_plate1.wells('C1','C2'), air_gap=10, new_tip='always')
 s50.set_flow_rate(aspirate=25, dispense=50) #return to normal aspiration and dispensation speed
 #https://docs.opentrons.com/pipettes.html#p10-single
 
 #### 2) MASTERMIX DISTRIBUTION ####
 
 #Mix mastermixes
-s50.mix(4, 50, temp_plate1.wells('C1'))
-s50.mix(4, 50, temp_plate1.wells('C2'))
+#s50.mix(4, 50, temp_plate1.wells('C1'))
+#s50.mix(4, 50, temp_plate1.wells('C2'))
 
 #Transfer Mastermix1 to first 48 wells A1-H6
-s50.transfer(samplevol, temp_plate1.wells('C1'), temp_plate2.cols('1','2','3','4','5','6'), mix_before(2,5), mix_after(3,20))
+s50.transfer(samplevol, temp_plate1.wells('C1'), temp_plate2.cols('1','2','3','4','5','6'))
 
 #Transfer Mastermix2 to last 48 wells A7-H12
-s50.transfer(samplevol, temp_plate1.wells('C2'), temp_plate2.cols('7','8','9','10','11','12'), mix_before(2,5), mix_after(3,20))
+s50.transfer(samplevol, temp_plate1.wells('C2'), temp_plate2.cols('7','8','9','10','11','12'))
 
 
 
