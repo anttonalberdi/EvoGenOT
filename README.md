@@ -1,6 +1,10 @@
 # EvoGenOT
 UCPH's EvoGenomics section's Opentrons protocol library.
 
+## Opentrons API documentation
+
+https://docs.opentrons.com/
+
 ## Protocol development steps
 
 1. Write the python code
