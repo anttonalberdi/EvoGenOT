@@ -1,9 +1,6 @@
 ##########################
 ### BEST Library build ###
-#
-#
-#
-# @JacobAgerbo (<genomicsisawesome@gmail.com>)
+
 ## Description of procedure ##
 #
 #
@@ -38,10 +35,22 @@
 #	Good Luck!	
 #
 #
+######## IMPORT LIBRARIES ########
 #from opentrons import labware, instruments, modules, robot
 
+#### METADATA ####
 
-# labware setup
+metadata = {
+    'protocolName': 'BEST_Lib_build_96_sample',
+    'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
+    'version': '1.0',
+    'date': '2019/02/09',
+    'description': 'Automated single tube library preperation after Carøe et al. 2017',
+}
+
+
+
+#### LABWARE SETUP ####
 cold_block = labware.load('opentrons-aluminum-block-2ml-eppendorf', '1')
 sample_plate = labware.load('96-PCR-flat', '2')
 elution_plate = labware.load('96-flat', '3')
@@ -57,8 +66,9 @@ tipracks_10 = [labware.load('tiprack-10ul', slot)
 tipracks_300 = [labware.load('tiprack-200ul', slot, share=True)
                 for slot in ['9', '11', '4']]
 
-# pipette setup
-p10 = instruments.P10_Single(
+
+#### PIPETTE SETUP ####
+s10 = instruments.P10_Single(
     mount='right',
     tip_racks=tipracks_10)
 
@@ -86,7 +96,7 @@ robot.comment("Yay! \ Blund-end Repair begins.")
 temp_deck.set_temperature(4)
 temp_deck.wait_for_temp()
 
-p10.transfer(8, ER_mastermix, [well.bottom() for well in temp_plate.wells()])
+s10.transfer(8, ER_mastermix, [well.bottom() for well in temp_plate.wells()])
 m300.transfer(32, sample_plate.cols(), temp_plate.cols(),mix_after=(3,30) , new_tip='always',  blow_out =True) 
 robot.pause("Yay! \ Please incubate in PCR machine \ at 20°C for 30 minutes, followed by 30 minutes at 65°C. \ Press resume when finished.")
 
@@ -97,9 +107,9 @@ Adapter Addition
 robot.comment("End of Blund-end Repair. Adapter Addition begins.")
 temp_deck.set_temperature(4)
 temp_deck.wait_for_temp()
-p10.transfer(2, BGI_adapter, [well.bottom() for well in temp_plate.wells()],mix_after=(3, 10) , new_tip='always',  blow_out =True)
+s10.transfer(2, BGI_adapter, [well.bottom() for well in temp_plate.wells()],mix_after=(3, 10) , new_tip='always',  blow_out =True)
 
-p10.transfer(8, Lig_mastermix, [well.top() for well in temp_plate.wells()], new_tip='once',  blow_out =True)
+s10.transfer(8, Lig_mastermix, [well.top() for well in temp_plate.wells()], new_tip='once',  blow_out =True)
 
 
 robot.pause("End of Adapter Addition. Ligase begins. \ Incubate at 20°C for 30 min, followed by 15 min at 65°C. Press resume when finished.")
@@ -110,4 +120,4 @@ Fill-in
 robot.comment("Fill-in begins.")
 temp_deck.set_temperature(4)
 temp_deck.wait_for_temp()
-p10.transfer(10, Fill_mastermix, [well.top() for well in temp_plate.wells()])
+s10.transfer(10, Fill_mastermix, [well.top() for well in temp_plate.wells()])
