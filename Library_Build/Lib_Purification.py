@@ -1,5 +1,31 @@
 ##### PURIFY #####
+#
+#
+# THINGS TO DO BEFORE PROCEDURE
+# 1.  Make fresh 80% Ethanol
+# 2.  Equlibrate SPRI beads at room temperature
+#
+# PROCEDURE
+#	
+#   1. Add 1.5x SPRI beads to x volume of DNA	
+#   2. Incubate for 1 minutes
+#   3. Engage magnet and incubate for 5 minutes
+#   4. Remove supernatant
+#   5. Wash twice with 80% ethanol
+#   6. Elute DNA
 
+######## IMPORT LIBRARIES ########
+#from opentrons import labware, instruments, modules, robot
+
+#### METADATA ####
+
+metadata = {
+    'protocolName': 'Purify_96_sample',
+    'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
+    'version': '1.0',
+    'date': '2019/02/09',
+    'description': '1.5 SPRI beads purification of DNA',
+}
 #### IMPORT LIBRARIES ####
 from opentrons import labware, instruments, modules, robot
 
