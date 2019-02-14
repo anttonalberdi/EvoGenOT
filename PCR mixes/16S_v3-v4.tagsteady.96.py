@@ -3,7 +3,7 @@ metadata = {
     'author': 'Antton Alberdi <anttonalberdi@gmail.com>',
     'version': '2.0',
     'creation_date': '2019/02/14',
-    'creation_date': '2019/02/14',
+    'validation_date': '2019/02/14',
     'description': 'PCR mix for 16S rRNA (v3-v4) metabarcoding of bacteria',
     'primers': 'Forward: 341F (CCTAYGGGRBGCASCAG), Reverse: R806 (GGACTACNNGGGTATCTAAT)',
     'Comb1':'Tag1,Tag1',
