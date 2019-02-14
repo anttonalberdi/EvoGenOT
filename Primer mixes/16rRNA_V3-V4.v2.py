@@ -49,7 +49,7 @@ ice_rack1 = labware.load('PCR-strip-tall', '2')
 
 #### TIP RACKS ####
 #300 ul tip racks in slots 5 and 8
-tipracks_200 = [labware.load('opentrons-tiprack-300ul', slot) for slot in ['8','5']]
+tipracks_200 = labware.load('opentrons-tiprack-300ul', '5')
 
 #### PIPETTES ####
 s50 = instruments.P50_Single(mount='left', tip_racks=[tipracks_200])
