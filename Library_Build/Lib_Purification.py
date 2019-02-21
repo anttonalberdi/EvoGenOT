@@ -24,7 +24,7 @@ metadata = {
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
     'version': '1.0',
     'date': '2019/02/09',
-    'description': '1.5 SPRI beads purification of DNA',
+    'description': '1.5x SPRI beads purification of DNA',
 }
 #### IMPORT LIBRARIES ####
 from opentrons import labware, instruments, modules, robot
