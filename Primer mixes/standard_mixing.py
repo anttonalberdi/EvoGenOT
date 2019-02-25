@@ -1,3 +1,12 @@
+metadata = {
+    'protocolName': 'Standard PCR primer mixing',
+    'author': 'Antton Alberdi <anttonalberdi@gmail.com>',
+    'version': '1.0',
+    'creation_date': '2019/02/25',
+    'validation_date': 'XXXXX',
+    'description': 'Standard protocol for PCR primer mixing',
+}
+
 #### LIBRARIES ####
 from opentrons import labware, instruments, modules, robot
 import pandas as pd
@@ -27,7 +36,6 @@ tube_rack3 = labware.load('opentrons-tuberack-2ml-eppendorf', '3', share=True)
 ice_rack1 = labware.load('PCR-strip-tall', '2', share=True)
 
 #### TIP RACKS ####
-#200ul tip racks in slots 5 and 8
 tiprack_200 = labware.load('labsolute-tiprack-200ul', '8')
 tiprack_10 = labware.load('labsolute-tiprack-10ul', '5')
 
