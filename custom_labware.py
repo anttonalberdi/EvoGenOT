@@ -42,3 +42,40 @@ if plate_name not in labware.list():
         volume=2000)
 
 #########################
+# labsolute 10µl TipRack #
+##########################
+plate_name = 'tiprack-Labsolute_10µl'
+if plate_name not in labware.list():
+    custom_plate = labware.create(
+        plate_name,                    # name of you labware
+        grid=(12, 8),                    # specify amount of (columns, rows)
+        spacing=(9, 9),               # distances (mm) between each (column, row)
+        diameter=4.5,                     # diameter (mm) of each well on the plate
+        depth=52,                       # depth (mm) of each well on the plate
+        volume=10)
+
+##########################
+# labsolute 200µl TipRack #
+##########################
+plate_name = 'tiprack-Labsolute_200µl'
+if plate_name not in labware.list():
+    custom_plate = labware.create(
+        plate_name,                    # name of you labware
+        grid=(12, 8),                    # specify amount of (columns, rows)
+        spacing=(9, 9),               # distances (mm) between each (column, row)
+        diameter=7,                     # diameter (mm) of each well on the plate
+        depth=54,                       # depth (mm) of each well on the plate
+        volume=200)
+
+##########################
+# labsolute 1000µl TipRack #
+##########################
+plate_name = 'tiprack-Labsolute_1000µl'
+if plate_name not in labware.list():
+    custom_plate = labware.create(
+        plate_name,                    # name of you labware
+        grid=(12, 8),                    # specify amount of (columns, rows)
+        spacing=(9, 9),               # distances (mm) between each (column, row)
+        diameter=8,                     # diameter (mm) of each well on the plate
+        depth=76,                       # depth (mm) of each well on the plate
+        volume=2000)
