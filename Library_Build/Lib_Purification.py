@@ -6,8 +6,8 @@
 # 2.  Equlibrate SPRI beads at room temperature
 #
 # PROCEDURE
-#	
-#   1. Add 1.5x SPRI beads to x volume of DNA	
+#
+#   1. Add 1.5x SPRI beads to x volume of DNA
 #   2. Incubate for 1 minutes
 #   3. Engage magnet and incubate for 5 minutes
 #   4. Remove supernatant
@@ -59,9 +59,7 @@ elution_vol = 40
 # Purification
 
 robot.comment("All hands hoay! Purification begins.")
-
 mag_deck.disengage()
-
 m300.transfer(bead_vol, SPRI_beads, mag_plate.cols , mix_before=(2,100),mix_after=(4,50), blow_out =True, new_tip='always', trash=False)
 m300.delay(minutes=1)
 #Incubate at room temperature for 5 min.
@@ -90,4 +88,3 @@ mag_deck.engage()
 m300.delay(minutes=2)
 
 m300.transfer(elution_vol, mag_plate.cols(), elution_plate.cols(), new_tip='always')
-
