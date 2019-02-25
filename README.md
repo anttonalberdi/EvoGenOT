@@ -31,3 +31,5 @@ s1000 | 100-1000 ul single channel pipette
 m10 | 1-10 ul multichannel pipette
 m50 | 5-50 ul multichannel pipette
 m300 | 30-300 ul multichannel pipette
+
+![image](https://github.com/anttonalberdi/EvoGenOT/blob/master/images/DeckMapEmpty.png?raw=true)
