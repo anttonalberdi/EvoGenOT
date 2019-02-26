@@ -8,8 +8,13 @@ metadata = {
 }
 
 #### LIBRARIES ####
-from opentrons import labware, instruments, modules, robot
+#Pandas for handling csv files
 import pandas as pd
+#Opentrons presets
+from opentrons import labware, instruments, modules, robot
+#Custom presets
+import os
+os.system("python custom_labware.py")
 
 #### MODULES ####
 

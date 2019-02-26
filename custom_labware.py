@@ -18,7 +18,11 @@
 #########################
 # 96 Well chilling rack #
 #########################
-plate_name = '96_Chill_rack'
+# Description: blue/purple eppendorf ice-racks available in the modern lab freezers
+# Created by Jacob Agerbo (2019/02/25)
+# Modified by Antton Alberdi (2019/02/26) - plate_name changed from '96_Chill_rack' to '96_chill_rack'
+
+plate_name = '96_chill_rack'
 if plate_name not in labware.list():
     custom_plate = labware.create(
         plate_name,                    # name of you labware
@@ -31,6 +35,10 @@ if plate_name not in labware.list():
 ##########################
 # 24 x 2ml chilling rack #
 ##########################
+# Description: white ice-racks available in the modern lab freezers
+# Created by Jacob Agerbo (2019/02/25)
+# Modified by Antton Alberdi (2019/02/26) - Changed the volume from 2000 to 1000
+
 plate_name = '2ml_chill_rack'
 if plate_name not in labware.list():
     custom_plate = labware.create(
@@ -39,7 +47,7 @@ if plate_name not in labware.list():
         spacing=(18, 18),               # distances (mm) between each (column, row)
         diameter=10,                     # diameter (mm) of each well on the plate
         depth=74,                       # depth (mm) of each well on the plate
-        volume=2000)
+        volume=1000)
 
 #########################
 # labsolute 10µl TipRack #
