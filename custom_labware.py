@@ -20,9 +20,9 @@
 #########################
 # Description: blue/purple eppendorf ice-racks available in the modern lab freezers
 # Created by Jacob Agerbo (2019/02/25)
-# Modified by Antton Alberdi (2019/02/26) - plate_name changed from '96_Chill_rack' to '96_chill_rack'
+# Modified by Antton Alberdi (2019/02/26) - plate_name changed from '96_Chill_rack' to 'chill_rack_96' to keep consistency with Opentrons presets
 
-plate_name = '96_chill_rack'
+plate_name = 'chill_rack_96'
 if plate_name not in labware.list():
     custom_plate = labware.create(
         plate_name,                    # name of you labware
@@ -37,8 +37,9 @@ if plate_name not in labware.list():
 ##########################
 # Description: white ice-racks available in the modern lab freezers
 # Created by Jacob Agerbo (2019/02/25)
+# Modified by Antton Alberdi (2019/02/26) - plate_name changed from '2ml_Chill_rack' to 'chill_rack_2ml' to keep consistency with Opentrons presets
 
-plate_name = '2ml_chill_rack'
+plate_name = 'chill_rack_2ml'
 if plate_name not in labware.list():
     custom_plate = labware.create(
         plate_name,                    # name of you labware
