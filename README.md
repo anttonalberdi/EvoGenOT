@@ -3,7 +3,7 @@ UCPH's EvoGenomics section's Opentrons protocol library.
 
 ## OT2 usage basics
 
-* Do NOT use the OT2 if you do not have the necessary training and have received the approval of Sarah Mak.
+* Do NOT use the OT2 if you do not have the necessary training and have received the approval from Sarah Mak.
 * Always use the OT2 [LogBook](https://goo.gl/forms/fcw7m5c86HYXqvbx1) to record usage.
 * Use the Google Calendar to book OT2 robots. Ask Sarah Mak for details.
 * Do NOT switch off the OT-2 unless there is a connection error (the power button is on the side).
