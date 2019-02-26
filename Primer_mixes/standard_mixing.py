@@ -41,7 +41,7 @@ tube_rack3 = labware.load('opentrons-tuberack-2ml-eppendorf', '3', share=True)
 ice_rack1 = labware.load('PCR-strip-tall', '2', share=True)
 
 #### TIP RACKS ####
-tiprack_200 = labware.load('labsolute-tiprack-200ul', '8')
+tiprack_200 = labware.load('labsolute-tiprack-200µl', '8')
 tiprack_10 = labware.load('labsolute-tiprack-10ul', '5')
 
 #### PIPETTES ####
