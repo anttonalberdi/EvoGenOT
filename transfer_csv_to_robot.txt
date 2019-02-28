@@ -3,3 +3,7 @@ scp /home/ot2yellowuser/github/EvoGenOT/custom_labware.py root@169.254.115.40:/r
 
 #Transfer protocol information
 scp /home/ot2yellowuser/github/EvoGenOT/Transfers_aliquots/2ml_to_96plate_map.csv root@169.254.115.40:/root/csv
+
+#Check file has been correctly transferred
+ssh root@169.254.115.40
+head /root/csv/2ml_to_96plate_map.csv
