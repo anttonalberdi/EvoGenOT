@@ -52,7 +52,7 @@ if "4" in racklist:
     tube_rack4 = labware.load('opentrons-tuberack-2ml-eppendorf', '11', share=True)
 
 #Plate
-ice_rack1 = labware.load('PCR-strip-tall', '9', share=True)
+ice_plate1 = labware.load('PCR-strip-tall', '9', share=True)
 
 #### TIP RACKS ####
 tiprack_200 = labware.load('labsolute-tiprack-200µl', '6')
@@ -62,22 +62,22 @@ s50 = instruments.P50_Single(mount='left', tip_racks=[tiprack_200],  min_volume=
 
 #### LIQUID HANDLING ####
 if "1" in racklist:
-    positions=[positionlist[i] for i in ([i for i,x in enumerate(racklist) if x == "1"])]
-    wells=[welllist[i] for i in ([i for i,x in enumerate(racklist) if x == "1"])]
-    volumes=[volumelist[i] for i in ([i for i,x in enumerate(racklist) if x == "1"])]
-    s50.transfer(volumes, tube_rack1.wells(positions), ice_rack1.wells(wells), new_tip='always')
+    positionsubset=[positionlist[i] for i in ([i for i,x in enumerate(racklist) if x == "1"])]
+    wellsubset=[welllist[i] for i in ([i for i,x in enumerate(racklist) if x == "1"])]
+    volumesubset=[volumelist[i] for i in ([i for i,x in enumerate(racklist) if x == "1"])]
+    s50.transfer(volumesubset, tube_rack1.wells(positionsubset), ice_plate1.wells(wellsubset), new_tip='always')
 if "2" in racklist:
-    positions=[positionlist[i] for i in ([i for i,x in enumerate(racklist) if x == "2"])]
-    wells=[welllist[i] for i in ([i for i,x in enumerate(racklist) if x == "2"])]
-    volumes=[volumelist[i] for i in ([i for i,x in enumerate(racklist) if x == "2"])]
-    s50.transfer(volumes, tube_rack2.wells(positions), ice_rack1.wells(wells), new_tip='always')
+    positionsubset=[positionlist[i] for i in ([i for i,x in enumerate(racklist) if x == "2"])]
+    wellsubset=[welllist[i] for i in ([i for i,x in enumerate(racklist) if x == "2"])]
+    volumesubset=[volumelist[i] for i in ([i for i,x in enumerate(racklist) if x == "2"])]
+    s50.transfer(volumesubset, tube_rack2.wells(positionsubset), ice_plate1.wells(wellsubset), new_tip='always')
 if "3" in racklist:
-    positions=[positionlist[i] for i in ([i for i,x in enumerate(racklist) if x == "3"])]
-    wells=[welllist[i] for i in ([i for i,x in enumerate(racklist) if x == "3"])]
-    volumes=[volumelist[i] for i in ([i for i,x in enumerate(racklist) if x == "3"])]
-    s50.transfer(volumes, tube_rack3.wells(positions), ice_rack1.wells(wells), new_tip='always')
+    positionsubset=[positionlist[i] for i in ([i for i,x in enumerate(racklist) if x == "3"])]
+    wellsubset=[welllist[i] for i in ([i for i,x in enumerate(racklist) if x == "3"])]
+    volumesubset=[volumelist[i] for i in ([i for i,x in enumerate(racklist) if x == "3"])]
+    s50.transfer(volumesubset, tube_rack3.wells(positionsubset), ice_plate1.wells(wellsubset), new_tip='always')
 if "4" in racklist:
-    positions=[positionlist[i] for i in ([i for i,x in enumerate(racklist) if x == "4"])]
-    wells=[welllist[i] for i in ([i for i,x in enumerate(racklist) if x == "4"])]
-    volumes=[volumelist[i] for i in ([i for i,x in enumerate(racklist) if x == "4"])]
-    s50.transfer(volumes, tube_rack4.wells(positions), ice_rack1.wells(wells), new_tip='always')
+    positionsubset=[positionlist[i] for i in ([i for i,x in enumerate(racklist) if x == "4"])]
+    wellsubset=[welllist[i] for i in ([i for i,x in enumerate(racklist) if x == "4"])]
+    volumesubset=[volumelist[i] for i in ([i for i,x in enumerate(racklist) if x == "4"])]
+    s50.transfer(volumesubset, tube_rack4.wells(positionsubset), ice_plate1.wells(wellsubset), new_tip='always')

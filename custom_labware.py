@@ -25,14 +25,13 @@ from opentrons import labware, instruments, modules, robot
 # Modified by Antton Alberdi (2019/02/26) - plate_name changed from '96_Chill_rack' to 'chill_rack_96' to keep consistency with Opentrons presets
 
 plate_name = 'chill_rack_96'
-if plate_name not in labware.list():
-    custom_plate = labware.create(
-        plate_name,                    # name of you labware
-        grid=(12, 8),                    # specify amount of (columns, rows)
-        spacing=(12, 12),               # distances (mm) between each (column, row)
-        diameter=6.4,                     # diameter (mm) of each well on the plate
-        depth=38,                       # depth (mm) of each well on the plate
-        volume=200)
+custom_plate = labware.create(
+    plate_name,                    # name of you labware
+    grid=(12, 8),                    # specify amount of (columns, rows)
+    spacing=(12, 12),               # distances (mm) between each (column, row)
+    diameter=6.4,                     # diameter (mm) of each well on the plate
+    depth=15,                       # depth (mm) of each well on the plate
+    volume=200)
 
 ##########################
 # 24 x 2ml chilling rack #
