@@ -25,4 +25,10 @@ Bla bla
 
 ## 3) Load the protocol in the OT2 app
 
-## 4) Doublecheck the operations in the OT2 app before running the protocol
+## 4) Check and calibrate pipette
+
+## 5) Place and calibrate labware
+
+## 6) Doublecheck the operations in the OT2 app
+
+## 7) Run the protocol
