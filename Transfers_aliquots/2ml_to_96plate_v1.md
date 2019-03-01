@@ -16,6 +16,13 @@ The protocol requires a mapping file (2ml_to_96plate_v1_map.csv) that specifies 
 * Well: specifies the coordinate of the well in the PCR plate (A1-H12)
 * Volume: specifies the volume to be transferred in ul.
 
-You can specify any relation between 1.5/2ml tubes and PCR plate wells. For instance, if you require one sample to be distributed to multiple PCR plate wells, just use the same source coordinates (rack and position) with different PCR plate well coordinates.
+You can specify any relation between 1.5/2ml tubes and PCR plate wells. For instance, if you require one sample to be distributed to multiple PCR plate wells, just use the same source coordinates (rack and position) with different PCR plate well coordinates. The columns must be comma-separated.
 
 Download the template csv file, edit it and upload it to github with the file name 2ml_to_96plate_v1_map.csv. This will overwrite the existing document with the same name. Make sure you do not overwrite the 2ml_to_96plate_v1_map_template.csv file. 
+
+## 2) Download the mapping file and transfer to the OT2 robot
+Bla bla
+
+## 3) Load the protocol in the OT2 app
+
+## 4) Doublecheck the operations in the OT2 app before running the protocol
