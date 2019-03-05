@@ -39,8 +39,7 @@ tube_rack3 = labware.load('opentrons-tuberack-2ml-eppendorf', '3', share=True)
   #D1-D6: Tag19-24
 
 #Primer mix rack
-temp_deck = modules.load('tempdeck', '5') #an 96-well ice rack can be also used
-temp_plate = labware.load('PCR-strip-tall', '2', share=True) #note that although no plate will be used, this is necessary
+temp_plate = labware.load('PCR-strip-tall', '5', share=True) #note that although no plate will be used, this is necessary
 
 #### TIP RACKS ####
 tiprack_200 = labware.load('labsolute-tiprack-200µl', '8')
@@ -94,11 +93,11 @@ mixlist_last = totalmixlist[int(combnumber/2):combnumber] #last 50%
 #### LIQUID HANDLING ####
 
 #Transfer Water (without changing the tip)
-s50.transfer(water, tube_rack1.wells('A1'), temp_plate.wells(mixlist_first))
-s50.transfer(water, tube_rack1.wells('A2'), temp_plate.wells(mixlist_last))
+s50.transfer(water[:int(combnumber/2)], tube_rack1.wells('A1'), temp_plate.wells(mixlist_first))
+s50.transfer(water[int(combnumber/2):combnumber], tube_rack1.wells('A2'), temp_plate.wells(mixlist_last))
 
 #Transfer Forward primer (always changing the tip)
-s50.transfer(forwardvol, tube_rack1.wells(forwardPos), temp_plate.wells(mixlist), new_tip='always')
+s50.transfer(forwardvol, tube_rack2.wells(forwardPos), temp_plate.wells(mixlist), new_tip='always')
 
 #Transfer Reverse primer (always changing the tip)
-s50.transfer(reversevol, tube_rack1.wells(reversePos), temp_plate.wells(mixlist), new_tip='always')
+s50.transfer(reversevol, tube_rack3.wells(reversePos), temp_plate.wells(mixlist), new_tip='always')
