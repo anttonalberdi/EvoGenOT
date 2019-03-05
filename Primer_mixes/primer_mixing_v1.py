@@ -50,8 +50,6 @@ s50 = instruments.P50_Single(mount='left', tip_racks=[tiprack_200])
 
 #### INPUT FILES ####
 
-#### INPUT FILES ####
-
 #Load data files
 combinations=[]
 forward=[]
