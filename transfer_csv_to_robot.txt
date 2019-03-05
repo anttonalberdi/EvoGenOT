@@ -1,13 +1,21 @@
-#Transfer custom labware information
-scp /home/ot2yellowuser/github/EvoGenOT/custom_labware.py root@169.254.115.40:/root/
+#Transfer custom labware information (red)
+scp /home/ot2reduser/github/EvoGenOT/custom_labware.py root@169.254.111.78:/root/
 
 #Transfer protocol information (example red)
-scp /home/ot2reduser/github/EvoGenOT/Primer_mixes/primer_mixing_v1_map.csv
+scp /home/ot2reduser/github/EvoGenOT/Primer_mixes/primer_mixing_v1_map.csv root@169.254.111.78:/root/csv
+
+#Check files have been correctly transferred (red)
+ssh root@169.254.111.78
+head /root/custom_labware.py
+head /root/csv/primer_mixing_v1_map.csv
+
+#Transfer custom labware information (yellow)
+scp /home/ot2yellowuser/github/EvoGenOT/custom_labware.py root@169.254.115.40:/root/
 
 #Transfer protocol information (example yellow)
 scp /home/ot2yellowuser/github/EvoGenOT/Transfers_aliquots/2ml_to_96plate_map.csv root@169.254.115.40:/root/csv
 
-
-#Check file has been correctly transferred
+#Check files have been correctly transferred (yellow)
 ssh root@169.254.115.40
+head /root/custom_labware.py
 head /root/csv/2ml_to_96plate_map.csv
