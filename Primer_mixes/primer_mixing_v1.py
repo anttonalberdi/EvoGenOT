@@ -78,11 +78,9 @@ water.pop(0)
 #Get number of combinations
 combnumber = len(combinations)
 
-#Replate Tag for position
-# https://stackoverflow.com/questions/47012328/how-to-replace-multiple-items-in-a-list-in-a-single-statement-in-python
-#tagmap = {'Tag1':'A1', 'Tag2':'A2', 'Tag3':'A3', 'Tag4':'A4', 'Tag5':'A5', 'Tag6':'A6', 'Tag7':'B1', 'Tag8':'B2', 'Tag9':'B3', 'Tag10':'B4', 'Tag11':'B5', 'Tag12':'B6', 'Tag13':'C1', 'Tag14':'C2', 'Tag15':'C3', 'Tag16':'C4', 'Tag17':'C5', 'Tag18':'C6', 'Tag19':'D1', 'Tag20':'D2', 'Tag21':'D3', 'Tag22':'D4', 'Tag23':'D5', 'Tag24':'D6'}
-#forwardPos = map(lambda i: tagmap.get(i, forward[i]), range(len(forward)))
-#NEED TO CHECK IF IT WORKS IN THE ROBOT!!! 2019/03/06
+#Replace Tag for position
+tagmap = {'Tag1':'A1', 'Tag2':'A2', 'Tag3':'A3', 'Tag4':'A4', 'Tag5':'A5', 'Tag6':'A6', 'Tag7':'B1', 'Tag8':'B2', 'Tag9':'B3', 'Tag10':'B4', 'Tag11':'B5', 'Tag12':'B6', 'Tag13':'C1', 'Tag14':'C2', 'Tag15':'C3', 'Tag16':'C4', 'Tag17':'C5', 'Tag18':'C6', 'Tag19':'D1', 'Tag20':'D2', 'Tag21':'D3', 'Tag22':'D4', 'Tag23':'D5', 'Tag24':'D6'}
+forwardPos = list(map(lambda i: tagmap.get(i, forward[i]), range(len(forward))))
 
 forwardPos=forward
 reversePos=reverse
