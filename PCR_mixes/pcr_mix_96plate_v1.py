@@ -158,7 +158,7 @@ s50.transfer(dntpTot/2, reagent_rack.wells('A5'), reagent_rack.wells('C1'), new_
 s50.transfer(dntpTot/2, reagent_rack.wells('A5'), reagent_rack.wells('C2'), new_tip='always')
 
 #Pause to place polymerase in the rack (until incorporating tempdecks)
-robot.pause()
+#robot.pause()
 
 #Transfer taqTot (slower pipetting) - mixing is very slow, need to think another strategy (mixing atomic is not working with space)
 s50.set_flow_rate(aspirate=10, dispense=10)
@@ -167,15 +167,15 @@ s50.transfer(taqTot/2, reagent_rack.wells('A6'), reagent_rack.wells('C2'), new_t
 s50.set_flow_rate(aspirate=25, dispense=50)
 
 #### MASTERMIX MIXING #### using mix function does not interprete rack dimnensions correctly
-s50.transfer(50, reagent_rack.wells('C1'), reagent_rack.wells('C1') mix_after=(10, 50))
-s50.transfer(50, reagent_rack.wells('C2'), reagent_rack.wells('C2') mix_after=(10, 50))
+s50.transfer(50, reagent_rack.wells('C1'), reagent_rack.wells('C1'), mix_after=(10, 50))
+s50.transfer(50, reagent_rack.wells('C2'), reagent_rack.wells('C2'), mix_after=(10, 50))
 
 #### MASTERMIX DISTRIBUTION ####
-s50.transfer(indVol, reagent_rack.wells('C1'), pcr_plate.cols('1','2','3','4','5','6').top())
-s50.transfer(indVol, reagent_rack.wells('C2'), pcr_plate.cols('7','8','9','10','11','12').top())
+s50.transfer(indVol, reagent_rack.wells('C1'), pcr_plate.cols('1','2','3','4','5','6'))
+s50.transfer(indVol, reagent_rack.wells('C2'), pcr_plate.cols('7','8','9','10','11','12'))
 
 #Pause to open primer lids
-robot.pause()
+#robot.pause()
 
 #### PRIMER DISTRIBUTION ####
 for col in list(range(len(primercols))):
