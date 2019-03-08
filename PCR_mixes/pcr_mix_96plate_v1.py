@@ -121,8 +121,8 @@ primerVol = primers
 
 #### PREPARATIONS ####
 
-#Get total volumes
-waterTot = water * (samples + round(samples * 0.048))
+#Get total volumes (it needs ca 8% more volume for the whole plate due to the dragged liquid attached to the tips)
+waterTot = water * (samples + round(samples * 0.08))
 bufferTot = buffer * (samples + round(samples * 0.08))
 mgcl2Tot = mgcl2 * (samples + round(samples * 0.08))
 bsaTot = bsa * (samples + round(samples * 0.08))
@@ -157,15 +157,18 @@ if bsaTot != 0:
 s50.transfer(dntpTot/2, reagent_rack.wells('A5'), reagent_rack.wells('C1'), new_tip='always')
 s50.transfer(dntpTot/2, reagent_rack.wells('A5'), reagent_rack.wells('C2'), new_tip='always')
 
-#Pause to place polymerase in the rack
+#Pause to place polymerase in the rack (until incorporating tempdecks)
 robot.pause()
 
 #Transfer taqTot (slower pipetting) - mixing is very slow, need to think another strategy (mixing atomic is not working with space)
 s50.set_flow_rate(aspirate=10, dispense=10)
-s50.transfer(taqTot/2, reagent_rack.wells('A6'), reagent_rack.wells('C1'), new_tip='always', mix_after=(10, 50))
-s50.transfer(taqTot/2, reagent_rack.wells('A6'), reagent_rack.wells('C2'), new_tip='always', mix_after=(10, 50))
+s50.transfer(taqTot/2, reagent_rack.wells('A6'), reagent_rack.wells('C1'), new_tip='always')
+s50.transfer(taqTot/2, reagent_rack.wells('A6'), reagent_rack.wells('C2'), new_tip='always')
 s50.set_flow_rate(aspirate=25, dispense=50)
 
+#### MASTERMIX MIXING #### using mix function does not interprete rack dimnensions correctly
+s50.transfer(50, reagent_rack.wells('C1'), reagent_rack.wells('C1') mix_after=(10, 50))
+s50.transfer(50, reagent_rack.wells('C2'), reagent_rack.wells('C2') mix_after=(10, 50))
 
 #### MASTERMIX DISTRIBUTION ####
 s50.transfer(indVol, reagent_rack.wells('C1'), pcr_plate.cols('1','2','3','4','5','6').top())
