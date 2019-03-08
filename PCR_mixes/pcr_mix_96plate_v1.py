@@ -7,6 +7,13 @@ metadata = {
     'description': 'Standard PCR mastermix preparation and distribution to plate',
 }
 
+#Note: transfer all reagents to 1.5/2ml epp tubes, due to the different ring heights
+
+#### CHANGELOG ####
+
+#2019-03-08, Antton - Added .top() to mastermix distribution to speed up and minimise risk of uncalibration issues
+#2019-03-08, Antton - Changed the % of extra reagents to 8%, as 4% was not enough
+
 #### LIBRARIES ####
 
 import csv
@@ -115,12 +122,12 @@ primerVol = primers
 #### PREPARATIONS ####
 
 #Get total volumes
-waterTot = water * (samples + round(samples * 0.04))
-bufferTot = buffer * (samples + round(samples * 0.04))
-mgcl2Tot = mgcl2 * (samples + round(samples * 0.04))
-bsaTot = bsa * (samples + round(samples * 0.04))
-dntpTot = dntp * (samples + round(samples * 0.04))
-taqTot = taq * (samples + round(samples * 0.04))
+waterTot = water * (samples + round(samples * 0.048))
+bufferTot = buffer * (samples + round(samples * 0.08))
+mgcl2Tot = mgcl2 * (samples + round(samples * 0.08))
+bsaTot = bsa * (samples + round(samples * 0.08))
+dntpTot = dntp * (samples + round(samples * 0.08))
+taqTot = taq * (samples + round(samples * 0.08))
 
 #Get individual mastermix volumes
 indVol = water + buffer + mgcl2 + bsa + dntp + taq
@@ -161,8 +168,8 @@ s50.set_flow_rate(aspirate=25, dispense=50)
 
 
 #### MASTERMIX DISTRIBUTION ####
-s50.transfer(indVol, reagent_rack.wells('C1'), pcr_plate.cols('1','2','3','4','5','6'))
-s50.transfer(indVol, reagent_rack.wells('C2'), pcr_plate.cols('7','8','9','10','11','12'))
+s50.transfer(indVol, reagent_rack.wells('C1'), pcr_plate.cols('1','2','3','4','5','6').top())
+s50.transfer(indVol, reagent_rack.wells('C2'), pcr_plate.cols('7','8','9','10','11','12').top())
 
 #Pause to open primer lids
 robot.pause()

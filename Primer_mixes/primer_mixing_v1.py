@@ -7,6 +7,8 @@ metadata = {
     'description': 'Standard protocol for PCR primer mixing',
 }
 
+#Note calibrate tube racks with the 1.5ml epp (water), not the primer tubes, otherwise it won't go to the bottom of the primers
+
 #### LIBRARIES ####
 
 import csv
@@ -83,7 +85,8 @@ def replace_all(text, dic):
     for i, j in dic.items():
         text = text.replace(i, j)
     return text
-tagmap = {'Tag1':'A1', 'Tag2':'A2', 'Tag3':'A3', 'Tag4':'A4', 'Tag5':'A5', 'Tag6':'A6', 'Tag7':'B1', 'Tag8':'B2', 'Tag9':'B3', 'Tag10':'B4', 'Tag11':'B5', 'Tag12':'B6', 'Tag13':'C1', 'Tag14':'C2', 'Tag15':'C3', 'Tag16':'C4', 'Tag17':'C5', 'Tag18':'C6', 'Tag19':'D1', 'Tag20':'D2', 'Tag21':'D3', 'Tag22':'D4', 'Tag23':'D5', 'Tag24':'D6'}
+tagmap = {'Tag1 ':'A1 ', 'Tag2 ':'A2 ', 'Tag3 ':'A3 ', 'Tag4 ':'A4 ', 'Tag5 ':'A5 ', 'Tag6 ' :'A6 ', 'Tag7 ':'B1 ', 'Tag8 ':'B2 ', 'Tag9 ':'B3 ', 'Tag10 ':'B4 ', 'Tag11 ':'B5 ', 'Tag12 ':'B6 ', 'Tag13 ':'C1 ', 'Tag14 ':'C2 ', 'Tag15 ':'C3 ', 'Tag16 ':'C4 ', 'Tag17 ':'C5 ', 'Tag18 ':'C6 ', 'Tag19 ':'D1 ', 'Tag20 ':'D2 ', 'Tag21 ':'D3 ', 'Tag22 ':'D4 ', 'Tag23 ':'D5 ', 'Tag24':'D6'}
+#the spaces are important to avoid replacing Tag12 with Tag1, for instance.
 
 #forward
 forwardStr = ' '.join(forward)
@@ -107,7 +110,9 @@ s50.transfer(water[:int(combnumber/2)], tube_rack1.wells('A1'), temp_plate.wells
 s50.transfer(water[int(combnumber/2):combnumber], tube_rack1.wells('A2'), temp_plate.wells(mixlist_last))
 
 #Transfer Forward primer (always changing the tip)
-s50.transfer(forwardvol, tube_rack2.wells(forwardPos), temp_plate.wells(mixlist), new_tip='always')
+for pos in list(range(len(mixlist))):
+    s50.transfer(float(forwardvol[pos]), tube_rack2.wells(forwardPos[pos]), temp_plate.wells(mixlist[pos]), new_tip='always')
 
 #Transfer Reverse primer (always changing the tip)
-s50.transfer(reversevol, tube_rack3.wells(reversePos), temp_plate.wells(mixlist), new_tip='always')
+for pos in list(range(len(mixlist))):
+    s50.transfer(float(reversevol[pos]), tube_rack3.wells(reversePos[pos]), temp_plate.wells(mixlist[pos]), new_tip='always')
