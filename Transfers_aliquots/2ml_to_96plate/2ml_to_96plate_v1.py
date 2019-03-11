@@ -7,6 +7,10 @@ metadata = {
     'description': 'Protocol for transferring liquids from 1.5/2ml to 96-well plate transfer',
 }
 
+#### CHANGELOG  ####
+
+#2018/03/11, Antton - Blow out added to the transfer to plate
+
 #### LIBRARIES ####
 
 import csv
@@ -63,19 +67,19 @@ if "1" in racklist:
     positionsubset=[positionlist[i] for i in ([i for i,x in enumerate(racklist) if x == "1"])]
     wellsubset=[welllist[i] for i in ([i for i,x in enumerate(racklist) if x == "1"])]
     volumesubset=[volumelist[i] for i in ([i for i,x in enumerate(racklist) if x == "1"])]
-    s50.transfer(volumesubset, tube_rack1.wells(positionsubset), PCR_plate1.wells(wellsubset), new_tip='always')
+    s50.transfer(volumesubset, tube_rack1.wells(positionsubset), PCR_plate1.wells(wellsubset), new_tip='always', blow_out=True)
 if "2" in racklist:
     positionsubset=[positionlist[i] for i in ([i for i,x in enumerate(racklist) if x == "2"])]
     wellsubset=[welllist[i] for i in ([i for i,x in enumerate(racklist) if x == "2"])]
     volumesubset=[volumelist[i] for i in ([i for i,x in enumerate(racklist) if x == "2"])]
-    s50.transfer(volumesubset, tube_rack2.wells(positionsubset), PCR_plate1.wells(wellsubset), new_tip='always')
+    s50.transfer(volumesubset, tube_rack2.wells(positionsubset), PCR_plate1.wells(wellsubset), new_tip='always', blow_out=True)
 if "3" in racklist:
     positionsubset=[positionlist[i] for i in ([i for i,x in enumerate(racklist) if x == "3"])]
     wellsubset=[welllist[i] for i in ([i for i,x in enumerate(racklist) if x == "3"])]
     volumesubset=[volumelist[i] for i in ([i for i,x in enumerate(racklist) if x == "3"])]
-    s50.transfer(volumesubset, tube_rack3.wells(positionsubset), PCR_plate1.wells(wellsubset), new_tip='always')
+    s50.transfer(volumesubset, tube_rack3.wells(positionsubset), PCR_plate1.wells(wellsubset), new_tip='always', blow_out=True)
 if "4" in racklist:
     positionsubset=[positionlist[i] for i in ([i for i,x in enumerate(racklist) if x == "4"])]
     wellsubset=[welllist[i] for i in ([i for i,x in enumerate(racklist) if x == "4"])]
     volumesubset=[volumelist[i] for i in ([i for i,x in enumerate(racklist) if x == "4"])]
-    s50.transfer(volumesubset, tube_rack4.wells(positionsubset), PCR_plate1.wells(wellsubset), new_tip='always')
+    s50.transfer(volumesubset, tube_rack4.wells(positionsubset), PCR_plate1.wells(wellsubset), new_tip='always', blow_out=True)
