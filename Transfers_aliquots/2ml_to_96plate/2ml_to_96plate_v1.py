@@ -7,9 +7,11 @@ metadata = {
     'description': 'Protocol for transferring liquids from 1.5/2ml to 96-well plate transfer',
 }
 
+#### CHANGELOG  ####
+
+#2018/03/11, Antton - Blow out added to the transfer to plate
+
 #### LIBRARIES ####
-
-
 
 import csv
 #Opentrons presets
@@ -52,7 +54,7 @@ if "4" in racklist:
     tube_rack4 = labware.load('opentrons-tuberack-2ml-eppendorf', '11', share=True)
 
 #Plate
-ice_plate1 = labware.load('PCR-strip-tall', '9', share=True)
+PCR_plate1 = labware.load('PCR-strip-tall', '9', share=True)
 
 #### TIP RACKS ####
 tiprack_10 = labware.load('labsolute-tiprack-10µl', '6')
@@ -65,19 +67,35 @@ if "1" in racklist:
     positionsubset=[positionlist[i] for i in ([i for i,x in enumerate(racklist) if x == "1"])]
     wellsubset=[welllist[i] for i in ([i for i,x in enumerate(racklist) if x == "1"])]
     volumesubset=[volumelist[i] for i in ([i for i,x in enumerate(racklist) if x == "1"])]
+<<<<<<< HEAD:Transfers_aliquots/2ml_to_96plate.py
     s10.transfer(volumesubset, tube_rack1.wells(positionsubset), ice_plate1.wells(wellsubset), new_tip='always')
+=======
+    s50.transfer(volumesubset, tube_rack1.wells(positionsubset), PCR_plate1.wells(wellsubset), new_tip='always', blow_out=True)
+>>>>>>> e765872e6556679052ba7e23c48ffead375bd1f2:Transfers_aliquots/2ml_to_96plate/2ml_to_96plate_v1.py
 if "2" in racklist:
     positionsubset=[positionlist[i] for i in ([i for i,x in enumerate(racklist) if x == "2"])]
     wellsubset=[welllist[i] for i in ([i for i,x in enumerate(racklist) if x == "2"])]
     volumesubset=[volumelist[i] for i in ([i for i,x in enumerate(racklist) if x == "2"])]
+<<<<<<< HEAD:Transfers_aliquots/2ml_to_96plate.py
     s10.transfer(volumesubset, tube_rack2.wells(positionsubset), ice_plate1.wells(wellsubset), new_tip='always')
+=======
+    s50.transfer(volumesubset, tube_rack2.wells(positionsubset), PCR_plate1.wells(wellsubset), new_tip='always', blow_out=True)
+>>>>>>> e765872e6556679052ba7e23c48ffead375bd1f2:Transfers_aliquots/2ml_to_96plate/2ml_to_96plate_v1.py
 if "3" in racklist:
     positionsubset=[positionlist[i] for i in ([i for i,x in enumerate(racklist) if x == "3"])]
     wellsubset=[welllist[i] for i in ([i for i,x in enumerate(racklist) if x == "3"])]
     volumesubset=[volumelist[i] for i in ([i for i,x in enumerate(racklist) if x == "3"])]
+<<<<<<< HEAD:Transfers_aliquots/2ml_to_96plate.py
     s10.transfer(volumesubset, tube_rack3.wells(positionsubset), ice_plate1.wells(wellsubset), new_tip='always')
+=======
+    s50.transfer(volumesubset, tube_rack3.wells(positionsubset), PCR_plate1.wells(wellsubset), new_tip='always', blow_out=True)
+>>>>>>> e765872e6556679052ba7e23c48ffead375bd1f2:Transfers_aliquots/2ml_to_96plate/2ml_to_96plate_v1.py
 if "4" in racklist:
     positionsubset=[positionlist[i] for i in ([i for i,x in enumerate(racklist) if x == "4"])]
     wellsubset=[welllist[i] for i in ([i for i,x in enumerate(racklist) if x == "4"])]
     volumesubset=[volumelist[i] for i in ([i for i,x in enumerate(racklist) if x == "4"])]
+<<<<<<< HEAD:Transfers_aliquots/2ml_to_96plate.py
     s10.transfer(volumesubset, tube_rack4.wells(positionsubset), ice_plate1.wells(wellsubset), new_tip='always')
+=======
+    s50.transfer(volumesubset, tube_rack4.wells(positionsubset), PCR_plate1.wells(wellsubset), new_tip='always', blow_out=True)
+>>>>>>> e765872e6556679052ba7e23c48ffead375bd1f2:Transfers_aliquots/2ml_to_96plate/2ml_to_96plate_v1.py

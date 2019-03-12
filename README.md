@@ -9,6 +9,14 @@ UCPH's EvoGenomics section's Opentrons protocol library.
 * Do NOT switch off the OT-2 unless there is a connection error (the power button is on the side).
 * Do NOT press the button with BLUE light. It is just a light indicating whether the OT-2 is ready or not.
 
+## OT2 protocols
+
+At EvoGenomics we have our own library of OT2 protocols developed and validated by internal users. All protocols are expected to contain:
+
+* A python script with a descriptive name and version number specified (e.g. 2ml_to_96plate_v1.py).
+* A readme file explaining the procedures to run the protocol (e.g. 2ml_to_96plate_v1.md)
+* Some protocols (aliquoting, PCR mixes, etc.) might require csv files with basic information about sample positions, volumes, etc. 
+
 ## Opentrons API documentation
 
 https://docs.opentrons.com/
