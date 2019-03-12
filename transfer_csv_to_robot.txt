@@ -1,5 +1,5 @@
 redip=169.254.214.54
-
+yellowip=169.254.115.40
 
 #Transfer custom labware information (red)
 scp /home/ot2reduser/github/EvoGenOT/custom_labware.py root@${redip}:/root/
@@ -19,7 +19,7 @@ head /root/csv/primer_mixing_v1_map.csv
 scp /home/ot2yellowuser/github/EvoGenOT/custom_labware.py root@169.254.115.40:/root/
 
 #Transfer protocol information (example yellow)
-scp /home/ot2yellowuser/github/EvoGenOT/Transfers_aliquots/2ml_to_96plate_map.csv root@169.254.115.40:/root/csv
+scp /home/ot2yellowuser/github/EvoGenOT/Transfers_aliquots/2ml_to_96plate_v1_map.csv root@${yellowip}:/root/csv
 
 #Check files have been correctly transferred (yellow)
 ssh root@169.254.115.40
