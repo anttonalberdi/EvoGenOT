@@ -86,19 +86,25 @@ water.pop(0)
 combnumber = len(combinations)
 
 #Replate Tag for position
+
+tagmap = {'Tag1 ':'A1 ', 'Tag2 ':'A2 ', 'Tag3 ':'A3 ', 'Tag4 ':'A4 ', 'Tag5 ':'A5 ', 'Tag6 ' :'A6 ', 'Tag7 ':'B1 ', 'Tag8 ':'B2 ', 'Tag9 ':'B3 ', 'Tag10 ':'B4 ', 'Tag11 ':'B5 ', 'Tag12 ':'B6 ', 'Tag13 ':'C1 ', 'Tag14 ':'C2 ', 'Tag15 ':'C3 ', 'Tag16 ':'C4 ', 'Tag17 ':'C5 ', 'Tag18 ':'C6 ', 'Tag19 ':'D1 ', 'Tag20 ':'D2 ', 'Tag21 ':'D3 ', 'Tag22 ':'D4 ', 'Tag23 ':'D5 ', 'Tag24 ':'D6 '}
+#the spaces are important to avoid replacing Tag12 with Tag1, for instance.
+
 def replace_all(text, dic):
     for i, j in dic.items():
         text = text.replace(i, j)
     return text
-tagmap = {'Tag1 ':'A1 ', 'Tag2 ':'A2 ', 'Tag3 ':'A3 ', 'Tag4 ':'A4 ', 'Tag5 ':'A5 ', 'Tag6 ' :'A6 ', 'Tag7 ':'B1 ', 'Tag8 ':'B2 ', 'Tag9 ':'B3 ', 'Tag10 ':'B4 ', 'Tag11 ':'B5 ', 'Tag12 ':'B6 ', 'Tag13 ':'C1 ', 'Tag14 ':'C2 ', 'Tag15 ':'C3 ', 'Tag16 ':'C4 ', 'Tag17 ':'C5 ', 'Tag18 ':'C6 ', 'Tag19 ':'D1 ', 'Tag20 ':'D2 ', 'Tag21 ':'D3 ', 'Tag22 ':'D4 ', 'Tag23 ':'D5 ', 'Tag24':'D6'}
-#the spaces are important to avoid replacing Tag12 with Tag1, for instance.
 
 #forward
 forwardStr = ' '.join(forward)
+forwardStr_length=len(forwardStr)+1
+forwardStr=forwardStr.ljust(forwardStr_length)
 forwardPosStr = replace_all(forwardStr, tagmap)
 forwardPos = forwardPosStr.split()
 #reverse
-reverseStr = ' '.join(forward)
+reverseStr = ' '.join(reverse)
+reverseStr_length=len(reverseStr)+1
+reverseStr=reverseStr.ljust(reverseStr_length)
 reversePosStr = replace_all(reverseStr, tagmap)
 reversePos = reversePosStr.split()
 
@@ -120,11 +126,11 @@ s50.transfer(water[int(combnumber/2):combnumber], tube_rack1.wells('A2'), strips
 #Transfer Forward primer (always changing the tip)
 robot.comment("Forward primer distribution begins.")
 for pos in list(range(len(mixlist))):
-    s50.transfer(float(forwardvol[pos]), tube_rack2.wells(forwardPos[pos]), strips.wells(mixlist[pos]), blow_out=True, new_tip='always')
+    s50.transfer(float(forwardvol[pos]), tube_rack2.wells(forwardPos[pos]), strips.wells(mixlist[pos]),  blow_out=True, new_tip='always')
 
 #Transfer Reverse primer (always changing the tip)
 robot.comment("Reverse primer distribution begins.")
 for pos in list(range(len(mixlist))):
-    s50.transfer(float(reversevol[pos]), tube_rack3.wells(reversePos[pos]), strips.wells(mixlist[pos]), blow_out=True, new_tip='always')
+    s50.transfer(float(reversevol[pos]), tube_rack3.wells(reversePos[pos]), strips.wells(mixlist[pos]),  blow_out=True, new_tip='always')
 
 robot.comment("Protocol is done.")
