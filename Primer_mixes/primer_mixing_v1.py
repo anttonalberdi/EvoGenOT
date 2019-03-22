@@ -9,6 +9,10 @@ metadata = {
 
 #Note calibrate tube racks with the 1.5ml epp (water), not the primer tubes, otherwise it won't go to the bottom of the primers
 
+#### CHANGELOB ####
+
+#2019/03/22, Antton - Adapted to use a temp deck for the strip tubes
+
 #### LIBRARIES ####
 
 import csv
@@ -22,29 +26,30 @@ import custom_labware
 #### MODULES ####
 
 #Water rack
-tube_rack1 = labware.load('opentrons-tuberack-2ml-eppendorf', '9', share=True)
+tube_rack1 = labware.load('opentrons-tuberack-2ml-eppendorf', '11', share=True)
   #A1 = 1.5 ml ddH2O
   #A2 = 1.5 ml ddH2O
 
 #Forward primers rack
-tube_rack2 = labware.load('opentrons-tuberack-2ml-eppendorf', '6', share=True)
+tube_rack2 = labware.load('opentrons-tuberack-2ml-eppendorf', '8', share=True)
   #A1-A6: Tag1-6
   #B1-B6: Tag7-12
   #C1-C6: Tag13-18
   #D1-D6: Tag19-24
 
 #Reverse primers rack
-tube_rack3 = labware.load('opentrons-tuberack-2ml-eppendorf', '3', share=True)
+tube_rack3 = labware.load('opentrons-tuberack-2ml-eppendorf', '5', share=True)
   #A1-A6: Tag1-6
   #B1-B6: Tag7-12
   #C1-C6: Tag13-18
   #D1-D6: Tag19-24
 
 #Primer mix rack
-temp_plate = labware.load('PCR-strip-tall', '5', share=True) #note that although no plate will be used, this is necessary
+temp_deck = modules.load('tempdeck', '10')
+strips = labware.load('PCR-strip-tall', '10', share=True)
 
 #### TIP RACKS ####
-tiprack_200 = labware.load('labsolute-tiprack-200µl', '8')
+tiprack_200 = labware.load('labsolute-tiprack-200µl', '9')
 
 #### PIPETTES ####
 s50 = instruments.P50_Single(mount='left', tip_racks=[tiprack_200])
@@ -105,14 +110,21 @@ mixlist_last = totalmixlist[int(combnumber/2):combnumber] #last 50%
 
 #### LIQUID HANDLING ####
 
+robot.comment("Water distribution begins.")
+temp_deck.set_temperature(4)
+
 #Transfer Water (without changing the tip)
-s50.transfer(water[:int(combnumber/2)], tube_rack1.wells('A1'), temp_plate.wells(mixlist_first))
-s50.transfer(water[int(combnumber/2):combnumber], tube_rack1.wells('A2'), temp_plate.wells(mixlist_last))
+s50.transfer(water[:int(combnumber/2)], tube_rack1.wells('A1'), strips.wells(mixlist_first))
+s50.transfer(water[int(combnumber/2):combnumber], tube_rack1.wells('A2'), strips.wells(mixlist_last))
 
 #Transfer Forward primer (always changing the tip)
+robot.comment("Forward primer distribution begins.")
 for pos in list(range(len(mixlist))):
-    s50.transfer(float(forwardvol[pos]), tube_rack2.wells(forwardPos[pos]), temp_plate.wells(mixlist[pos]), new_tip='always')
+    s50.transfer(float(forwardvol[pos]), tube_rack2.wells(forwardPos[pos]), strips.wells(mixlist[pos]), new_tip='always')
 
 #Transfer Reverse primer (always changing the tip)
+robot.comment("Reverse primer distribution begins.")
 for pos in list(range(len(mixlist))):
-    s50.transfer(float(reversevol[pos]), tube_rack3.wells(reversePos[pos]), temp_plate.wells(mixlist[pos]), new_tip='always')
+    s50.transfer(float(reversevol[pos]), tube_rack3.wells(reversePos[pos]), strips.wells(mixlist[pos]), new_tip='always')
+
+robot.comment("Protocol is done.")
