@@ -114,17 +114,17 @@ robot.comment("Water distribution begins.")
 temp_deck.set_temperature(4)
 
 #Transfer Water (without changing the tip)
-s50.transfer(water[:int(combnumber/2)], tube_rack1.wells('A1'), strips.wells(mixlist_first))
-s50.transfer(water[int(combnumber/2):combnumber], tube_rack1.wells('A2'), strips.wells(mixlist_last))
+s50.transfer(water[:int(combnumber/2)], tube_rack1.wells('A1'), strips.wells(mixlist_first), blow_out=True)
+s50.transfer(water[int(combnumber/2):combnumber], tube_rack1.wells('A2'), strips.wells(mixlist_last), blow_out=True)
 
 #Transfer Forward primer (always changing the tip)
 robot.comment("Forward primer distribution begins.")
 for pos in list(range(len(mixlist))):
-    s50.transfer(float(forwardvol[pos]), tube_rack2.wells(forwardPos[pos]), strips.wells(mixlist[pos]), new_tip='always')
+    s50.transfer(float(forwardvol[pos]), tube_rack2.wells(forwardPos[pos]), strips.wells(mixlist[pos]), blow_out=True, new_tip='always')
 
 #Transfer Reverse primer (always changing the tip)
 robot.comment("Reverse primer distribution begins.")
 for pos in list(range(len(mixlist))):
-    s50.transfer(float(reversevol[pos]), tube_rack3.wells(reversePos[pos]), strips.wells(mixlist[pos]), new_tip='always')
+    s50.transfer(float(reversevol[pos]), tube_rack3.wells(reversePos[pos]), strips.wells(mixlist[pos]), blow_out=True, new_tip='always')
 
 robot.comment("Protocol is done.")
