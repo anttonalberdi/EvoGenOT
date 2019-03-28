@@ -129,8 +129,7 @@ m300.transfer(500, [well.bottom() for well in sample_plate.wells()], Liquid_tras
 ## Dry beads
 temp_deck.set_temperature(55)
 temp_deck.wait_for_temp()
-robot.pause("Put the plate on the Temperature Module for 20 minutes at 55°C \The 300 uL tips have run out. Please replace tipracks. Resume \
-when the tips are replenished.")
+robot.pause("Put the plate on the Temperature Module for 20 minutes at 55°C \The 300 uL tips will run out. Please replace tipracks.")
 
 m300.reset_tip_tracking()
 
