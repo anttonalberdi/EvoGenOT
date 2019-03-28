@@ -127,10 +127,11 @@ m300.delay(minutes=5)
 m300.transfer(500, [well.bottom() for well in sample_plate.wells()], Liquid_trash, new_tip='always',  blow_out =True)
 
 ## Dry beads
-robot.pause("Put the plate on the Temperature Module for 20 minutes at 55°C")
-
-robot.pause("The 300 uL tips have run out. Please replace tipracks. Resume \
+temp_deck.set_temperature(55)
+temp_deck.wait_for_temp()
+robot.pause("Put the plate on the Temperature Module for 20 minutes at 55°C \The 300 uL tips have run out. Please replace tipracks. Resume \
 when the tips are replenished.")
+
 m300.reset_tip_tracking()
 
 ## Elution
