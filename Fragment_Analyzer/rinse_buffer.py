@@ -1,5 +1,5 @@
-4metadata = {
-    'protocolName': 'Inlet buffer 96-well plate preparation',
+metadata = {
+    'protocolName': 'Rinse buffer 96-well plate preparation',
     'author': 'Antton Alberdi <anttonalberdi@gmail.com>',
     'version': '1.0',
     'creation_date': '2019/03/19',
@@ -35,7 +35,7 @@ tiprack_1000 = labware.load('labsolute-tiprack-1000µl', '11')
 s1000 = instruments.P1000_Single(mount='left', tip_racks=[tiprack_1000])
 
 #### LIQUID HANDLING ####
-s1000.transfer(1000, tube_rack.wells('A3'), buffer_plate.rows('1'), blow_out=True, touch_tip=True)
-s1000.transfer(1000, tube_rack.wells('A4'), buffer_plate.rows('2'), blow_out=True, touch_tip=True)
-s1000.transfer(1000, tube_rack.wells('B3'), buffer_plate.rows('3'), blow_out=True, touch_tip=True)
-s1000.transfer(1000, tube_rack.wells('B4'), buffer_plate.rows('4'), blow_out=True, touch_tip=True)
+s1000.transfer(200, tube_rack.wells('A3'), buffer_plate.rows('1'), blow_out=True, touch_tip=True)
+s1000.transfer(200, tube_rack.wells('A3'), buffer_plate.rows('2'), blow_out=True, touch_tip=True)
+s1000.transfer(200, tube_rack.wells('A3'), buffer_plate.rows('3'), blow_out=True, touch_tip=True)
+s1000.transfer(200, tube_rack.wells('A3'), buffer_plate.rows('4'), blow_out=True, touch_tip=True)
