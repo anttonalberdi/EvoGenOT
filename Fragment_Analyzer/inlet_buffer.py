@@ -22,7 +22,7 @@ import custom_labware
 
 #### MODULES ####
 
-#Source tubes (only load if mentioned in the map file)
+#Source tubes (6x50ml tubes, each tube containing 25 ul)
 tube_rack = labware.load('opentrons-tuberack-50ml', 10)
 #calibrate 2-3 mm above the tube top
 
