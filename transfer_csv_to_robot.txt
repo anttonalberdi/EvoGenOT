@@ -1,28 +1,11 @@
-robotip=169.254.214.54
+computer=ot2greenuser
+#Green: ot2greenuser
+robotip=169.254.92.29
 
-#Transfer custom labware information (red)
-scp /home/ot2reduser/github/EvoGenOT/custom_labware.py root@${redip}:/root/
-
-#Transfer protocol information (example red) - transfer them one by one
-scp /home/ot2reduser/github/EvoGenOT/Primer_mixes/primer_mixing_v1_map.csv root@${redip}:/root/csv
-scp /home/ot2reduser/github/EvoGenOT/PCR_mixes/pcr_mix_96plate_v1_primers.csv root@${redip}:/root/csv
-scp /home/ot2reduser/github/EvoGenOT/PCR_mixes/pcr_mix_96plate_v1_reagents.csv root@${redip}:/root/csv
+scp /home/${computer}/github/EvoGenOT/custom_labware.py root@${robotip}:/root/
+scp /home/${computer}/github/EvoGenOT/Amplicon_pooling/amplicon_pooling_v1_map.csv root@${robotip}:/root/csv
 
 
-#Check files have been correctly transferred (red)
-ssh root@${redip}
-head /root/custom_labware.py
-head /root/csv/primer_mixing_v1_map.csv
-
-#Transfer custom labware information (yellow)
-scp /home/ot2yellowuser/github/EvoGenOT/custom_labware.py root@169.254.115.40:/root/
-
-#Transfer protocol information (example yellow)
-scp /home/ot2yellowuser/github/EvoGenOT/Transfers_aliquots/2ml_to_96plate_v1_map.csv root@${robotip}:/root/csv
-scp /home/ot2reduser/github/EvoGenOT/Primer_mixes/primer_mixing_v1_map_template.csv root@${robotip}:/root/csv
-
-#Check files have been correctly transferred (yellow)
 ssh root@${robotip}
 head /root/custom_labware.py
-head /root/csv/2ml_to_96plate_map.csv
-cat /root/csv/primer_mixing_v1_map_template.csv
+head /root/csv/amplicon_pooling_v1_map.csv

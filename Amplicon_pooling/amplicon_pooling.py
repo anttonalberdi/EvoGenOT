@@ -20,9 +20,8 @@ import custom_labware
 #### INPUT FILES ####
 
 #Load data files
-racklist=[]
-positionlist=[]
 welllist=[]
+tubelist=[]
 volumelist=[]
 with open("/root/csv/amplicon_pooling_v1_map.csv", "r") as csvfile:
     transfermap = csv.reader(csvfile, delimiter=',')
@@ -39,16 +38,16 @@ volumelist.pop(0)
 #### MODULES ####
 
 #Pooling tubes
-tube_rack = labware.load('opentrons-tuberack-2ml-eppendorf', '2', share=True)
+tube_rack = labware.load('opentrons-tuberack-2ml-eppendorf', '8', share=True)
 #Pools 1-6 in A1-A6
 #Pools 7-12 in B1-B6
 #Pooling tubes should ideally contain 10-20ul of water
 
 #Plate
-PCR_plate = labware.load('96-PCR-flat', '9', share=True)
+PCR_plate = labware.load('96-PCR-tall', '9', share=True)
 
 #### TIP RACKS ####
-tiprack_10 = labware.load('labsolute-tiprack-10µl', '6')
+tiprack_10 = labware.load('labsolute-tiprack-10µl', '11')
 
 #### PIPETTES ####
 s10 = instruments.P10_Single(mount='left', tip_racks=[tiprack_10])
