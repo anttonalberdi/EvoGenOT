@@ -11,6 +11,7 @@ metadata = {
 
 #### CHANGELOG ####
 
+#2019-04-25, Antton - Options for only half plate added
 #2019-03-11, Antton - Blowout added to buffer and magnesium. Mixing to primers reduced to one. pcr_plate changed to 96-PCR-tall
 #2019-03-08, Antton - Added .top() to mastermix distribution to speed up and minimise risk of uncalibration issues
 
@@ -35,7 +36,7 @@ reagent_rack = labware.load('opentrons-tuberack-2ml-eppendorf', '9', share=True)
   #A5 = dNTPs
   #A6 = TagGold
   #C1 = Mastermix1
-  #C2 = Mastermix2
+  #C2 = Mastermix2 (if >48 samples)
 
 #PCR plate
 pcr_plate = labware.load('96-PCR-tall', '6', share=True)
@@ -136,26 +137,31 @@ indVol = water + buffer + mgcl2 + bsa + dntp + taq
 
 #Transfer Water
 s50.transfer(waterTot/2, reagent_rack.wells('A1'), reagent_rack.wells('C1'))
-s50.transfer(waterTot/2, reagent_rack.wells('A1'), reagent_rack.wells('C2'))
+if samples > 48:
+    s50.transfer(waterTot/2, reagent_rack.wells('A1'), reagent_rack.wells('C2'))
 
 #Transfer Buffer (dispense it from the top to avoid changing tip) - NEEDS A FINAL PURGE TO AVOID DRAGGINGDROPS
 s50.transfer(bufferTot/2, reagent_rack.wells('A2'), reagent_rack.wells('C1').top(), blow_out=True)
-s50.transfer(bufferTot/2, reagent_rack.wells('A2'), reagent_rack.wells('C2').top(), blow_out=True)
+if samples > 48:
+    s50.transfer(bufferTot/2, reagent_rack.wells('A2'), reagent_rack.wells('C2').top(), blow_out=True)
 
 #Transfer MgCl2 (dispense it from the top to avoid changing tip)
 s50.transfer(mgcl2Tot/2, reagent_rack.wells('A3'), reagent_rack.wells('C1').top(), blow_out=True)
-s50.transfer(mgcl2Tot/2, reagent_rack.wells('A3'), reagent_rack.wells('C2').top(), blow_out=True)
+if samples > 48:
+    s50.transfer(mgcl2Tot/2, reagent_rack.wells('A3'), reagent_rack.wells('C2').top(), blow_out=True)
 
 #Transfer BSA (slower pipetting)
 if bsaTot != 0:
     s50.set_flow_rate(aspirate=10, dispense=5)
     s50.transfer(bsaTot/2, reagent_rack.wells('A4'), reagent_rack.wells('C1'), new_tip='always')
-    s50.transfer(bsaTot/2, reagent_rack.wells('A4'), reagent_rack.wells('C2'), new_tip='always')
+    if samples > 48:
+        s50.transfer(bsaTot/2, reagent_rack.wells('A4'), reagent_rack.wells('C2'), new_tip='always')
     s50.set_flow_rate(aspirate=25, dispense=50)
 
 #Transfer dNTP
 s50.transfer(dntpTot/2, reagent_rack.wells('A5'), reagent_rack.wells('C1'), new_tip='always')
-s50.transfer(dntpTot/2, reagent_rack.wells('A5'), reagent_rack.wells('C2'), new_tip='always')
+if samples > 48:
+    s50.transfer(dntpTot/2, reagent_rack.wells('A5'), reagent_rack.wells('C2'), new_tip='always')
 
 #Pause to place polymerase in the rack (until incorporating tempdecks)
 robot.pause()
@@ -163,16 +169,19 @@ robot.pause()
 #Transfer taqTot (slower pipetting)
 s50.set_flow_rate(aspirate=10, dispense=5)
 s50.transfer(taqTot/2, reagent_rack.wells('A6'), reagent_rack.wells('C1'), new_tip='always')
-s50.transfer(taqTot/2, reagent_rack.wells('A6'), reagent_rack.wells('C2'), new_tip='always')
+if samples > 48:
+    s50.transfer(taqTot/2, reagent_rack.wells('A6'), reagent_rack.wells('C2'), new_tip='always')
 s50.set_flow_rate(aspirate=25, dispense=50)
 
 #### MASTERMIX MIXING #### using mix function does not interprete rack dimnensions correctly
 s50.transfer(50, reagent_rack.wells('C1'), reagent_rack.wells('C1'), mix_after=(10, 50))
-s50.transfer(50, reagent_rack.wells('C2'), reagent_rack.wells('C2'), mix_after=(10, 50))
+if samples > 48:
+    s50.transfer(50, reagent_rack.wells('C2'), reagent_rack.wells('C2'), mix_after=(10, 50))
 
 #### MASTERMIX DISTRIBUTION ####
 s50.transfer(indVol, reagent_rack.wells('C1'), pcr_plate.cols('1','2','3','4','5','6'))
-s50.transfer(indVol, reagent_rack.wells('C2'), pcr_plate.cols('7','8','9','10','11','12'))
+if samples > 48:
+    s50.transfer(indVol, reagent_rack.wells('C2'), pcr_plate.cols('7','8','9','10','11','12'))
 
 #Pause to open primer lids
 robot.pause()
