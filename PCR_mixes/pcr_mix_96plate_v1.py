@@ -160,7 +160,7 @@ s50.transfer(dntpTot/2, reagent_rack.wells('A5'), reagent_rack.wells('C2'), new_
 #Pause to place polymerase in the rack (until incorporating tempdecks)
 robot.pause()
 
-#Transfer taqTot (slower pipetting) - mixing is very slow, need to think another strategy (mixing atomic is not working with space)
+#Transfer taqTot (slower pipetting)
 s50.set_flow_rate(aspirate=10, dispense=5)
 s50.transfer(taqTot/2, reagent_rack.wells('A6'), reagent_rack.wells('C1'), new_tip='always')
 s50.transfer(taqTot/2, reagent_rack.wells('A6'), reagent_rack.wells('C2'), new_tip='always')
