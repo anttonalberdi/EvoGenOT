@@ -8,6 +8,7 @@ metadata = {
 }
 
 #Note: transfer all reagents to 1.5/2ml epp tubes, due to the different ring heights
+#Note: calibrate 1.5 tubes 2 mm over the top, otherwise the pippette will go far too down
 
 #### CHANGELOG ####
 
@@ -55,6 +56,7 @@ tiprack_200 = labware.load('labsolute-tiprack-200µl', '5')
 tiprack_10 = labware.load('labsolute-tiprack-10µl', '2')
 
 #### PIPETTES ####
+
 s50 = instruments.P50_Single(mount='left', tip_racks=[tiprack_200])
 m10 = instruments.P10_Multi(mount='right', tip_racks=[tiprack_10])
 
@@ -137,31 +139,26 @@ indVol = water + buffer + mgcl2 + bsa + dntp + taq
 
 #Transfer Water
 s50.transfer(waterTot/2, reagent_rack.wells('A1'), reagent_rack.wells('C1'))
-if samples > 48:
-    s50.transfer(waterTot/2, reagent_rack.wells('A1'), reagent_rack.wells('C2'))
+s50.transfer(waterTot/2, reagent_rack.wells('A1'), reagent_rack.wells('C2'))
 
 #Transfer Buffer (dispense it from the top to avoid changing tip) - NEEDS A FINAL PURGE TO AVOID DRAGGINGDROPS
 s50.transfer(bufferTot/2, reagent_rack.wells('A2'), reagent_rack.wells('C1').top(), blow_out=True)
-if samples > 48:
-    s50.transfer(bufferTot/2, reagent_rack.wells('A2'), reagent_rack.wells('C2').top(), blow_out=True)
+s50.transfer(bufferTot/2, reagent_rack.wells('A2'), reagent_rack.wells('C2').top(), blow_out=True)
 
 #Transfer MgCl2 (dispense it from the top to avoid changing tip)
 s50.transfer(mgcl2Tot/2, reagent_rack.wells('A3'), reagent_rack.wells('C1').top(), blow_out=True)
-if samples > 48:
-    s50.transfer(mgcl2Tot/2, reagent_rack.wells('A3'), reagent_rack.wells('C2').top(), blow_out=True)
+s50.transfer(mgcl2Tot/2, reagent_rack.wells('A3'), reagent_rack.wells('C2').top(), blow_out=True)
 
 #Transfer BSA (slower pipetting)
 if bsaTot != 0:
     s50.set_flow_rate(aspirate=10, dispense=5)
     s50.transfer(bsaTot/2, reagent_rack.wells('A4'), reagent_rack.wells('C1'), new_tip='always')
-    if samples > 48:
-        s50.transfer(bsaTot/2, reagent_rack.wells('A4'), reagent_rack.wells('C2'), new_tip='always')
+    s50.transfer(bsaTot/2, reagent_rack.wells('A4'), reagent_rack.wells('C2'), new_tip='always')
     s50.set_flow_rate(aspirate=25, dispense=50)
 
 #Transfer dNTP
 s50.transfer(dntpTot/2, reagent_rack.wells('A5'), reagent_rack.wells('C1'), new_tip='always')
-if samples > 48:
-    s50.transfer(dntpTot/2, reagent_rack.wells('A5'), reagent_rack.wells('C2'), new_tip='always')
+s50.transfer(dntpTot/2, reagent_rack.wells('A5'), reagent_rack.wells('C2'), new_tip='always')
 
 #Pause to place polymerase in the rack (until incorporating tempdecks)
 robot.pause()
@@ -169,19 +166,20 @@ robot.pause()
 #Transfer taqTot (slower pipetting)
 s50.set_flow_rate(aspirate=10, dispense=5)
 s50.transfer(taqTot/2, reagent_rack.wells('A6'), reagent_rack.wells('C1'), new_tip='always')
-if samples > 48:
-    s50.transfer(taqTot/2, reagent_rack.wells('A6'), reagent_rack.wells('C2'), new_tip='always')
+s50.transfer(taqTot/2, reagent_rack.wells('A6'), reagent_rack.wells('C2'), new_tip='always')
 s50.set_flow_rate(aspirate=25, dispense=50)
 
 #### MASTERMIX MIXING #### using mix function does not interprete rack dimnensions correctly
 s50.transfer(50, reagent_rack.wells('C1'), reagent_rack.wells('C1'), mix_after=(10, 50))
-if samples > 48:
-    s50.transfer(50, reagent_rack.wells('C2'), reagent_rack.wells('C2'), mix_after=(10, 50))
+s50.transfer(50, reagent_rack.wells('C2'), reagent_rack.wells('C2'), mix_after=(10, 50))
 
 #### MASTERMIX DISTRIBUTION ####
-s50.transfer(indVol, reagent_rack.wells('C1'), pcr_plate.cols('1','2','3','4','5','6'))
-if samples > 48:
-    s50.transfer(indVol, reagent_rack.wells('C2'), pcr_plate.cols('7','8','9','10','11','12'))
+if samples == 96:
+  s50.transfer(indVol, reagent_rack.wells('C1'), pcr_plate.cols('1','2','3','4','5','6'))
+  s50.transfer(indVol, reagent_rack.wells('C2'), pcr_plate.cols('7','8','9','10','11','12'))
+elif samples == 48:
+    s50.transfer(indVol, reagent_rack.wells('C1'), pcr_plate.cols('1','2','3'))
+    s50.transfer(indVol, reagent_rack.wells('C2'), pcr_plate.cols('4','5','6'))
 
 #Pause to open primer lids
 robot.pause()
