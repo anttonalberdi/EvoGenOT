@@ -102,3 +102,13 @@ if plate_name not in labware.list():
         diameter=8,                     # diameter (mm) of each well on the plate
         depth=76,                       # depth (mm) of each well on the plate
         volume=1000)
+    
+plate_name = 'One-Column-reservoir'
+if plate_name not in labware.list():
+    custom_plate = labware.create(
+        plate_name,                    # name of you labware
+        grid=(1, 1),                    # specify amount of (columns, rows)
+        spacing=(0, 0),               # distances (mm) between each (column, row)
+        diameter=80,                     # diameter (mm) of each well on the plate
+        depth=35,                       # depth (mm) of each well on the plate
+        volume=350000)    
