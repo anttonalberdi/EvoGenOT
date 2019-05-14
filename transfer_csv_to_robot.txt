@@ -1,8 +1,8 @@
 computer=ot2greenuser
 #Green: ot2greenuser
-robotip=169.254.92.29
+robotip=169.254.78.98
 
-scp /home/${computer}/github/EvoGenOT/custom_labware.py root@${robotip}:/root/
+#scp /home/${computer}/github/EvoGenOT/custom_labware.py root@${robotip}:/root/
 scp /home/${computer}/github/EvoGenOT/Amplicon_pooling/amplicon_pooling_v1_map.csv root@${robotip}:/root/csv
 
 

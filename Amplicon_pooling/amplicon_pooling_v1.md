@@ -17,9 +17,17 @@ The protocol requires a mapping file (amplicon_pooling_v1_map.csv) that specifie
 Download the template csv file, edit it and upload it to github with the file name amplicon_pooling_v1_map.csv. This will overwrite the existing document with the same name. Make sure you do not overwrite the amplicon_pooling_v1_map_template.csv file. The columns must be comma-separated.
 
 ## 2) Download the mapping file and transfer to the OT2 robot
-Bla bla
+1) Open Atom software in the laptop next to the robot.
+2) Make sure EvoGenOT project is open (visible in the left column). If you cannot see it File > Add Project Folder > "Path to the project"
+3) Click the "Fetch" button in the bottom left corner to download the latest updates from the EvoGenOT project at Github (including the mapping file). Alternatively, right-click "Fetch" button and select "Pull".
+4) Doublecheck the amplicon_pooling_v1_map.csv file you can access from the left column contains the information you are expecting to show.
 
 ## 3) Load the protocol in the OT2 app
+
+1) Open the Opentrons software.
+2) Copy the robot's IP address from the "Robot" tab (e.g. 129.64.124.34). Do not copy the port (e.g. /16).
+3) Open the
+
 
 ## 4) Check and calibrate pipette
 
