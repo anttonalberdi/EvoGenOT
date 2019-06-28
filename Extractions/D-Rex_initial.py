@@ -32,14 +32,14 @@ RNA_plate = labware.load('96-deep-well', '1')
 mag_deck = modules.load('magdeck', '7')
 sample_plate = labware.load('96-deep-well', '7', share=True)
 
-tipracks_200 = [labware.load('tiprack-200ul', slot)
-               for slot in ['4','5','6','11']]
+tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
+               for slot in ['4','5','6']]
 
 
 
 #### PIPETTE SETUP ####
 m300 = instruments.P300_Multi(
-    mount='left',
+    mount='right',
     tip_racks=tipracks_200)
 
 #### REAGENT SETUP
@@ -61,16 +61,16 @@ EtOH_buffer_vol = 350
 #### PROTOCOL ####
 ## add beads and sample binding buffer to DNA/sample plate
 mag_deck.disengage()
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.top() for well in sample_plate.wells()], new_tip='once',  blow_out =True)
+m300.distribute(Binding_buffer_vol, Binding_buffer, sample_plate.cols(), new_tip='once',  blow_out =True)
 m300.delay(minutes=10)
 
 ## add beads and EtOH binding buffer to RNA plate
 mag_deck.disengage()
-m300.distribute(EtOH_buffer_vol, EtOH_Bind1, [well.bottom() for well in RNA_plate.wells()], new_tip='once',  blow_out =True)
+m300.distribute(EtOH_buffer_vol, EtOH_Bind1, RNA_plate.cols(), new_tip='always',  blow_out =True)
 
 
 ## Transfer supernatant
 mag_deck.engage(height=12)
 m300.delay(minutes=5)
-m300.transfer(350, [well.top() for well in sample_plate.wells()], RNA_plate,mix_after=(8,200), new_tip='once',  blow_out =True)
+m300.transfer(350, sample_plate.cols, RNA_plate.cols(), mix_after=(8,200), new_tip='once',  blow_out =True)
 robot.pause("Transfer DNA plate to fridge with cover-foil")

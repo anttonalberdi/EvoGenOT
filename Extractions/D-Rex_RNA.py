@@ -39,11 +39,11 @@ tipracks_200 = [labware.load('tiprack-200ul', slot)
 
 #### PIPETTE SETUP ####
 p50 = instruments.P50_Single(
-    mount='right',
+    mount='left',
     tip_racks=tipracks_200)
 
 m300 = instruments.P300_Multi(
-    mount='left',
+    mount='right',
     tip_racks=tipracks_200)
 
 #### REAGENT SETUP
