@@ -75,17 +75,40 @@ m300.delay(minutes=6)
 ## Transfer supernatant
 mag_deck.engage(height=12)
 m300.delay(minutes=5)
-m300.transfer(350, sample_plate.cols('1'), RNA_plate.cols('1'), mix_after=(8,200), new_tip='once',  blow_out =True)
-m300.transfer(350, sample_plate.cols('2'), RNA_plate.cols('2'), mix_after=(8,200), new_tip='once',  blow_out =True)
-m300.transfer(350, sample_plate.cols('3'), RNA_plate.cols('3'), mix_after=(8,200), new_tip='once',  blow_out =True)
-m300.transfer(350, sample_plate.cols('4'), RNA_plate.cols('4'), mix_after=(8,200), new_tip='once',  blow_out =True)
-m300.transfer(350, sample_plate.cols('5'), RNA_plate.cols('5'), mix_after=(8,200), new_tip='once',  blow_out =True)
-m300.transfer(350, sample_plate.cols('6'), RNA_plate.cols('6'), mix_after=(8,200), new_tip='once',  blow_out =True)
-m300.transfer(350, sample_plate.cols('7'), RNA_plate.cols('7'), mix_after=(8,200), new_tip='once',  blow_out =True)
-m300.transfer(350, sample_plate.cols('8'), RNA_plate.cols('8'), mix_after=(8,200), new_tip='once',  blow_out =True)
-m300.transfer(350, sample_plate.cols('9'), RNA_plate.cols('9'), mix_after=(8,200), new_tip='once',  blow_out =True)
-m300.transfer(350, sample_plate.cols('10'), RNA_plate.cols('10'), mix_after=(8,200), new_tip='once',  blow_out =True)
-m300.transfer(350, sample_plate.cols('11'), RNA_plate.cols('11'), mix_after=(8,200), new_tip='once',  blow_out =True)
-m300.transfer(350, sample_plate.cols('12'), RNA_plate.cols('12'), mix_after=(8,200), new_tip='once',  blow_out =True)
+m300.transfer(175, sample_plate.cols('1'), RNA_plate.cols('1'), new_tip='once',  blow_out =True)
+m300.transfer(175, sample_plate.cols('1'), RNA_plate.cols('1'), mix_after=(8,200), new_tip='once',  blow_out =True)
+
+m300.transfer(175, sample_plate.cols('2'), RNA_plate.cols('2'), new_tip='once',  blow_out =True)
+m300.transfer(175, sample_plate.cols('2'), RNA_plate.cols('2'), mix_after=(8,200), new_tip='once',  blow_out =True)
+
+m300.transfer(175, sample_plate.cols('3'), RNA_plate.cols('3'), new_tip='once',  blow_out =True)
+m300.transfer(175, sample_plate.cols('3'), RNA_plate.cols('3'), mix_after=(8,200), new_tip='once',  blow_out =True)
+
+m300.transfer(175, sample_plate.cols('4'), RNA_plate.cols('4'), new_tip='once',  blow_out =True)
+m300.transfer(175, sample_plate.cols('4'), RNA_plate.cols('4'), mix_after=(8,200), new_tip='once',  blow_out =True)
+
+m300.transfer(175, sample_plate.cols('5'), RNA_plate.cols('5'), new_tip='once',  blow_out =True)
+m300.transfer(175, sample_plate.cols('5'), RNA_plate.cols('5'), mix_after=(8,200), new_tip='once',  blow_out =True)
+
+m300.transfer(175, sample_plate.cols('6'), RNA_plate.cols('6'), new_tip='once',  blow_out =True)
+m300.transfer(175, sample_plate.cols('6'), RNA_plate.cols('6'), mix_after=(8,200), new_tip='once',  blow_out =True)
+
+m300.transfer(175, sample_plate.cols('7'), RNA_plate.cols('7'), new_tip='once',  blow_out =True)
+m300.transfer(175, sample_plate.cols('7'), RNA_plate.cols('7'), mix_after=(8,200), new_tip='once',  blow_out =True)
+
+m300.transfer(175, sample_plate.cols('8'), RNA_plate.cols('8'), new_tip='once',  blow_out =True)
+m300.transfer(175, sample_plate.cols('8'), RNA_plate.cols('8'), mix_after=(8,200), new_tip='once',  blow_out =True)
+
+m300.transfer(175, sample_plate.cols('9'), RNA_plate.cols('9'), new_tip='once',  blow_out =True)
+m300.transfer(175, sample_plate.cols('9'), RNA_plate.cols('9'), mix_after=(8,200), new_tip='once',  blow_out =True)
+
+m300.transfer(175, sample_plate.cols('10'), RNA_plate.cols('10'), new_tip='once',  blow_out =True)
+m300.transfer(175, sample_plate.cols('10'), RNA_plate.cols('10'), mix_after=(8,200), new_tip='once',  blow_out =True)
+
+m300.transfer(175, sample_plate.cols('11'), RNA_plate.cols('11'), new_tip='once',  blow_out =True)
+m300.transfer(175, sample_plate.cols('11'), RNA_plate.cols('11'), mix_after=(8,200), new_tip='once',  blow_out =True)
+
+m300.transfer(175, sample_plate.cols('12'), RNA_plate.cols('12'), new_tip='once',  blow_out =True)
+m300.transfer(175, sample_plate.cols('12'), RNA_plate.cols('12'), mix_after=(8,200), new_tip='once',  blow_out =True)
 
 robot.pause("Transfer DNA plate to fridge with cover-foil")
