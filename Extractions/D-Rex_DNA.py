@@ -25,13 +25,11 @@ metadata = {
 
 
 #### LABWARE SETUP ####
-elution_plate_DNA = labware.load('96-flat', '3')
+elution_plate_DNA = labware.load('96-flat', '1')
 trough = labware.load('trough-12row', '2')
-buffer = labware.load('opentrons-tuberack-50ml', '8')
-trash_box = labware.load('trash-box', '1')
+trash_box = labware.load('trash-box', '8')
 mag_deck = modules.load('magdeck', '7')
 sample_plate = labware.load('96-deep-well', '7', share=True)
-temp_deck = modules.load('tempdeck', '10')
 
 
 tipracks_200 = [labware.load('tiprack-200ul', slot)
