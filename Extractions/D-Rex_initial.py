@@ -54,7 +54,7 @@ EtOH_Bind2 = trough.wells('A3')
 
 
 Sample_vol = 200
-Binding_buffer_vol = Sample_vol
+Binding_buffer_vol = Sample_vol*1
 EtOH_buffer_vol = 350
 
 
