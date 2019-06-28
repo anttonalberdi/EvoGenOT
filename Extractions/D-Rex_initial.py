@@ -1,7 +1,7 @@
 ## Description of procedure ##
 #
 #
-# Things do before procedure 
+# Things do before procedure
 #
 #	1. Bead beat samples at maximum speed for 5 minutes (If needed do Proteinase K for digestion of tissue)
 # 	2. Spin down samples 10.000 rpm for 1 minute
@@ -38,10 +38,6 @@ tipracks_200 = [labware.load('tiprack-200ul', slot)
 
 
 #### PIPETTE SETUP ####
-p50 = instruments.P50_Single(
-    mount='right',
-    tip_racks=tipracks_200)
-
 m300 = instruments.P300_Multi(
     mount='left',
     tip_racks=tipracks_200)
@@ -53,7 +49,6 @@ Binding_buffer = trough.wells('A1')			# Buffer B
 EtOH_Bind1 = trough.wells('A2')
 EtOH_Bind2 = trough.wells('A3')
 
-Liquid_trash = trash_box.wells('A1')
 
 #### VOLUME SETUP
 
@@ -66,7 +61,7 @@ EtOH_buffer_vol = 350
 #### PROTOCOL ####
 ## add beads and sample binding buffer to DNA/sample plate
 mag_deck.disengage()
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.top() for well in sample_plate.wells()],mix_after=(8,200) , new_tip='once',  blow_out =True)
+m300.distribute(Binding_buffer_vol, Binding_buffer, [well.top() for well in sample_plate.wells()], new_tip='once',  blow_out =True)
 m300.delay(minutes=10)
 
 ## add beads and EtOH binding buffer to RNA plate
@@ -77,5 +72,5 @@ m300.distribute(EtOH_buffer_vol, EtOH_Bind1, [well.bottom() for well in RNA_plat
 ## Transfer supernatant
 mag_deck.engage(height=12)
 m300.delay(minutes=5)
-m300.transfer(350, [well.top() for well in sample_plate.wells()], RNA_plate,mix_after=(8,200), new_tip='always',  blow_out =True)
+m300.transfer(350, [well.top() for well in sample_plate.wells()], RNA_plate,mix_after=(8,200), new_tip='once',  blow_out =True)
 robot.pause("Transfer DNA plate to fridge with cover-foil")
