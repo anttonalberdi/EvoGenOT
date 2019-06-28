@@ -1,7 +1,7 @@
 ## Description of procedure ##
 #
 #
-# Things do before procedure
+# Things do before procedure 
 #
 #	1. Bead beat samples at maximum speed for 5 minutes (If needed do Proteinase K for digestion of tissue)
 # 	2. Spin down samples 10.000 rpm for 1 minute
