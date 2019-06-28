@@ -70,11 +70,11 @@ m300.distribute(EtOH_buffer_vol, EtOH_Bind1, RNA_plate.cols('1','2','3','4','5',
 m300.distribute(EtOH_buffer_vol, EtOH_Bind2, RNA_plate.cols('7','8','9','10','11','12'), new_tip='never', blow_out =True)
 
 ## Incubate beads
-m300.delay(minutes=6)
+m300.delay(minutes=5)
 
 ## Transfer supernatant
 mag_deck.engage(height=12)
-m300.delay(minutes=5)
+m300.delay(minutes=2)
 m300.transfer(175, sample_plate.cols('1'), RNA_plate.cols('1'), new_tip='once',  blow_out =True)
 m300.transfer(175, sample_plate.cols('1'), RNA_plate.cols('1'), mix_after=(8,200), new_tip='once',  blow_out =True)
 
