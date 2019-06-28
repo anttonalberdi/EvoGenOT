@@ -62,7 +62,7 @@ EtOH_buffer_vol = 350
 
 
 #### PROTOCOL ####
-## add beads and sample binding buffer to DNA plate
+## add beads and sample binding buffer to DNA/sample plate
 mag_deck.disengage()
 m300.distribute(Binding_buffer_vol, Binding_buffer, [well.top() for well in sample_plate.wells()],mix_after=(8,200) , new_tip='once',  blow_out =True)
 m300.delay(minutes=10)
@@ -73,7 +73,7 @@ m300.distribute(EtOH_buffer_vol, EtOH_Bind1, [well.bottom() for well in RNA_plat
 
 
 ## Transfer supernatant
-mag_deck.engage()
+mag_deck.engage(height=12)
 m300.delay(minutes=5)
 m300.transfer(350, [well.top() for well in sample_plate.wells()], RNA_plate,mix_after=(8,200), new_tip='always',  blow_out =True)
 robot.pause("Transfer DNA plate to fridge with cover-foil")

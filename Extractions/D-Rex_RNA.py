@@ -74,14 +74,14 @@ Elution_vol = 50
 ## Ethanol Wash 1
 mag_deck.disengage()
 m300.distribute(Wash_1_vol, EtOH1, [well.top() for well in RNA_plate.wells()] , new_tip='once',  blow_out =True)
-mag_deck.engage()
+mag_deck.engage(height=12)
 m300.delay(minutes=2)
 m300.transfer(Wash_1_vol, [well.bottom() for well in RNA_plate.wells()], Liquid_trash, new_tip='always',  blow_out =True)
 
 ## Ethanol Wash 2
 mag_deck.disengage()
 m300.distribute(Wash_2_vol, EtOH2, [well.top() for well in RNA_plate.wells()], new_tip='once',  blow_out =True)
-mag_deck.engage()
+mag_deck.engage(height=12)
 m300.delay(minutes=2)
 m300.transfer(Wash_2_vol, [well.bottom() for well in RNA_plate.wells()], Liquid_trash, new_tip='always',  blow_out =True)
 
@@ -94,21 +94,21 @@ m300.delay(minutes=10)
 mag_deck.disengage()
 m300.distribute(200, BufferC, [well.top() for well in RNA_plate.wells()], new_tip='once',  blow_out =True)
 m300.delay(minutes=10)
-mag_deck.engage()
+mag_deck.engage(height=12)
 m300.delay(minutes=2)
 m300.transfer(200, [well.bottom() for well in RNA_plate.wells()], Liquid_trash, new_tip='always',  blow_out =True)
 
 ## Ethanol Wash 3
 mag_deck.disengage()
 m300.distribute(EtOH_vol, Ethanol_1, [well.top() for well in RNA_plate.wells()], new_tip='once',  blow_out =True)
-mag_deck.engage()
+mag_deck.engage(height=12)
 m300.delay(minutes=5)
 m300.transfer(Wash_1_vol, [well.bottom() for well in RNA_plate.wells()], Liquid_trash, new_tip='always',  blow_out =True)
 
 ## Ethanol Wash 4
 mag_deck.disengage()
 m300.distribute(EtOH_vol, Ethanol_2, [well.top() for well in RNA_plate.wells()], new_tip='once',  blow_out =True)
-mag_deck.engage()
+mag_deck.engage(height=12)
 m300.delay(minutes=5)
 m300.transfer(500, [well.bottom() for well in RNA_plate.wells()], Liquid_trash, new_tip='always',  blow_out =True)
 
@@ -117,9 +117,9 @@ m300.delay(minutes=10)
 
 ## Elution
 mag_deck.disengage()
-m300.distribute(Elution_vol, Elution_buffer, [well.bottom() for well in RNA_plate.wells(), new_tip='always',  blow_out =True]
-mag_deck.engage()
+m300.distribute(Elution_vol, Elution_buffer, [well.bottom() for well in RNA_plate.wells(), new_tip='always',  blow_out =True])
+mag_deck.engage(height=12)
 m300.delay(minutes=5)
-m300.transfer(40, [well.bottom() for well in RNA_plate.wells(), [well.bottom() for well in elution_plate_DNA.wells(), new_tip='always',  blow_out =True]
+m300.transfer(40, [well.bottom() for well in RNA_plate.wells(), [well.bottom() for well in elution_plate_DNA.wells(), new_tip='always',  blow_out =True])
 
 robot.comment("Job's done")
