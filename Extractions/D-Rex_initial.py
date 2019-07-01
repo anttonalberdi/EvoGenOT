@@ -33,7 +33,7 @@ mag_deck = modules.load('magdeck', '7')
 sample_plate = labware.load('96-deep-well', '7', share=True)
 
 tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
-               for slot in ['4','5','6']]
+               for slot in ['3','4','5','6']]
 
 
 
@@ -61,23 +61,23 @@ EtOH_buffer_vol = 350
 #### PROTOCOL ####
 ## add beads and sample binding buffer to DNA/sample plate New syntax (m300.distribute(Binding_buffer_vol, Binding_buffer, [well.top() for sample_plate.cols('1')], new_tip='once',  blow_out =True))
 mag_deck.disengage()
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('1')], mix_after=(5,200), new_tip='always',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('2')], mix_after=(5,200), new_tip='always',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('3')], mix_after=(5,200), new_tip='always',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('4')], mix_after=(5,200), new_tip='always',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('5')], mix_after=(5,200), new_tip='always',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('6')], mix_after=(5,200), new_tip='always',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('7')], mix_after=(5,200), new_tip='always',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('8')], mix_after=(5,200), new_tip='always',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('9')], mix_after=(5,200), new_tip='always',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('10')], mix_after=(5,200), new_tip='always',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('11')], mix_after=(5,200), new_tip='always',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('12')], mix_after=(5,200), new_tip='always',  blow_out =True)
+m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('1')], mix_after=(5,200), new_tip='once',  blow_out =True)
+m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('2')], mix_after=(5,200), new_tip='once',  blow_out =True)
+m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('3')], mix_after=(5,200), new_tip='once',  blow_out =True)
+m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('4')], mix_after=(5,200), new_tip='once',  blow_out =True)
+m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('5')], mix_after=(5,200), new_tip='once',  blow_out =True)
+m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('6')], mix_after=(5,200), new_tip='once',  blow_out =True)
+m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('7')], mix_after=(5,200), new_tip='once',  blow_out =True)
+m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('8')], mix_after=(5,200), new_tip='once',  blow_out =True)
+m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('9')], mix_after=(5,200), new_tip='once',  blow_out =True)
+m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('10')], mix_after=(5,200), new_tip='once',  blow_out =True)
+m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('11')], mix_after=(5,200), new_tip='once',  blow_out =True)
+m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('12')], mix_after=(5,200), new_tip='once',  blow_out =True)
 
 
 ## add beads and EtOH binding buffer to RNA plate
 m300.distribute(EtOH_buffer_vol, EtOH_Bind1, RNA_plate.cols('1','2','3','4','5','6'), new_tip='once', blow_out =True)
-m300.distribute(EtOH_buffer_vol, EtOH_Bind2, RNA_plate.cols('7','8','9','10','11','12'), new_tip='never', blow_out =True)
+m300.distribute(EtOH_buffer_vol, EtOH_Bind2, RNA_plate.cols('7','8','9','10','11','12'), new_tip='once', blow_out =True)
 
 ## Incubate beads
 m300.delay(minutes=5)
