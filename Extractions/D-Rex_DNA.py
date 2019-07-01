@@ -20,7 +20,7 @@ metadata = {
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
     'version': '1.0',
     'date': '2019/03/28',
-    'description': 'Automation of Zymo Quick DNA protocol for stool samples in SHIELD',
+    'description': 'Automation of D-Rex DNA protocol for stool samples in SHIELD',
 }
 
 
