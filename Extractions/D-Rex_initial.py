@@ -33,7 +33,7 @@ mag_deck = modules.load('magdeck', '7')
 sample_plate = labware.load('96-deep-well', '7', share=True)
 
 tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
-               for slot in ['3','4','5','6']]
+               for slot in ['4','5','6']]
 
 
 
@@ -49,6 +49,32 @@ Binding_buffer = trough.wells('A1')			# Buffer B
 EtOH_Bind1 = trough.wells('A2')
 EtOH_Bind2 = trough.wells('A3')
 
+#### Plate SETUP
+SA1 = sample_plate.wells('A1')
+SA2 = sample_plate.wells('A2')
+SA3 = sample_plate.wells('A3')
+SA4 = sample_plate.wells('A4')
+SA5 = sample_plate.wells('A5')
+SA6 = sample_plate.wells('A6')
+SA7 = sample_plate.wells('A7')
+SA8 = sample_plate.wells('A8')
+SA9 = sample_plate.wells('A9')
+SA10 = sample_plate.wells('A10')
+SA11 = sample_plate.wells('A11')
+SA12 = sample_plate.wells('A12')
+
+RA1 = RNA_plate.wells('A1')
+RA2 = RNA_plate.wells('A2')
+RA3 = RNA_plate.wells('A3')
+RA4 = RNA_plate.wells('A4')
+RA5 = RNA_plate.wells('A5')
+RA6 = RNA_plate.wells('A6')
+RA7 = RNA_plate.wells('A7')
+RA8 = RNA_plate.wells('A8')
+RA9 = RNA_plate.wells('A9')
+RA10 = RNA_plate.wells('A10')
+RA11 = RNA_plate.wells('A11')
+RA12 = RNA_plate.wells('A12')
 
 #### VOLUME SETUP
 
@@ -59,66 +85,57 @@ EtOH_buffer_vol = 350
 
 
 #### PROTOCOL ####
-## add beads and sample binding buffer to DNA/sample plate New syntax (m300.distribute(Binding_buffer_vol, Binding_buffer, [well.top() for sample_plate.cols('1')], new_tip='once',  blow_out =True))
+## add beads and sample binding buffer to DNA/sample plate
 mag_deck.disengage()
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('1')], mix_after=(5,200), new_tip='once',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('2')], mix_after=(5,200), new_tip='once',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('3')], mix_after=(5,200), new_tip='once',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('4')], mix_after=(5,200), new_tip='once',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('5')], mix_after=(5,200), new_tip='once',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('6')], mix_after=(5,200), new_tip='once',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('7')], mix_after=(5,200), new_tip='once',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('8')], mix_after=(5,200), new_tip='once',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('9')], mix_after=(5,200), new_tip='once',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('10')], mix_after=(5,200), new_tip='once',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('11')], mix_after=(5,200), new_tip='once',  blow_out =True)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [well.bottom(2) for well in sample_plate.cols('12')], mix_after=(5,200), new_tip='once',  blow_out =True)
+m300.distribute(Binding_buffer_vol, Binding_buffer, [wells.top(-4) for wells in sample_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')], new_tip='once',  blow_out =True)
 
 
 ## add beads and EtOH binding buffer to RNA plate
+mag_deck.disengage()
 m300.distribute(EtOH_buffer_vol, EtOH_Bind1, RNA_plate.cols('1','2','3','4','5','6'), new_tip='once', blow_out =True)
 m300.distribute(EtOH_buffer_vol, EtOH_Bind2, RNA_plate.cols('7','8','9','10','11','12'), new_tip='once', blow_out =True)
 
 ## Incubate beads
-m300.delay(minutes=5)
+m300.delay(minutes=6)
+
 
 ## Transfer supernatant
 mag_deck.engage(height=12)
-m300.delay(minutes=2)
-m300.transfer(175, [well.bottom(2) for well in sample_plate.cols('1')], [well.top(-2) for well in RNA_plate.cols('1')], new_tip='once',  blow_out =True)
-m300.transfer(175, [well.bottom(2) for well in sample_plate.cols('1')], [well.bottom(2) for well in RNA_plate.cols('1')], mix_after=(8,200), new_tip='never',  blow_out =True)
+m300.delay(minutes=5)
+m300.transfer(175, SA1.bottom(2), RA1.top(-4), new_tip='once',  blow_out =True)
+m300.transfer(175, SA1.bottom(2), RA1.bottom(2), mix_after=(8,200), new_tip='once',  blow_out =True)
 
-m300.transfer(175, [well.bottom(2) for well in sample_plate.cols('2')], [well.top(-2) for well in RNA_plate.cols('2')], new_tip='once',  blow_out =True)
-m300.transfer(175, [well.bottom(2) for well in sample_plate.cols('2')], [well.bottom(2) for well in RNA_plate.cols('2')], mix_after=(8,200), new_tip='never',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for cols in sample_plate.cols('A2')], [wells.top(-4) for wells in RNA_plate.wells('A2')], new_tip='once',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for cols in sample_plate.cols('A2')], [wells.bottom(2) for wells in RNA_plate.wells('A2')], mix_after=(8,200), new_tip='once',  blow_out =True)
 
-m300.transfer(175, sample_plate.cols('3').bottom(), RNA_plate.cols('3').top(), new_tip='once',  blow_out =True)
-m300.transfer(175, sample_plate.cols('3').bottom(), RNA_plate.cols('3').bottom(), mix_after=(8,200), new_tip='never',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A3')], [wells.top(-4) for wells in RNA_plate.wells('A3')], new_tip='once',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A3')], [wells.bottom(2) for wells in RNA_plate.wells('A3')], mix_after=(8,200), new_tip='once',  blow_out =True)
 
-m300.transfer(175, sample_plate.cols('4').bottom(), RNA_plate.cols('4').top(), new_tip='once',  blow_out =True)
-m300.transfer(175, sample_plate.cols('4').bottom(), RNA_plate.cols('4').bottom(), mix_after=(8,200), new_tip='never',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A4')], [wells.top(-4) for wells in RNA_plate.wells('A4')], new_tip='once',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A4')], [wells.bottom(2) for wells in RNA_plate.wells('A4')], mix_after=(8,200), new_tip='once',  blow_out =True)
 
-m300.transfer(175, sample_plate.cols('5').bottom(), RNA_plate.cols('5').top(), new_tip='once',  blow_out =True)
-m300.transfer(175, sample_plate.cols('5').bottom(), RNA_plate.cols('5').bottom(), mix_after=(8,200), new_tip='never',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A5')], [wells.top(-4) for wells in RNA_plate.wells('A5')], new_tip='once',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A5')], [wells.bottom(2) for wells in RNA_plate.wells('A5')], mix_after=(8,200), new_tip='once',  blow_out =True)
 
-m300.transfer(175, sample_plate.cols('6').bottom(), RNA_plate.cols('6').top(), new_tip='once',  blow_out =True)
-m300.transfer(175, sample_plate.cols('6').bottom(), RNA_plate.cols('6').bottom(), mix_after=(8,200), new_tip='never',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A6')], [wells.top(-4) for wells in RNA_plate.wells('A6')], new_tip='once',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A6')], [wells.bottom(2) for wells in RNA_plate.wells('A6')], mix_after=(8,200), new_tip='once',  blow_out =True)
 
-m300.transfer(175, sample_plate.cols('7').bottom(), RNA_plate.cols('7').top(), new_tip='once',  blow_out =True)
-m300.transfer(175, sample_plate.cols('7').bottom(), RNA_plate.cols('7').bottom(), mix_after=(8,200), new_tip='never',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A7')], [wells.top(-4) for wells in RNA_plate.wells('A7')], new_tip='once',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A7')], [wells.bottom(2) for wells in RNA_plate.wells('A7')], mix_after=(8,200), new_tip='once',  blow_out =True)
 
-m300.transfer(175, sample_plate.cols('8').bottom(), RNA_plate.cols('8').top(), new_tip='once',  blow_out =True)
-m300.transfer(175, sample_plate.cols('8').bottom(), RNA_plate.cols('8').bottom(), mix_after=(8,200), new_tip='never',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A8')], [wells.top(-4) for wells in RNA_plate.wells('A8')], new_tip='once',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A8')], [wells.bottom(2) for wells in RNA_plate.wells('A8')], mix_after=(8,200), new_tip='once',  blow_out =True)
 
-m300.transfer(175, sample_plate.cols('9').bottom(), RNA_plate.cols('9').top(), new_tip='once',  blow_out =True)
-m300.transfer(175, sample_plate.cols('9').bottom(), RNA_plate.cols('9').bottom(), mix_after=(8,200), new_tip='never',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A9')], [wells.top(-4) for wells in RNA_plate.wells('A9')], new_tip='once',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A9')], [wells.bottom(2) for wells in RNA_plate.wells('A9')], mix_after=(8,200), new_tip='once',  blow_out =True)
 
-m300.transfer(175, sample_plate.cols('10').bottom(), RNA_plate.cols('10').top(), new_tip='once',  blow_out =True)
-m300.transfer(175, sample_plate.cols('10').bottom(), RNA_plate.cols('10').bottom(), mix_after=(8,200), new_tip='never',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A10')], [wells.top(-4) for wells in RNA_plate.wells('A10')], new_tip='once',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A10')], [wells.bottom(2) for wells in RNA_plate.wells('A10')], mix_after=(8,200), new_tip='once',  blow_out =True)
 
-m300.transfer(175, sample_plate.cols('11').bottom(), RNA_plate.cols('11').top(), new_tip='once',  blow_out =True)
-m300.transfer(175, sample_plate.cols('11').bottom(), RNA_plate.cols('11').bottom(), mix_after=(8,200), new_tip='never',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A11')], [wells.top(-4) for wells in RNA_plate.wells('A11')], new_tip='once',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A11')], [wells.bottom(2) for wells in RNA_plate.wells('A11')], mix_after=(8,200), new_tip='once',  blow_out =True)
 
-m300.transfer(175, sample_plate.cols('12').bottom(), RNA_plate.cols('12').top(), new_tip='once',  blow_out =True)
-m300.transfer(175, sample_plate.cols('12').bottom(), RNA_plate.cols('12').bottom(), mix_after=(8,200), new_tip='never',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A12')], [wells.top(-4) for wells in RNA_plate.wells('A12')], new_tip='once',  blow_out =True)
+#m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A12')], [wells.bottom(2) for wells in RNA_plate.wells('A12')], mix_after=(8,200), new_tip='once',  blow_out =True)
 
 robot.pause("Transfer DNA plate to fridge with cover-foil")
