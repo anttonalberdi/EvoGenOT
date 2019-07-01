@@ -59,7 +59,7 @@ EtOH_buffer_vol = 350
 
 
 #### PROTOCOL ####
-## add beads and sample binding buffer to DNA/sample plate
+## add beads and sample binding buffer to DNA/sample plate New syntax (m300.distribute(Binding_buffer_vol, Binding_buffer, [well.top() for sample_plate.cols('1')], new_tip='once',  blow_out =True))
 mag_deck.disengage()
 m300.distribute(Binding_buffer_vol, Binding_buffer, sample_plate.cols('1').top(), new_tip='once',  blow_out =True)
 m300.distribute(Binding_buffer_vol, Binding_buffer, sample_plate.cols('2').top(), new_tip='never',  blow_out =True)
