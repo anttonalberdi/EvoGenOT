@@ -137,5 +137,5 @@ m300.transfer(175, SA1.bottom(2), RA1.bottom(2), mix_after=(8,200), new_tip='onc
 
 #m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A12')], [wells.top(-4) for wells in RNA_plate.wells('A12')], new_tip='once',  blow_out =True)
 #m300.transfer(175, [wells.bottom(2) for wells in sample_plate.wells('A12')], [wells.bottom(2) for wells in RNA_plate.wells('A12')], mix_after=(8,200), new_tip='once',  blow_out =True)
-
+mag_deck.disengage()
 robot.pause("Transfer DNA plate to fridge with cover-foil")
