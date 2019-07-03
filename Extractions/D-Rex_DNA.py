@@ -23,29 +23,43 @@ metadata = {
     'description': 'Automation of D-Rex DNA protocol for stool samples in SHIELD',
 }
 
+### Custom LABWARE load
+plate_name = '1ml_PCR'
+if plate_name not in labware.list():
+    custom_plate = labware.create(
+        plate_name,                    # name of you labware
+        grid=(12, 8),                    # specify amount of (columns, rows)
+        spacing=(9, 9),               # distances (mm) between each (column, row)
+        diameter=7.5,                     # diameter (mm) of each well on the plate
+        depth=26.4,                       # depth (mm) of each well on the plate
+        volume=1000)
+
+plate_name = 'One-Column-reservoir'
+if plate_name not in labware.list():
+    custom_plate = labware.create(
+        plate_name,                    # name of you labware
+        grid=(1, 1),                    # specify amount of (columns, rows)
+        spacing=(0, 0),               # distances (mm) between each (column, row)
+        diameter=81,                     # diameter (mm) of each well on the plate
+        depth=35,                       # depth (mm) of each well on the plate
+        volume=350000)
 
 #### LABWARE SETUP ####
 elution_plate_DNA = labware.load('96-flat', '1')
 trough = labware.load('trough-12row', '2')
-trash_box = labware.load('trash-box', '8')
+trash_box = labware.load('One-Column-reservoir', '8')
 mag_deck = modules.load('magdeck', '7')
 DNA_plate = labware.load('96-flat', '7', share=True)
 sample_plate = labware.load('1ml_PCR','3')
 
 tipracks_200 = [labware.load('tiprack-200ul', slot)
-               for slot in ['4','5','6','11']]
+               for slot in ['3','4','5','6','9']]
 
-tipracks_1000 = [labware.load('tiprack-1000ul', slot, share=True)
-                for slot in ['9']]
 
 
 #### PIPETTE SETUP ####
-s1000 = instruments.P1000_Single(
-    mount='right',
-    tip_racks=tipracks_1000)
-
 m300 = instruments.P300_Multi(
-    mount='left',
+    mount='right',
     tip_racks=tipracks_200)
 
 #### REAGENT SETUP
@@ -56,11 +70,10 @@ Elution_buffer = trough.wells('A2')
 Liquid_trash = trash_box.wells('A1')
 
 
-BufferC = buffer.wells('A10')
-Ethanol_1 = buffer.wells('A2')
-Ethanol_2 = buffer.wells('A3')
-Wash_1 = buffer.wells('B2')
-Wash_2 = buffer.wells('B3')
+BufferC = buffer.wells('A9')
+Ethanol_1 = buffer.wells('A10')
+Ethanol_2 = buffer.wells('A11')
+Elution_buffer = trough.wells('A12')
 
 
 #### VOLUME SETUP
@@ -115,81 +128,81 @@ m300.transfer(100, SA9.bottom(2), DA9.bottom(2), mix_before=(5,70), new_tip='onc
 m300.transfer(100, SA10.bottom(2), DA10.bottom(2), mix_before=(5,70), new_tip='once',  blow_out =True)
 m300.transfer(100, SA11.bottom(2), DA11.bottom(2), mix_before=(5,70), new_tip='once',  blow_out =True)
 m300.transfer(100, SA12.bottom(2), DA12.bottom(2), mix_before=(5,70), new_tip='once',  blow_out =True)
-mag_deck.engage()
+mag_deck.engage(height=16)
 
 m300.delay(minutes=2)
 
 #### Remove supernatant
-m300.transfer(200, DA1.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA2.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA3.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA4.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA5.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA6.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA7.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA8.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA9.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA10.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA11.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA12.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
+m300.transfer(200, DA1.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA2.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA3.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA4.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA5.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA6.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA7.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA8.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA9.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA10.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA11.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA12.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
 
 #### Wash beads with BufferC
 mag_deck.disengage()
 m300.transfer(BufferC_vol, BufferC, [wells.top(-5) for wells in DNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
-mag_deck.engage()
+mag_deck.engage(height=16)
 m300.delay(minutes=2)
 
-m300.transfer(200, DA1.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA2.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA3.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA4.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA5.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA6.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA7.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA8.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA9.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA10.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA11.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA12.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
+m300.transfer(200, DA1.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA2.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA3.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA4.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA5.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA6.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA7.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA8.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA9.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA10.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA11.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA12.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
 
 
 #### Wash beads with ethanol
 mag_deck.disengage()
 m300.transfer(Wash_1_vol, EtOH1, [wells.top(-5) for wells in DNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
-mag_deck.engage()
+mag_deck.engage(height=16)
 m300.delay(minutes=2)
 
-m300.transfer(200, DA1.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA2.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA3.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA4.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA5.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA6.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA7.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA8.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA9.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA10.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA11.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA12.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
+m300.transfer(200, DA1.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA2.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA3.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA4.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA5.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA6.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA7.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA8.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA9.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA10.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA11.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA12.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
 
 #### Wash beads with ethanol
 mag_deck.disengage()
 m300.transfer(Wash_2_vol, EtOH2, [wells.top(-5) for wells in DNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
-mag_deck.engage()
+mag_deck.engage(height=16)
 m300.delay(minutes=2)
 
-m300.transfer(200, DA1.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA2.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA3.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA4.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA5.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA6.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA7.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA8.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA9.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA10.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA11.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
-m300.transfer(200, DA12.bottom(2), Liquid_trash, new_tip='always',  blow_out =True)
+m300.transfer(200, DA1.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA2.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA3.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA4.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA5.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA6.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA7.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA8.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA9.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA10.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA11.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+m300.transfer(200, DA12.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
 
 #### Dry beads before elution
 m300.delay(minutes=4)
@@ -198,14 +211,14 @@ mag_deck.disengage()
 m300.transfer(Elution_vol, Elution_buffer, [wells.top(-5) for wells in DNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
 m300.delay(minutes=5)
 
-mag_deck.engage()
+mag_deck.engage(height=16)
 m300.delay(minutes=2)
 m300.transfer(200, DA1.bottom(2), elution_plate_DNA.wells('A1'), new_tip='always',  blow_out =True)
 m300.transfer(200, DA2.bottom(2), elution_plate_DNA.wells('A2'), new_tip='always',  blow_out =True)
 m300.transfer(200, DA3.bottom(2), elution_plate_DNA.wells('A3'), new_tip='always',  blow_out =True)
 m300.transfer(200, DA4.bottom(2), elution_plate_DNA.wells('A4'), new_tip='always',  blow_out =True)
 m300.transfer(200, DA5.bottom(2), elution_plate_DNA.wells('A5'), new_tip='always',  blow_out =True)
-m300.tDAnsfer(200, DA6.bottom(2), elution_plate_DNA.wells('A6'), new_tip='always',  blow_out =True)
+m300.trAnsfer(200, DA6.bottom(2), elution_plate_DNA.wells('A6'), new_tip='always',  blow_out =True)
 m300.transfer(200, DA7.bottom(2), elution_plate_DNA.wells('A7'), new_tip='always',  blow_out =True)
 m300.transfer(200, DA8.bottom(2), elution_plate_DNA.wells('A8'), new_tip='always',  blow_out =True)
 m300.tDAnsfer(200, DA9.bottom(2), elution_plate_DNA.wells('A9'), new_tip='always',  blow_out =True)
