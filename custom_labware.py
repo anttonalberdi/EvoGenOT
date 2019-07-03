@@ -124,7 +124,7 @@ if plate_name not in labware.list():
 # PCR plate able to contain 1ml for extraction and purification of RNA/DNA
 # Created by Jacob Agerbo (2019/07/02)
 
-plate_name = '1ml-PCR'
+plate_name = '1ml_PCR'
 if plate_name not in labware.list():
     custom_plate = labware.create(
         plate_name,                    # name of you labware
