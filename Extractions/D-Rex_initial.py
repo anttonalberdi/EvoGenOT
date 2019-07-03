@@ -15,8 +15,6 @@ from opentrons import labware, instruments, modules, robot
 
 #### METADATA ####
 
-
-
 metadata = {
     'protocolName': 'D-Rex Inital Extraction',
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
@@ -25,12 +23,22 @@ metadata = {
     'description': 'Automation of D-Rex RNA and DNA seperation for extraction protocol of stool samples in SHIELD',
 }
 
+### Custom LABWARE load
+plate_name = '1ml_PCR'
+if plate_name not in labware.list():
+    custom_plate = labware.create(
+        plate_name,                    # name of you labware
+        grid=(12, 8),                    # specify amount of (columns, rows)
+        spacing=(9, 9),               # distances (mm) between each (column, row)
+        diameter=7.5,                     # diameter (mm) of each well on the plate
+        depth=26.4,                       # depth (mm) of each well on the plate
+        volume=1000)
 
 #### LABWARE SETUP ####
 trough = labware.load('trough-12row', '2')
-RNA_plate = labware.load('96-deep-well', '1')
+RNA_plate = labware.load('1ml_PCR', '1')
 mag_deck = modules.load('magdeck', '7')
-sample_plate = labware.load('96-deep-well', '7', share=True)
+sample_plate = labware.load('1ml_PCR', '7', share=True)
 
 tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
                for slot in ['4','5','6']]

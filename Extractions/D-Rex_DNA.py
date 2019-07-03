@@ -30,7 +30,7 @@ trough = labware.load('trough-12row', '2')
 trash_box = labware.load('trash-box', '8')
 mag_deck = modules.load('magdeck', '7')
 DNA_plate = labware.load('96-flat', '7', share=True)
-sample_plate = labware.load('96-deep-well','3')
+sample_plate = labware.load('1ml_PCR','3')
 
 tipracks_200 = [labware.load('tiprack-200ul', slot)
                for slot in ['4','5','6','11']]

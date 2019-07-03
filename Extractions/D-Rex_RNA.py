@@ -27,7 +27,7 @@ metadata = {
 #### LABWARE SETUP ####
 elution_plate_RNA = labware.load('96-flat', '1')
 trough = labware.load('trough-12row', '2')
-RNA_plate = labware.load('96-deep-well', '7')
+RNA_plate = labware.load('1ml_PCR', '7')
 mag_deck = modules.load('magdeck', '7')
 trash_box = labware.load('trash-box', '8')
 

@@ -102,7 +102,12 @@ if plate_name not in labware.list():
         diameter=8,                     # diameter (mm) of each well on the plate
         depth=76,                       # depth (mm) of each well on the plate
         volume=1000)
-    
+
+############################
+#   One Column Reservoir   #
+############################
+# Description: A costummade reservoir for large volume aliquoting
+# Created by Jacob Agerbo (2019/02/25)
 plate_name = 'One-Column-reservoir'
 if plate_name not in labware.list():
     custom_plate = labware.create(
@@ -111,4 +116,20 @@ if plate_name not in labware.list():
         spacing=(0, 0),               # distances (mm) between each (column, row)
         diameter=81,                     # diameter (mm) of each well on the plate
         depth=35,                       # depth (mm) of each well on the plate
-        volume=350000)    
+        volume=350000)
+
+############################
+# 1ml PCR Plate #
+############################
+# PCR plate able to contain 1ml for extraction and purification of RNA/DNA
+# Created by Jacob Agerbo (2019/07/02)
+
+plate_name = '1ml-PCR'
+if plate_name not in labware.list():
+    custom_plate = labware.create(
+        plate_name,                    # name of you labware
+        grid=(12, 8),                    # specify amount of (columns, rows)
+        spacing=(9, 9),               # distances (mm) between each (column, row)
+        diameter=7.5,                     # diameter (mm) of each well on the plate
+        depth=26.4,                       # depth (mm) of each well on the plate
+        volume=1000)
