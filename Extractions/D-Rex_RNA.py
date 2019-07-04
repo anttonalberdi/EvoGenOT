@@ -45,14 +45,14 @@ if plate_name not in labware.list():
         volume=350000)
 
 #### LABWARE SETUP ####
-elution_plate_RNA = labware.load('96-flat', '1')
+elution_plate_RNA = labware.load('biorad-hardshell-96-PCR', '1')
 trough = labware.load('trough-12row', '2')
 mag_deck = modules.load('magdeck', '7')
 RNA_plate = labware.load('1ml_PCR', '7', share=True)
 trash_box = labware.load('One-Column-reservoir', '8')
 
 tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
-               for slot in ['3','4','5','6','9','11']]
+               for slot in ['3','4','5','6']]
 
 
 
@@ -208,6 +208,12 @@ m300.transfer(200, RA12.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow
 mag_deck.disengage()
 m300.transfer(Wash_2_vol, EtOH4, [wells.top(-5) for wells in RNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
 mag_deck.engage(height=16)
+
+##Reset tipracks for more tips
+robot.pause("Please fill up tips before continuing process")
+m300.reset()
+
+## Ethanol Wash 4 - continued
 m300.delay(minutes=2)
 m300.transfer(200, RA1.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
 m300.transfer(200, RA2.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
@@ -221,6 +227,8 @@ m300.transfer(200, RA9.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow_
 m300.transfer(200, RA10.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
 m300.transfer(200, RA11.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
 m300.transfer(200, RA12.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
+
+
 
 ## Dry beads before elution
 m300.delay(minutes=5)

@@ -45,11 +45,11 @@ if plate_name not in labware.list():
         volume=350000)
 
 #### LABWARE SETUP ####
-elution_plate_DNA = labware.load('96-flat', '1')
+elution_plate_DNA = labware.load('biorad-hardshell-96-PCR', '1')
 trough = labware.load('trough-12row', '2')
 trash_box = labware.load('One-Column-reservoir', '8')
 mag_deck = modules.load('magdeck', '7')
-DNA_plate = labware.load('96-flat', '7', share=True)
+DNA_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 sample_plate = labware.load('1ml_PCR','3')
 
 tipracks_200 = [labware.load('tiprack-200ul', slot)
@@ -60,6 +60,10 @@ tipracks_200 = [labware.load('tiprack-200ul', slot)
 #### PIPETTE SETUP ####
 m300 = instruments.P300_Multi(
     mount='right',
+    min_volume=25,
+    max_volume=200,
+    aspirate_flow_rate=100,
+    dispense_flow_rate=200,
     tip_racks=tipracks_200)
 
 #### REAGENT SETUP
@@ -165,8 +169,11 @@ m300.transfer(200, DA10.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow
 m300.transfer(200, DA11.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
 m300.transfer(200, DA12.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
 
+##Reset tipracks for more tips
+robot.pause("Please fill up tips before continuing process")
+m300.reset()
 
-#### Wash beads with ethanol
+#### Wash beads with EtOH1
 mag_deck.disengage()
 m300.transfer(Wash_1_vol, EtOH1, [wells.top(-5) for wells in DNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
 mag_deck.engage(height=16)
@@ -185,7 +192,7 @@ m300.transfer(200, DA10.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow
 m300.transfer(200, DA11.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
 m300.transfer(200, DA12.bottom(2), Liquid_trash.top(-4), new_tip='always',  blow_out =True)
 
-#### Wash beads with ethanol
+#### Wash beads with EtOH2
 mag_deck.disengage()
 m300.transfer(Wash_2_vol, EtOH2, [wells.top(-5) for wells in DNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
 mag_deck.engage(height=16)
