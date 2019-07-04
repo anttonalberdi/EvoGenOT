@@ -55,9 +55,7 @@ m300 = instruments.P300_Multi(
     tip_racks=tipracks_200)
 
 #### REAGENT SETUP
-
 Binding_buffer = trough.wells('A1')			# Buffer B
-
 EtOH_Bind1 = trough.wells('A2')
 EtOH_Bind2 = trough.wells('A3')
 
@@ -89,8 +87,6 @@ RA11 = RNA_plate.wells('A11')
 RA12 = RNA_plate.wells('A12')
 
 #### VOLUME SETUP
-
-
 Sample_vol = 200
 Binding_buffer_vol = Sample_vol*1
 EtOH_buffer_vol = 350
