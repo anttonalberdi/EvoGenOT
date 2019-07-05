@@ -95,7 +95,7 @@ EtOH_buffer_vol = 350
 #### PROTOCOL ####
 ## add beads and sample binding buffer to DNA/sample plate
 mag_deck.disengage()
-m300.distribute(Binding_buffer_vol, Binding_buffer, [wells.top(-4) for wells in sample_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')], new_tip='once',  blow_out =True)
+m300.distribute(Binding_buffer_vol, Binding_buffer, [wells.top(-4) for wells in sample_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')], new_tip='once', mix_before=(8,200), blow_out =True)
 
 
 ## add beads and EtOH binding buffer to RNA plate
