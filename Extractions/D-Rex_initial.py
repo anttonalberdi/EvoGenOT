@@ -108,7 +108,7 @@ m300.delay(minutes=6)
 
 
 ## Transfer supernatant
-mag_deck.engage(height=12)
+mag_deck.engage(height=16)
 m300.delay(minutes=5)
 m300.transfer(165, SA1.bottom(2), RA1.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(165, SA1.bottom(2), RA1.bottom(2), mix_after=(8,200), new_tip='once',  blow_out =True)
