@@ -111,40 +111,40 @@ m300.delay(minutes=6)
 mag_deck.engage(height=16)
 m300.delay(minutes=5)
 m300.transfer(165, SA1.bottom(2), RA1.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(165, SA1.bottom(2), RA1.bottom(2), mix_after=(8,200), new_tip='once',  blow_out =True)
+m300.transfer(165, SA1.bottom(2), RA1.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
 
 m300.transfer(165, SA2.bottom(2), RA2.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(165, SA2.bottom(2), RA2.bottom(2), mix_after=(8,200), new_tip='once',  blow_out =True)
+m300.transfer(165, SA2.bottom(2), RA2.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
 
 m300.transfer(165, SA3.bottom(2), RA3.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(165, SA3.bottom(2), RA3.bottom(2), mix_after=(8,200), new_tip='once',  blow_out =True)
+m300.transfer(165, SA3.bottom(2), RA3.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
 
 m300.transfer(165, SA4.bottom(2), RA4.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(165, SA4.bottom(2), RA4.bottom(2), mix_after=(8,200), new_tip='once',  blow_out =True)
+m300.transfer(165, SA4.bottom(2), RA4.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
 
 m300.transfer(165, SA5.bottom(2), RA5.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(165, SA5.bottom(2), RA5.bottom(2), mix_after=(8,200), new_tip='once',  blow_out =True)
+m300.transfer(165, SA5.bottom(2), RA5.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
 
 m300.transfer(165, SA6.bottom(2), RA6.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(165, SA6.bottom(2), RA6.bottom(2), mix_after=(8,200), new_tip='once',  blow_out =True)
+m300.transfer(165, SA6.bottom(2), RA6.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
 
 m300.transfer(165, SA7.bottom(2), RA7.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(165, SA7.bottom(2), RA7.bottom(2), mix_after=(8,200), new_tip='once',  blow_out =True)
+m300.transfer(165, SA7.bottom(2), RA7.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
 
 m300.transfer(165, SA8.bottom(2), RA8.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(165, SA8.bottom(2), RA8.bottom(2), mix_after=(8,200), new_tip='once',  blow_out =True)
+m300.transfer(165, SA8.bottom(2), RA8.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
 
 m300.transfer(165, SA9.bottom(2), RA9.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(165, SA9.bottom(2), RA9.bottom(2), mix_after=(8,200), new_tip='once',  blow_out =True)
+m300.transfer(165, SA9.bottom(2), RA9.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
 
 m300.transfer(165, SA10.bottom(2), RA10.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(165, SA10.bottom(2), RA10.bottom(2), mix_after=(8,200), new_tip='once',  blow_out =True)
+m300.transfer(165, SA10.bottom(2), RA10.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
 
 m300.transfer(165, SA11.bottom(2), RA11.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(165, SA11.bottom(2), RA11.bottom(2), mix_after=(8,200), new_tip='once',  blow_out =True)
+m300.transfer(165, SA11.bottom(2), RA11.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
 
 m300.transfer(165, SA12.bottom(2), RA12.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(165, SA12.bottom(2), RA12.bottom(2), mix_after=(8,200), new_tip='once',  blow_out =True)
+m300.transfer(165, SA12.bottom(2), RA12.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
 
 
 

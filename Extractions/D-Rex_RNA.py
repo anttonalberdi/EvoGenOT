@@ -167,7 +167,7 @@ m300.transfer(30, DNase, [wells.top(-15) for wells in RNA_plate.wells('A1','A2',
 m300.delay(minutes=10)
 
 ## Buffer C rebind
-m300.transfer(200, BufferC, [wells.top(-15) for wells in RNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
+m300.transfer(200, BufferC, [wells.top(-15) for wells in RNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='always', mix_after=(3,200),  blow_out =True)
 
 m300.delay(minutes=10)
 mag_deck.engage(height=16)
