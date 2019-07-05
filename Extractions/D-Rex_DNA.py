@@ -67,15 +67,12 @@ m300 = instruments.P300_Multi(
 
 #### REAGENT SETUP
 
-Beads = trough.wells('A1')
-Elution_buffer = trough.wells('A2')
-
 Liquid_trash = trash_box.wells('A1')
 
 
-BufferC = buffer.wells('A9')
-Ethanol_1 = buffer.wells('A10')
-Ethanol_2 = buffer.wells('A11')
+BufferC = trough.wells('A9')
+EtOH1 = trough.wells('A10')
+EtOH2 = trough.wells('A11')
 Elution_buffer = trough.wells('A12')
 
 
@@ -90,19 +87,6 @@ Wash_2_vol = 0.9*Sample_vol
 Elution_vol = 50
 
 #### Plate SETUP
-SA1 = sample_plate.wells('A1')
-SA2 = sample_plate.wells('A2')
-SA3 = sample_plate.wells('A3')
-SA4 = sample_plate.wells('A4')
-SA5 = sample_plate.wells('A5')
-SA6 = sample_plate.wells('A6')
-SA7 = sample_plate.wells('A7')
-SA8 = sample_plate.wells('A8')
-SA9 = sample_plate.wells('A9')
-SA10 = sample_plate.wells('A10')
-SA11 = sample_plate.wells('A11')
-SA12 = sample_plate.wells('A12')
-
 DA1 = DNA_plate.wells('A1')
 DA2 = DNA_plate.wells('A2')
 DA3 = DNA_plate.wells('A3')
@@ -210,10 +194,10 @@ m300.transfer(Elution_vol, DA2.bottom(2), elution_plate_DNA.wells('A2'), new_tip
 m300.transfer(Elution_vol, DA3.bottom(2), elution_plate_DNA.wells('A3'), new_tip='always',  blow_out =True)
 m300.transfer(Elution_vol, DA4.bottom(2), elution_plate_DNA.wells('A4'), new_tip='always',  blow_out =True)
 m300.transfer(Elution_vol, DA5.bottom(2), elution_plate_DNA.wells('A5'), new_tip='always',  blow_out =True)
-m300.trAnsfer(Elution_vol, DA6.bottom(2), elution_plate_DNA.wells('A6'), new_tip='always',  blow_out =True)
+m300.transfer(Elution_vol, DA6.bottom(2), elution_plate_DNA.wells('A6'), new_tip='always',  blow_out =True)
 m300.transfer(Elution_vol, DA7.bottom(2), elution_plate_DNA.wells('A7'), new_tip='always',  blow_out =True)
 m300.transfer(Elution_vol, DA8.bottom(2), elution_plate_DNA.wells('A8'), new_tip='always',  blow_out =True)
-m300.tDAnsfer(Elution_vol, DA9.bottom(2), elution_plate_DNA.wells('A9'), new_tip='always',  blow_out =True)
+m300.transfer(Elution_vol, DA9.bottom(2), elution_plate_DNA.wells('A9'), new_tip='always',  blow_out =True)
 m300.transfer(Elution_vol, DA10.bottom(2), elution_plate_DNA.wells('A10'), new_tip='always',  blow_out =True)
 m300.transfer(Elution_vol, DA11.bottom(2), elution_plate_DNA.wells('A11'), new_tip='always',  blow_out =True)
 m300.transfer(Elution_vol, DA12.bottom(2), elution_plate_DNA.wells('A12'), new_tip='always',  blow_out =True)
