@@ -235,9 +235,10 @@ m300.delay(minutes=5)
 
 ## Elution
 mag_deck.disengage()
-m300.transfer(Elution_vol, Elution_buffer, [wells.top(-15) for wells in RNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
+m300.transfer(Elution_vol, Elution_buffer, [wells.top(-15) for wells in RNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='always', mix_after=(3,30),  blow_out =True)
+m300.delay(minutes=10)
 mag_deck.engage(height=16)
-m300.delay(minutes=5)
+m300.delay(minutes=2)
 
 m300.transfer(Elution_vol, RA1.bottom(1), elution_plate_RNA.wells('A1'), new_tip='once',  blow_out =True)
 m300.transfer(Elution_vol, RA2.bottom(1), elution_plate_RNA.wells('A2'), new_tip='once',  blow_out =True)
