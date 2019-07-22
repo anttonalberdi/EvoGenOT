@@ -67,15 +67,15 @@ temp_plate = labware.load('96-flat', '10', share=True)
 #mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 
 tipracks_10 = [labware.load('tiprack-10ul', slot, share=True)
-               for slot in ['8','5']]
+               for slot in ['8','5', '4']]
 
 tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
-                for slot in ['9', '11', '4']]
+                for slot in ['9', '11']]
 
 
 #### PIPETTE SETUP ####
-m10 = instruments.P10_Single(
-    mount='right',
+m10 = instruments.P10_Multi(
+    mount='left',
     tip_racks=tipracks_10)
 
 m300 = instruments.P300_Multi(
