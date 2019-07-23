@@ -52,7 +52,7 @@ trough = labware.load('trough-12row', '2')
 Trash = labware.load('One-Column-reservoir','3')
 mag_deck = modules.load('magdeck', '7')
 mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
-elution_plate = labware.load('biorad-hardshell-96-PCR','4')
+elution_plate = labware.load('biorad-hardshell-96-PCR','1')
 
 
 tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
