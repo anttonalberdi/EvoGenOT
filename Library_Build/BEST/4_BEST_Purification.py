@@ -95,8 +95,8 @@ SA12 = mag_plate.wells('A12')
 
 sample_vol = 60
 bead_vol = 1.5*sample_vol
-EtOH_vol = 200
-EtOH_vol2 = 180
+EtOH_vol = 180
+EtOH_vol2 = 150
 elution_vol = 40
 
 """
@@ -105,40 +105,40 @@ Blund end repair
 robot.comment("Yay! \ Purification begins!")
 
 ### Beads addition
-
-mag_deck.disengage()
-m300.transfer(bead_vol, SPRI_beads, SA1.bottom(2), mix_after=(5,100), blow_out=True ,new_tip='always') # Change blow_out to blow_out liquid in mag_plate
-m300.transfer(bead_vol, SPRI_beads, SA2.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(bead_vol, SPRI_beads, SA3.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(bead_vol, SPRI_beads, SA4.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(bead_vol, SPRI_beads, SA5.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(bead_vol, SPRI_beads, SA6.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(bead_vol, SPRI_beads, SA7.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(bead_vol, SPRI_beads, SA8.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(bead_vol, SPRI_beads, SA9.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(bead_vol, SPRI_beads, SA10.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(bead_vol, SPRI_beads, SA11.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(bead_vol, SPRI_beads, SA12.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
+mag_height = -10
+mag_deck.disengage(height=mag_height)
+m300.transfer(bead_vol, SPRI_beads, SA1.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always') # Change blow_out to blow_out liquid in mag_plate
+m300.transfer(bead_vol, SPRI_beads, SA2.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA3.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA4.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA5.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA6.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA7.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA8.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA9.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA10.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA11.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA12.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
 m300.delay(minutes=5)
 mag_deck.engage()
 m300.delay(minutes=2)
 
 ### Remove supernatant
-m300.transfer(140, SA1.bottom(2), Liquid_trash.top(-5),new_tip='always', blow_out=True)
-m300.transfer(140, SA2.bottom(2), Liquid_trash.top(-5), new_tip='always', blow_out=True)
-m300.transfer(140, SA3.bottom(2), Liquid_trash.top(-5), new_tip='always', blow_out=True)
-m300.transfer(140, SA4.bottom(2), Liquid_trash.top(-5), new_tip='always', blow_out=True)
-m300.transfer(140, SA5.bottom(2), Liquid_trash.top(-5), new_tip='always', blow_out=True)
-m300.transfer(140, SA6.bottom(2), Liquid_trash.top(-5), new_tip='always', blow_out=True)
-m300.transfer(140, SA7.bottom(2), Liquid_trash.top(-5), new_tip='always', blow_out=True)
-m300.transfer(140, SA8.bottom(2), Liquid_trash.top(-5), new_tip='always', blow_out=True)
-m300.transfer(140, SA9.bottom(2), Liquid_trash.top(-5), new_tip='always', blow_out=True)
-m300.transfer(140, SA10.bottom(2), Liquid_trash.top(-5), new_tip='always', blow_out=True)
-m300.transfer(140, SA11.bottom(2), Liquid_trash.top(-5), new_tip='always', blow_out=True)
-m300.transfer(140, SA12.bottom(2), Liquid_trash.top(-5), new_tip='always', blow_out=True)
+m300.transfer(140, SA1.bottom(1), Liquid_trash.top(-5), blow_out=True,new_tip='always')
+m300.transfer(140, SA2.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(140, SA3.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(140, SA4.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(140, SA5.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(140, SA6.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(140, SA7.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(140, SA8.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(140, SA9.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(140, SA10.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(140, SA11.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(140, SA12.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
 
 ### Wash with EtOH1
-mag_deck.disengage()
+mag_deck.disengage(height=mag_height)
 
 m300.transfer(EtOH_vol, EtOH1, SA1.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
 m300.transfer(EtOH_vol, EtOH1, SA2.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
@@ -169,11 +169,11 @@ m300.transfer(200, SA11.bottom(2), Liquid_trash.top(-5), new_tip='always', blow_
 m300.transfer(200, SA12.bottom(2), Liquid_trash.top(-5), new_tip='always', blow_out=True)
 
 ##Reset tipracks for more tips
-robot.pause("Please fill up tips before continuing process")
+robot.pause("Please fill up tips before continuing process and empty trash box")
 m300.reset()
 
 ### Wash with EtOH2
-mag_deck.disengage()
+mag_deck.disengage(height=mag_height)
 
 m300.transfer(EtOH_vol2, EtOH2, SA1.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
 m300.transfer(EtOH_vol2, EtOH2, SA2.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
