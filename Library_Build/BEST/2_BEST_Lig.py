@@ -24,7 +24,7 @@
 #
 #
 ######## IMPORT LIBRARIES ########
-#from opentrons import labware, instruments, modules, robot
+from opentrons import labware, instruments, modules, robot
 
 #### METADATA ####
 

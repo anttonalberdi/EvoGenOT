@@ -24,7 +24,7 @@
 #
 #
 ######## IMPORT LIBRARIES ########
-#from opentrons import labware, instruments, modules, robot
+from opentrons import labware, instruments, modules, robot
 
 #### METADATA ####
 
@@ -71,9 +71,9 @@ m300 = instruments.P300_Multi(
 
 
 ## Purification reagents SETUP
-SPRI_beads = trough.wells('A8')
-EtOH1 = trough.wells('A9')
-EtOH2 = trough.wells('A10')
+SPRI_beads = trough.wells('A1')
+EtOH1 = trough.wells('A2')
+EtOH2 = trough.wells('A3')
 Elution_buffer = trough.wells('A12')
 
 Liquid_trash = Trash.wells('A1')
@@ -107,7 +107,7 @@ robot.comment("Yay! \ Purification begins!")
 ### Beads addition
 
 mag_deck.disengage()
-m300.transfer(bead_vol, SPRI_beads, SA1.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
+m300.transfer(bead_vol, SPRI_beads, SA1.bottom(2), mix_after=(5,100), blow_out=True ,new_tip='always') # Change blow_out to blow_out liquid in mag_plate
 m300.transfer(bead_vol, SPRI_beads, SA2.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
 m300.transfer(bead_vol, SPRI_beads, SA3.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
 m300.transfer(bead_vol, SPRI_beads, SA4.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
@@ -222,7 +222,7 @@ m300.transfer(elution_vol, Elution_buffer, SA11.bottom(2), mix_after=(5,100),new
 m300.transfer(elution_vol, Elution_buffer, SA12.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
 
 m300.delay(minutes=15)
-m300.transfer(35, SA1.bottom(2), elution_plate('A1', new_tip='always', blow_out=True)
+m300.transfer(35, SA1.bottom(2), elution_plate('A1'), new_tip='always', blow_out=True)
 m300.transfer(35, SA2.bottom(2), elution_plate('A2'), new_tip='always', blow_out=True)
 m300.transfer(35, SA3.bottom(2), elution_plate('A3'), new_tip='always', blow_out=True)
 m300.transfer(35, SA4.bottom(2), elution_plate('A4'), new_tip='always', blow_out=True)
