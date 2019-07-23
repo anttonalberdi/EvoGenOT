@@ -49,14 +49,14 @@ if plate_name not in labware.list():
 
 #### LABWARE SETUP ####
 trough = labware.load('trough-12row', '2')
-Trash = labware.load('One-Column-reservoir','3')
+Trash = labware.load('One-Column-reservoir','9')
 mag_deck = modules.load('magdeck', '7')
 mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 elution_plate = labware.load('biorad-hardshell-96-PCR','1')
 
 
 tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
-                for slot in ['8','9','10','11']]
+                for slot in ['3','4','5','6']]
 
 
 #### PIPETTE SETUP ####
@@ -105,40 +105,39 @@ Blund end repair
 robot.comment("Yay! \ Purification begins!")
 
 ### Beads addition
-mag_height = -10
-mag_deck.disengage(height=mag_height)
-m300.transfer(bead_vol, SPRI_beads, SA1.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always') # Change blow_out to blow_out liquid in mag_plate
-m300.transfer(bead_vol, SPRI_beads, SA2.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
-m300.transfer(bead_vol, SPRI_beads, SA3.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
-m300.transfer(bead_vol, SPRI_beads, SA4.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
-m300.transfer(bead_vol, SPRI_beads, SA5.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
-m300.transfer(bead_vol, SPRI_beads, SA6.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
-m300.transfer(bead_vol, SPRI_beads, SA7.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
-m300.transfer(bead_vol, SPRI_beads, SA8.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
-m300.transfer(bead_vol, SPRI_beads, SA9.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
-m300.transfer(bead_vol, SPRI_beads, SA10.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
-m300.transfer(bead_vol, SPRI_beads, SA11.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
-m300.transfer(bead_vol, SPRI_beads, SA12.bottom(2), mix_after=(5,100), blow_out=True,new_tip='always')
+mag_deck.disengage()
+m300.transfer(bead_vol, SPRI_beads, SA1.bottom(5), mix_after=(3,100), blow_out=True,new_tip='always') # Change blow_out to blow_out liquid in mag_plate
+m300.transfer(bead_vol, SPRI_beads, SA2.bottom(5), mix_after=(3,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA3.bottom(5), mix_after=(3,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA4.bottom(5), mix_after=(3,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA5.bottom(5), mix_after=(3,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA6.bottom(5), mix_after=(3,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA7.bottom(5), mix_after=(3,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA8.bottom(5), mix_after=(3,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA9.bottom(5), mix_after=(3,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA10.bottom(5), mix_after=(3,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA11.bottom(5), mix_after=(3,100), blow_out=True,new_tip='always')
+m300.transfer(bead_vol, SPRI_beads, SA12.bottom(5), mix_after=(3,100), blow_out=True,new_tip='always')
 m300.delay(minutes=5)
 mag_deck.engage()
 m300.delay(minutes=2)
 
 ### Remove supernatant
-m300.transfer(140, SA1.bottom(1), Liquid_trash.top(-5), blow_out=True,new_tip='always')
-m300.transfer(140, SA2.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(140, SA3.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(140, SA4.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(140, SA5.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(140, SA6.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(140, SA7.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(140, SA8.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(140, SA9.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(140, SA10.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(140, SA11.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(140, SA12.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(180, SA1.bottom(1), Liquid_trash.top(-5), blow_out=True,new_tip='always')
+m300.transfer(180, SA2.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(180, SA3.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(180, SA4.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(180, SA5.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(180, SA6.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(180, SA7.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(180, SA8.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(180, SA9.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(180, SA10.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(180, SA11.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(180, SA12.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
 
 ### Wash with EtOH1
-mag_deck.disengage(height=mag_height)
+mag_deck.disengage()
 
 m300.transfer(EtOH_vol, EtOH1, SA1.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
 m300.transfer(EtOH_vol, EtOH1, SA2.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
@@ -173,7 +172,7 @@ robot.pause("Please fill up tips before continuing process and empty trash box")
 m300.reset()
 
 ### Wash with EtOH2
-mag_deck.disengage(height=mag_height)
+mag_deck.disengage()
 
 m300.transfer(EtOH_vol2, EtOH2, SA1.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
 m300.transfer(EtOH_vol2, EtOH2, SA2.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
