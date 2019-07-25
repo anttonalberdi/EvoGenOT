@@ -29,6 +29,22 @@
 #
 # 3) Place B-Str in Column 1 of chill_rack_96 and E-Str in Column 3 of chill_rack_96 #Open the leads just before starting the protocol
 #
+# 4) Place the plate (biorad-hardshell-96-PCR) with the 96 samples in the tempdeck. NEED TO DECIDE ON THE FOIL! X-CROSSED?
+#
+# ROBOT PROTOCOL BEGINS
+#
+# 5) Transfer 63 ul from B-Str to E-Str (total should be around 77 ul) and mix well
+#
+# 6) Distribute 5.85 ul to each column in the plate and mix thoroughly (each well should have ca 30 ul and there should be around 7ul spare mix in the strip-tube)
+#
+# ROBOT PROTOCOL ENDS
+#
+# 7) Seal the plate with thin aluminium foil
+#
+# 8) Incubate the plate 30 min 20 ºC, 30 min 65 ºC
+#
+###########
+
 
 ## Description of procedure ##
 #
