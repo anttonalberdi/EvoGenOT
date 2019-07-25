@@ -173,7 +173,7 @@ temp_deck.wait_for_temp()
 m300.transfer(86, ER_mastermix, Enzyme_ER.bottom(2), mix_after=(3,30), blow_out=True)
 
 ### Addition of End repair mastermix to libraries
-m10.transfer(8, Enzyme_ER.bottom(4), SA1.bottom(2),mix_after=(3,8) , new_tip='always',  blow_out =True)
+m10.transfer(8, Enzyme_ER.bottom(4), SA1.bottom(2),mix_after=(3,8) , new_tip='always',  blow_out =True) #We might need to change the order of blow out
 m10.transfer(8, Enzyme_ER.bottom(4), SA2.bottom(2),mix_after=(3,8) , new_tip='always',  blow_out =True)
 m10.transfer(8, Enzyme_ER.bottom(3), SA3.bottom(2),mix_after=(3,8) , new_tip='always',  blow_out =True)
 m10.transfer(8, Enzyme_ER.bottom(3), SA4.bottom(2),mix_after=(3,8) , new_tip='always',  blow_out =True)
