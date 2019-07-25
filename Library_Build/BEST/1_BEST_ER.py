@@ -2,6 +2,34 @@
 ### BEST Library build ###
 ##########################
 
+## Description of procedure - Antton ##
+#
+#                           x1          x96(+10) #the extra amount shoud be optimised based on robot behavior
+# T4 DNA ligase buffer	    3           318
+# Reaction enhancer	        1.5         159
+# T4 PNK	                0.75        79.5
+# T4 polymerase	            0.3         31.8
+# dNTP 25 mM	            0.3         31.8
+# Mix                       5.85        620.1
+# Sample                    24.15
+# Total                     30
+#       
+# 1) Pre-mix buffers in 1.5ml tube and distribute to strip tubes (B-Str) #Should be done before and keep frozen
+#      T4 DNA ligase buffer	 318
+#      Reaction enhancer     159
+#      dNTP 25 mM	         31.8
+#      Total                 508.8
+#      For each well         63.6
+#
+# 2) Pre-mix enzymes in 1.5ml tube and distribute to strip tubes (E-Str) #Should be done before and keep frozen
+#       T4 PNK	             79.5
+#       T4 polymerase	     31.8
+#       Total                111.3
+#       For each well        13.9
+#
+# 3) Place B-Str in Column 1 of chill_rack_96 and E-Str in Column 3 of chill_rack_96 #Open the leads just before starting the protocol
+#
+
 ## Description of procedure ##
 #
 #
