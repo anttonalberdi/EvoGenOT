@@ -57,8 +57,8 @@ if plate_name not in labware.list():
         volume=350000)
 
 #### LABWARE SETUP ####
-cold_block = labware.load('chill_rack_96', '1')
-Cold_plate = labware.load('96-flat', '1', share=True)
+cold_block = modules.load('tempdeck', '7')
+Cold_plate = labware.load('96-flat', '7', share=True)
 # trough = labware.load('trough-12row', '2')
 # Trash = labware.load('One-Column-reservoir','3')
 temp_deck = modules.load('tempdeck', '10')
@@ -135,6 +135,7 @@ Ligase
 robot.comment("Yay! \ Ligase begins.")
 
 temp_deck.set_temperature(6)
+cold_block.set_temperature(6)
 temp_deck.wait_for_temp()
 
 ### Addition of Adapters

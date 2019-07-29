@@ -101,8 +101,8 @@ if plate_name not in labware.list():
         volume=350000)
 
 #### LABWARE SETUP ####
-cold_block = labware.load('chill_rack_96', '1')
-Cold_plate = labware.load('96-flat', '1', share=True)
+cold_block = modules.load('tempdeck', '7')
+Cold_plate = labware.load('96-flat', '7', share=True)
 # trough = labware.load('trough-12row', '2')
 # Trash = labware.load('One-Column-reservoir','3')
 temp_deck = modules.load('tempdeck', '10')
@@ -131,12 +131,12 @@ m300 = instruments.P300_Multi(
     tip_racks=tipracks_200)
 
 ## Enzyme SETUP
-Enzyme_ER = cold_block.wells('A1')
+Enzyme_ER = Cold_plate.wells('A1')
 # Enzyme_Lig = Cold_plate.wells('A2')
 # Enzyme_Fill = Cold_plate.wells('A3')
 
 ## Reagent SETUP
-ER_mastermix = cold_block.wells('A4')
+ER_mastermix = Cold_plate.wells('A4')
 # BGI_adapter = Cold_plate.wells('A5')
 # Lig_mastermix = Cold_plate.wells('A6')
 # Fill_mastermix = Cold_plate.wells('A7')
@@ -181,7 +181,9 @@ Blund end repair
 robot.comment("Yay! \ Blund-end Repair begins.")
 
 temp_deck.set_temperature(6)
+cold_block.set_temperature(6)
 temp_deck.wait_for_temp()
+
 ### Addition of End repair mastermix to enzymes
 m300.transfer(86, ER_mastermix, Enzyme_ER.bottom(2), mix_after=(3,30), blow_out=True)
 
