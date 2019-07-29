@@ -180,8 +180,8 @@ Blund end repair
 """
 robot.comment("Yay! \ Blund-end Repair begins.")
 
-temp_deck.set_temperature(6)
-cold_block.set_temperature(6)
+cold_block.set_temperature(10)
+temp_deck.set_temperature(10)
 temp_deck.wait_for_temp()
 
 ### Addition of End repair mastermix to enzymes
