@@ -83,6 +83,8 @@ Liquid_trash = Trash.wells('A1')
 ## Sample Setup
 sample_number = 96
 col_num = sample_number // 8 + (1 if sample_number % 8 > 0 else 0)
+samples = [col for col in mag_plate.cols()[:col_num]]
+samples_top = [well.top() for well in mag_plate.rows(0)[:col_num]]
 
 SA1 = mag_plate.wells('A1')
 SA2 = mag_plate.wells('A2')
@@ -96,9 +98,6 @@ SA9 = mag_plate.wells('A9')
 SA10 = mag_plate.wells('A10')
 SA11 = mag_plate.wells('A11')
 SA12 = mag_plate.wells('A12')
-
-samples = [col for col in mag_plate.cols()[:col_num]]
-samples_top = [well.top() for well in mag_plate.rows(0)[:col_num]]
 
 sample_vol = 60
 bead_vol = 1.5*sample_vol

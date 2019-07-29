@@ -124,7 +124,7 @@ SA12 = temp_plate.wells('A12')
 ## Volume setup
 #ER_vol = 5.85
 Lig_vol = 8
-#Fill_vol =
+#Fill_vol = 10
 #MM_dist_ER = ER_vol * col_num
 MM_dist_Lig = Lig_vol * col_num
 #MM_dist_Fill = Fill_vol * col_num
