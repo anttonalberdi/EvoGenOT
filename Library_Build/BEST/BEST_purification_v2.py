@@ -79,7 +79,7 @@ Elution_buffer = trough.wells('A12')
 Liquid_trash = Trash.wells('A1')
 
 ## Sample Setup
-
+sample_number = 96
 col_num = sample_number // 8 + (1 if sample_number % 8 > 0 else 0)
 
 SA1 = mag_plate.wells('A1')
@@ -95,7 +95,8 @@ SA10 = mag_plate.wells('A10')
 SA11 = mag_plate.wells('A11')
 SA12 = mag_plate.wells('A12')
 
-declare -a sample_list=("SA1" "SA2" "SA3" "SA4" "SA5" "SA6" "SA7" "SA8" "SA9" "SA10" "SA11" "SA12")
+samples = [col for col in mag_plate.cols()[:col_num]]
+samples_top = [well.top() for well in mag_plate.rows(0)[:col_num]]
 
 sample_vol = 60
 bead_vol = 1.5*sample_vol
@@ -108,39 +109,20 @@ robot.comment("Yay! \ Purification begins!")
 ### Beads addition
 mag_deck.disengage()
 
-    for target in "${sample_list[@]}":
-        pipette.set_flow_rate(aspirate=180, dispense=180)
-        pipette.pick_up_tip()
-        # Slow down head speed 0.5X for bead handling
-        pipette.mix(3, 200, SPRI_beads)
-        max_speed_per_axis = {
-            'x': (50), 'y': (50), 'z': (50), 'a': (10), 'b': (10), 'c': (10)}
-        robot.head_speed(
-            combined_speed=max(max_speed_per_axis.values()),
-            **max_speed_per_axis)
-
-        pipette.set_flow_rate(aspirate=10, dispense=10)
-        pipette.transfer(
-            bead_vol, SPRI_beads, target, air_gap=0, new_tip='never')
-        pipette.set_flow_rate(aspirate=50, dispense=50)
-        pipette.mix(5, 100, target)
-        pipette.blow_out()
-        max_speed_per_axis = {
-            'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
-            'c': (40)}
-        robot.head_speed(
-            combined_speed=max(max_speed_per_axis.values()),
-            **max_speed_per_axis)
-
-        pipette.drop_tip()
-
-    # Return robot head speed to the defaults for all axes
-        max_speed_per_axis = {
-            'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
-            'c': (40)}
-        robot.head_speed(
-            combined_speed=max(max_speed_per_axis.values()),
-            **max_speed_per_axis)
+for target in samples:
+    m300.set_flow_rate(aspirate=180, dispense=180)
+    m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
+    m300.mix(3, 200, SPRI_beads)
+    max_speed_per_axis = {'x': (50), 'y': (50), 'z': (50), 'a': (10), 'b': (10), 'c': (10)}
+    robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+    m300.set_flow_rate(aspirate=10, dispense=10)
+    m300.transfer(bead_vol, SPRI_beads, target, air_gap=0, new_tip='never')
+    m300.set_flow_rate(aspirate=50, dispense=50)
+    m300.mix(5, 100, target)
+    m300.blow_out()
+    max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
+    robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+    m300.drop_tip()
 
 robot.comment("Incubating the beads and PCR products at room temperature \
 for 5 minutes. Protocol will resume automatically.")
