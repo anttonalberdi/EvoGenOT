@@ -1,27 +1,29 @@
-##########################
-### BEST Library build ###
-##########################
+#######################################
+### BEST Library build Purification ###
+#######################################
 
 ## Description of procedure ##
 #
 #
 # Things do before procedure
 #
-#	1. Mix mastermix of End-repair, Ligase and Fill-in according to BEST-sheet and sample size.
-#				NOTE! This procedure is for full plates
-# 	2. Thaw samples in fridge and place them in a slot 2 in a chilling rack.
+#	1. Ensure samples are room temperature and place libraries in magnetic module
+# 	2. Ensure SPRI beads are room temperature
+#   3. Make freshly made 80% Ethanol for purification
+#   4. Distribute:
+#                   SPRI beads to Column 1,
+#                   Ethanol to Column 2 and 3
+#                   Elution Buffer to Column 12
 #
 # Procedure
 #
-#		BEST
-# 	1.	Distribute 2µl Adapters mix into temp_deck
-#	  2.	Adds 110µl of Fill MM to Enzyme strip (8.4µl * 13 columns)
-#   3.  Distribute 10µl of Enzyme-Fill_MM to each well
-#	  4.	Incubate in PCR at 65°C for 15 min, and at 80°C for 15 min
-
+#		Purification
+# 	1.	Distribute 1.5x beads to library and mixes
+#	2.	Removes supernatant and adds ethanol for washing, washing will be processed twice
+#   3.  Beads will air dry for 4 minutes and 35µl elution buffer will be added
+#	4.	Elutes will incubate for 15 minutes at room temperature and be eluted to a new plate in slot 1
 #
 #	Good Luck!
-#
 #
 ######## IMPORT LIBRARIES ########
 from opentrons import labware, instruments, modules, robot
@@ -100,9 +102,9 @@ samples_top = [well.top() for well in mag_plate.rows(0)[:col_num]]
 
 sample_vol = 60
 bead_vol = 1.5*sample_vol
-EtOH_vol = 180
+EtOH_vol = 170
 EtOH_vol2 = 150
-elution_vol = 40
+elution_vol = 35
 
 robot.comment("Yay! \ Purification begins!")
 
@@ -113,7 +115,7 @@ for target in samples:
     m300.set_flow_rate(aspirate=180, dispense=180)
     m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
     m300.mix(3, 200, SPRI_beads)
-    max_speed_per_axis = {'x': (50), 'y': (50), 'z': (50), 'a': (10), 'b': (10), 'c': (10)}
+    max_speed_per_axis = {'x': (100), 'y': (100), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m300.set_flow_rate(aspirate=10, dispense=10)
     m300.transfer(bead_vol, SPRI_beads, target, air_gap=0, new_tip='never')
@@ -130,13 +132,16 @@ m300.delay(minutes=5)
 mag_deck.engage()
 m300.delay(minutes=2)
 
+### Resets head speed for futher processing
+max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
+robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 
 ### Remove supernatant
 m300.transfer(180, SA1.bottom(), Liquid_trash.top(-5), blow_out=True,new_tip='always')
 m300.transfer(180, SA2.bottom(), Liquid_trash.top(-5), blow_out=True, new_tip='always')
 m300.transfer(180, SA3.bottom(), Liquid_trash.top(-5), blow_out=True, new_tip='always')
 m300.transfer(180, SA4.bottom(), Liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(180, SA5.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
+m300.transfer(180, SA5.bottom(), Liquid_trash.top(-5), blow_out=True, new_tip='always')
 m300.transfer(180, SA6.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
 m300.transfer(180, SA7.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
 m300.transfer(180, SA8.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip='always')
@@ -147,19 +152,24 @@ m300.transfer(180, SA12.bottom(1), Liquid_trash.top(-5), blow_out=True, new_tip=
 
 ### Wash with EtOH1
 mag_deck.disengage()
+for target in samples:
+    m300.set_flow_rate(aspirate=180, dispense=180)
+    m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
+    max_speed_per_axis = {'x': (100), 'y': (100), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
+    robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+    m300.set_flow_rate(aspirate=10, dispense=10)
+    m300.transfer(EtOH_vol, EtOH1, target, air_gap=20, new_tip='never')
+    m300.set_flow_rate(aspirate=50, dispense=50)
+    m300.mix(3, 100, target)
+    m300.blow_out()
+    max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
+    robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+    m300.drop_tip()
 
-m300.transfer(EtOH_vol, EtOH1, SA1.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol, EtOH1, SA2.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol, EtOH1, SA3.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol, EtOH1, SA4.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol, EtOH1, SA5.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol, EtOH1, SA6.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol, EtOH1, SA7.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol, EtOH1, SA8.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol, EtOH1, SA9.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol, EtOH1, SA10.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol, EtOH1, SA11.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol, EtOH1, SA12.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
+### Resets head speed for futher processing
+max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
+robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+
 mag_deck.engage()
 m300.delay(minutes=2)
 
@@ -183,18 +193,23 @@ m300.reset()
 ### Wash with EtOH2
 mag_deck.disengage()
 
-m300.transfer(EtOH_vol2, EtOH2, SA1.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol2, EtOH2, SA2.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol2, EtOH2, SA3.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol2, EtOH2, SA4.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol2, EtOH2, SA5.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol2, EtOH2, SA6.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol2, EtOH2, SA7.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol2, EtOH2, SA8.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol2, EtOH2, SA9.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol2, EtOH2, SA10.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol2, EtOH2, SA11.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(EtOH_vol2, EtOH2, SA12.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
+for target in samples:
+    m300.set_flow_rate(aspirate=180, dispense=180)
+    m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
+    max_speed_per_axis = {'x': (100), 'y': (100), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
+    robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+    m300.set_flow_rate(aspirate=10, dispense=10)
+    m300.transfer(EtOH_vol2, EtOH2, target, air_gap=20, new_tip='never')
+    m300.set_flow_rate(aspirate=50, dispense=50)
+    m300.mix(3, 100, target)
+    m300.blow_out()
+    max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
+    robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+    m300.drop_tip()
+
+### Resets head speed for futher processing
+max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
+robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 
 mag_deck.engage()
 m300.delay(minutes=2)
@@ -213,23 +228,32 @@ m300.transfer(200, SA11.bottom(1), Liquid_trash.top(-5), new_tip='always', blow_
 m300.transfer(200, SA12.bottom(1), Liquid_trash.top(-5), new_tip='always', blow_out=True)
 
 ## Dry beads before elution
-m300.delay(minutes=3)
+m300.delay(minutes=4)
 
 ## Elution of DNA
-m300.transfer(elution_vol, Elution_buffer, SA1.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(elution_vol, Elution_buffer, SA2.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(elution_vol, Elution_buffer, SA3.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(elution_vol, Elution_buffer, SA4.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(elution_vol, Elution_buffer, SA5.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(elution_vol, Elution_buffer, SA6.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(elution_vol, Elution_buffer, SA7.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(elution_vol, Elution_buffer, SA8.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(elution_vol, Elution_buffer, SA9.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(elution_vol, Elution_buffer, SA10.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(elution_vol, Elution_buffer, SA11.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
-m300.transfer(elution_vol, Elution_buffer, SA12.bottom(2), mix_after=(5,100),new_tip='always', blow_out=True)
 
+for target in samples:
+    m300.set_flow_rate(aspirate=180, dispense=180)
+    m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
+    max_speed_per_axis = {'x': (200), 'y': (200), 'z': (100), 'a': (100), 'b': (40), 'c': (40)}
+    robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+    m300.set_flow_rate(aspirate=10, dispense=10)
+    m300.transfer(elution_vol, Elution_buffer, target, air_gap=20, new_tip='never')
+    m300.set_flow_rate(aspirate=50, dispense=50)
+    m300.mix(5, 100, target)
+    m300.blow_out()
+    max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
+    robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+    m300.drop_tip()
+
+### Resets head speed for futher processing
+max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
+robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+
+### Incubate elutes for 15 minutes at room temperature
 m300.delay(minutes=15)
+
+### Transfer elutes to new plates.
 m300.transfer(35, SA1.bottom(2), elution_plate('A1'), new_tip='always', blow_out=True)
 m300.transfer(35, SA2.bottom(2), elution_plate('A2'), new_tip='always', blow_out=True)
 m300.transfer(35, SA3.bottom(2), elution_plate('A3'), new_tip='always', blow_out=True)
