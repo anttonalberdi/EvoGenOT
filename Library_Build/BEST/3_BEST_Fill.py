@@ -104,6 +104,9 @@ Fill_mastermix = Cold_plate.wells('A7')
 # Liquid_trash = Trash.wells('A1')
 
 ## Sample Setup
+sample_number = 96
+col_num = sample_number // 8 + (1 if sample_number % 8 > 0 else 0)
+samples = [col for col in mag_plate.cols()[:col_num]]
 
 SA1 = temp_plate.wells('A1')
 SA2 = temp_plate.wells('A2')
@@ -118,8 +121,16 @@ SA10 = temp_plate.wells('A10')
 SA11 = temp_plate.wells('A11')
 SA12 = temp_plate.wells('A12')
 
+## Volume setup
+#ER_vol = 5.85
+#Lig_vol = 8
+Fill_vol = 10
+#MM_dist_ER = ER_vol * col_num
+#MM_dist_Lig = Lig_vol * col_num
+MM_dist_Fill = Fill_vol * col_num
+
 """
-Blund end repair
+Fill in
 """
 robot.comment("Yay! \ Blund-end Repair begins.")
 
@@ -128,20 +139,26 @@ temp_deck.wait_for_temp()
 
 ### Addition of Fill in mastermix to enzymes
 
-m300.transfer(110, Fill_mastermix, Enzyme_Fill.bottom(2), mix_after=(5,30), blow_out=True)
+m300.transfer(MM_dist_Fill, Fill_mastermix, Enzyme_Fill.bottom(2), mix_after=(5,30), blow_out=True)
 
 ### Addition of Fill in mastermix to to libraries
-m10.transfer(10, Enzyme_Fill.bottom(1), SA1.bottom(2),mix_after=(3,8) , new_tip='always',  blow_out =True)
-m10.transfer(10, Enzyme_Fill.bottom(1), SA2.bottom(2),mix_after=(3,8) , new_tip='always',  blow_out =True)
-m10.transfer(10, Enzyme_Fill.bottom(1), SA3.bottom(2),mix_after=(3,8) , new_tip='always',  blow_out =True)
-m10.transfer(10, Enzyme_Fill.bottom(1), SA4.bottom(2),mix_after=(3,8) , new_tip='always',  blow_out =True)
-m10.transfer(10, Enzyme_Fill.bottom(1), SA5.bottom(2),mix_after=(3,8) , new_tip='always',  blow_out =True)
-m10.transfer(10, Enzyme_Fill.bottom(1), SA6.bottom(2),mix_after=(3,8) , new_tip='always',  blow_out =True)
-m10.transfer(10, Enzyme_Fill.bottom(1), SA7.bottom(2),mix_after=(3,8) , new_tip='always',  blow_out =True)
-m10.transfer(10, Enzyme_Fill.bottom(1), SA8.bottom(2),mix_after=(3,8) , new_tip='always',  blow_out =True)
-m10.transfer(10, Enzyme_Fill.bottom(1), SA9.bottom(2),mix_after=(3,8) , new_tip='always',  blow_out =True)
-m10.transfer(10, Enzyme_Fill.bottom(1), SA10.bottom(2),mix_after=(3,8) , new_tip='always',  blow_out =True)
-m10.transfer(10, Enzyme_Fill.bottom(1), SA11.bottom(2),mix_after=(3,8) , new_tip='always',  blow_out =True)
-m10.transfer(10, Enzyme_Fill.bottom(1), SA12.bottom(2),mix_after=(3,8) , new_tip='always',  blow_out =True)
+for target in samples:
+    m10.set_flow_rate(aspirate=180, dispense=180)
+    m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
+    m10.mix(3, 10, Enzyme_Fill.bottom(4))
+    max_speed_per_axis = {'x': (100), 'y': (100), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
+    robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+    m10.set_flow_rate(aspirate=20, dispense=20)
+    m10.transfer(Fill_vol, Enzyme_Fill, target.bottom(3), air_gap=2, new_tip='never')
+    m10.set_flow_rate(aspirate=20, dispense=20)
+    m10.mix(2, 10, target.bottom(6))
+    m10.delay(seconds=3)
+    m10.touch_tip(v_offset=-2)
+    m10.move_to(target.top(-4))
+    m10.blow_out()
+    max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
+    robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+    m10.drop_tip()
+
 
 robot.pause("Yay! \ Please incubate in PCR machine \ at 65°C for 15 minutes, followed by 15 minutes at 80°C. \ Press resume when finished.")
