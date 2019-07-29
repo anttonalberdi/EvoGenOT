@@ -102,7 +102,7 @@ if plate_name not in labware.list():
 
 #### LABWARE SETUP ####
 cold_block = modules.load('tempdeck', '7')
-Cold_plate = labware.load('96-flat', '7', share=True)
+Cold_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 # trough = labware.load('trough-12row', '2')
 # Trash = labware.load('One-Column-reservoir','3')
 temp_deck = modules.load('tempdeck', '10')
@@ -181,6 +181,7 @@ Blund end repair
 robot.comment("Yay! \ Blund-end Repair begins.")
 
 cold_block.set_temperature(10)
+cold_block.wait_for_temp()
 temp_deck.set_temperature(10)
 temp_deck.wait_for_temp()
 

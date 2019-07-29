@@ -58,7 +58,7 @@ if plate_name not in labware.list():
 
 #### LABWARE SETUP ####
 cold_block = modules.load('tempdeck', '7')
-Cold_plate = labware.load('96-flat', '7', share=True)
+Cold_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 # trough = labware.load('trough-12row', '2')
 # Trash = labware.load('One-Column-reservoir','3')
 temp_deck = modules.load('tempdeck', '10')
