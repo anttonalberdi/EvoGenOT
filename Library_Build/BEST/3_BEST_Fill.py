@@ -146,7 +146,7 @@ for target in samples:
     m10.set_flow_rate(aspirate=180, dispense=180)
     m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
     m10.mix(3, 10, Enzyme_Fill.bottom(4))
-    max_speed_per_axis = {'x': (100), 'y': (100), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
+    max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (20), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m10.set_flow_rate(aspirate=20, dispense=20)
     m10.transfer(Fill_vol, Enzyme_Fill, target.bottom(3), air_gap=2, new_tip='never')
