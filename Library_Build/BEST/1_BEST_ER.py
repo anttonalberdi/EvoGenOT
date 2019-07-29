@@ -150,7 +150,7 @@ ER_mastermix = cold_block.wells('A4')
 ## Sample Setup
 sample_number = 96
 col_num = sample_number // 8 + (1 if sample_number % 8 > 0 else 0)
-samples = [col for col in mag_plate.cols()[:col_num]]
+samples = [col for col in temp_plate.cols()[:col_num]]
 
 SA1 = temp_plate.wells('A1')
 SA2 = temp_plate.wells('A2')
