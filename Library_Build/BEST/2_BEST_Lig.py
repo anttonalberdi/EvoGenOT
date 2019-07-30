@@ -176,6 +176,7 @@ for target in samples:
 
 
 ### Addition of End repair mastermix to enzymes
+m300.start_at_tip(tipracks_200.well('A2'))
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, 50, Lig_mastermix)
@@ -212,8 +213,6 @@ for target in samples:
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m10.drop_tip()
 
-
-robot.pause("Yay! \ Please incubate in PCR machine \ at 20°C for 30 minutes, followed by 15 minutes at 65°C. \ Press resume when finished.")
-
 temp_deck_1.deactivate()
 temp_deck_2.deactivate()
+robot.comment("Yay! \ Please incubate in PCR machine \ at 20°C for 30 minutes, followed by 15 minutes at 65°C. \ Press resume when finished.")

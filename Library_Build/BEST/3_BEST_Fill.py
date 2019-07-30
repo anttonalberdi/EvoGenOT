@@ -25,6 +25,7 @@
 #
 ######## IMPORT LIBRARIES ########
 from opentrons import labware, instruments, modules, robot
+from opentrons.legacy_api.modules import tempdeck
 
 #### METADATA ####
 
@@ -57,11 +58,24 @@ if plate_name not in labware.list():
         volume=350000)
 
 #### LABWARE SETUP ####
-cold_block = modules.load('tempdeck', '7')
+temp_deck_1 = tempdeck.TempDeck()
+temp_deck_2 = tempdeck.TempDeck()
+
+temp_deck_1._port = '/dev/ttyACM0'
+temp_deck_2._port = '/dev/ttyACM1'
+
+
+if not robot.is_simulating():
+	temp_deck_1.connect()
+	temp_deck_2.connect()
+
+
+
+temp_deck1 = modules.load('tempdeck', '7')
 Cold_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 # trough = labware.load('trough-12row', '2')
 # Trash = labware.load('One-Column-reservoir','3')
-temp_deck = modules.load('tempdeck', '10')
+temp_deck2 = modules.load('tempdeck', '10')
 temp_plate = labware.load('biorad-hardshell-96-PCR', '10', share=True)
 #mag_deck = modules.load('magdeck', '7')
 #mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
@@ -139,11 +153,9 @@ temp_deck.set_temperature(10)
 temp_deck.wait_for_temp()
 
 ### Addition of Fill in mastermix to enzymes
-
-m300.transfer(MM_dist_Fill, Fill_mastermix, Enzyme_Fill.bottom(2), mix_after=(5,30), blow_out=True)
-
-m300.set_flow_rate(aspirate=180, dispense=180)
-m300.pick_up_tip(tipracks_200.wells('A2')) # Slow down head speed 0.5X for bead handling
+m300.start_at_tip(tipracks_200.well('A3'))
+m300.set_flow_rate(aspirate=50, dispense=50)
+m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, 50, Fill_mastermix)
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (20), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -161,7 +173,7 @@ m300.drop_tip()
 
 ### Addition of Fill in mastermix to to libraries
 for target in samples:
-    m10.set_flow_rate(aspirate=180, dispense=180)
+    m10.set_flow_rate(aspirate=50, dispense=50)
     m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
     m10.mix(3, 10, Enzyme_Fill.bottom(4))
     max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (20), 'b': (20), 'c': (20)}
@@ -178,5 +190,6 @@ for target in samples:
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m10.drop_tip()
 
-
-robot.pause("Yay! \ Please incubate in PCR machine \ at 65°C for 15 minutes, followed by 15 minutes at 80°C. \ Press resume when finished.")
+temp_deck_1.deactivate()
+temp_deck_2.deactivate()
+robot.comment("Yay! \ Please incubate in PCR machine \ at 65°C for 15 minutes, followed by 15 minutes at 80°C. \ Press resume when finished.")
