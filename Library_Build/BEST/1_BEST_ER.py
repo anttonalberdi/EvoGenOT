@@ -105,8 +105,8 @@ if plate_name not in labware.list():
 temp_deck_1 = tempdeck.TempDeck()
 temp_deck_2 = tempdeck.TempDeck()
 
-temp_deck_1._port = '/dev/ttyACM3'
-temp_deck_2._port = '/dev/ttyACM2'
+temp_deck_1._port = '/dev/ttyACM0'
+temp_deck_2._port = '/dev/ttyACM1'
 
 
 if not robot.is_simulating():
