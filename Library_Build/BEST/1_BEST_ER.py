@@ -204,13 +204,13 @@ temp_deck_2.wait_for_temp()
 
 m300.set_flow_rate(aspirate=180, dispense=180)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.mix(3, 10, ER_mastermix)
+m300.mix(3, 50, ER_mastermix)
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (20), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.set_flow_rate(aspirate=25, dispense=25)
 m300.transfer(MM_dist_ER, ER_mastermix, Enzyme_ER.bottom(2), air_gap=2, new_tip='never')
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.mix(5, 10, Enzyme_ER.bottom(2))
+m300.mix(5, 30, Enzyme_ER.bottom(2))
 m300.delay(seconds=5)
 m300.move_to(Enzyme_ER.top(-1))
 m300.blow_out()
@@ -227,11 +227,12 @@ for target in samples:
     max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (20), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m10.set_flow_rate(aspirate=25, dispense=25)
-    m10.transfer(ER_vol, Enzyme_ER, target.bottom(2), air_gap=2, new_tip='never')
+    m10.transfer(ER_vol, Enzyme_ER.bottom(1), target.bottom(2), air_gap=0, new_tip='never')
     m10.set_flow_rate(aspirate=50, dispense=50)
-    m10.mix(5, 10, target.bottom(2))
+    m10.mix(5, 10, target.bottom(6))
     m10.delay(seconds=5)
-    m10.move_to(target.top(-1))
+    m10.set_flow_rate(aspirate=100, dispense=100)
+    m10.move_to(target.top(-2))
     m10.blow_out()
     max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -239,3 +240,6 @@ for target in samples:
 
 
 robot.pause("Yay! \ Please incubate in PCR machine \ at 20°C for 30 minutes, followed by 30 minutes at 65°C. \ Press resume when finished.")
+
+temp_deck_1.deactivate()
+temp_deck_2.deactivate()
