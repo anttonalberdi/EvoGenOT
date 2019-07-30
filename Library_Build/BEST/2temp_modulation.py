@@ -6,7 +6,7 @@ from opentrons.legacy_api.modules import tempdeck
     ssh into robot and
     then run ls /dev/tty*
     you are looking for two values with the format /dev/ttyACM*
-    you will use those values in line 22 and 23.
+    you will use those values in line 22 and 24.
     If you need to know which tempdeck is hooked up to which port.
     You will unplug one, then run ls /dev/tty*. There should only be one /dev/ttyACM*.
     This will correlate to the tempdeck that is plugged in. Then you plug the other temp deck in and run ls /dev/tty* again.

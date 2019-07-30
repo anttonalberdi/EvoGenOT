@@ -69,6 +69,7 @@
 #
 ######## IMPORT LIBRARIES ########
 from opentrons import labware, instruments, modules, robot
+from opentrons.legacy_api.modules import tempdeck
 
 #### METADATA ####
 
@@ -101,11 +102,24 @@ if plate_name not in labware.list():
         volume=350000)
 
 #### LABWARE SETUP ####
-cold_block = modules.load('tempdeck', '7')
+temp_deck_1 = tempdeck.TempDeck()
+temp_deck_2 = tempdeck.TempDeck()
+
+temp_deck_1._port = '/dev/ttyACM3'
+temp_deck_2._port = '/dev/ttyACM2'
+
+
+if not robot.is_simulating():
+	temp_deck_1.connect()
+	temp_deck_2.connect()
+
+
+
+temp_deck1 = modules.load('tempdeck', '7')
 Cold_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 # trough = labware.load('trough-12row', '2')
 # Trash = labware.load('One-Column-reservoir','3')
-temp_deck = modules.load('tempdeck', '10')
+temp_deck2 = modules.load('tempdeck', '10')
 temp_plate = labware.load('biorad-hardshell-96-PCR', '10', share=True)
 #mag_deck = modules.load('magdeck', '7')
 #mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
@@ -180,10 +194,11 @@ Blund end repair
 """
 robot.comment("Yay! \ Blund-end Repair begins.")
 
-cold_block.set_temperature(10)
-cold_block.wait_for_temp()
-temp_deck.set_temperature(10)
-temp_deck.wait_for_temp()
+temp_deck_1.set_temperature(10)
+temp_deck_2.set_temperature(10)
+
+temp_deck_1.wait_for_temp()
+temp_deck_2.wait_for_temp()
 
 ### Addition of End repair mastermix to enzymes
 
