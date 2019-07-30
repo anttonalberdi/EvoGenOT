@@ -142,6 +142,23 @@ temp_deck.wait_for_temp()
 
 m300.transfer(MM_dist_Fill, Fill_mastermix, Enzyme_Fill.bottom(2), mix_after=(5,30), blow_out=True)
 
+m300.set_flow_rate(aspirate=180, dispense=180)
+m300.pick_up_tip(tipracks_200.wells('A2')) # Slow down head speed 0.5X for bead handling
+m300.mix(3, 50, Fill_mastermix)
+max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (20), 'b': (20), 'c': (20)}
+robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+m300.set_flow_rate(aspirate=25, dispense=25)
+m300.transfer(MM_dist_Fill, Fill_mastermix, Enzyme_Fill.bottom(2), air_gap=1, new_tip='never')
+m300.set_flow_rate(aspirate=50, dispense=50)
+m300.mix(5, 30, Enzyme_ER.bottom(2))
+m300.delay(seconds=5)
+m300.set_flow_rate(aspirate=180, dispense=180)
+m300.move_to(Enzyme_ER.top(-1))
+m300.blow_out()
+max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
+robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+m300.drop_tip()
+
 ### Addition of Fill in mastermix to to libraries
 for target in samples:
     m10.set_flow_rate(aspirate=180, dispense=180)
