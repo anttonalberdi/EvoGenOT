@@ -50,7 +50,7 @@ if plate_name not in labware.list():
         volume=350000)
 
 #### LABWARE SETUP ####
-trough = labware.load('trough-12row', '2')
+trough = labware.load('trough-12row', '8')
 Trash = labware.load('One-Column-reservoir','9')
 mag_deck = modules.load('magdeck', '7')
 mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
@@ -156,10 +156,10 @@ mag_deck.disengage()
 for target in samples:
     m300.set_flow_rate(aspirate=180, dispense=180)
     m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-    max_speed_per_axis = {'x': (200), 'y': (200), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
+    max_speed_per_axis = {'x': (300), 'y': (300), 'z': (75), 'a': (75), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m300.set_flow_rate(aspirate=40, dispense=40)
-    m300.transfer(EtOH_vol, EtOH1, target.bottom(6), air_gap=40, new_tip='never')
+    m300.transfer(EtOH_vol, EtOH1, target.bottom(6), air_gap=0, new_tip='never')
     m300.set_flow_rate(aspirate=50, dispense=50)
     m300.mix(3, 100, target.bottom(6))
     m300.delay(seconds=5)
@@ -199,10 +199,10 @@ mag_deck.disengage()
 for target in samples:
     m300.set_flow_rate(aspirate=180, dispense=180)
     m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-    max_speed_per_axis = {'x': (200), 'y': (200), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
+    max_speed_per_axis = {'x': (300), 'y': (300), 'z': (75), 'a': (75), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m300.set_flow_rate(aspirate=40, dispense=40)
-    m300.transfer(EtOH_vol2, EtOH2, target.bottom(6), air_gap=50, new_tip='never')
+    m300.transfer(EtOH_vol2, EtOH2, target.bottom(6), air_gap=0, new_tip='never')
     m300.set_flow_rate(aspirate=50, dispense=50)
     m300.mix(3, 100, target.bottom(6))
     m300.delay(seconds=5)
@@ -240,7 +240,7 @@ m300.delay(minutes=4)
 for target in samples:
     m300.set_flow_rate(aspirate=180, dispense=180)
     m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-    max_speed_per_axis = {'x': (200), 'y': (200), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
+    max_speed_per_axis = {'x': (300), 'y': (300), 'z': (75), 'a': (75), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m300.set_flow_rate(aspirate=40, dispense=40)
     m300.transfer(elution_vol, Elution_buffer, target.bottom(6), air_gap=0, new_tip='never')
