@@ -50,8 +50,8 @@ if plate_name not in labware.list():
         volume=350000)
 
 #### LABWARE SETUP ####
-trough = labware.load('trough-12row', '8')
-Trash = labware.load('One-Column-reservoir','9')
+trough = labware.load('trough-12row', '10')
+Trash = labware.load('One-Column-reservoir','8')
 mag_deck = modules.load('magdeck', '7')
 mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 elution_plate = labware.load('biorad-hardshell-96-PCR','1')
@@ -254,7 +254,7 @@ for target in samples:
     m300.drop_tip()
 
 ### Resets head speed for futher processing
-max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
+max_speed_per_axis = {'x': (600), 'y': (400), 'z': (50), 'a': (50), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 
 ### Incubate elutes for 15 minutes at room temperature
@@ -273,6 +273,6 @@ m300.transfer(35, SA9.bottom(1), elution_plate('A9'), new_tip='always', blow_out
 m300.transfer(35, SA10.bottom(1), elution_plate('A10'), new_tip='always', blow_out=True)
 m300.transfer(35, SA11.bottom(1), elution_plate('A11'), new_tip='always', blow_out=True)
 m300.transfer(35, SA12.bottom(1), elution_plate('A12'), new_tip='always', blow_out=True)
-
+mag_deck.disengage()
 
 robot.pause("Yay! \ Purification has finished \ Please store purified libraries as -20°C \ Press resume when finished.")
