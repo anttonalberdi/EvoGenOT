@@ -148,12 +148,13 @@ Fill in
 """
 robot.comment("Yay! \ Blund-end Repair begins.")
 
-cold_block.set_temperature(10)
-temp_deck.set_temperature(10)
-temp_deck.wait_for_temp()
+temp_deck_1.set_temperature(10)
+temp_deck_2.set_temperature(10)
+
+temp_deck_1.wait_for_temp()
+temp_deck_2.wait_for_temp()
 
 ### Addition of Fill in mastermix to enzymes
-m300.start_at_tip(tipracks_200.well('A3'))
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, 50, Fill_mastermix)
@@ -162,10 +163,10 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.set_flow_rate(aspirate=25, dispense=25)
 m300.transfer(MM_dist_Fill, Fill_mastermix, Enzyme_Fill.bottom(2), air_gap=1, new_tip='never')
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.mix(5, 30, Enzyme_ER.bottom(2))
+m300.mix(5, 30, Enzyme_Fill.bottom(2))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=180, dispense=180)
-m300.move_to(Enzyme_ER.top(-1))
+m300.move_to(Enzyme_Fill.top(-1))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
