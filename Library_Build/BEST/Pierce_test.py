@@ -105,7 +105,9 @@ for target in samples:
     max_speed_per_axis = {'x': (100), 'y': (100), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m300.set_flow_rate(aspirate=25, dispense=25)
-    m300.transfer(bead_vol, SPRI_beads, target.bottom(6), air_gap=0, new_tip='never')
+    m300.aspirate(bead_vol, SPRI_beads)
+    m300.move_to(target.bottom(1))
+    m300.dispense(bead_vol,target.bottom(6))
     m300.set_flow_rate(aspirate=50, dispense=50)
     m300.delay(seconds=5)
     m300.move_to(target.top(-4))
