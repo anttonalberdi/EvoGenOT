@@ -91,7 +91,7 @@ tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
 m10 = instruments.P10_Multi(
     mount='left',
     min_volume=1,
-    max_volume=20,
+    max_volume=10,
     tip_racks=tipracks_10)
 
 m300 = instruments.P300_Multi(
@@ -182,7 +182,7 @@ for target in samples:
     max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (20), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m10.set_flow_rate(aspirate=20, dispense=20)
-    m10.transfer(Fill_vol, Enzyme_Fill, target.bottom(3), air_gap=2, new_tip='never')
+    m10.transfer(Fill_vol, Enzyme_Fill, target.bottom(3), air_gap=0, new_tip='never')
     m10.set_flow_rate(aspirate=20, dispense=20)
     m10.mix(2, 10, target.bottom(6))
     m10.delay(seconds=2)
