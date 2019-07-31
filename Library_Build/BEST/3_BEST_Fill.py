@@ -90,6 +90,8 @@ tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
 #### PIPETTE SETUP ####
 m10 = instruments.P10_Multi(
     mount='left',
+    min_volume=1,
+    max_volume=20,
     tip_racks=tipracks_10)
 
 m300 = instruments.P300_Multi(
@@ -164,7 +166,7 @@ m300.set_flow_rate(aspirate=25, dispense=25)
 m300.transfer(MM_dist_Fill, Fill_mastermix, Enzyme_Fill.bottom(2), air_gap=1, new_tip='never')
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.mix(5, 30, Enzyme_Fill.bottom(2))
-m300.delay(seconds=5)
+m300.delay(seconds=3)
 m300.set_flow_rate(aspirate=180, dispense=180)
 m300.move_to(Enzyme_Fill.top(-1))
 m300.blow_out()
@@ -183,7 +185,7 @@ for target in samples:
     m10.transfer(Fill_vol, Enzyme_Fill, target.bottom(3), air_gap=2, new_tip='never')
     m10.set_flow_rate(aspirate=20, dispense=20)
     m10.mix(2, 10, target.bottom(6))
-    m10.delay(seconds=3)
+    m10.delay(seconds=2)
     m10.touch_tip(v_offset=-2)
     m10.move_to(target.top(-4))
     m10.blow_out()
