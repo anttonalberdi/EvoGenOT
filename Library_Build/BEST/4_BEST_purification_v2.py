@@ -121,7 +121,6 @@ for target in samples:
     m300.set_flow_rate(aspirate=50, dispense=50)
     m300.mix(5, 100, target.bottom(6))
     m300.delay(seconds=5)
-    m300.touch_tip(v_offset=-2)
     m300.move_to(target.top(-4))
     m300.blow_out()
     max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
@@ -164,8 +163,7 @@ for target in samples:
     m300.set_flow_rate(aspirate=50, dispense=50)
     m300.mix(3, 100, target.bottom(6))
     m300.delay(seconds=5)
-    m300.touch_tip(v_offset=-2)
-    m300.move_to(target.top(-1))
+    m300.move_to(target.top(-3))
     m300.blow_out()
     max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -208,8 +206,7 @@ for target in samples:
     m300.set_flow_rate(aspirate=50, dispense=50)
     m300.mix(3, 100, target.bottom(6))
     m300.delay(seconds=5)
-    m300.touch_tip(v_offset=-2)
-    m300.move_to(target.top(-1))
+    m300.move_to(target.top(-3))
     m300.blow_out()
     max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -250,8 +247,7 @@ for target in samples:
     m300.set_flow_rate(aspirate=50, dispense=50)
     m300.mix(3, 100, target.bottom(6))
     m300.delay(seconds=5)
-    m300.touch_tip(v_offset=-2)
-    m300.move_to(target.top(-1))
+    m300.move_to(target.top(-3))
     m300.blow_out()
     max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
