@@ -130,7 +130,7 @@ for target in samples:
 robot.comment("Incubating the beads and PCR products at room temperature \
 for 5 minutes. Protocol will resume automatically.")
 m300.delay(minutes=5)
-mag_deck.engage()
+mag_deck.engage(height=-3)
 m300.delay(minutes=2)
 
 ### Resets head speed for futher processing
@@ -173,7 +173,7 @@ for target in samples:
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 
-mag_deck.engage()
+mag_deck.engage(height=-3)
 m300.delay(minutes=2)
 
 m300.transfer(200, SA1.bottom(2), Liquid_trash.top(-5), new_tip='always', blow_out=True)
@@ -216,7 +216,7 @@ for target in samples:
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 
-mag_deck.engage()
+mag_deck.engage(height=-3)
 m300.delay(minutes=2)
 
 m300.transfer(200, SA1.bottom(1), Liquid_trash.top(-5), new_tip='always', blow_out=True)
