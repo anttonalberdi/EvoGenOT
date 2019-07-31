@@ -25,7 +25,7 @@
 #
 ######## IMPORT LIBRARIES ########
 from opentrons import labware, instruments, modules, robot
-
+from opentrons.legacy_api.modules import tempdeck
 #### METADATA ####
 
 metadata = {
@@ -57,20 +57,33 @@ if plate_name not in labware.list():
         volume=350000)
 
 #### LABWARE SETUP ####
-cold_block = modules.load('tempdeck', '7')
+temp_deck_1 = tempdeck.TempDeck()
+temp_deck_2 = tempdeck.TempDeck()
+
+temp_deck_1._port = '/dev/ttyACM0'
+temp_deck_2._port = '/dev/ttyACM1'
+
+
+if not robot.is_simulating():
+	temp_deck_1.connect()
+	temp_deck_2.connect()
+
+
+
+temp_deck1 = modules.load('tempdeck', '7')
 Cold_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 # trough = labware.load('trough-12row', '2')
 # Trash = labware.load('One-Column-reservoir','3')
-temp_deck = modules.load('tempdeck', '10')
+temp_deck2 = modules.load('tempdeck', '10')
 temp_plate = labware.load('biorad-hardshell-96-PCR', '10', share=True)
 #mag_deck = modules.load('magdeck', '7')
 #mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 
 tipracks_10 = [labware.load('tiprack-10ul', slot, share=True)
-               for slot in ['8','5', '4']]
+               for slot in ['8','6', '3']]
 
 tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
-                for slot in ['9', '11']]
+                for slot in ['9']]
 
 
 #### PIPETTE SETUP ####
@@ -134,24 +147,30 @@ Ligase
 """
 robot.comment("Yay! \ Ligase begins.")
 
-cold_block.set_temperature(10)
-temp_deck.set_temperature(10)
-temp_deck.wait_for_temp()
+temp_deck_1.set_temperature(10)
+temp_deck_2.set_temperature(10)
+
+temp_deck_1.wait_for_temp()
+temp_deck_2.wait_for_temp()
+
 
 ### Addition of Adapters
 
 for target in samples:
-    m10.set_flow_rate(aspirate=180, dispense=180)
+    m10.set_flow_rate(aspirate=50, dispense=50)
     m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, BGI_adapter)
+    m10.move_to(BGI_adapter.bottom())
+    m10.mix(3, 5, BGI_adapter.bottom(4))
     max_speed_per_axis = {'x': (400), 'y': (400), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m10.set_flow_rate(aspirate=25, dispense=25)
-    m10.transfer(2, BGI_adapter, target.bottom(3), air_gap=6, new_tip='never')
+    m10.aspirate(2,BGI_adapter.bottom(1))
+    m10.move_to(target.bottom())
+    m10.dispense(2, target.bottom(3))
     m10.set_flow_rate(aspirate=50, dispense=50)
-    m10.mix(5, 10, target.bottom(3))
+    m10.mix(3, 10, target.bottom(3))
     m10.delay(seconds=3)
-    m10.touch_tip(v_offset=-2)
+    m10.set_flow_rate(aspirate=180, dispense=180)
     m10.move_to(target.top(-4))
     m10.blow_out()
     max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
@@ -160,26 +179,46 @@ for target in samples:
 
 
 ### Addition of End repair mastermix to enzymes
-m300.transfer(MM_dist_Lig, Lig_mastermix, Enzyme_Lig.bottom(2), mix_after=(5,30), blow_out=True)
+m300.start_at_tip(tipracks_200.well('A2'))
+m300.set_flow_rate(aspirate=50, dispense=50)
+m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
+m300.move_to(Lig_mastermix.bottom())
+m300.mix(3, 50, Lig_mastermix.bottom(4))
+max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (20), 'b': (20), 'c': (20)}
+robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+m300.set_flow_rate(aspirate=25, dispense=25)
+m300.aspirate(MM_dist_Lig,Lig_mastermix.bottom(1))
+m300.move_to(Enzyme_Lig.bottom())
+m300.dispense(MM_dist_Lig, Enzyme_Lig.bottom(4))
+m300.set_flow_rate(aspirate=50, dispense=50)
+m300.mix(5, 30, Enzyme_Lig.bottom(4))
+m300.delay(seconds=5)
+m300.set_flow_rate(aspirate=180, dispense=180)
+m300.move_to(Enzyme_Lig.top(-4))
+m300.blow_out()
+max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
+robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+m300.drop_tip()
 
 ### Addition of End repair mastermix to libraries
 for target in samples:
-    m10.set_flow_rate(aspirate=180, dispense=180)
+    m10.set_flow_rate(aspirate=50, dispense=50)
     m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
     m10.mix(3, 10, Enzyme_Lig)
-    max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
+    max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (20), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-    m10.set_flow_rate(aspirate=20, dispense=20)
-    m10.transfer(Lig_vol, Enzyme_Lig, target.bottom(3), air_gap=2, new_tip='never')
-    m10.set_flow_rate(aspirate=20, dispense=20)
-    m10.mix(2, 10, target.bottom(6))
-    m10.delay(seconds=3)
-    m10.touch_tip(v_offset=-2)
+    m10.set_flow_rate(aspirate=25, dispense=25)
+    m10.transfer(Lig_vol, Enzyme_Lig.bottom(1), target.bottom(2), air_gap=0, new_tip='never')
+    m10.set_flow_rate(aspirate=40, dispense=40)
+    m10.mix(5, 10, target.bottom(6))
+    m10.delay(seconds=5)
+    m10.set_flow_rate(aspirate=100, dispense=100)
     m10.move_to(target.top(-4))
     m10.blow_out()
     max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m10.drop_tip()
 
-
-robot.pause("Yay! \ Please incubate in PCR machine \ at 20°C for 30 minutes, followed by 15 minutes at 65°C. \ Press resume when finished.")
+temp_deck_1.deactivate()
+temp_deck_2.deactivate()
+robot.comment("Yay! \ Please incubate in PCR machine \ at 20°C for 30 minutes, followed by 15 minutes at 65°C. \ Press resume when finished.")
