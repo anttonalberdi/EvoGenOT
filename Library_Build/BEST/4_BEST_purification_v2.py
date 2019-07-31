@@ -243,7 +243,7 @@ for target in samples:
     max_speed_per_axis = {'x': (300), 'y': (300), 'z': (75), 'a': (75), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m300.set_flow_rate(aspirate=40, dispense=40)
-    m300.transfer(elution_vol, Elution_buffer, target.bottom(6), air_gap=0, new_tip='never')
+    m300.transfer(elution_vol, Elution_buffer, target.bottom(2), air_gap=0, new_tip='never')
     m300.set_flow_rate(aspirate=50, dispense=50)
     m300.mix(3, 100, target.bottom(6))
     m300.delay(seconds=5)
