@@ -90,19 +90,23 @@ mag_deck.engage(height=14)
 m300.delay(seconds=10)
 mag_deck.engage(height=15)
 m300.delay(seconds=10)
+mag_deck.engage(height=16)
+m300.delay(seconds=10)
+mag_deck.engage(height=17)
+m300.delay(seconds=10)
+mag_deck.engage(height=18)
+m300.delay(seconds=10)
 mag_deck.disengage()
 
 
 for target in samples:
     m300.set_flow_rate(aspirate=180, dispense=180)
     m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-    m300.mix(3, 200, SPRI_beads)
     max_speed_per_axis = {'x': (100), 'y': (100), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m300.set_flow_rate(aspirate=25, dispense=25)
     m300.transfer(bead_vol, SPRI_beads, target.bottom(6), air_gap=0, new_tip='never')
     m300.set_flow_rate(aspirate=50, dispense=50)
-    m300.mix(5, 100, target.bottom(6))
     m300.delay(seconds=5)
     m300.move_to(target.top(-4))
     m300.blow_out()
