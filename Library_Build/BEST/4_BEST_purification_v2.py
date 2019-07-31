@@ -99,7 +99,7 @@ SA10 = mag_plate.wells('A10')
 SA11 = mag_plate.wells('A11')
 SA12 = mag_plate.wells('A12')
 
-sample_vol = 60
+sample_vol = 50
 bead_vol = 1.5*sample_vol
 EtOH_vol = 160
 EtOH_vol2 = 150
@@ -117,9 +117,11 @@ for target in samples:
     max_speed_per_axis = {'x': (100), 'y': (100), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m300.set_flow_rate(aspirate=25, dispense=25)
-    m300.transfer(bead_vol, SPRI_beads, target.bottom(6), air_gap=0, new_tip='never')
-    m300.set_flow_rate(aspirate=50, dispense=50)
-    m300.mix(5, 100, target.bottom(6))
+    m300.aspirate(bead_vol, SPRI_beads)
+    m300.move_to(target.bottom())
+    m300.dispense(bead_vol,target.bottom(4))
+    m300.set_flow_rate(aspirate=30, dispense=30)
+    m300.mix(5, 100, target.bottom(4))
     m300.delay(seconds=5)
     m300.move_to(target.top(-4))
     m300.blow_out()
