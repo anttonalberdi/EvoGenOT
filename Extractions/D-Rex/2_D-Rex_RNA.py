@@ -72,7 +72,8 @@ EtOH2 = trough.wells('A6')
 EtOH3 = trough.wells('A7')
 EtOH4 = trough.wells('A8')
 DNase = trough.wells('A9')
-BufferC = trough.wells('A10')
+BufferC_1 = trough.wells('A10')
+BufferC_2 = trough.wells('A11')
 Elution_buffer = trough.wells('A12')
 
 Liquid_trash = trash_box.wells('A1')
@@ -159,19 +160,41 @@ m300.transfer(250, RA12.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_o
 ## Dry beads before DNase treatment
 mag_deck.disengage()
 m300.delay(minutes=3)
-m300.transfer(30, DNase, [wells.top(-15) for wells in RNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
 
+sample_number = 96
+col_num = sample_number // 8 + (1 if sample_number % 8 > 0 else 0)
+samples = [col for col in RNA_plate.cols()[:col_num]]
+
+m300.pick_up_tip()
+for target in samples: # Slow down head speed 0.5X for bead handling
+    m300.mix(2, 30, DNase)
+    max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
+    robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+    m300.set_flow_rate(aspirate=50, dispense=50)
+    m300.aspirate(30, DNase.bottom(1))
+    m300.dispense(30, target.top(-10))
+    m300.delay(seconds=5)
+    m300.set_flow_rate(aspirate=100, dispense=100)
+    m300.move_to(target.top(-8))
+    m300.blow_out()
+    max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
+    robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+m300.drop_tip()
+
+#incubating samples with DNase
 m300.delay(minutes=10)
-
 ##Reset tipracks for more tips
 robot.pause("Please fill up tips before continuing process")
 m300.reset()
-## Buffer C rebind
-m300.transfer(200, BufferC, [wells.top(-15) for wells in RNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='always', mix_after=(3,200),  blow_out =True)
 
-m300.delay(minutes=10)
+## Buffer C rebind
+m300.transfer(195, BufferC_1, [wells.top(-15) for wells in RNA_plate.wells('A1','A2','A3','A4','A5','A6')] , new_tip='always', mix_after=(3,200),  blow_out =True)
+m300.transfer(195, BufferC_2, [wells.top(-15) for wells in RNA_plate.wells('A7','A8','A9','A10','A11','A12')] , new_tip='always', mix_after=(3,200),  blow_out =True)
+
+m300.delay(minutes=8)
 mag_deck.engage(height=16)
-m300.delay(minutes=2)
+m300.delay(minutes=1)
+
 m300.transfer(200, RA1.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(200, RA2.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(200, RA3.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
