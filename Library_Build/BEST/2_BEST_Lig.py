@@ -166,7 +166,7 @@ for target in samples:
 
 
 ### Addition of End repair mastermix to enzymes
-m300.start_at_tip(s)
+m300.start_at_tip()
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Lig_mastermix.bottom())
