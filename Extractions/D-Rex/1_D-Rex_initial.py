@@ -56,7 +56,7 @@ m300 = instruments.P300_Multi(
 
 #### REAGENT SETUP
 Binding_buffer1 = trough.wells('A1')
-Binding_buffer1 = trough.wells('A2')			# Buffer B			# Buffer B
+Binding_buffer2 = trough.wells('A2')			# Buffer B			# Buffer B
 EtOH_Bind1 = trough.wells('A3')
 EtOH_Bind2 = trough.wells('A4')
 
