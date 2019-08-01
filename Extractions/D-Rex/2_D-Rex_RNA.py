@@ -156,9 +156,6 @@ m300.transfer(250, RA10.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_o
 m300.transfer(250, RA11.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(250, RA12.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
 
-##Reset tipracks for more tips
-robot.pause("Please fill up tips before continuing process")
-m300.reset()
 ## Dry beads before DNase treatment
 mag_deck.disengage()
 m300.delay(minutes=3)
@@ -166,6 +163,9 @@ m300.transfer(30, DNase, [wells.top(-15) for wells in RNA_plate.wells('A1','A2',
 
 m300.delay(minutes=10)
 
+##Reset tipracks for more tips
+robot.pause("Please fill up tips before continuing process")
+m300.reset()
 ## Buffer C rebind
 m300.transfer(200, BufferC, [wells.top(-15) for wells in RNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='always', mix_after=(3,200),  blow_out =True)
 
