@@ -95,21 +95,24 @@ EtOH_buffer_vol = 350
 #### PROTOCOL ####
 ## add beads and sample binding buffer to DNA/sample plate
 mag_deck.disengage()
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.distribute(Binding_buffer_vol, Binding_buffer, [wells.top(-4) for wells in sample_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')], new_tip='once', mix_before=(3,200), blow_out =True)
 
 
 ## add beads and EtOH binding buffer to RNA plate
 mag_deck.disengage()
+m300.set_flow_rate(aspirate=100, dispense=200)
 m300.distribute(EtOH_buffer_vol, EtOH_Bind1, RNA_plate.cols('1','2','3','4','5','6'), new_tip='once', blow_out =True)
 m300.distribute(EtOH_buffer_vol, EtOH_Bind2, RNA_plate.cols('7','8','9','10','11','12'), new_tip='once', blow_out =True)
 
 ## Incubate beads
-m300.delay(minutes=6)
+m300.delay(minutes=5)
 
 
 ## Transfer supernatant
 mag_deck.engage(height=16)
 m300.delay(minutes=5)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.transfer(165, SA1.bottom(2), RA1.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(165, SA1.bottom(2), RA1.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
 
