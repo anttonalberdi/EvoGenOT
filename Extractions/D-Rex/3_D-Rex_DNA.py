@@ -70,9 +70,10 @@ m300 = instruments.P300_Multi(
 Liquid_trash = trash_box.wells('A1')
 
 
-BufferC = trough.wells('A9')
-EtOH1 = trough.wells('A10')
-EtOH2 = trough.wells('A11')
+BufferC_1 = trough.wells('A10')
+BufferC_2 = trough.wells('A11')
+EtOH1 = trough.wells('A5')
+EtOH2 = trough.wells('A6')
 Elution_buffer = trough.wells('A12')
 
 
@@ -81,7 +82,7 @@ Elution_buffer = trough.wells('A12')
 
 Sample_vol = 200
 Sample_buffer_vol = 2.5*Sample_vol
-BufferC_vol = 1.0*Sample_vol
+BufferC_vol = 0.9*Sample_vol
 Wash_1_vol = Sample_vol
 Wash_2_vol = 0.9*Sample_vol
 Elution_vol = 50
@@ -121,7 +122,9 @@ m300.transfer(200, DA12.bottom(1), Liquid_trash.top(-4), new_tip='always',  blow
 
 #### Wash beads with BufferC
 mag_deck.disengage()
-m300.transfer(BufferC_vol, BufferC, [wells.top(-5) for wells in DNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
+m300.transfer(BufferC_vol, BufferC_1, [wells.top(-5) for wells in DNA_plate.wells('A1','A2','A3','A4','A5','A6')] , new_tip='once',  blow_out =True)
+m300.transfer(BufferC_vol, BufferC_2, [wells.top(-5) for wells in DNA_plate.wells('A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
+
 mag_deck.engage(height=16)
 m300.delay(minutes=2)
 

@@ -121,19 +121,6 @@ sample_number = 96
 col_num = sample_number // 8 + (1 if sample_number % 8 > 0 else 0)
 samples = [col for col in temp_plate.cols()[:col_num]]
 
-SA1 = temp_plate.wells('A1')
-SA2 = temp_plate.wells('A2')
-SA3 = temp_plate.wells('A3')
-SA4 = temp_plate.wells('A4')
-SA5 = temp_plate.wells('A5')
-SA6 = temp_plate.wells('A6')
-SA7 = temp_plate.wells('A7')
-SA8 = temp_plate.wells('A8')
-SA9 = temp_plate.wells('A9')
-SA10 = temp_plate.wells('A10')
-SA11 = temp_plate.wells('A11')
-SA12 = temp_plate.wells('A12')
-
 ## Volume setup
 #ER_vol = 5.85
 Lig_vol = 8
@@ -179,7 +166,6 @@ for target in samples:
 
 
 ### Addition of End repair mastermix to enzymes
-m300.start_at_tip(tipracks_200.well('A2'))
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Lig_mastermix.bottom())
