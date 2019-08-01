@@ -159,7 +159,7 @@ m300.transfer(250, RA12.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_o
 
 ## Dry beads before DNase treatment
 mag_deck.disengage()
-m300.delay(minutes=3)
+m300.delay(minutes=1)
 
 sample_number = 96
 col_num = sample_number // 8 + (1 if sample_number % 8 > 0 else 0)
@@ -188,25 +188,26 @@ robot.pause("Please fill up tips before continuing process")
 m300.reset()
 
 ## Buffer C rebind
-m300.transfer(195, BufferC_1, [wells.top(-15) for wells in RNA_plate.wells('A1','A2','A3','A4','A5','A6')] , new_tip='always', mix_after=(3,200),  blow_out =True)
-m300.transfer(195, BufferC_2, [wells.top(-15) for wells in RNA_plate.wells('A7','A8','A9','A10','A11','A12')] , new_tip='always', mix_after=(3,200),  blow_out =True)
+m300.set_flow_rate(aspirate=150, dispense=200)
+m300.transfer(195, BufferC_1, [wells.bottom(2) for wells in RNA_plate.wells('A1','A2','A3','A4','A5','A6')] , new_tip='always', mix_after=(5,200),  blow_out =True)
+m300.transfer(195, BufferC_2, [wells.bottom(2) for wells in RNA_plate.wells('A7','A8','A9','A10','A11','A12')] , new_tip='always', mix_after=(5,200),  blow_out =True)
 
 m300.delay(minutes=8)
 mag_deck.engage(height=16)
 m300.delay(minutes=1)
 
-m300.transfer(200, RA1.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(200, RA2.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(200, RA3.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(200, RA4.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(200, RA5.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(200, RA6.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(200, RA7.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(200, RA8.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(200, RA9.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(200, RA10.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(200, RA11.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
-m300.transfer(200, RA12.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
+m300.transfer(200, RA1.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
+m300.transfer(200, RA2.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
+m300.transfer(200, RA3.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
+m300.transfer(200, RA4.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
+m300.transfer(200, RA5.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
+m300.transfer(200, RA6.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
+m300.transfer(200, RA7.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
+m300.transfer(200, RA8.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
+m300.transfer(200, RA9.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
+m300.transfer(200, RA10.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
+m300.transfer(200, RA11.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
+m300.transfer(200, RA12.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
 
 ## Ethanol Wash 3
 mag_deck.disengage()
@@ -258,7 +259,22 @@ m300.delay(minutes=5)
 
 ## Elution
 mag_deck.disengage()
-m300.transfer(Elution_vol, Elution_buffer, [wells.top(-15) for wells in RNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='always', mix_after=(3,30),  blow_out =True)
+for target in samples: # Slow down head speed 0.5X for bead handling
+    m300.pick_up_tip()
+    max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
+    robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+    m300.set_flow_rate(aspirate=50, dispense=50)
+    m300.aspirate(Elution_vol, Elution_buffer.bottom(1))
+    m300.dispense(Elution_vol, target.bottom(1))
+    m300.mix(5, 30, target.bottom(3))
+    m300.delay(seconds=5)
+    m300.set_flow_rate(aspirate=100, dispense=100)
+    m300.move_to(target.bottom(5))
+    m300.blow_out()
+    max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
+    robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+    m300.drop_tip()
+
 m300.delay(minutes=10)
 mag_deck.engage(height=16)
 m300.delay(minutes=2)
