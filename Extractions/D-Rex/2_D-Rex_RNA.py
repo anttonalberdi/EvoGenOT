@@ -104,7 +104,7 @@ Elution_vol = 50
 #### PROTOCOL ####
 
 ## Remove supernatant
-mag_deck.engage(height=16)
+mag_deck.engage(height=18)
 m300.delay(minutes=3)
 m300.transfer(700, RA1.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(700, RA2.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
@@ -122,7 +122,7 @@ m300.transfer(700, RA12.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_o
 ## Ethanol Wash 1
 mag_deck.disengage()
 m300.transfer(Wash_1_vol, EtOH1, [wells.top(-5) for wells in RNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
-mag_deck.engage(height=16)
+mag_deck.engage(height=18)
 m300.delay(minutes=2)
 
 m300.transfer(Wash_1_vol, RA1.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
@@ -142,7 +142,7 @@ m300.transfer(Wash_1_vol, RA12.bottom(2), Liquid_trash.top(-4), new_tip='once', 
 ## Ethanol Wash 2
 mag_deck.disengage()
 m300.transfer(Wash_2_vol, EtOH2, [wells.top(-5) for wells in RNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
-mag_deck.engage(height=16)
+mag_deck.engage(height=18)
 m300.delay(minutes=2)
 m300.transfer(250, RA1.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(250, RA2.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
@@ -193,7 +193,7 @@ m300.transfer(195, BufferC_1, [wells.bottom(2) for wells in RNA_plate.wells('A1'
 m300.transfer(195, BufferC_2, [wells.bottom(2) for wells in RNA_plate.wells('A7','A8','A9','A10','A11','A12')] , new_tip='always', mix_after=(5,200),  blow_out =True)
 
 m300.delay(minutes=8)
-mag_deck.engage(height=16)
+mag_deck.engage(height=18)
 m300.delay(minutes=1)
 
 m300.transfer(200, RA1.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
@@ -212,7 +212,7 @@ m300.transfer(200, RA12.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_o
 ## Ethanol Wash 3
 mag_deck.disengage()
 m300.transfer(Wash_2_vol, EtOH3, [wells.top(-5) for wells in RNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
-mag_deck.engage(height=16)
+mag_deck.engage(height=18)
 m300.delay(minutes=2)
 
 m300.transfer(200, RA1.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
@@ -231,7 +231,7 @@ m300.transfer(200, RA12.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_o
 ## Ethanol Wash 4
 mag_deck.disengage()
 m300.transfer(Wash_2_vol, EtOH4, [wells.top(-5) for wells in RNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
-mag_deck.engage(height=16)
+mag_deck.engage(height=18)
 
 ##Reset tipracks for more tips
 robot.pause("Please fill up tips before continuing process")
@@ -276,7 +276,7 @@ for target in samples: # Slow down head speed 0.5X for bead handling
     m300.drop_tip()
 
 m300.delay(minutes=10)
-mag_deck.engage(height=16)
+mag_deck.engage(height=18)
 m300.delay(minutes=2)
 
 m300.transfer(Elution_vol, RA1.bottom(1), elution_plate_RNA.wells('A1'), new_tip='once',  blow_out =True)
