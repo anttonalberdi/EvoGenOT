@@ -70,9 +70,9 @@ m300 = instruments.P300_Multi(
 Liquid_trash = trash_box.wells('A1')
 
 
-BufferC = trough.wells('A9')
-EtOH1 = trough.wells('A10')
-EtOH2 = trough.wells('A11')
+BufferC = trough.wells('A10')
+EtOH1 = trough.wells('A5')
+EtOH2 = trough.wells('A6')
 Elution_buffer = trough.wells('A12')
 
 

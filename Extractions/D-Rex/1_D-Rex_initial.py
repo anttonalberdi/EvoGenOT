@@ -55,9 +55,10 @@ m300 = instruments.P300_Multi(
     tip_racks=tipracks_200)
 
 #### REAGENT SETUP
-Binding_buffer = trough.wells('A1')			# Buffer B
-EtOH_Bind1 = trough.wells('A2')
-EtOH_Bind2 = trough.wells('A3')
+Binding_buffer1 = trough.wells('A1')
+Binding_buffer1 = trough.wells('A2')			# Buffer B			# Buffer B
+EtOH_Bind1 = trough.wells('A3')
+EtOH_Bind2 = trough.wells('A4')
 
 #### Plate SETUP
 SA1 = sample_plate.wells('A1')
@@ -96,7 +97,8 @@ EtOH_buffer_vol = 350
 ## add beads and sample binding buffer to DNA/sample plate
 mag_deck.disengage()
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.distribute(Binding_buffer_vol, Binding_buffer, [wells.top(-4) for wells in sample_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')], new_tip='once', mix_before=(3,200), blow_out =True)
+m300.distribute(Binding_buffer_vol, Binding_buffer1, [wells.top(-4) for wells in sample_plate.wells('A1','A2','A3','A4','A5','A6')], new_tip='always', mix_before=(3,200), blow_out =True)
+m300.distribute(Binding_buffer_vol, Binding_buffer2, [wells.top(-4) for wells in sample_plate.wells('A8','A9','A10','A11','A12')], new_tip='always', mix_before=(3,200), blow_out =True)
 
 
 ## add beads and EtOH binding buffer to RNA plate

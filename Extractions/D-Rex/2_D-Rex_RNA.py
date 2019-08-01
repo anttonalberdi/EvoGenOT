@@ -67,12 +67,12 @@ m300 = instruments.P300_Multi(
 
 #### REAGENT SETUP
 
-EtOH1 = trough.wells('A4')
-EtOH2 = trough.wells('A5')
-EtOH3 = trough.wells('A6')
-EtOH4 = trough.wells('A7')
-DNase = trough.wells('A8')
-BufferC = trough.wells('A9')
+EtOH1 = trough.wells('A5')
+EtOH2 = trough.wells('A6')
+EtOH3 = trough.wells('A7')
+EtOH4 = trough.wells('A8')
+DNase = trough.wells('A9')
+BufferC = trough.wells('A10')
 Elution_buffer = trough.wells('A12')
 
 Liquid_trash = trash_box.wells('A1')
