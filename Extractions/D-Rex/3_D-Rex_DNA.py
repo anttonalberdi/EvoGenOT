@@ -187,7 +187,7 @@ m300.transfer(250, DA12.bottom(), Liquid_trash.top(-4), new_tip='once',  blow_ou
 m300.delay(minutes=4)
 mag_deck.disengage()
 
-m300.transfer(Elution_vol, Elution_buffer, [wells.top(-5) for wells in DNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',mix_after=(5,40),  blow_out =True)
+m300.transfer(Elution_vol, Elution_buffer, [wells.top(-5) for wells in DNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='always',mix_after=(5,40),  blow_out =True)
 m300.delay(minutes=5)
 
 mag_deck.engage(height=16)
