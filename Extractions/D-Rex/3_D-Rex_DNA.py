@@ -52,7 +52,7 @@ mag_deck = modules.load('magdeck', '7')
 DNA_plate = labware.load('1ml_PCR', '7', share=True)
 
 tipracks_200 = [labware.load('tiprack-200ul', slot)
-               for slot in ['3','4','5','6','9']]
+               for slot in ['2','3','4','5','6']]
 
 
 
