@@ -191,7 +191,7 @@ m300.transfer(Elution_vol, Elution_buffer, [wells.top(-5) for wells in DNA_plate
 m300.delay(minutes=5)
 
 mag_deck.engage(height=16)
-m300.delay(minutes=2)
+m300.delay(minutes=5)
 m300.transfer(Elution_vol, DA1.bottom(2), elution_plate_DNA.wells('A1'), new_tip='always',  blow_out =True)
 m300.transfer(Elution_vol, DA2.bottom(2), elution_plate_DNA.wells('A2'), new_tip='always',  blow_out =True)
 m300.transfer(Elution_vol, DA3.bottom(2), elution_plate_DNA.wells('A3'), new_tip='always',  blow_out =True)
