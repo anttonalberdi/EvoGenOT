@@ -35,7 +35,7 @@ if plate_name not in labware.list():
         volume=1000)
 
 #### LABWARE SETUP ####
-trough = labware.load('trough-12row', '2')
+trough = labware.load('trough-12row', '9')
 RNA_plate = labware.load('1ml_PCR', '1')
 mag_deck = modules.load('magdeck', '7')
 sample_plate = labware.load('1ml_PCR', '7', share=True)
@@ -102,12 +102,12 @@ mag_deck.disengage()
 ### Transfer buffer B and beads to SA1
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.move_to(Binding_buffer1.top(-10))
-m300.mix(3, Binding_buffer_vol, Binding_buffer1.top(-8))
+m300.move_to(Binding_buffer1.top(-16))
+m300.mix(3, Binding_buffer_vol, Binding_buffer1.top(-12))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (50), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.set_flow_rate(aspirate=25, dispense=25)
-m300.aspirate(Binding_buffer_vol, Binding_buffer1.top(-8))
+m300.aspirate(Binding_buffer_vol, Binding_buffer1.top(-12))
 m300.move_to(SA1.bottom(1))
 m300.dispense(Binding_buffer_vol, SA1.bottom(4))
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -123,13 +123,13 @@ m300.drop_tip()
 ### Transfer buffer B and beads to SA2
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.move_to(Binding_buffer1.top(-14))
-m300.mix(3, Binding_buffer_vol, Binding_buffer1.top(-10))
+m300.move_to(Binding_buffer1.top(-20))
+m300.mix(3, Binding_buffer_vol, Binding_buffer1.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (50), 'b': (40), 'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.set_flow_rate(aspirate=25, dispense=25)
 m300.move_to(Binding_buffer1.top(-8))
-m300.aspirate(Binding_buffer_vol, Binding_buffer1.top(-10))
+m300.aspirate(Binding_buffer_vol, Binding_buffer1.top(-16))
 m300.move_to(SA2.bottom(1))
 m300.dispense(Binding_buffer_vol, SA2.bottom(4))
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -228,13 +228,13 @@ m300.drop_tip()
 
 ### Transfer buffer B and beads to SA7
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.move_to(Binding_buffer2.top(-10))
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.mix(3, Binding_buffer_vol, Binding_buffer2.top(-8))
+m300.move_to(Binding_buffer2.top(-15))
+m300.mix(3, Binding_buffer_vol, Binding_buffer2.top(-12))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (50), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.set_flow_rate(aspirate=25, dispense=25)
-m300.aspirate(Binding_buffer_vol, Binding_buffer2.top(-8))
+m300.aspirate(Binding_buffer_vol, Binding_buffer2.top(-12))
 m300.move_to(SA7.bottom())
 m300.dispense(Binding_buffer_vol, SA7.bottom(4))
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -250,12 +250,12 @@ m300.drop_tip()
 ### Transfer buffer B and beads to SA8
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.move_to(Binding_buffer2.top(-14))
-m300.mix(3, Binding_buffer_vol, Binding_buffer2.top(-10))
+m300.move_to(Binding_buffer2.top(-20))
+m300.mix(3, Binding_buffer_vol, Binding_buffer2.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (50), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.set_flow_rate(aspirate=25, dispense=25)
-m300.aspirate(Binding_buffer_vol, Binding_buffer2.top(-10))
+m300.aspirate(Binding_buffer_vol, Binding_buffer2.top(-16))
 m300.move_to(SA8.bottom(1))
 m300.dispense(Binding_buffer_vol, SA8.bottom(4))
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -368,38 +368,26 @@ m300.delay(minutes=5)
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.transfer(165, SA1.bottom(2), RA1.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(165, SA1.bottom(2), RA1.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
-
 m300.transfer(165, SA2.bottom(2), RA2.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(165, SA2.bottom(2), RA2.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
-
 m300.transfer(165, SA3.bottom(2), RA3.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(165, SA3.bottom(2), RA3.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
-
 m300.transfer(165, SA4.bottom(2), RA4.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(165, SA4.bottom(2), RA4.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
-
 m300.transfer(165, SA5.bottom(2), RA5.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(165, SA5.bottom(2), RA5.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
-
 m300.transfer(165, SA6.bottom(2), RA6.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(165, SA6.bottom(2), RA6.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
-
 m300.transfer(165, SA7.bottom(2), RA7.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(165, SA7.bottom(2), RA7.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
-
 m300.transfer(165, SA8.bottom(2), RA8.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(165, SA8.bottom(2), RA8.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
-
 m300.transfer(165, SA9.bottom(2), RA9.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(165, SA9.bottom(2), RA9.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
-
 m300.transfer(165, SA10.bottom(2), RA10.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(165, SA10.bottom(2), RA10.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
-
 m300.transfer(165, SA11.bottom(2), RA11.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(165, SA11.bottom(2), RA11.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
-
 m300.transfer(165, SA12.bottom(2), RA12.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(165, SA12.bottom(2), RA12.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
-
 mag_deck.disengage()
