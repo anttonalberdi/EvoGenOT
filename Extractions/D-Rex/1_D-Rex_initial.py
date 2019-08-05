@@ -357,6 +357,7 @@ mag_deck.disengage()
 
 #Pick up tip
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
+
 # Adding beads + ethanol to RA1
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.move_to(EtOH_Bind1.top(-16))
@@ -541,7 +542,7 @@ m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 
-# Adding beads + ethanol to RA9
+# Adding beads + ethanol to RA11
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.mix(3, 200, EtOH_Bind2.bottom())
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (50), 'b': (20), 'c': (20)}
@@ -580,11 +581,8 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 #Dropping tip after aliquoting beads and Ethanol
 m300.drop_tip()
 
-
-
 ## Incubate beads
 m300.delay(minutes=5)
-
 
 ## Transfer supernatant
 mag_deck.engage(height=16)
@@ -592,17 +590,17 @@ m300.delay(minutes=5)
 
 #Transfer supernatant to RA1
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA1.bottom(2))
 m300.dispense(165, RA1.bottom(4))
 m300.move_to(RA1.top(-4))
 m300.blow_out()
 m300.aspirate(165, SA1.bottom(2))
 m300.dispense(165, RA1.bottom(4))
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=105, dispense=105)
 m300.mix(3, 200, RA1.bottom(2))
 m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
+m300.set_flow_rate(aspirate=150, dispense=150)
 m300.move_to(RA1.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
@@ -611,17 +609,17 @@ m300.drop_tip()
 
 #Transfer supernatant to RA2
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA2.bottom(2))
 m300.dispense(165, RA2.bottom(4))
 m300.move_to(RA2.top(-4))
 m300.blow_out()
 m300.aspirate(165, SA2.bottom(2))
 m300.dispense(165, RA2.bottom(4))
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=105, dispense=105)
 m300.mix(3, 200, RA2.bottom(2))
 m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
+m300.set_flow_rate(aspirate=150, dispense=150)
 m300.move_to(RA2.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
@@ -630,17 +628,17 @@ m300.drop_tip()
 
 #Transfer supernatant to RA3
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA3.bottom(2))
 m300.dispense(165, RA3.bottom(4))
 m300.move_to(RA3.top(-4))
 m300.blow_out()
 m300.aspirate(165, SA3.bottom(2))
 m300.dispense(165, RA3.bottom(4))
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=105, dispense=105)
 m300.mix(3, 200, RA3.bottom(2))
 m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
+m300.set_flow_rate(aspirate=150, dispense=150)
 m300.move_to(RA3.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
@@ -649,17 +647,17 @@ m300.drop_tip()
 
 #Transfer supernatant to RA4
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA4.bottom(2))
 m300.dispense(165, RA4.bottom(4))
 m300.move_to(RA4.top(-4))
 m300.blow_out()
 m300.aspirate(165, SA4.bottom(2))
 m300.dispense(165, RA4.bottom(4))
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=105, dispense=105)
 m300.mix(3, 200, RA4.bottom(2))
 m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
+m300.set_flow_rate(aspirate=150, dispense=150)
 m300.move_to(RA4.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
@@ -668,17 +666,17 @@ m300.drop_tip()
 
 #Transfer supernatant to RA5
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA5.bottom(2))
 m300.dispense(165, RA5.bottom(4))
 m300.move_to(RA5.top(-4))
 m300.blow_out()
 m300.aspirate(165, SA5.bottom(2))
 m300.dispense(165, RA5.bottom(4))
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=105, dispense=105)
 m300.mix(3, 200, RA5.bottom(2))
 m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
+m300.set_flow_rate(aspirate=150, dispense=150)
 m300.move_to(RA5.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
@@ -687,17 +685,17 @@ m300.drop_tip()
 
 #Transfer supernatant to RA6
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA6.bottom(2))
 m300.dispense(165, RA6.bottom(4))
 m300.move_to(RA6.top(-4))
 m300.blow_out()
 m300.aspirate(165, SA6.bottom(2))
 m300.dispense(165, RA6.bottom(4))
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=105, dispense=105)
 m300.mix(3, 200, RA6.bottom(2))
 m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
+m300.set_flow_rate(aspirate=150, dispense=150)
 m300.move_to(RA6.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
@@ -706,17 +704,17 @@ m300.drop_tip()
 
 #Transfer supernatant to RA7
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA7.bottom(2))
 m300.dispense(165, RA7.bottom(4))
 m300.move_to(RA7.top(-4))
 m300.blow_out()
 m300.aspirate(165, SA7.bottom(2))
 m300.dispense(165, RA7.bottom(4))
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=105, dispense=105)
 m300.mix(3, 200, RA7.bottom(2))
 m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
+m300.set_flow_rate(aspirate=150, dispense=150)
 m300.move_to(RA7.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
@@ -725,17 +723,17 @@ m300.drop_tip()
 
 #Transfer supernatant to RA8
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA8.bottom(2))
 m300.dispense(165, RA8.bottom(4))
 m300.move_to(RA8.top(-4))
 m300.blow_out()
 m300.aspirate(165, SA8.bottom(2))
 m300.dispense(165, RA8.bottom(4))
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=105, dispense=105)
 m300.mix(3, 200, RA8.bottom(2))
 m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
+m300.set_flow_rate(aspirate=150, dispense=150)
 m300.move_to(RA8.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
@@ -744,17 +742,17 @@ m300.drop_tip()
 
 #Transfer supernatant to RA9
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA9.bottom(2))
 m300.dispense(165, RA9.bottom(4))
 m300.move_to(RA9.top(-4))
 m300.blow_out()
 m300.aspirate(165, SA9.bottom(2))
 m300.dispense(165, RA9.bottom(4))
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=105, dispense=105)
 m300.mix(3, 200, RA9.bottom(2))
 m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
+m300.set_flow_rate(aspirate=150, dispense=150)
 m300.move_to(RA9.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
@@ -763,17 +761,17 @@ m300.drop_tip()
 
 #Transfer supernatant to RA10
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA10.bottom(2))
 m300.dispense(165, RA10.bottom(4))
 m300.move_to(RA10.top(-4))
 m300.blow_out()
 m300.aspirate(165, SA10.bottom(2))
 m300.dispense(165, RA10.bottom(4))
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=105, dispense=105)
 m300.mix(3, 200, RA10.bottom(2))
 m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
+m300.set_flow_rate(aspirate=150, dispense=150)
 m300.move_to(RA10.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
@@ -782,17 +780,17 @@ m300.drop_tip()
 
 #Transfer supernatant to RA11
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA11.bottom(2))
 m300.dispense(165, RA11.bottom(4))
 m300.move_to(RA11.top(-4))
 m300.blow_out()
 m300.aspirate(165, SA11.bottom(2))
 m300.dispense(165, RA11.bottom(4))
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=105, dispense=105)
 m300.mix(3, 200, RA11.bottom(2))
 m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
+m300.set_flow_rate(aspirate=150, dispense=150)
 m300.move_to(RA11.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
@@ -801,17 +799,17 @@ m300.drop_tip()
 
 #Transfer supernatant to RA12
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA12.bottom(2))
 m300.dispense(165, RA12.bottom(4))
 m300.move_to(RA12.top(-4))
 m300.blow_out()
 m300.aspirate(165, SA12.bottom(2))
 m300.dispense(165, RA12.bottom(4))
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=105, dispense=105)
 m300.mix(3, 200, RA12.bottom(2))
 m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
+m300.set_flow_rate(aspirate=150, dispense=150)
 m300.move_to(RA12.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
