@@ -11,7 +11,7 @@
 #-----------------------------------------------------------------#
 
 find *.fq.gz > list
-sed 's/.fq.gz//g' list > list2 
+sed 's/.fq.gz//g' list > list2
 uniq list2 > sample_list
 rm -f list*
 sample_list=$(cat sample_list)
@@ -49,9 +49,9 @@ cd $PBS_O_WORKDIR
 NPROCS=`wc -l < $PBS_NODEFILE`
 echo This job has allocated $NPROCS nodes
 
-# Load all required modules for the job 
+# Load all required modules for the job
 module load java/1.8.0  fastqc/0.11.8
-fastqc -o . ../*.fq.gz 
+fastqc -o . ../*.fq.gz
 
 unzip '*fastqc.zip'
 head -n10 *_fastqc/fastqc_data.txt > 1-raw_read_count.txt
@@ -90,14 +90,14 @@ cd $PBS_O_WORKDIR
 NPROCS=`wc -l < $PBS_NODEFILE`
 echo This job has allocated $NPROCS nodes
 
-# Load all required modules for the job  
-module load adapterremoval/2.2.4 
+# Load all required modules for the job
+module load adapterremoval/2.2.4
 FASTA_DIR='/home/projects/ku-cbd/people/jacras/1-HappyFish/0-data'
 WORK_DIR='/home/projects/ku-cbd/people/jacras/1-HappyFish/0-data/1-trimmed'
 
 cd $FASTA_DIR/
 find *.fq.gz > temp
-sed 's/_read_[1-2].fq.gz//g' temp > temp2 
+sed 's/_read_[1-2].fq.gz//g' temp > temp2
 uniq temp2 > sample_list.txt
 rm -f temp*
 sample_list=$(cat sample_list.txt)
@@ -140,21 +140,21 @@ cd $PBS_O_WORKDIR
 NPROCS=`wc -l < $PBS_NODEFILE`
 echo This job has allocated $NPROCS nodes
 
-# Load all required modules for the job  
+# Load all required modules for the job
 module load anaconda3/4.4.0 pigz/2.3.4
 FASTA_DIR='/home/projects/ku-cbd/people/jacras/1-HappyFish/0-data'
 WORK_DIR='/home/projects/ku-cbd/people/jacras/1-HappyFish/0-data/1-trimmed'
 
 cd $FASTA_DIR/
 find *.fq.gz > temp
-sed 's/.fq.gz//g' temp > temp2 
+sed 's/.fq.gz//g' temp > temp2
 uniq temp2 > sample_list.txt
 rm -f temp*
 sample_list=$(cat sample_list.txt)
 cd $WORK_DIR
 
 for a in $sample_list
-do 
+do
 	/services/tools/anaconda3-2.2.0/bin/cutadapt --quality-base=33 --cores=0 -q 30 -m 50 -b AAGTCGGAGGCCAAGCGGTCTTAGGAAGACAA -b GAACGACATGGCTACGATCCGACTT -o $WORK_DIR/"$a"_filtered.fq.gz  $FASTA_DIR/"$a".fq.gz  > $WORK_DIR/"$a".fq.gz.cutadapt.log
 done
 
@@ -190,7 +190,7 @@ cd $PBS_O_WORKDIR
 NPROCS=`wc -l < $PBS_NODEFILE`
 echo This job has allocated $NPROCS nodes
 
-# Load all required modules for the job 
+# Load all required modules for the job
 module load java/1.8.0  fastqc/0.11.8
 fastqc ../1-trimmed/37_filtered_* -t 20
 
@@ -236,7 +236,7 @@ cd $PBS_O_WORKDIR
 NPROCS=`wc -l < $PBS_NODEFILE`
 echo This job has allocated $NPROCS nodes
 
-# Load all required modules for the job  
+# Load all required modules for the job
 module load bowtie2/2.3.4.1
 declare -a sample_list=("")
 for sample in "${sample_list[@]}"
@@ -290,7 +290,7 @@ cd $PBS_O_WORKDIR
 NPROCS=`wc -l < $PBS_NODEFILE`
 echo This job has allocated $NPROCS nodes
 
-# Load all required modules for the job  
+# Load all required modules for the job
 module load SPAdes/3.13.0 anaconda3/4.4.0
 
 for sample in "${sample_list[@]}"
@@ -329,7 +329,7 @@ cd $PBS_O_WORKDIR
 NPROCS=`wc -l < $PBS_NODEFILE`
 echo This job has allocated $NPROCS nodes
 
-# Load all required modules for the job  
+# Load all required modules for the job
 module load megahit/1.1.1
 
 for sample in "${sample_list[@]}"
@@ -392,13 +392,13 @@ WORK_DIR='/home/projects/ku-cbd/people/jacras/1-HappyFish/2-MegaHit/'
 
 cd $FASTA_DIR/
 find *.fastq.gz > temp
-sed 's/_r[1-2].fastq.gz//g' temp > temp2 
+sed 's/_r[1-2].fastq.gz//g' temp > temp2
 uniq temp2 > sample_list.txt
 rm -f temp*
 sample_list=$(cat sample_list.txt)
 cd $WORK_DIR
 for a in $sample_list
-do 
+do
 megahit -1 $FASTA_DIR/"$a"_r1.fastq.gz -2 $FASTA_DIR/"$a"_r2.fastq.gz --min-contig-len 1000 -t 24 --presets meta-sensitive -o $ASSEM_DIR
 done
 
@@ -443,7 +443,7 @@ cd $PBS_O_WORKDIR
 NPROCS=`wc -l < $PBS_NODEFILE`
 echo This job has allocated $NPROCS nodes
 
-# Load all required modules for the job  
+# Load all required modules for the job
 module load bwa/0.7.15
 ASSEM_DIR='/home/projects/ku-cbd/people/jacras/1-HappyFish/2-MegaHit/test_pe12_gz'
 FASTA_DIR='/home/projects/ku-cbd/people/jacras/1-HappyFish/0-data/2-Host_Removal/1-Output'
@@ -496,7 +496,7 @@ cd $PBS_O_WORKDIR
 NPROCS=`wc -l < $PBS_NODEFILE`
 echo This job has allocated $NPROCS nodes
 
-# Load all required modules for the job  
+# Load all required modules for the job
 module load bwa/0.7.15 samtools/1.9
 ASSEM_DIR='/home/projects/ku-cbd/people/jacras/1-HappyFish/2-MegaHit/test_pe12_gz'
 FASTA_DIR='/home/projects/ku-cbd/people/jacras/1-HappyFish/0-data/2-Host_Removal/1-Output'
@@ -545,7 +545,6 @@ cd $PBS_O_WORKDIR
 NPROCS=`wc -l < $PBS_NODEFILE`
 echo This job has allocated $NPROCS nodes
 
-# Load all required modules for the job  
-module load prodigal/2.6.3 
+# Load all required modules for the job
+module load prodigal/2.6.3
 prodigal -p meta -a prodigal/final.contigs.genes.faa -d prodigal/final.contigs.genes.fna -f gff -o prodigal/final.contigs.genes.gff -i final.contigs.fa
-
