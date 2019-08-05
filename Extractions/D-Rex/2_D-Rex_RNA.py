@@ -292,4 +292,3 @@ m300.transfer(Elution_vol, RA10.bottom(1), elution_plate_RNA.wells('A10'), new_t
 m300.transfer(Elution_vol, RA11.bottom(1), elution_plate_RNA.wells('A11'), new_tip='once',  blow_out =True)
 m300.transfer(Elution_vol, RA12.bottom(1), elution_plate_RNA.wells('A12'), new_tip='once',  blow_out =True)
 mag_deck.disengage()
-robot.comment("Job's done")
