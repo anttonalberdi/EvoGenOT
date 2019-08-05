@@ -401,7 +401,4 @@ m300.transfer(165, SA11.bottom(2), RA11.bottom(2), mix_after=(5,200), new_tip='o
 m300.transfer(165, SA12.bottom(2), RA12.top(-4), new_tip='once',  blow_out =True)
 m300.transfer(165, SA12.bottom(2), RA12.bottom(2), mix_after=(5,200), new_tip='once',  blow_out =True)
 
-
-
 mag_deck.disengage()
-robot.pause("Transfer DNA plate to fridge with cover-foil")
