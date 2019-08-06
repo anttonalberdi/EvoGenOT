@@ -3,7 +3,7 @@
 #
 # Things do before procedure
 #
-#	1. Bead beat samples at maximum speed for 5 minutes (If needed do Proteinase K for digestion of tissue)
+#	1. Bead beat samples at maximum speed for 5 minutes
 # 	2. Spin down samples 10.000 rpm for 1 minute
 #	3. Transfer 200µl lysed sample to a deep well plate
 
@@ -16,11 +16,11 @@ from opentrons import labware, instruments, modules, robot
 #### METADATA ####
 
 metadata = {
-    'protocolName': 'D-Rex RNA Extraction',
+    'protocolName': 'Extraction_DNA_RNA',
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
     'version': '1.0',
     'date': '2019/03/28',
-    'description': 'Automation of D-Rex RNA protocol for stool samples in SHIELD',
+    'description': 'Automation of D-Rex DNA protocol for stool samples in SHIELD',
 }
 
 ### Custom LABWARE load
@@ -45,14 +45,14 @@ if plate_name not in labware.list():
         volume=350000)
 
 #### LABWARE SETUP ####
-elution_plate_RNA = labware.load('biorad-hardshell-96-PCR', '1')
+elution_plate_DNA = labware.load('biorad-hardshell-96-PCR', '1')
 trough = labware.load('trough-12row', '9')
-mag_deck = modules.load('magdeck', '7')
-RNA_plate = labware.load('1ml_PCR', '7', share=True)
 trash_box = labware.load('One-Column-reservoir', '8')
+mag_deck = modules.load('magdeck', '7')
+DNA_plate = labware.load('1ml_PCR', '7', share=True)
 
-tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
-               for slot in ['3','4','5','6']]
+tipracks_200 = [labware.load('tiprack-200ul', slot)
+               for slot in ['2','3','4','5','6']]
 
 
 
@@ -67,66 +67,68 @@ m300 = instruments.P300_Multi(
 
 #### REAGENT SETUP
 
-EtOH1 = trough.wells('A5')
-EtOH2 = trough.wells('A6')
-EtOH3 = trough.wells('A7')
-EtOH4 = trough.wells('A8')
-DNase = trough.wells('A9')
+Liquid_trash = trash_box.wells('A1')
+
+
 BufferC_1 = trough.wells('A10')
 BufferC_2 = trough.wells('A11')
+EtOH1 = trough.wells('A5')
+EtOH2 = trough.wells('A6')
 Elution_buffer = trough.wells('A12')
 
-Liquid_trash = trash_box.wells('A1')
-#### Plate SETUP for Purification
 
-RA1 = RNA_plate.wells('A1')
-RA2 = RNA_plate.wells('A2')
-RA3 = RNA_plate.wells('A3')
-RA4 = RNA_plate.wells('A4')
-RA5 = RNA_plate.wells('A5')
-RA6 = RNA_plate.wells('A6')
-RA7 = RNA_plate.wells('A7')
-RA8 = RNA_plate.wells('A8')
-RA9 = RNA_plate.wells('A9')
-RA10 = RNA_plate.wells('A10')
-RA11 = RNA_plate.wells('A11')
-RA12 = RNA_plate.wells('A12')
 #### VOLUME SETUP
 
 
 Sample_vol = 200
-EtOH_vol = 2.0*Sample_vol
-Wash_1_vol = 1.0*Sample_vol
+Sample_buffer_vol = 2.5*Sample_vol
+BufferC_vol = 0.9*Sample_vol
+Wash_1_vol = Sample_vol
 Wash_2_vol = 0.9*Sample_vol
 Elution_vol = 50
 
-BufferC_vol = 0.9*Sample_vol
-
-#### PROTOCOL ####
-## Dry beads before DNase treatment
-mag_deck.disengage()
+#### Plate SETUP
+DA1 = DNA_plate.wells('A1')
+DA2 = DNA_plate.wells('A2')
+DA3 = DNA_plate.wells('A3')
+DA4 = DNA_plate.wells('A4')
+DA5 = DNA_plate.wells('A5')
+DA6 = DNA_plate.wells('A6')
+DA7 = DNA_plate.wells('A7')
+DA8 = DNA_plate.wells('A8')
+DA9 = DNA_plate.wells('A9')
+DA10 = DNA_plate.wells('A10')
+DA11 = DNA_plate.wells('A11')
+DA12 = DNA_plate.wells('A12')
 
 sample_number = 96
 col_num = sample_number // 8 + (1 if sample_number % 8 > 0 else 0)
-samples = [col for col in RNA_plate.cols()[:col_num]]
+samples = [col for col in DNA_plate.cols()[:col_num]]
 
-## Buffer C rebind
-### Transfer buffer C and beads to RA1
+#### PROTOCOL ####
+## transfer respuspended supernatant to DNA plate
+mag_deck.engage(height=18)
+m300.delay(minutes=2)
+
+#### Wash beads with BufferC
+mag_deck.disengage()
+### Transfer buffer C and beads to DA1
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down  speed 0.5X for bead handling
-m300.move_to(BufferC_2.top(-10))
-m300.mix(3, BufferC_vol, BufferC_2.top(-8))
+m300.move_to(BufferC_1.top(-16))
+m300.mix(3, BufferC_vol, BufferC_1.top(-12))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.set_flow_rate(aspirate=25, dispense=25)
-m300.aspirate(BufferC_vol, BufferC_2.top(-8))
-m300.move_to(RA1.bottom())
-m300.dispense(BufferC_vol, RA1.bottom(4))
+m300.move_to(BufferC_1.bottom(1))
+m300.aspirate(BufferC_vol, BufferC_1.top(-12))
+m300.move_to(DA1.bottom(1))
+m300.dispense(BufferC_vol, DA1.bottom(4))
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.mix(5, BufferC_vol, RA1.bottom(2))
+m300.mix(5, BufferC_vol, DA1.bottom(2))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=100, dispense=100)
-m300.move_to(RA1.bottom(5))
+m300.move_to(DA1.bottom(5))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
