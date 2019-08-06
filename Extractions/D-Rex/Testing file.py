@@ -49,7 +49,7 @@ elution_plate_DNA = labware.load('biorad-hardshell-96-PCR', '1')
 trough = labware.load('trough-12row', '9')
 trash_box = labware.load('One-Column-reservoir', '8')
 mag_deck = modules.load('magdeck', '7')
-DNA_plate = labware.load('1ml_PCR', '7', share=True)
+DNA_plate = labware.load('temp_deck', '10', share=True)
 
 tipracks_200 = [labware.load('tiprack-200ul', slot)
                for slot in ['2','3','4','5','6']]
@@ -105,18 +105,10 @@ sample_number = 96
 col_num = sample_number // 8 + (1 if sample_number % 8 > 0 else 0)
 samples = [col for col in DNA_plate.cols()[:col_num]]
 
+
 #### PROTOCOL ####
-### Transfer buffer C and beads to DA1
-m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip() # Slow down  speed 0.5X for bead handling
-m300.move_to(BufferC_1.top(-16))
-m300.mix(3, BufferC_vol, BufferC_1.top(-12))
-max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
-robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
-m300.aspirate(BufferC_vol, BufferC_1.top(-12))
+m300.pick_up_tip()
 m300.move_to(DA1.bottom(1))
-m300.dispense(BufferC_vol, DA1.bottom(4))
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.mix(5, BufferC_vol, DA1.bottom(2))
 m300.delay(seconds=5)
