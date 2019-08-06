@@ -106,26 +106,4 @@ samples = [col for col in DNA_plate.cols()[:col_num]]
 
 
 #### PROTOCOL ####
-m300.pick_up_tip()
-m300.move_to(DA2.bottom(1))
-m300.set_flow_rate(aspirate=150, dispense=150)
-m300.mix(10, BufferC_vol, DA2.bottom(2))
-m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.move_to(DA2.bottom(5))
-m300.blow_out()
-max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
-robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.drop_tip()
-
-m300.pick_up_tip()
-m300.move_to(DA3.bottom(1))
-m300.set_flow_rate(aspirate=150, dispense=150)
-m300.mix(10, BufferC_vol, DA3.bottom(2))
-m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.move_to(DA3.bottom(5))
-m300.blow_out()
-max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
-robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.drop_tip()
+mag_deck.engage(height=-10)
