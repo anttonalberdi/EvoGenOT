@@ -225,7 +225,6 @@ m300.mix(3, BufferC_vol, BufferC_1)
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.set_flow_rate(aspirate=25, dispense=25)
-m300.move_to(BufferC_1.bottom())
 m300.aspirate(BufferC_vol, BufferC_1.bottom(1))
 m300.move_to(DA6.bottom(1))
 m300.dispense(BufferC_vol, DA6.bottom(4))
