@@ -51,7 +51,7 @@ trash_box = labware.load('One-Column-reservoir', '8')
 mag_deck = modules.load('magdeck', '7')
 temp_deck = modules.load('tempdeck', '10')
 
-DNA_plate = labware.load('1ml_PCR', '7', share=True)
+DNA_plate_1 = labware.load('1ml_PCR', '7', share=True)
 DNA_plate_2= labware.load('1ml_PCR', '10', share=True)
 
 tipracks_200 = [labware.load('tiprack-200ul', slot)
@@ -91,18 +91,18 @@ Wash_2_vol = 0.9*Sample_vol
 Elution_vol = 50
 
 #### Plate SETUP
-DA1 = DNA_plate.wells('A1')
-DA2 = DNA_plate.wells('A2')
-DA3 = DNA_plate.wells('A3')
-DA4 = DNA_plate.wells('A4')
-DA5 = DNA_plate.wells('A5')
-DA6 = DNA_plate.wells('A6')
-DA7 = DNA_plate.wells('A7')
-DA8 = DNA_plate.wells('A8')
-DA9 = DNA_plate.wells('A9')
-DA10 = DNA_plate.wells('A10')
-DA11 = DNA_plate.wells('A11')
-DA12 = DNA_plate.wells('A12')
+DA1 = DNA_plate_1.wells('A1')
+DA2 = DNA_plate_1.wells('A2')
+DA3 = DNA_plate_1.wells('A3')
+DA4 = DNA_plate_1.wells('A4')
+DA5 = DNA_plate_1.wells('A5')
+DA6 = DNA_plate_1.wells('A6')
+DA7 = DNA_plate_1.wells('A7')
+DA8 = DNA_plate_1.wells('A8')
+DA9 = DNA_plate_1.wells('A9')
+DA10 = DNA_plate_1.wells('A10')
+DA11 = DNA_plate_1.wells('A11')
+DA12 = DNA_plate_1.wells('A12')
 
 
 ### Plate 2 SETUP
