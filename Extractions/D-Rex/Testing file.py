@@ -106,12 +106,6 @@ col_num = sample_number // 8 + (1 if sample_number % 8 > 0 else 0)
 samples = [col for col in DNA_plate.cols()[:col_num]]
 
 #### PROTOCOL ####
-## transfer respuspended supernatant to DNA plate
-mag_deck.engage(height=18)
-m300.delay(minutes=2)
-
-#### Wash beads with BufferC
-mag_deck.disengage()
 ### Transfer buffer C and beads to DA1
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down  speed 0.5X for bead handling
