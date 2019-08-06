@@ -402,7 +402,7 @@ m300.transfer(250, DA12.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_o
 
 #### Wash beads with EtOH1
 mag_deck.disengage()
-m300.transfer(Wash_1_vol, EtOH1, [wells.top(-3) for wells in DNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
+m300.transfer(Wash_1_vol, EtOH1, [wells.top(-3) for wells in DNA_plate_1.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
 mag_deck.engage(height=18)
 m300.delay(minutes=2)
 
@@ -425,7 +425,7 @@ m300.reset()
 
 #### Wash beads with EtOH2
 mag_deck.disengage()
-m300.transfer(Wash_2_vol, EtOH2, [wells.top(-3) for wells in DNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
+m300.transfer(Wash_2_vol, EtOH2, [wells.top(-3) for wells in DNA_plate_1.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
 mag_deck.engage(height=18)
 m300.delay(minutes=2)
 
