@@ -48,9 +48,8 @@ if plate_name not in labware.list():
 elution_plate_DNA = labware.load('biorad-hardshell-96-PCR', '1')
 trough = labware.load('trough-12row', '9')
 trash_box = labware.load('One-Column-reservoir', '8')
-mag_deck = modules.load('magdeck', '7')
-DNA_plate = labware.load('temp_deck', '10', share=True)
-
+temp_deck = modules.load('TempDeck', '10')
+DNA_plate = labware.load('1ml_PCR', '10', share=True)
 tipracks_200 = [labware.load('tiprack-200ul', slot)
                for slot in ['2','3','4','5','6']]
 
@@ -108,12 +107,24 @@ samples = [col for col in DNA_plate.cols()[:col_num]]
 
 #### PROTOCOL ####
 m300.pick_up_tip()
-m300.move_to(DA1.bottom(1))
-m300.set_flow_rate(aspirate=50, dispense=50)
-m300.mix(5, BufferC_vol, DA1.bottom(2))
+m300.move_to(DA2.bottom(1))
+m300.set_flow_rate(aspirate=150, dispense=150)
+m300.mix(10, BufferC_vol, DA2.bottom(2))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=100, dispense=100)
-m300.move_to(DA1.bottom(5))
+m300.move_to(DA2.bottom(5))
+m300.blow_out()
+max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
+robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+m300.drop_tip()
+
+m300.pick_up_tip()
+m300.move_to(DA3.bottom(1))
+m300.set_flow_rate(aspirate=150, dispense=150)
+m300.mix(10, BufferC_vol, DA3.bottom(2))
+m300.delay(seconds=5)
+m300.set_flow_rate(aspirate=100, dispense=100)
+m300.move_to(DA3.bottom(5))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
