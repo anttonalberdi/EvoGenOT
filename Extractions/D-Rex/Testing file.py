@@ -48,7 +48,7 @@ if plate_name not in labware.list():
 elution_plate_DNA = labware.load('biorad-hardshell-96-PCR', '1')
 trough = labware.load('trough-12row', '9')
 trash_box = labware.load('One-Column-reservoir', '8')
-temp_deck = modules.load('TempDeck', '10')
+mad_deck = modules.load('magdeck', '10')
 DNA_plate = labware.load('1ml_PCR', '10', share=True)
 tipracks_200 = [labware.load('tiprack-200ul', slot)
                for slot in ['2','3','4','5','6']]
