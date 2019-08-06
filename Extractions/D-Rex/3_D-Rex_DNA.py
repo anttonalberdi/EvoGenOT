@@ -111,7 +111,7 @@ mag_deck.engage(height=18)
 m300.delay(minutes=2)
 
 #### Wash beads with BufferC
-mag_deck.disengage(offset=-5)
+mag_deck.disengage()
 ### Transfer buffer C and beads to DA1
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down  speed 0.5X for bead handling
@@ -358,7 +358,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.drop_tip()
 
-mag_deck.disengage(offset=0)
+
 mag_deck.engage(height=18)
 m300.delay(minutes=2)
 
@@ -377,9 +377,9 @@ m300.transfer(250, DA11.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_o
 m300.transfer(250, DA12.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True, air_gap=30)
 
 #### Wash beads with EtOH1
-mag_deck.disengage(offset=-5)
+mag_deck.disengage()
 m300.transfer(Wash_1_vol, EtOH1, [wells.top(-3) for wells in DNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
-mag_deck.disengage(offset=0)
+
 mag_deck.engage(height=18)
 m300.delay(minutes=2)
 
@@ -401,9 +401,9 @@ robot.pause("Please fill up tips before continuing process")
 m300.reset()
 
 #### Wash beads with EtOH2
-mag_deck.disengage(offset=-5)
+mag_deck.disengage()
 m300.transfer(Wash_2_vol, EtOH2, [wells.top(-3) for wells in DNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
-mag_deck.disengage(offset=0)
+
 mag_deck.engage(height=18)
 m300.delay(minutes=2)
 
@@ -424,7 +424,7 @@ m300.transfer(250, DA12.bottom(), Liquid_trash.top(-4), new_tip='once',  blow_ou
 m300.delay(minutes=2)
 
 ## Elution
-mag_deck.disengage(offset=-5)
+mag_deck.disengage()
 for target in samples: # Slow down head speed 0.5X for bead handling
     m300.pick_up_tip()
     max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (50), 'b': (20), 'c': (20)}
@@ -442,7 +442,7 @@ for target in samples: # Slow down head speed 0.5X for bead handling
     m300.drop_tip()
 
 m300.delay(minutes=5)
-mag_deck.disengage(offset=0)
+
 mag_deck.engage(height=18)
 m300.delay(minutes=5)
 m300.transfer(Elution_vol, DA1.bottom(), elution_plate_DNA.wells('A1'), new_tip='always',  blow_out =True, air_gap=30)
@@ -457,4 +457,4 @@ m300.transfer(Elution_vol, DA9.bottom(), elution_plate_DNA.wells('A9'), new_tip=
 m300.transfer(Elution_vol, DA10.bottom(), elution_plate_DNA.wells('A10'), new_tip='always',  blow_out =True, air_gap=30)
 m300.transfer(Elution_vol, DA11.bottom(), elution_plate_DNA.wells('A11'), new_tip='always',  blow_out =True, air_gap=30)
 m300.transfer(Elution_vol, DA12.bottom(), elution_plate_DNA.wells('A12'), new_tip='always',  blow_out =True, air_gap=30)
-mag_deck.disengage(offset=-5)
+mag_deck.disengage()
