@@ -121,7 +121,7 @@ BA12 = DNA_plate_2.wells('A12')
 
 sample_number = 96
 col_num = sample_number // 8 + (1 if sample_number % 8 > 0 else 0)
-samples = [col for col in DNA_plate.cols()[:col_num]]
+samples = [col for col in DNA_plate_1.cols()[:col_num]]
 
 #### PROTOCOL ####
 ## transfer respuspended supernatant to DNA plate
