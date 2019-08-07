@@ -107,7 +107,7 @@ samples = [col for col in DNA_plate.cols()[:col_num]]
 
 #### PROTOCOL ####
 ## transfer respuspended supernatant to DNA plate
-mag_deck.engage(height=18)
+mag_deck.engage(height=35)
 m300.delay(minutes=2)
 
 #### Wash beads with BufferC
@@ -359,7 +359,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 
-mag_deck.engage(height=18)
+mag_deck.engage(height=35)
 m300.delay(minutes=2)
 
 ## Remove Buffer C
@@ -380,7 +380,7 @@ m300.transfer(250, DA12.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_o
 mag_deck.disengage()
 m300.transfer(Wash_1_vol, EtOH1, [wells.top(-3) for wells in DNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
 
-mag_deck.engage(height=18)
+mag_deck.engage(height=35)
 m300.delay(minutes=2)
 
 m300.transfer(180, DA1.bottom(2), Liquid_trash.top(-4), new_tip='once',  blow_out =True)
@@ -404,7 +404,7 @@ m300.reset()
 mag_deck.disengage()
 m300.transfer(Wash_2_vol, EtOH2, [wells.top(-3) for wells in DNA_plate.wells('A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12')] , new_tip='once',  blow_out =True)
 
-mag_deck.engage(height=18)
+mag_deck.engage(height=35)
 m300.delay(minutes=2)
 
 m300.transfer(250, DA1.bottom(), Liquid_trash.top(-4), new_tip='once',  blow_out =True, air_gap=30)
@@ -443,7 +443,7 @@ for target in samples: # Slow down head speed 0.5X for bead handling
 
 m300.delay(minutes=5)
 
-mag_deck.engage(height=18)
+mag_deck.engage(height=35)
 m300.delay(minutes=5)
 m300.transfer(Elution_vol, DA1.bottom(), elution_plate_DNA.wells('A1'), new_tip='always',  blow_out =True, air_gap=30)
 m300.transfer(Elution_vol, DA3.bottom(), elution_plate_DNA.wells('A3'), new_tip='always',  blow_out =True, air_gap=30)
