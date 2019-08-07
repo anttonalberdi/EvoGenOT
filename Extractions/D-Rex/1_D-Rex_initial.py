@@ -90,7 +90,7 @@ RA12 = RNA_plate.wells('A12')
 #### VOLUME SETUP
 Sample_vol = 200
 Binding_buffer_vol = Sample_vol*1
-½_EtOH_buffer_vol = 175
+EtOH_buffer_vol = 175
 
 
 #### PROTOCOL ####
