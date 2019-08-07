@@ -106,11 +106,9 @@ samples = [col for col in DNA_plate.cols()[:col_num]]
 
 
 #### PROTOCOL ####
-mag_deck.engage(height=20)
-m300.delay(seconds=5)
-mag_deck.engage(height=25)
-m300.delay(seconds=5)
-mag_deck.engage(height=30)
-m300.delay(seconds=5)
 mag_deck.engage(height=35)
 m300.delay(seconds=5)
+mag_deck.engage(height=36)
+m300.delay(seconds=5)
+
+#Right height 35-36 
