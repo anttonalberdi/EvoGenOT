@@ -25,23 +25,32 @@ metadata = {
     'date': '2019/03/28',
     'description': 'Automation of Zymo Quick DNA protocol for stool samples in SHIELD',
 }
-
+#Custom LABWARE load
+plate_name = 'One-Column-reservoir'
+if plate_name not in labware.list():
+    custom_plate = labware.create(
+        plate_name,                    # name of you labware
+        grid=(1, 1),                    # specify amount of (columns, rows)
+        spacing=(0, 0),               # distances (mm) between each (column, row)
+        diameter=81,                     # diameter (mm) of each well on the plate
+        depth=35,                       # depth (mm) of each well on the plate
+        volume=350000)
 
 #### LABWARE SETUP ####
-elution_plate_DNA = labware.load('96-flat', '3')
-trough = labware.load('trough-12row', '2')
-buffer = labware.load('opentrons-tuberack-50ml', '8')
-trash_box = labware.load('trash-box', '1')
+elution_plate_DNA = labware.load('96-flat', '1')
+trough = labware.load('trough-12row', '9')
+buffer = labware.load('opentrons-tuberack-50ml', '11')
+trash_box = labware.load('One-Colum-reservoir', '8')
 mag_deck = modules.load('magdeck', '7')
 sample_plate = labware.load('96-deep-well', '7', share=True)
 temp_deck = modules.load('tempdeck', '10')
 
 
 tipracks_200 = [labware.load('tiprack-200ul', slot)
-               for slot in ['4','5','6','11']]
+               for slot in ['3','4','5','6']]
 
 tipracks_1000 = [labware.load('tiprack-1000ul', slot, share=True)
-                for slot in ['9']]
+                for slot in ['10']]
 
 
 #### PIPETTE SETUP ####
@@ -54,16 +63,17 @@ m300 = instruments.P300_Multi(
     tip_racks=tipracks_200)
 
 #### REAGENT SETUP
+Beads_ = trough.wells('A1')
+Beads_2 = trough.wells('A2')
+Ethanol_1 = buffer.wells('A3')
+Ethanol_2 = buffer.wells('A4')
+Elution_buffer = trough.wells('A12')
 
-Beads = trough.wells('A1')
-Elution_buffer = trough.wells('A2')
 
-Liquid_trash = trash_box.wells('A1')
 
 
 Sample_buffer = buffer.wells('A1')
-Ethanol_1 = buffer.wells('A2')
-Ethanol_2 = buffer.wells('A3')
+
 Wash_1 = buffer.wells('B2')
 Wash_2 = buffer.wells('B3')
 
