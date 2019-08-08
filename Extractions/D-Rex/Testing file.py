@@ -3,7 +3,7 @@
 #
 # Things do before procedure
 #
-#	1. Bead beat samples at maximum speed for 5 minutes
+#	1. Bead beat samples at maximum speed for 5 minutes (If needed do Proteinase K for digestion of tissue)
 # 	2. Spin down samples 10.000 rpm for 1 minute
 #	3. Transfer 200µl lysed sample to a deep well plate
 
@@ -16,11 +16,11 @@ from opentrons import labware, instruments, modules, robot
 #### METADATA ####
 
 metadata = {
-    'protocolName': 'Extraction_DNA_RNA',
+    'protocolName': 'D-Rex Inital Extraction',
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
     'version': '1.0',
     'date': '2019/03/28',
-    'description': 'Automation of D-Rex DNA protocol for stool samples in SHIELD',
+    'description': 'Automation of D-Rex RNA and DNA seperation for extraction protocol of stool samples in SHIELD',
 }
 
 ### Custom LABWARE load
@@ -34,24 +34,24 @@ if plate_name not in labware.list():
         depth=26.4,                       # depth (mm) of each well on the plate
         volume=1000)
 
-plate_name = 'One-Column-reservoir'
+plate_name = '1ml_magPCR'
 if plate_name not in labware.list():
     custom_plate = labware.create(
         plate_name,                    # name of you labware
-        grid=(1, 1),                    # specify amount of (columns, rows)
-        spacing=(0, 0),               # distances (mm) between each (column, row)
-        diameter=81,                     # diameter (mm) of each well on the plate
-        depth=35,                       # depth (mm) of each well on the plate
-        volume=350000)
+        grid=(12, 8),                    # specify amount of (columns, rows)
+        spacing=(9, 9),               # distances (mm) between each (column, row)
+        diameter=7.5,                     # diameter (mm) of each well on the plate
+        depth=26.4,                       # depth (mm) of each well on the plate
+        volume=1000)
 
 #### LABWARE SETUP ####
-elution_plate_DNA = labware.load('biorad-hardshell-96-PCR', '1')
 trough = labware.load('trough-12row', '9')
-trash_box = labware.load('One-Column-reservoir', '8')
+RNA_plate = labware.load('1ml_PCR', '1')
 mag_deck = modules.load('magdeck', '7')
-DNA_plate = labware.load('1ml_PCR', '7', share=True)
-tipracks_200 = [labware.load('tiprack-200ul', slot)
-               for slot in ['2','3','4','5','6']]
+sample_plate = labware.load('1ml_magPCR', '7', share=True)
+
+tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
+               for slot in ['3','4','5','6']]
 
 
 
@@ -59,58 +59,96 @@ tipracks_200 = [labware.load('tiprack-200ul', slot)
 m300 = instruments.P300_Multi(
     mount='right',
     min_volume=25,
-    max_volume=200,
+    max_volume=300,
     aspirate_flow_rate=100,
     dispense_flow_rate=200,
     tip_racks=tipracks_200)
 
 #### REAGENT SETUP
-
-Liquid_trash = trash_box.wells('A1')
-
-
-BufferC_1 = trough.wells('A10')
-BufferC_2 = trough.wells('A11')
-EtOH1 = trough.wells('A5')
-EtOH2 = trough.wells('A6')
-Elution_buffer = trough.wells('A12')
-
-
-#### VOLUME SETUP
-
-
-Sample_vol = 200
-Sample_buffer_vol = 2.5*Sample_vol
-BufferC_vol = 0.9*Sample_vol
-Wash_1_vol = Sample_vol
-Wash_2_vol = 0.9*Sample_vol
-Elution_vol = 50
+Binding_buffer1 = trough.wells('A1')
+Binding_buffer2 = trough.wells('A2')			# Buffer B			# Buffer B
+EtOH_Bind1 = trough.wells('A3')
+EtOH_Bind2 = trough.wells('A4')
 
 #### Plate SETUP
-DA1 = DNA_plate.wells('A1')
-DA2 = DNA_plate.wells('A2')
-DA3 = DNA_plate.wells('A3')
-DA4 = DNA_plate.wells('A4')
-DA5 = DNA_plate.wells('A5')
-DA6 = DNA_plate.wells('A6')
-DA7 = DNA_plate.wells('A7')
-DA8 = DNA_plate.wells('A8')
-DA9 = DNA_plate.wells('A9')
-DA10 = DNA_plate.wells('A10')
-DA11 = DNA_plate.wells('A11')
-DA12 = DNA_plate.wells('A12')
+SA1 = sample_plate.wells('A1')
+SA2 = sample_plate.wells('A2')
+SA3 = sample_plate.wells('A3')
+SA4 = sample_plate.wells('A4')
+SA5 = sample_plate.wells('A5')
+SA6 = sample_plate.wells('A6')
+SA7 = sample_plate.wells('A7')
+SA8 = sample_plate.wells('A8')
+SA9 = sample_plate.wells('A9')
+SA10 = sample_plate.wells('A10')
+SA11 = sample_plate.wells('A11')
+SA12 = sample_plate.wells('A12')
 
-sample_number = 96
-col_num = sample_number // 8 + (1 if sample_number % 8 > 0 else 0)
-samples = [col for col in DNA_plate.cols()[:col_num]]
+RA1 = RNA_plate.wells('A1')
+RA2 = RNA_plate.wells('A2')
+RA3 = RNA_plate.wells('A3')
+RA4 = RNA_plate.wells('A4')
+RA5 = RNA_plate.wells('A5')
+RA6 = RNA_plate.wells('A6')
+RA7 = RNA_plate.wells('A7')
+RA8 = RNA_plate.wells('A8')
+RA9 = RNA_plate.wells('A9')
+RA10 = RNA_plate.wells('A10')
+RA11 = RNA_plate.wells('A11')
+RA12 = RNA_plate.wells('A12')
+
+#### VOLUME SETUP
+Sample_vol = 200
+Binding_buffer_vol = Sample_vol*1
+EtOH_buffer_vol = 175
 
 
 #### PROTOCOL ####
-mag_deck.engage(height=34)
-m300.delay(seconds=5)
-mag_deck.engage(height=35)
-m300.delay(seconds=5)
-mag_deck.engage(height=36)
-m300.delay(seconds=5)
+
+
+## add beads and sample binding buffer to DNA/sample plate
+
 mag_deck.disengage()
-#Right height 35
+### Transfer buffer B and beads to SA1
+m300.pick_up_tip() # Slow down  speed 0.5X for bead handling
+m300.aspirate(300, Binding_buffer1.top(-12))
+m300.dispense(30, SA1.bottom(20))
+m300.delay(seconds=3)
+m300.dispense(30, SA1.bottom(18))
+m300.delay(seconds=3)
+m300.dispense(30, SA1.bottom(16))
+m300.delay(seconds=3)
+m300.dispense(30, SA1.bottom(14))
+m300.delay(seconds=3)
+m300.dispense(30, SA1.bottom(12))
+m300.delay(seconds=3)
+m300.dispense(30, SA1.bottom(11))
+m300.delay(seconds=3)
+m300.dispense(30, SA1.bottom(10))
+m300.delay(seconds=3)
+m300.dispense(30, SA1.bottom(9))
+m300.delay(seconds=3)
+m300.dispense(30, SA1.bottom(8))
+m300.delay(seconds=3)
+m300.dispense(30, SA1.bottom(7))
+m300.delay(seconds=3)
+m300.aspirate(300, Binding_buffer1.top(-12))
+m300.dispense(30, SA1.bottom(5))
+m300.delay(seconds=3)
+m300.dispense(30, SA1.bottom(3))
+m300.delay(seconds=3)
+m300.dispense(30, SA1.bottom(1))
+m300.delay(seconds=3)
+m300.dispense(30, SA1.bottom())
+m300.delay(seconds=3)
+m300.dispense(30, SA1.top())
+m300.delay(seconds=3)
+m300.dispense(30, SA1.top(-5))
+m300.delay(seconds=3)
+m300.dispense(30, SA1.top(-10))
+m300.delay(seconds=3)
+m300.dispense(30, SA1.top(-20))
+m300.delay(seconds=3)
+m300.dispense(30, SA1.top(-26))
+m300.delay(seconds=3)
+m300.drop_tip()

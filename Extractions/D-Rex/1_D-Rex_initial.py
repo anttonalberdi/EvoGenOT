@@ -41,7 +41,7 @@ if plate_name not in labware.list():
         grid=(12, 8),                    # specify amount of (columns, rows)
         spacing=(9, 9),               # distances (mm) between each (column, row)
         diameter=7.5,                     # diameter (mm) of each well on the plate
-        depth=34.4,                       # depth (mm) of each well on the plate
+        depth=26.4,                       # depth (mm) of each well on the plate
         volume=1000)
 
 #### LABWARE SETUP ####

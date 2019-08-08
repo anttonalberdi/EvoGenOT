@@ -24,7 +24,7 @@ metadata = {
 }
 
 ### Custom LABWARE load
-plate_name = '1ml_PCR'
+plate_name = '1ml_magPCR'
 if plate_name not in labware.list():
     custom_plate = labware.create(
         plate_name,                    # name of you labware
@@ -49,7 +49,7 @@ elution_plate_DNA = labware.load('biorad-hardshell-96-PCR', '1')
 trough = labware.load('trough-12row', '9')
 trash_box = labware.load('One-Column-reservoir', '8')
 mag_deck = modules.load('magdeck', '7')
-DNA_plate = labware.load('1ml_PCR', '7', share=True)
+DNA_plate = labware.load('1ml_magPCR', '7', share=True)
 
 tipracks_200 = [labware.load('tiprack-200ul', slot)
                for slot in ['2','3','4','5','6']]
