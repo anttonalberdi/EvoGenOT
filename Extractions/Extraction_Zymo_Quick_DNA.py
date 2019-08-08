@@ -72,6 +72,7 @@ Liquid_trash = trash_box.wells('A1')
 Sample_buffer = buffer.wells('A1')
 Ethanol_1 = buffer.wells('A2')
 Ethanol_2 = buffer.wells('A3')
+
 Wash_1 = buffer.wells('B2')
 Wash_2 = buffer.wells('B3')
 
