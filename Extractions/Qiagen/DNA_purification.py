@@ -23,15 +23,15 @@ reagent_plate = labware.load('opentrons-tuberack-15_50ml', '6')
 # Tipracks
 tipracks_300 = [labware.load('tiprack-300ul', slot)
               for slot in ['1','2']]
-             
+
 tipracks_1000 = [labware.load('tiprack-1000ul', slot)
                for slot in ['4','5']]
-               
+
 Empty_tipracks_300 = [labware.load('tiprack-300ul', 90)
-               
-        
-             
-# Pippetes 
+
+
+
+# Pippetes
 m300 = instruments.P300_Multi(
     mount='left',
     tip_racks=tipracks_300)
@@ -39,8 +39,8 @@ m300 = instruments.P300_Multi(
 s1000 = instruments.P1000_Single(
     mount='right',
     tip_racks=tipracks_1000)
-    
-    
+
+
 # Reagents
 Magbeads = reagent_plate.wells('A1')
 lysisbuffer = reagent_plate.wells('B1')
@@ -53,100 +53,100 @@ EB = reagent_plate.wells('C2')
 ################################# Protocol starts #################################################
 #################################################################################################
 
-# Transfer extract 
+# Transfer extract
 s1000.transfer(200, sample_plate1.wells(), mag_plate.cols('1', '2', '3'), new_tip='always') #Perhaps define which well goes to which well
-s1000.transfer(200, sample_plate2.wells(), mag_plate.cols('4', '5', '6'), new_tip='always') 
+s1000.transfer(200, sample_plate2.wells(), mag_plate.cols('4', '5', '6'), new_tip='always')
 
-# Add Lysis buffer  
-s1000.transfer(200, lysisbuffer, mag_plate.cols(1:6), mix_after=(4,150), new_tip='always') 
+# Add Lysis buffer
+s1000.transfer(200, lysisbuffer, mag_plate.cols(1:6), mix_after=(4,150), new_tip='always')
 
-# Add Ethanol 
+# Add Ethanol
 s1000.transfer(500, ethanol, mag_plate.cols(1:6), mix_after=(4,300), new_tip='always')
 
 # Distribute Magbeads to plate
-s1000.transfer(100, Magbeads, mag_plate.cols(7:8), mix_before=(10,1000), new_tip='never') 
+s1000.transfer(100, Magbeads, mag_plate.cols(7:8), mix_before=(10,1000), new_tip='never')
 
 # Add Magbeads to extract
-m300.transfer(30, mag_plate.cols(7), mag_plate.cols(1), mix_before=(5,30), mix_after=(6,300), new_tip='always') 
-m300.transfer(30, mag_plate.cols(7), mag_plate.cols(2), mix_before=(5,30), mix_after=(6,300), new_tip='always') 
-m300.transfer(30, mag_plate.cols(7), mag_plate.cols(3), mix_before=(5,30), mix_after=(6,300), new_tip='always') 
-m300.transfer(30, mag_plate.cols(8), mag_plate.cols(4), mix_before=(5,30), mix_after=(6,300), new_tip='always') 
-m300.transfer(30, mag_plate.cols(8), mag_plate.cols(5), mix_before=(5,30), mix_after=(6,300), new_tip='always') 
-m300.transfer(30, mag_plate.cols(8), mag_plate.cols(6), mix_before=(5,30), mix_after=(6,300), new_tip='always') 
+m300.transfer(30, mag_plate.cols(7), mag_plate.cols(1), mix_before=(5,30), mix_after=(6,300), new_tip='always')
+m300.transfer(30, mag_plate.cols(7), mag_plate.cols(2), mix_before=(5,30), mix_after=(6,300), new_tip='always')
+m300.transfer(30, mag_plate.cols(7), mag_plate.cols(3), mix_before=(5,30), mix_after=(6,300), new_tip='always')
+m300.transfer(30, mag_plate.cols(8), mag_plate.cols(4), mix_before=(5,30), mix_after=(6,300), new_tip='always')
+m300.transfer(30, mag_plate.cols(8), mag_plate.cols(5), mix_before=(5,30), mix_after=(6,300), new_tip='always')
+m300.transfer(30, mag_plate.cols(8), mag_plate.cols(6), mix_before=(5,30), mix_after=(6,300), new_tip='always')
 
 #################################################################
 ### Mixing and return pipette tips to empty rack for re-use #####
 #################################################################
 # 1 mixing
 m300.delay(minutes=5)
-m300.mix(4, 500, mag_plate.cols('1')) 
+m300.mix(4, 500, mag_plate.cols('1'))
 m300.drop_tip(Empty_tipracks_300.cols(‘1’))
 
-m300.mix(4, 500, mag_plate.cols('2')) 
+m300.mix(4, 500, mag_plate.cols('2'))
 m300.drop_tip(Empty_tipracks_300.cols(‘3’))
 
-m300.mix(4, 500, mag_plate.cols('3')) 
+m300.mix(4, 500, mag_plate.cols('3'))
 m300.drop_tip(Empty_tipracks_300.cols(‘5’))
 
-m300.mix(4, 500, mag_plate.cols('4')) 
+m300.mix(4, 500, mag_plate.cols('4'))
 m300.drop_tip(Empty_tipracks_300.cols(‘7’))
 
-m300.mix(4, 500, mag_plate.cols('5')) 
+m300.mix(4, 500, mag_plate.cols('5'))
 m300.drop_tip(Empty_tipracks_300.cols(‘9’))
 
-m300.mix(4, 500, mag_plate.cols('6')) 
+m300.mix(4, 500, mag_plate.cols('6'))
 m300.drop_tip(Empty_tipracks_300.cols(‘11’))
 
 # 2 mixing
 m300.delay(minutes=5)
 m300.pick_up_tip(Empty_tipracks_300.cols(‘1’)) # Picking up used tips
-m300.mix(4, 500, mag_plate.cols('1')) 
+m300.mix(4, 500, mag_plate.cols('1'))
 m300.drop_tip(Empty_tipracks_300.cols(‘1’))
 
 m300.pick_up_tip(Empty_tipracks_300.cols(‘3’)) # Picking up used tips
-m300.mix(4, 500, mag_plate.cols('2')) 
+m300.mix(4, 500, mag_plate.cols('2'))
 m300.drop_tip(Empty_tipracks_300.cols(‘3’))
 
 m300.pick_up_tip(Empty_tipracks_300.cols(‘5’)) # Picking up used tips
-m300.mix(4, 500, mag_plate.cols('3')) 
+m300.mix(4, 500, mag_plate.cols('3'))
 m300.drop_tip(Empty_tipracks_300.cols(‘5’))
 
 m300.pick_up_tip(Empty_tipracks_300.cols(‘7’)) # Picking up used tips
-m300.mix(4, 500, mag_plate.cols('4')) 
+m300.mix(4, 500, mag_plate.cols('4'))
 m300.drop_tip(Empty_tipracks_300.cols(‘7’))
 
 m300.pick_up_tip(Empty_tipracks_300.cols(‘9’)) # Picking up used tips
-m300.mix(4, 500, mag_plate.cols('5')) 
+m300.mix(4, 500, mag_plate.cols('5'))
 m300.drop_tip(Empty_tipracks_300.cols(‘9’))
 
 m300.pick_up_tip(Empty_tipracks_300.cols(‘11’)) # Picking up used tips
-m300.mix(4, 500, mag_plate.cols('7')) 
+m300.mix(4, 500, mag_plate.cols('7'))
 m300.drop_tip(Empty_tipracks_300.cols(‘11’))
 
 # 3 mixing
 m300.delay(minutes=5)
 m300.pick_up_tip(Empty_tipracks_300.cols(‘1’)) # Picking up used tips
-m300.mix(4, 500, mag_plate.cols('1')) 
+m300.mix(4, 500, mag_plate.cols('1'))
 m300.drop_tip(Empty_tipracks_300.cols(‘1’))
 
 m300.pick_up_tip(Empty_tipracks_300.cols(‘3’)) # Picking up used tips
-m300.mix(4, 500, mag_plate.cols('2')) 
+m300.mix(4, 500, mag_plate.cols('2'))
 m300.drop_tip(Empty_tipracks_300.cols(‘3’))
 
 m300.pick_up_tip(Empty_tipracks_300.cols(‘5’)) # Picking up used tips
-m300.mix(4, 500, mag_plate.cols('3')) 
+m300.mix(4, 500, mag_plate.cols('3'))
 m300.drop_tip(Empty_tipracks_300.cols(‘5’))
 
 m300.pick_up_tip(Empty_tipracks_300.cols(‘7’)) # Picking up used tips
-m300.mix(4, 500, mag_plate.cols('4')) 
+m300.mix(4, 500, mag_plate.cols('4'))
 m300.drop_tip(Empty_tipracks_300.cols(‘7’))
 
 m300.pick_up_tip(Empty_tipracks_300.cols(‘9’)) # Picking up used tips
-m300.mix(4, 500, mag_plate.cols('5')) 
+m300.mix(4, 500, mag_plate.cols('5'))
 m300.drop_tip(Empty_tipracks_300.cols(‘9’))
 
 m300.pick_up_tip(Empty_tipracks_300.cols(‘11’)) # Picking up used tips
-m300.mix(4, 500, mag_plate.cols('7')) 
+m300.mix(4, 500, mag_plate.cols('7'))
 m300.drop_tip(Empty_tipracks_300.cols(‘11’))
 
 m300.delay(minutes=10) # Adjust to reach ≈ 20 min
