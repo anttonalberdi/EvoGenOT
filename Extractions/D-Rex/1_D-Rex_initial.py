@@ -595,7 +595,7 @@ m300.drop_tip()
 m300.delay(minutes=5)
 
 ## Transfer supernatant
-mag_deck.engage(height=35)
+mag_deck.engage(height=34)
 m300.delay(minutes=5)
 
 #Transfer supernatant to RA1
