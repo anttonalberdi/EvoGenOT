@@ -1,11 +1,10 @@
 ## Description of procedure ##
-#
-#
-# Things do before procedure
-#
-#	1. Bead beat samples at maximum speed for 5 minutes (If needed do Proteinase K for digestion of tissue)
-# 	2. Spin down samples 10.000 rpm for 1 minute
-#	3. Transfer 200µl lysed sample to a deep well plate
+
+# Should be run before running the actual protocol
+
+# This protocol is to verify that the calibration of the robot is working correctly
+
+# Use model labwares for this step
 
 ### Procedure ###
 
@@ -34,7 +33,7 @@ if plate_name not in labware.list():
         depth=26.4,                       # depth (mm) of each well on the plate
         volume=1000)
 
-plate_name = '1ml_magPCR'
+plate_name = '1ml_magPCR'                 # Model for calibration
 if plate_name not in labware.list():
     custom_plate = labware.create(
         plate_name,                    # name of you labware
@@ -45,8 +44,8 @@ if plate_name not in labware.list():
         volume=1000)
 
 #### LABWARE SETUP ####
-trough = labware.load('trough-12row', '9')
-RNA_plate = labware.load('1ml_PCR', '1')
+trough = labware.load('trough-12row', '9')          # Model for calibration
+RNA_plate = labware.load('1ml_PCR', '1')            # Model for calibration
 mag_deck = modules.load('magdeck', '7')
 sample_plate = labware.load('1ml_magPCR', '7', share=True)
 
@@ -66,9 +65,7 @@ m300 = instruments.P300_Multi(
 
 #### REAGENT SETUP
 Binding_buffer1 = trough.wells('A1')
-Binding_buffer2 = trough.wells('A2')			# Buffer B			# Buffer B
-EtOH_Bind1 = trough.wells('A3')
-EtOH_Bind2 = trough.wells('A4')
+
 
 #### Plate SETUP
 SA1 = sample_plate.wells('A1')
@@ -100,17 +97,16 @@ RA12 = RNA_plate.wells('A12')
 #### VOLUME SETUP
 Sample_vol = 200
 Binding_buffer_vol = Sample_vol*1
-EtOH_buffer_vol = 175
-
 
 #### PROTOCOL ####
 
 
-## add beads and sample binding buffer to DNA/sample plate
-
+## Magdeck engagement height
+mag_deck.engage(35)
 mag_deck.disengage()
-### Transfer buffer B and beads to SA1
-m300.pick_up_tip() # Slow down  speed 0.5X for bead handling
+
+#Magdeck PCR plate depth verification if using the adaptor
+m300.pick_up_tip()
 m300.aspirate(300, Binding_buffer1.top(-12))
 m300.dispense(30, SA1.bottom(20))
 m300.delay(seconds=3)
@@ -122,20 +118,20 @@ m300.dispense(30, SA1.bottom(14))
 m300.delay(seconds=3)
 m300.dispense(30, SA1.bottom(12))
 m300.delay(seconds=3)
-m300.dispense(30, SA1.bottom(11))
+m300.dispense(30, SA1.bottom(10))
 m300.delay(seconds=3)
 m300.dispense(30, SA1.bottom(10))
 m300.delay(seconds=3)
-m300.dispense(30, SA1.bottom(9))
-m300.delay(seconds=3)
 m300.dispense(30, SA1.bottom(8))
 m300.delay(seconds=3)
-m300.dispense(30, SA1.bottom(7))
+m300.dispense(30, SA1.bottom(6))
 m300.delay(seconds=3)
-m300.aspirate(300, Binding_buffer1.top(-12))
 m300.dispense(30, SA1.bottom(5))
 m300.delay(seconds=3)
-m300.dispense(30, SA1.bottom(3))
+m300.aspirate(300, Binding_buffer1.top(-12))
+m300.dispense(30, SA1.bottom(4))
+m300.delay(seconds=3)
+m300.dispense(30, SA1.bottom(2))
 m300.delay(seconds=3)
 m300.dispense(30, SA1.bottom(1))
 m300.delay(seconds=3)

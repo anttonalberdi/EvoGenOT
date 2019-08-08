@@ -183,9 +183,8 @@ for target in samples: # Slow down head speed 0.5X for bead handling
 m300.drop_tip()
 
 #incubating samples with DNase
-m300.delay(minutes=10)
+robot.pause("Please cover the plate with film and incubate 10 min 25°C at 1300 rpm. Please fill up tips before continuing process")
 ##Reset tipracks for more tips
-robot.pause("Please fill up tips before continuing process")
 m300.reset()
 
 ## Buffer C rebind
@@ -524,7 +523,7 @@ for target in samples: # Slow down head speed 0.5X for bead handling
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m300.drop_tip()
 
-m300.delay(minutes=10)
+robot.pause("Please cover the plate with film and incubate 5 min 25°C at 1500 rpm")
 mag_deck.engage(height=34)
 m300.delay(minutes=2)
 
