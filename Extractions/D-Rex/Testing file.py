@@ -112,5 +112,5 @@ mag_deck.engage(height=35)
 m300.delay(seconds=5)
 mag_deck.engage(height=36)
 m300.delay(seconds=5)
-
+mag_deck.disengage()
 #Right height 35-36
