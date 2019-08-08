@@ -504,8 +504,7 @@ m300.transfer(250, RA12.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_o
 
 
 
-## Dry beads before elution
-m300.delay(minutes=3)
+## Dry beads before elution (removing supernatant from all wells takes more than 5 mins, should be enough for beads to dry)
 
 ## Elution
 mag_deck.disengage()
