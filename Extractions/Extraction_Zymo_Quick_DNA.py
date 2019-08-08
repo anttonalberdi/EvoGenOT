@@ -63,24 +63,19 @@ m300 = instruments.P300_Multi(
     tip_racks=tipracks_200)
 
 #### REAGENT SETUP
-Beads_ = trough.wells('A1')
-Beads_2 = trough.wells('A2')
-Ethanol_1 = buffer.wells('A3')
-Ethanol_2 = buffer.wells('A4')
-Elution_buffer = trough.wells('A12')
+Beads = trough.wells('A1')
+Elution_buffer = trough.wells('A2')
 
-
+Liquid_trash = trash_box.wells('A1')
 
 
 Sample_buffer = buffer.wells('A1')
-
+Ethanol_1 = buffer.wells('A2')
+Ethanol_2 = buffer.wells('A3')
 Wash_1 = buffer.wells('B2')
 Wash_2 = buffer.wells('B3')
 
-
 #### VOLUME SETUP
-
-
 Sample_vol = 200
 Sample_buffer_vol = 2.5*Sample_vol
 Bead_vol = 30
