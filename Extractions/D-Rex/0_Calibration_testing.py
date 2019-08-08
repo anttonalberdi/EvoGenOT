@@ -103,6 +103,7 @@ Binding_buffer_vol = Sample_vol*1
 
 ## Magdeck engagement height
 mag_deck.disengage()
+m300.delay(minutes=2)
 mag_deck.engage(height=34)
 
 #Magdeck PCR plate depth verification if using the adaptor
