@@ -436,7 +436,7 @@ for target in samples: # Slow down head speed 0.5X for bead handling
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m300.drop_tip()
 
-m300.delay(minutes=5)
+robot.pause("Please cover the plate with film and incubate 5min 25°C at 1500 rpm")
 
 mag_deck.engage(height=34)
 m300.delay(minutes=5)
