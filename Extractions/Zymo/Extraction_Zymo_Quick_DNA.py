@@ -104,8 +104,8 @@ Liquid_trash = trash_box.wells('A1')
 #### VOLUME SETUP
 Sample_vol = 200
 Binding_buffer_vol = 250 # add binding_buffer and beads together 470µl buffer to 30µl beads per sample = total of 500 per sample
-EtOH_vol = 2.5*Sample_vol
-Wash_vol = 2.5*Sample_vol
+EtOH_vol = 1.25*Sample_vol
+Wash_vol = 1.25*Sample_vol
 Elution_vol = 55
 
 
