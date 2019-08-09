@@ -54,9 +54,9 @@ trash_box = labware.load('One-Colum-reservoir', '8')
 mag_deck = modules.load('magdeck', '7')
 sample_plate = labware.load('1ml_PCR', '7', share=True)
 
-tipracks_300_1 = [labware.load('tiprack-200ul', '1', share=True)
-tipracks_300_2 = [labware.load('tiprack-200ul', '2', share=True)
-tipracks_300_3 = [labware.load('tiprack-200ul', '3', share=True)
+tipracks_300_1 = labware.load('tiprack-200ul', '1', share=True)
+tipracks_300_2 = labware.load('tiprack-200ul', '2', share=True)
+tipracks_300_3 = labware.load('tiprack-200ul', '3', share=True)
 
 
 tipracks_1000 = [labware.load('tiprack-1000ul', slot, share=True)
