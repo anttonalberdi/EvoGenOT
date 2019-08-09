@@ -106,7 +106,7 @@ Sample_vol = 200
 Binding_buffer_vol = 250 # add binding_buffer and beads together 470µl buffer to 30µl beads per sample = total of 500 per sample
 EtOH_vol = 1.25*Sample_vol
 Wash_vol = 1.25*Sample_vol
-Elution_vol = 55
+Elution_buffer_vol = 55
 
 
 #### Sample SETUP
@@ -2516,8 +2516,9 @@ m300.return_tip()
 
 ## Drying beads
 m300.delay(minutes=5)
+mag_deck.disengage()
 
-### Transfer Elution buffer and beads to SA1
+### Transfer Elution buffer to SA1
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Elution_buffer.top(-16))
@@ -2536,7 +2537,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.return_tip()
 
-### Transfer Elution buffer and beads to SA2
+### Transfer Elution buffer to SA2
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Elution_buffer.bottom())
@@ -2555,7 +2556,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.return_tip()
 
-### Transfer Elution buffer and beads to SA3
+### Transfer Elution buffer to SA3
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
@@ -2573,7 +2574,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.return_tip()
 
-### Transfer Elution buffer and beads to SA4
+### Transfer Elution buffer to SA4
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
@@ -2591,7 +2592,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.return_tip()
 
-### Transfer Elution buffer and beads to SA5
+### Transfer Elution buffer to SA5
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
@@ -2609,7 +2610,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.return_tip()
 
-### Transfer Elution buffer and beads to SA6
+### Transfer Elution buffer to SA6
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
@@ -2627,7 +2628,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.return_tip()
 
-### Transfer Elution buffer and beads to SA7
+### Transfer Elution buffer to SA7
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
@@ -2645,7 +2646,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.return_tip()
 
-### Transfer Elution buffer and beads to SA8
+### Transfer Elution buffer to SA8
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
@@ -2663,7 +2664,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.return_tip()
 
-### Transfer Elution buffer and beads to SA9
+### Transfer Elution buffer to SA9
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
@@ -2681,7 +2682,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.return_tip()
 
-### Transfer Elution buffer and beads to SA10
+### Transfer Elution buffer to SA10
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Elution_buffer.bottom())
@@ -2700,7 +2701,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.return_tip()
 
-### Transfer Elution buffer and beads to SA11
+### Transfer Elution buffer to SA11
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
@@ -2718,7 +2719,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.return_tip()
 
-### Transfer Elution buffer and beads to SA12
+### Transfer Elution buffer to SA12
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
