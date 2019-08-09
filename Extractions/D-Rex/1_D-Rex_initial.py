@@ -68,6 +68,8 @@ Binding_buffer1 = trough.wells('A1')
 Binding_buffer2 = trough.wells('A2')			# Buffer B			# Buffer B
 EtOH_Bind1 = trough.wells('A3')
 EtOH_Bind2 = trough.wells('A4')
+BufferC_1 = trough.wells('A10')
+BufferC_2 = trough.wells('A11')
 
 #### Plate SETUP
 SA1 = sample_plate.wells('A1')
