@@ -802,9 +802,9 @@ m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.set_flow_rate(aspirate=25, dispense=25)
-m300.aspirate(Wash_vol, Wash_1_2.top(-12))
+m300.aspirate(Wash_vol, Wash_1_2.bottom())
 m300.dispense(Wash_vol, SA10.top(-4))
-m300.aspirate(Wash_vol, Wash_1_2.top(-16))
+m300.aspirate(Wash_vol, Wash_1_2.bottom())
 m300.dispense(Wash_vol, SA10.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_vol, SA10.bottom(5))
@@ -848,9 +848,9 @@ m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.set_flow_rate(aspirate=25, dispense=25)
-m300.aspirate(Wash_vol, Wash_1_2.top(-12))
+m300.aspirate(Wash_vol, Wash_1_2.bottom())
 m300.dispense(Wash_vol, SA11.top(-4))
-m300.aspirate(Wash_vol, Wash_1_2.top(-16))
+m300.aspirate(Wash_vol, Wash_1_2.bottom())
 m300.dispense(Wash_vol, SA11.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_vol, SA11.bottom(5))
