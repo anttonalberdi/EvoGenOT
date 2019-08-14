@@ -1,4 +1,4 @@
-Wash 2## Description of procedure ##
+## Description of procedure ##
 #
 #
 # Things do before procedure
