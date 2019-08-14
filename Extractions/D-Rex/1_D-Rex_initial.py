@@ -112,12 +112,12 @@ mag_deck.disengage()
 ### Transfer buffer B and beads to SA1
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.move_to(Binding_buffer1.top(-20))
-m300.mix(3, Binding_buffer_vol, Binding_buffer1.top(-20))
+m300.move_to(Binding_buffer1.top(-25))
+m300.mix(3, Binding_buffer_vol, Binding_buffer1.top(-25))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (50), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.set_flow_rate(aspirate=25, dispense=25)
-m300.aspirate(Binding_buffer_vol, Binding_buffer1.top(-20))
+m300.aspirate(Binding_buffer_vol, Binding_buffer1.top(-25))
 m300.move_to(SA1.bottom(1))
 m300.dispense(Binding_buffer_vol, SA1.bottom(4))
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -133,13 +133,13 @@ m300.drop_tip()
 ### Transfer buffer B and beads to SA2
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.move_to(Binding_buffer1.top(-20))
-m300.mix(3, Binding_buffer_vol, Binding_buffer1.top(-20))
+m300.move_to(Binding_buffer1.top(-25))
+m300.mix(3, Binding_buffer_vol, Binding_buffer1.top(-25))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (50), 'b': (40), 'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.set_flow_rate(aspirate=25, dispense=25)
 m300.move_to(Binding_buffer1.top(-8))
-m300.aspirate(Binding_buffer_vol, Binding_buffer1.top(-20))
+m300.aspirate(Binding_buffer_vol, Binding_buffer1.top(-25))
 m300.move_to(SA2.bottom(1))
 m300.dispense(Binding_buffer_vol, SA2.bottom(4))
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -239,12 +239,12 @@ m300.drop_tip()
 ### Transfer buffer B and beads to SA7
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.move_to(Binding_buffer2.top(-15))
-m300.mix(3, Binding_buffer_vol, Binding_buffer2.top(-12))
+m300.move_to(Binding_buffer2.top(-25))
+m300.mix(3, Binding_buffer_vol, Binding_buffer2.top(-25))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (50), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.set_flow_rate(aspirate=25, dispense=25)
-m300.aspirate(Binding_buffer_vol, Binding_buffer2.top(-12))
+m300.aspirate(Binding_buffer_vol, Binding_buffer2.top(-25))
 m300.move_to(SA7.bottom(1))
 m300.dispense(Binding_buffer_vol, SA7.bottom(4))
 m300.set_flow_rate(aspirate=50, dispense=50)
