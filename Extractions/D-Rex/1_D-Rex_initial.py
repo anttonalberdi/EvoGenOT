@@ -599,7 +599,7 @@ mag_deck.engage(height=34)
 m300.delay(minutes=5)
 
 #Transfer supernatant to RA1
-m300.pick_up_tip(tipracks_200_1.wells('A1')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA1.bottom(2))
 m300.dispense(165, RA1.bottom(4))
@@ -618,7 +618,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 #Transfer supernatant to RA2
-m300.pick_up_tip(tipracks_200_1.wells('A2')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA2.bottom(2))
 m300.dispense(165, RA2.bottom(4))
@@ -637,7 +637,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 #Transfer supernatant to RA3
-m300.pick_up_tip(tipracks_200_1.wells('A3')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA3.bottom(2))
 m300.dispense(165, RA3.bottom(4))
@@ -656,7 +656,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 #Transfer supernatant to RA4
-m300.pick_up_tip(tipracks_200_1.wells('A4')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA4.bottom(2))
 m300.dispense(165, RA4.bottom(4))
@@ -675,7 +675,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 #Transfer supernatant to RA5
-m300.pick_up_tip(tipracks_200_1.wells('A5')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA5.bottom(2))
 m300.dispense(165, RA5.bottom(4))
@@ -694,7 +694,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 #Transfer supernatant to RA6
-m300.pick_up_tip(tipracks_200_1.wells('A6')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA6.bottom(2))
 m300.dispense(165, RA6.bottom(4))
@@ -713,7 +713,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 #Transfer supernatant to RA7
-m300.pick_up_tip(tipracks_200_1.wells('A7')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA7.bottom(2))
 m300.dispense(165, RA7.bottom(4))
@@ -732,7 +732,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 #Transfer supernatant to RA8
-m300.pick_up_tip(tipracks_200_1.wells('A8')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA8.bottom(2))
 m300.dispense(165, RA8.bottom(4))
@@ -751,7 +751,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 #Transfer supernatant to RA9
-m300.pick_up_tip(tipracks_200_1.wells('A9')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip()# Slow down head speed 0.5X for bead handling
 m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA9.bottom(2))
 m300.dispense(165, RA9.bottom(4))
@@ -770,7 +770,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 #Transfer supernatant to RA10
-m300.pick_up_tip(tipracks_200_1.wells('A10')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA10.bottom(2))
 m300.dispense(165, RA10.bottom(4))
@@ -789,7 +789,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 #Transfer supernatant to RA11
-m300.pick_up_tip(tipracks_200_1.wells('A11')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA11.bottom(2))
 m300.dispense(165, RA11.bottom(4))
@@ -808,7 +808,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 #Transfer supernatant to RA12
-m300.pick_up_tip(tipracks_200_1.wells('A12')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.set_flow_rate(aspirate=55, dispense=55)
 m300.aspirate(165, SA12.bottom(2))
 m300.dispense(165, RA12.bottom(4))
