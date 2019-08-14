@@ -52,10 +52,8 @@ mag_deck = modules.load('magdeck', '7')
 DNA_plate = labware.load('1ml_magPCR', '7', share=True)
 backup = labware.load('opentrons-tuberack-50ml', '6')
 
-tipracks_200_1 = labware.load('tiprack-200ul', '2', share=True)
-tipracks_200_2 = labware.load('tiprack-200ul', '3', share=True)
-tipracks_200_3 = labware.load('tiprack-200ul', '4', share=True)
-tipracks_200_4 = labware.load('tiprack-200ul', '5', share=True)
+tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
+               for slot in ['3','4','5','6']]
 
 tipracks_1000 = labware.load('tiprack-1000ul', '11', share=True)
 
@@ -68,7 +66,7 @@ m300 = instruments.P300_Multi(
     max_volume=200,
     aspirate_flow_rate=100,
     dispense_flow_rate=200,
-    tip_racks=tipracks_200_1,tipracks_200_2,tipracks_200_3,tipracks_200_4)
+    tip_racks=tipracks_200)
 
 p1000 = instruments.P1000_Single(
     mount='left',
@@ -145,7 +143,7 @@ m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA1.top(-10))
 m300.blow_out()
 
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA2
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -160,7 +158,7 @@ m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA2.top(-10))
 m300.blow_out()
 
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA3
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -173,7 +171,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA3.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA4
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -186,7 +184,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA4.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA5
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -199,7 +197,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA5.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA6
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -213,7 +211,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA7.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 #### Ensure enough buffer i reservoir by adding 3ml from backup
 robot.comment("Ensure enough buffer i reservoir by adding 3ml from backup")
@@ -247,7 +245,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA7.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA8
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -260,7 +258,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA8.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA9
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -273,7 +271,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA9.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA10
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -286,7 +284,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA10.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA11
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -299,7 +297,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA11.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA12
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -312,7 +310,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA12.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 mag_deck.engage(height=34)
 m300.delay(minutes=2)
@@ -326,7 +324,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA2
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -336,7 +334,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA3
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -346,7 +344,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA4
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -356,7 +354,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA5
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -366,7 +364,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA6
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -376,7 +374,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA7
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -386,7 +384,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA8
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -396,7 +394,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA9
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -406,7 +404,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA10
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -416,7 +414,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA11
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -426,7 +424,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA12
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -436,7 +434,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 mag_deck.disengage()
 
@@ -454,7 +452,7 @@ m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA1.top(-10))
 m300.blow_out()
 
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA2
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -468,7 +466,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA2.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA3
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -481,7 +479,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA3.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA4
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -494,7 +492,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA4.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA5
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -507,7 +505,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA5.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA6
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -521,7 +519,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA7.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 #### Ensure enough buffer i reservoir by adding 3ml from backup
 robot.comment("Ensure enough buffer i reservoir by adding 3ml from backup")
@@ -555,7 +553,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA7.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA8
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -568,7 +566,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA8.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA9
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -581,7 +579,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA9.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA10
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -594,7 +592,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA10.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA11
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -607,7 +605,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA11.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Wash 1 to DA12
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -620,7 +618,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(RA12.top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 mag_deck.engage(height=34)
 m300.delay(minutes=2)
@@ -637,7 +635,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA2
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -647,7 +645,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA3
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -657,7 +655,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA4
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -667,7 +665,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA5
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -677,7 +675,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA6
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -687,7 +685,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA7
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -697,7 +695,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA8
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -707,7 +705,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA9
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -717,7 +715,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA10
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -727,7 +725,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA11
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -737,7 +735,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 ### remove supernatant from DA12
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -747,7 +745,7 @@ m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.return_tip()
+m300.drop_tip()
 
 #### Dry beads before elution (removing supernatant from all wells takes more than 5 mins, should be enough for beads to dry)
 
@@ -767,7 +765,7 @@ for target in samples: # Slow down head speed 0.5X for bead handling
     m300.blow_out()
     max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-    m300.return_tip()
+    m300.drop_tip()
 
 robot.pause("Please cover the plate with film and incubate 5 min 25°C at 1500 rpm")
 
@@ -783,7 +781,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(elution_plate_RNA.wells('A1').top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Elution buffer to elution_plate A2
 m300.pick_up_tip(tipracks_200_4.wells('A2'))
@@ -794,7 +792,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(elution_plate_RNA.wells('A2').top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Elution buffer to elution_plate A3
 m300.pick_up_tip(tipracks_200_4.wells('A3'))
@@ -805,7 +803,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(elution_plate_RNA.wells('A3').top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Elution buffer to elution_plate A4
 m300.pick_up_tip(tipracks_200_4.wells('A4'))
@@ -816,7 +814,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(elution_plate_RNA.wells('A4').top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Elution buffer to elution_plate A5
 m300.pick_up_tip(tipracks_200_4.wells('A5'))
@@ -827,7 +825,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(elution_plate_RNA.wells('A5').top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Elution buffer to elution_plate A6
 m300.pick_up_tip(tipracks_200_4.wells('A6'))
@@ -838,7 +836,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(elution_plate_RNA.wells('A6').top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Elution buffer to elution_plate A7
 m300.pick_up_tip(tipracks_200_4.wells('A7'))
@@ -849,7 +847,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(elution_plate_RNA.wells('A7').top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Elution buffer to elution_plate A8
 m300.pick_up_tip(tipracks_200_4.wells('A8'))
@@ -860,7 +858,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(elution_plate_RNA.wells('A8').top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Elution buffer to elution_plate A9
 m300.pick_up_tip(tipracks_200_4.wells('A9'))
@@ -871,7 +869,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(elution_plate_RNA.wells('A9').top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Elution buffer to elution_plate A10
 m300.pick_up_tip(tipracks_200_4.wells('A10'))
@@ -882,7 +880,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(elution_plate_RNA.wells('A10').top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Elution buffer to elution_plate A11
 m300.pick_up_tip(tipracks_200_4.wells('A11'))
@@ -893,7 +891,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(elution_plate_RNA.wells('A11').top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer Elution buffer to elution_plate A12
 m300.pick_up_tip(tipracks_200_4.wells('A12'))
@@ -904,6 +902,6 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(elution_plate_RNA.wells('A12').top(-10))
 m300.blow_out()
-m300.return_tip()
+m300.drop_tip()
 
 mag_deck.disengage()

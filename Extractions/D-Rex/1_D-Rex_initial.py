@@ -50,9 +50,8 @@ RNA_plate = labware.load('1ml_PCR', '1')
 mag_deck = modules.load('magdeck', '7')
 sample_plate = labware.load('1ml_magPCR', '7', share=True)
 
-tipracks_200_1 = labware.load('tiprack-200ul', 2, share=True)
-tipracks_200_2 = labware.load('tiprack-200ul', 3, share=True)
-tipracks_200_3 = labware.load('tiprack-200ul', 4, share=True)
+tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
+               for slot in ['3','4','5','6']]
 
 #### PIPETTE SETUP ####
 m300 = instruments.P300_Multi(
@@ -61,7 +60,7 @@ m300 = instruments.P300_Multi(
     max_volume=200,
     aspirate_flow_rate=100,
     dispense_flow_rate=200,
-    tip_racks=tipracks_200_1,tipracks_200_2, tipracks_200_3)
+    tip_racks=tipracks_200)
 
 #### REAGENT SETUP
 Binding_buffer1 = trough.wells('A1')
@@ -129,7 +128,7 @@ m300.move_to(SA1.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer buffer B and beads to SA2
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -151,7 +150,7 @@ m300.move_to(SA2.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer buffer B and beads to SA3
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -172,7 +171,7 @@ m300.move_to(SA3.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer buffer B and beads to SA4
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -193,7 +192,7 @@ m300.move_to(SA4.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer buffer B and beads to SA5
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -214,7 +213,7 @@ m300.move_to(SA5.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer buffer B and beads to SA6
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -235,7 +234,7 @@ m300.move_to(SA6.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer buffer B and beads to SA7
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -256,7 +255,7 @@ m300.move_to(SA7.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer buffer B and beads to SA8
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -277,7 +276,7 @@ m300.move_to(SA8.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer buffer B and beads to SA9
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -298,7 +297,7 @@ m300.move_to(SA9.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer buffer B and beads to SA10
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -319,7 +318,7 @@ m300.move_to(SA10.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer buffer B and beads to SA11
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -340,7 +339,7 @@ m300.move_to(SA11.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m300.drop_tip()
 
 ### Transfer buffer B and beads to SA12
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -361,7 +360,7 @@ m300.move_to(SA12.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m300.drop_tip()
 
 ## add beads and EtOH binding buffer to RNA plate
 mag_deck.disengage()
@@ -616,7 +615,7 @@ m300.move_to(RA1.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m300.drop_tip()
 
 #Transfer supernatant to RA2
 m300.pick_up_tip(tipracks_200_1.wells('A2')) # Slow down head speed 0.5X for bead handling
