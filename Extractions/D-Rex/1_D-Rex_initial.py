@@ -279,7 +279,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 ### Transfer buffer B and beads to SA9
-m300.set_flow_rate(aspirate=100 dispense=100)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, Binding_buffer_vol, Binding_buffer2)
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (50), 'b': (20), 'c': (20)}
