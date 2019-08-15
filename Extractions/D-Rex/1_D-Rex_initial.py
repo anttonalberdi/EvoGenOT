@@ -50,9 +50,9 @@ RNA_plate = labware.load('1ml_PCR', '1')
 mag_deck = modules.load('magdeck', '7')
 sample_plate = labware.load('1ml_magPCR', '7', share=True)
 
-tipracks_200_1 = labware.load('tiprack-200ul', 4, share=True)
-tipracks_200_2 = labware.load('tiprack-200ul', 5, share=True)
-tipracks_200_3 = labware.load('tiprack-200ul', 6, share=True)
+tipracks_200_1 = labware.load('tiprack-200ul', '4', share=True)
+tipracks_200_2 = labware.load('tiprack-200ul', '5', share=True)
+tipracks_200_3 = labware.load('tiprack-200ul', '6', share=True)
 
 #### PIPETTE SETUP ####
 m300 = instruments.P300_Multi(
