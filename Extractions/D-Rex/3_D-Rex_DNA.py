@@ -523,7 +523,7 @@ m300.return_tip()
 #### Ensure enough buffer i reservoir by adding 3ml from backup
 robot.comment("Ensure enough buffer i reservoir by adding 3ml from backup")
 p1000.set_flow_rate(aspirate=500, dispense=400)
-p1000.pick_up_tip()
+p1000.pick_up_tip(tipracks_1000.wells('B1'))
 p1000.aspirate(800, ETOH_backup.top(-12))
 p1000.dispense(800, EtOH2.top(-4))
 p1000.delay(seconds=2)

@@ -52,12 +52,12 @@ RNA_plate = labware.load('1ml_magPCR', '7', share=True)
 trash_box = labware.load('One-Column-reservoir', '8')
 backup = labware.load('opentrons-tuberack-50ml', '6')
 
-tipracks_200_1 = labware.load('tiprack-200ul', 2, share=True)
-tipracks_200_2 = labware.load('tiprack-200ul', 3, share=True)
-tipracks_200_3 = labware.load('tiprack-200ul', 4, share=True)
-tipracks_200_4 = labware.load('tiprack-200ul', 5, share=True)
+tipracks_200_1 = labware.load('tiprack-200ul', '2', share=True)
+tipracks_200_2 = labware.load('tiprack-200ul', '3', share=True)
+tipracks_200_3 = labware.load('tiprack-200ul', '4', share=True)
+tipracks_200_4 = labware.load('tiprack-200ul', '5', share=True)
 
-tipracks_1000 = labware.load('tiprack-1000ul', 11, share=True)
+tipracks_1000 = labware.load('tiprack-1000ul', '11', share=True)
 
 
 
