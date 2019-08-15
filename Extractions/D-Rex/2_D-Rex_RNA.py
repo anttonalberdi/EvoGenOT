@@ -68,7 +68,7 @@ m300 = instruments.P300_Multi(
     max_volume=200,
     aspirate_flow_rate=100,
     dispense_flow_rate=200,
-    tip_racks=([tip_racks_200_1, tipracks_200_2, tipracks_200_3, tipracks_200_4]))
+    tip_racks=([tipracks_200_1, tipracks_200_2, tipracks_200_3, tipracks_200_4]))
 
 p1000 = instruments.P1000_Single(
     mount='left',
@@ -809,7 +809,7 @@ m300.move_to(BufferC_1.top(-20))
 m300.mix(3, BufferC_vol, BufferC_1.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=50, dispense=50
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(BufferC_vol, BufferC_1.top(-16))
 m300.move_to(RA2.bottom(1))
 m300.dispense(BufferC_vol, RA2.bottom(4))
