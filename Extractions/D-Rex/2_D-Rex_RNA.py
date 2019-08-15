@@ -18,8 +18,8 @@ from opentrons import labware, instruments, modules, robot
 metadata = {
     'protocolName': 'D-Rex RNA Extraction',
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
-    'version': '1.0',
-    'date': '2019/03/28',
+    'version': '1.0-optimized',
+    'date': '2019/08/15',
     'description': 'Automation of D-Rex RNA protocol for stool samples in SHIELD',
 }
 
