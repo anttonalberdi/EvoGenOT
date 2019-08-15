@@ -57,7 +57,7 @@ tipracks_200_2 = labware.load('tiprack-200ul', 3, share=True)
 tipracks_200_3 = labware.load('tiprack-200ul', 4, share=True)
 tipracks_200_4 = labware.load('tiprack-200ul', 5, share=True)
 
-tipracks_1000 = labware.load('tiprack-1000ul', '11', share=True)
+tipracks_1000 = labware.load('tiprack-1000ul', 11, share=True)
 
 
 
