@@ -780,16 +780,17 @@ robot.pause("Please cover the plate with film and incubate 10 min 25°C at 1300 
 ##Reset tipracks for more tips
 m300.reset()
 
+
 ### Buffer C rebind, by using tiprack 1
 ### Transfer buffer C and beads to RA1
-m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip() # Slow down  speed 0.5X for bead handling
-m300.move_to(BufferC_1.top(-16))
+m300.set_flow_rate(aspirate=100, dispense=100)
+m300.pick_up_tip()
+m300.move(BufferC_1.top(-16))
 m300.mix(3, BufferC_vol, BufferC_1.top(-12))
-max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
-robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
-m300.move_to(BufferC_1.top(-8)
+max_speed_per_axis = {'x':(300), 'y':(300), 'z': (50), 'a': (20), 'b': (20), 'c': 20}
+robot.head_speed(combined_speed=max(max_speed_per_axis.values()), **max_speed_per_axis)
+m.set_flow_rate(aspirate=50, dispense=50)
+m300.move_to(BufferC_1.top(-8))
 m300.aspirate(BufferC_vol, BufferC_1.top(-12))
 m300.move_to(RA1.bottom(1))
 m300.dispense(BufferC_vol, RA1.bottom(4))
@@ -802,6 +803,7 @@ m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.return_tip()
+
 
 ### Transfer buffer C and beads to RA2
 m300.set_flow_rate(aspirate=50, dispense=50)
