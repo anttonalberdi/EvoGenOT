@@ -141,7 +141,7 @@ m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(EtOH1.top(-16))
 m300.aspirate(Wash_1_vol, EtOH1.top(-12))
-m300.dispense(EWash_1_vol, RA1.top(-4))
+m300.dispense(Wash_1_vol, RA1.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_1_vol, RA1.bottom(5))
 m300.delay(seconds=5)
