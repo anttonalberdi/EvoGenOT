@@ -36,7 +36,7 @@ if plate_name not in labware.list():
         depth=35,                       # depth (mm) of each well on the plate
         volume=350000)
 
-plate_name = '1ml_PCR'
+plate_name = '1ml_magPCR'
 if plate_name not in labware.list():
     custom_plate = labware.create(
         plate_name,                    # name of you labware
@@ -52,7 +52,7 @@ trough = labware.load('trough-12row', '9')
 backup = labware.load('opentrons-tuberack-50ml', '5')
 trash_box = labware.load('One-Column-reservoir', '8')
 mag_deck = modules.load('magdeck', '7')
-sample_plate = labware.load('1ml_PCR', '7', share=True)
+sample_plate = labware.load('1ml_magPCR', '7', share=True)
 
 tipracks_300_1 = labware.load('tiprack-200ul', '1', share=True)
 tipracks_300_2 = labware.load('tiprack-200ul', '2', share=True)
@@ -883,7 +883,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Remove wash supernatant
-mag_deck.engage(heigth=34)
+mag_deck.engage(height=34)
 m300.delay(minutes=1)
 ### remove supernatant from SA1
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -1363,7 +1363,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Remove wash supernatant
-mag_deck.engage(heigth=34)
+mag_deck.engage(height=34)
 m300.delay(minutes=1)
 
 ### remove supernatant from SA1
@@ -1851,7 +1851,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Remove ethanol supernatant
-mag_deck.engage(heigth=34)
+mag_deck.engage(height=34)
 m300.delay(minutes=1)
 ### remove supernatant from SA1
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -2331,7 +2331,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Remove ethanol supernatant
-mag_deck.engage(heigth=34)
+mag_deck.engage(height=34)
 m300.delay(minutes=1)
 m300.set_flow_rate(aspirate=130, dispense=300)
 ### remove supernatant from SA1
@@ -2741,7 +2741,7 @@ m300.return_tip()
 ### Incubating beads with elution buffer
 m300.delay(minutes=10)
 
-mag_deck.engage(heigth=34)
+mag_deck.engage(height=34)
 m300.delay(minutes=2)
 
 ### Transfer Elution buffer to EA1
