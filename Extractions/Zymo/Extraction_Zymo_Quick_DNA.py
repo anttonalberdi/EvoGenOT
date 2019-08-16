@@ -50,7 +50,7 @@ if plate_name not in labware.list():
 elution_plate = labware.load('96-flat', '4')
 trough = labware.load('trough-12row', '9')
 backup = labware.load('opentrons-tuberack-50ml', '5')
-trash_box = labware.load('One-Colum-reservoir', '8')
+trash_box = labware.load('One-Column-reservoir', '8')
 mag_deck = modules.load('magdeck', '7')
 sample_plate = labware.load('1ml_PCR', '7', share=True)
 
