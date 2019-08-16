@@ -59,8 +59,7 @@ tipracks_300_2 = labware.load('tiprack-200ul', '2', share=True)
 tipracks_300_3 = labware.load('tiprack-200ul', '3', share=True)
 
 
-tipracks_1000 = [labware.load('tiprack-1000ul', slot, share=True)
-               for slot in ['6']]
+tipracks_1000 = labware.load('tiprack-1000ul', '6', share=True)
 
 #### PIPETTE SETUP ####
 
