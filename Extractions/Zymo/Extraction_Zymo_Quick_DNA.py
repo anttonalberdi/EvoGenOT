@@ -94,6 +94,7 @@ Ethanol_2_1 = trough.wells('A10')
 Ethanol_2_2 = trough.wells('A11')
 
 Elution_buffer = trough.wells('A12')
+
 #### Backup liquids
 Wash_backup = backup.wells('A1')
 Ethanol_backup = backup.wells('A2')
@@ -141,13 +142,13 @@ EA12 = elution_plate.wells('A12')
 mag_deck.disengage()
 
 ### Transfer Binding buffer and beads to SA1
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Binding_buffer1.top(-16))
 m300.mix(3, Binding_buffer_vol, Binding_buffer1.top(-12))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Binding_buffer_vol, Binding_buffer1.top(-12))
 m300.dispense(Binding_buffer_vol, SA1.top(-4))
 m300.aspirate(Binding_buffer_vol, Binding_buffer1.top(-16))
@@ -163,13 +164,13 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Binding buffer and beads to SA2
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Binding_buffer1.bottom())
 m300.mix(3, Binding_buffer_vol, Binding_buffer1.bottom(2))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Binding_buffer_vol, Binding_buffer1.bottom(2))
 m300.dispense(Binding_buffer_vol, SA2.top(-4))
 m300.aspirate(Binding_buffer_vol, Binding_buffer1.bottom(2))
@@ -185,12 +186,12 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Binding buffer and beads to SA3
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, Binding_buffer_vol, Binding_buffer1.bottom(1))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Binding_buffer_vol, Binding_buffer1.bottom(1))
 m300.dispense(Binding_buffer_vol, SA3.top(-4))
 m300.aspirate(Binding_buffer_vol, Binding_buffer1.bottom(1))
@@ -206,12 +207,12 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Binding buffer and beads to SA4
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, Binding_buffer_vol, Binding_buffer1.bottom(1))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Binding_buffer_vol, Binding_buffer1.bottom())
 m300.dispense(Binding_buffer_vol, SA4.top(-4))
 m300.aspirate(Binding_buffer_vol, Binding_buffer1.bottom())
@@ -227,13 +228,13 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Binding buffer and beads to SA5
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Binding_buffer2.top(-16))
 m300.mix(3, Binding_buffer_vol, Binding_buffer2.top(-12))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Binding_buffer_vol, Binding_buffer2.top(-12))
 m300.dispense(Binding_buffer_vol, SA5.top(-4))
 m300.aspirate(Binding_buffer_vol, Binding_buffer2.top(-16))
@@ -249,13 +250,13 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Binding buffer and beads to SA6
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Binding_buffer2.bottom())
 m300.mix(3, Binding_buffer_vol, Binding_buffer2.bottom(4))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Binding_buffer_vol, Binding_buffer2.bottom(2))
 m300.dispense(Binding_buffer_vol, SA6.top(-4))
 m300.aspirate(Binding_buffer_vol, Binding_buffer2.bottom(2))
@@ -271,12 +272,12 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Binding buffer and beads to SA7
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, Binding_buffer_vol, Binding_buffer2.bottom(4))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Binding_buffer_vol, Binding_buffer2.bottom(1))
 m300.dispense(Binding_buffer_vol, SA7.top(-4))
 m300.aspirate(Binding_buffer_vol, Binding_buffer2.bottom(1))
@@ -292,12 +293,12 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Binding buffer and beads to SA8
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, Binding_buffer_vol, Binding_buffer2.bottom(1))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Binding_buffer_vol, Binding_buffer2.bottom())
 m300.dispense(Binding_buffer_vol, SA8.top(-4))
 m300.aspirate(Binding_buffer_vol, Binding_buffer2.bottom())
@@ -313,13 +314,13 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Binding buffer and beads to SA9
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Binding_buffer3.top(-16))
 m300.mix(3, Binding_buffer_vol, Binding_buffer3.top(-12))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Binding_buffer_vol, Binding_buffer3.top(-12))
 m300.dispense(Binding_buffer_vol, SA9.top(-4))
 m300.aspirate(Binding_buffer_vol, Binding_buffer3.top(-16))
@@ -335,13 +336,13 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Binding buffer and beads to SA10
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Binding_buffer3.bottom())
 m300.mix(3, Binding_buffer_vol, Binding_buffer3.bottom(2))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Binding_buffer_vol, Binding_buffer3.bottom(2))
 m300.dispense(Binding_buffer_vol, SA10.top(-4))
 m300.aspirate(Binding_buffer_vol, Binding_buffer3.bottom(2))
@@ -357,12 +358,12 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Binding buffer and beads to SA11
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, Binding_buffer_vol, Binding_buffer3.bottom(1))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Binding_buffer_vol, Binding_buffer3.bottom(1))
 m300.dispense(Binding_buffer_vol, SA11.top(-4))
 m300.aspirate(Binding_buffer_vol, Binding_buffer3.bottom(1))
@@ -378,12 +379,12 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Binding buffer and beads to SA12
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, Binding_buffer_vol, Binding_buffer3.bottom())
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Binding_buffer_vol, Binding_buffer3.bottom())
 m300.dispense(Binding_buffer_vol, SA12.top(-4))
 m300.aspirate(Binding_buffer_vol, Binding_buffer3.bottom())
@@ -586,12 +587,12 @@ m300.return_tip()
 
 ### Wash with wash-buffer
 ### Transfer Wash 1 to SA1
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Wash_1_1.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_1_1.top(-12))
 m300.dispense(Wash_vol, SA1.top(-4))
 m300.aspirate(Wash_vol, Wash_1_1.top(-16))
@@ -607,12 +608,12 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Wash 1 to SA2
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Wash_1_1.bottom())
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_1_1.bottom(2))
 m300.dispense(Wash_vol, SA2.top(-4))
 m300.aspirate(Wash_vol, Wash_1_1.bottom(2))
@@ -628,11 +629,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Wash 1 to SA3
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_1_1.bottom(1))
 m300.dispense(Wash_vol, SA3.top(-4))
 m300.aspirate(Wash_vol, Wash_1_1.bottom(1))
@@ -648,11 +649,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Wash 1 to SA4
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_1_1.bottom())
 m300.dispense(Wash_vol, SA4.top(-4))
 m300.aspirate(Wash_vol, Wash_1_1.bottom())
@@ -670,7 +671,7 @@ m300.return_tip()
 #### Ensure enough buffer i reservoir by adding 3ml from backup
 robot.comment("Ensure enough buffer i reservoir by adding 3ml from backup")
 p1000.set_flow_rate(aspirate=500, dispense=400)
-p1000.pick_up_tip()
+p1000.pick_up_tip(tipracks_1000.wells('A1'))
 p1000.aspirate(800, Wash_backup.top(-12))
 p1000.dispense(800, Wash_1_1.top(-4))
 p1000.delay(seconds=2)
@@ -694,11 +695,11 @@ p1000.blow_out()
 p1000.drop_tip()
 
 ### Transfer Wash 1 to SA5
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_1_1.bottom())
 m300.dispense(Wash_vol, SA5.top(-4))
 m300.aspirate(Wash_vol, Wash_1_1.bottom())
@@ -714,12 +715,12 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Wash 1 to SA6
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Wash_1_1.bottom())
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_1_1.bottom())
 m300.dispense(Wash_vol, SA6.top(-4))
 m300.aspirate(Wash_vol, Wash_1_1.bottom())
@@ -736,12 +737,12 @@ m300.return_tip()
 
 ### Start taking wash buffer from Wash_1_2
 ### Transfer Wash 1 to SA7
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, Wash_vol, Wash_1_2.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_1_2.top(-12))
 m300.dispense(Wash_vol, SA7.top(-4))
 m300.aspirate(Wash_vol, Wash_1_2.top(-16))
@@ -757,14 +758,14 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Wash 1 to SA8
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handlingSA9
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
-m300.aspirate(Wash_vol, Wash_1_2.bottom())
+m300.set_flow_rate(aspirate=50, dispense=50)
+m300.aspirate(Wash_vol, Wash_1_2.bottom(1))
 m300.dispense(Wash_vol, SA8.top(-4))
-m300.aspirate(Wash_vol, Wash_1_2.bottom())
+m300.aspirate(Wash_vol, Wash_1_2.bottom(1))
 m300.dispense(Wash_vol, SA8.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_vol, SA8.bottom(5))
@@ -777,11 +778,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Wash 1 to SA9
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_1_2.bottom())
 m300.dispense(Wash_vol, SA9.top(-4))
 m300.aspirate(Wash_vol, Wash_1_2.bottom())
@@ -797,11 +798,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Wash 1 to SA10
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_1_2.bottom())
 m300.dispense(Wash_vol, SA10.top(-4))
 m300.aspirate(Wash_vol, Wash_1_2.bottom())
@@ -819,7 +820,7 @@ m300.return_tip()
 #### Ensure enough buffer i reservoir by adding 3ml from backup
 robot.comment("Ensure enough buffer i reservoir by adding 3ml from backup")
 p1000.set_flow_rate(aspirate=500, dispense=400)
-p1000.pick_up_tip()
+p1000.pick_up_tip(tipracks_1000.wells('B1'))
 p1000.aspirate(800, Wash_backup.top(-28))
 p1000.dispense(800, Wash_1_2.top(-4))
 p1000.delay(seconds=2)
@@ -843,11 +844,11 @@ p1000.blow_out()
 p1000.drop_tip()
 
 ### Transfer Wash 1 to SA11
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_1_2.bottom())
 m300.dispense(Wash_vol, SA11.top(-4))
 m300.aspirate(Wash_vol, Wash_1_2.bottom())
@@ -863,11 +864,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Wash 1 to SA12
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_1_2.top(-12))
 m300.dispense(Wash_vol, SA12.top(-4))
 m300.aspirate(Wash_vol, Wash_1_2.top(-16))
@@ -1066,12 +1067,12 @@ m300.blow_out(trash_box.wells('A1').top(-5))
 m300.return_tip()
 
 ### Transfer Wash 2 to SA1
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Wash_2_1.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_2_1.top(-12))
 m300.dispense(Wash_vol, SA1.top(-4))
 m300.aspirate(Wash_vol, Wash_2_1.top(-16))
@@ -1087,12 +1088,12 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Wash 2 to SA2
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Wash_2_1.bottom())
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_2_1.bottom(2))
 m300.dispense(Wash_vol, SA2.top(-4))
 m300.aspirate(Wash_vol, Wash_2_1.bottom(2))
@@ -1108,11 +1109,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Wash 2 to SA3
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_2_1.bottom(1))
 m300.dispense(Wash_vol, SA3.top(-4))
 m300.aspirate(Wash_vol, Wash_2_1.bottom(1))
@@ -1128,11 +1129,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Wash 2 to SA4
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_2_1.bottom())
 m300.dispense(Wash_vol, SA4.top(-4))
 m300.aspirate(Wash_vol, Wash_2_1.bottom())
@@ -1150,7 +1151,7 @@ m300.return_tip()
 #### Ensure enough buffer i reservoir by adding 3ml from backup
 robot.comment("Ensure enough buffer i reservoir by adding 3ml from backup")
 p1000.set_flow_rate(aspirate=500, dispense=400)
-p1000.pick_up_tip()
+p1000.pick_up_tip(tipracks_1000.wells('C1'))
 p1000.aspirate(800, Wash_backup.top(-12))
 p1000.dispense(800, Wash_2_1.top(-4))
 p1000.delay(seconds=2)
@@ -1174,11 +1175,11 @@ p1000.blow_out()
 p1000.drop_tip()
 
 ### Transfer Wash 2 to SA5
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_2_1.bottom())
 m300.dispense(Wash_vol, SA5.top(-4))
 m300.aspirate(Wash_vol, Wash_2_1.bottom())
@@ -1194,11 +1195,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Wash 2 to SA6
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_2_1.bottom())
 m300.dispense(Wash_vol, SA6.top(-4))
 m300.aspirate(Wash_vol, Wash_2_1.bottom())
@@ -1216,12 +1217,12 @@ m300.return_tip()
 ### Start taking wash buffer from Wash_2_2
 
 ### Transfer Wash 2 to SA7
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Wash_2_2.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_2_2.top(-12))
 m300.dispense(Wash_vol, SA7.top(-4))
 m300.aspirate(Wash_vol, Wash_2_2.top(-16))
@@ -1237,11 +1238,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Wash 2 to SA8
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=1O0, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handlingSA9
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_2_2.bottom())
 m300.dispense(Wash_vol, SA8.top(-4))
 m300.aspirate(Wash_vol, Wash_2_2.bottom())
@@ -1257,11 +1258,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Wash 2 to SA9
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_2_2.bottom())
 m300.dispense(Wash_vol, SA9.top(-4))
 m300.aspirate(Wash_vol, Wash_2_2.bottom())
@@ -1277,11 +1278,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Wash 2 to SA10
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_2_2.top(-12))
 m300.dispense(Wash_vol, SA10.top(-4))
 m300.aspirate(Wash_vol, Wash_2_2.top(-16))
@@ -1299,7 +1300,7 @@ m300.return_tip()
 #### Ensure enough buffer i reservoir by adding 3ml from backup
 robot.comment("Ensure enough buffer i reservoir by adding 3ml from backup")
 p1000.set_flow_rate(aspirate=500, dispense=400)
-p1000.pick_up_tip()
+p1000.pick_up_tip(tipracks_1000.wells('D1'))
 p1000.aspirate(800, Wash_backup.top(-28))
 p1000.dispense(800, Wash_2_2.top(-4))
 p1000.delay(seconds=2)
@@ -1323,11 +1324,11 @@ p1000.blow_out()
 p1000.drop_tip()
 
 ### Transfer Wash 2 to SA11
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_2_2.top(-12))
 m300.dispense(Wash_vol, SA11.top(-4))
 m300.aspirate(Wash_vol, Wash_2_2.top(-16))
@@ -1343,11 +1344,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Wash 2 to SA12
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Wash_vol, Wash_2_2.top(-12))
 m300.dispense(Wash_vol, SA12.top(-4))
 m300.aspirate(Wash_vol, Wash_2_2.top(-16))
@@ -1365,7 +1366,7 @@ m300.return_tip()
 ### Remove wash supernatant
 mag_deck.engage(heigth=34)
 m300.delay(minutes=1)
-m300.set_flow_rate(aspirate=130, dispense=300)
+
 ### remove supernatant from SA1
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip(tipracks_300_3.wells('A1'))
@@ -1554,12 +1555,12 @@ m300.reset()
 
 
 ### Transfer Ethanol 1 to SA1
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Ethanol_1_1.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_1_1.top(-12))
 m300.dispense(Ethanol_vol, SA1.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_1_1.top(-16))
@@ -1575,12 +1576,12 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Ethanol 1 to SA2
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Ethanol_1_1.bottom())
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_1_1.bottom(2))
 m300.dispense(Ethanol_vol, SA2.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_1_1.bottom(2))
@@ -1596,11 +1597,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Ethanol 1 to SA3
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_1_1.bottom(1))
 m300.dispense(Ethanol_vol, SA3.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_1_1.bottom(1))
@@ -1616,11 +1617,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Ethanol 1 to SA4
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_1_1.bottom())
 m300.dispense(Ethanol_vol, SA4.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_1_1.bottom())
@@ -1638,7 +1639,7 @@ m300.return_tip()
 #### Ensure enough buffer i reservoir by adding 3ml from backup
 robot.comment("Ensure enough buffer i reservoir by adding 3ml from backup")
 p1000.set_flow_rate(aspirate=500, dispense=400)
-p1000.pick_up_tip()
+p1000.pick_up_tip(tipracks_1000.wells('E1'))
 p1000.aspirate(800, Ethanol_backup.top(-12))
 p1000.dispense(800, Ethanol_1_1.top(-4))
 p1000.delay(seconds=2)
@@ -1662,11 +1663,11 @@ p1000.blow_out()
 p1000.drop_tip()
 
 ### Transfer Ethanol 1 to SA5
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_1_1.bottom())
 m300.dispense(Ethanol_vol, SA5.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_1_1.bottom())
@@ -1682,11 +1683,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Ethanol 1 to SA6
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_1_1.bottom())
 m300.dispense(Ethanol_vol, SA6.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_1_1.bottom())
@@ -1704,12 +1705,12 @@ m300.return_tip()
 ### Start taking Ethanol buffer from Ethanol_1_2
 
 ### Transfer Ethanol 1 to SA7
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Ethanol_1_2.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_1_2.top(-12))
 m300.dispense(Ethanol_vol, SA7.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_1_2.top(-16))
@@ -1725,11 +1726,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Ethanol 1 to SA8
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handlingSA9
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_1_2.bottom())
 m300.dispense(Ethanol_vol, SA8.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_1_2.bottom())
@@ -1745,11 +1746,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Ethanol 1 to SA9
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_1_2.bottom())
 m300.dispense(Ethanol_vol, SA9.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_1_2.bottom())
@@ -1765,11 +1766,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Ethanol 1 to SA10
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_1_2.top(-12))
 m300.dispense(Ethanol_vol, SA10.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_1_2.top(-16))
@@ -1787,7 +1788,7 @@ m300.return_tip()
 #### Ensure enough buffer i reservoir by adding 3ml from backup
 robot.comment("Ensure enough buffer i reservoir by adding 3ml from backup")
 p1000.set_flow_rate(aspirate=500, dispense=400)
-p1000.pick_up_tip()
+p1000.pick_up_tip(tipracks_1000.wells('F1'))
 p1000.aspirate(800, Ethanol_backup.top(-28))
 p1000.dispense(800, Ethanol_1_2.top(-4))
 p1000.delay(seconds=2)
@@ -1811,11 +1812,11 @@ p1000.blow_out()
 p1000.drop_tip()
 
 ### Transfer Ethanol 1 to SA11
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_1_2.top(-12))
 m300.dispense(Ethanol_vol, SA11.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_1_2.top(-16))
@@ -1831,11 +1832,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Ethanol 1 to SA12
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_1_2.top(-12))
 m300.dispense(Ethanol_vol, SA12.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_1_2.top(-16))
@@ -2034,12 +2035,12 @@ m300.blow_out(trash_box.wells('A1').top(-5))
 m300.return_tip()
 
 ### Transfer Ethanol 2 to SA1
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Ethanol_2_1.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_2_1.top(-12))
 m300.dispense(Ethanol_vol, SA1.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_2_1.top(-16))
@@ -2055,12 +2056,12 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Ethanol 2 to SA2
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Ethanol_2_1.bottom())
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_2_1.bottom(2))
 m300.dispense(Ethanol_vol, SA2.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_2_1.bottom(2))
@@ -2076,11 +2077,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Ethanol 2 to SA3
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_2_1.bottom(1))
 m300.dispense(Ethanol_vol, SA3.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_2_1.bottom(1))
@@ -2096,11 +2097,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Ethanol 2 to SA4
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_2_1.bottom())
 m300.dispense(Ethanol_vol, SA4.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_2_1.bottom())
@@ -2118,7 +2119,7 @@ m300.return_tip()
 #### Ensure enough buffer i reservoir by adding 3ml from backup
 robot.comment("Ensure enough buffer i reservoir by adding 3ml from backup")
 p1000.set_flow_rate(aspirate=500, dispense=400)
-p1000.pick_up_tip()
+p1000.pick_up_tip(tipracks_1000.wells('G1'))
 p1000.aspirate(800, Ethanol_backup.top(-12))
 p1000.dispense(800, Ethanol_2_1.top(-4))
 p1000.delay(seconds=2)
@@ -2142,11 +2143,11 @@ p1000.blow_out()
 p1000.drop_tip()
 
 ### Transfer Ethanol 2 to SA5
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_2_1.bottom())
 m300.dispense(Ethanol_vol, SA5.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_2_1.bottom())
@@ -2162,11 +2163,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Ethanol 2 to SA6
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_2_1.bottom())
 m300.dispense(Ethanol_vol, SA6.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_2_1.bottom())
@@ -2184,12 +2185,12 @@ m300.return_tip()
 ### Start taking Ethanol buffer from Ethanol_2_2
 
 ### Transfer Ethanol 2 to SA7
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Ethanol_2_2.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_2_2.top(-12))
 m300.dispense(Ethanol_vol, SA7.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_2_2.top(-16))
@@ -2205,11 +2206,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Ethanol 2 to SA8
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handlingSA9
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_2_2.bottom())
 m300.dispense(Ethanol_vol, SA8.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_2_2.bottom())
@@ -2225,11 +2226,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Ethanol 2 to SA9
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_2_2.bottom())
 m300.dispense(Ethanol_vol, SA9.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_2_2.bottom())
@@ -2245,11 +2246,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Ethanol 2 to SA10
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_2_2.top(-12))
 m300.dispense(Ethanol_vol, SA10.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_2_2.top(-16))
@@ -2267,7 +2268,7 @@ m300.return_tip()
 #### Ensure enough buffer i reservoir by adding 3ml from backup
 robot.comment("Ensure enough buffer i reservoir by adding 3ml from backup")
 p1000.set_flow_rate(aspirate=500, dispense=400)
-p1000.pick_up_tip()
+p1000.pick_up_tip(tipracks_1000.wells('H1'))
 p1000.aspirate(800, Ethanol_backup.top(-28))
 p1000.dispense(800, Ethanol_2_2.top(-4))
 p1000.delay(seconds=2)
@@ -2291,11 +2292,11 @@ p1000.blow_out()
 p1000.drop_tip()
 
 ### Transfer Ethanol 2 to SA11
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_2_2.top(-12))
 m300.dispense(Ethanol_vol, SA11.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_2_2.top(-16))
@@ -2311,11 +2312,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Ethanol 2 to SA12
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Ethanol_vol, Ethanol_2_2.top(-12))
 m300.dispense(Ethanol_vol, SA12.top(-4))
 m300.aspirate(Ethanol_vol, Ethanol_2_2.top(-16))
@@ -2519,12 +2520,12 @@ m300.delay(minutes=5)
 mag_deck.disengage()
 
 ### Transfer Elution buffer to SA1
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Elution_buffer.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, Elution_buffer.top(-12))
 m300.dispense(Elution_buffer_vol, SA1.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -2538,12 +2539,12 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Elution buffer to SA2
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Elution_buffer.bottom())
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, Elution_buffer.top(-16))
 m300.dispense(Elution_buffer_vol, SA2.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -2557,11 +2558,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Elution buffer to SA3
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, Elution_buffer.bottom(1))
 m300.dispense(Elution_buffer_vol, SA3.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -2575,11 +2576,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Elution buffer to SA4
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, Elution_buffer.bottom())
 m300.dispense(Elution_buffer_vol, SA4.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -2593,11 +2594,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Elution buffer to SA5
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, Elution_buffer.bottom())
 m300.dispense(Elution_buffer_vol, SA5.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -2611,11 +2612,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Elution buffer to SA6
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, Elution_buffer.bottom())
 m300.dispense(Elution_buffer_vol, SA6.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -2629,11 +2630,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Elution buffer to SA7
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, Elution_buffer.bottom())
 m300.dispense(Elution_buffer_vol, SA7.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -2647,11 +2648,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Elution buffer to SA8
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, Elution_buffer.bottom())
 m300.dispense(Elution_buffer_vol, SA8.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -2665,11 +2666,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Elution buffer to SA9
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, Elution_buffer.bottom())
 m300.dispense(Elution_buffer_vol, SA9.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -2683,12 +2684,12 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Elution buffer to SA10
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Elution_buffer.bottom())
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, Elution_buffer.bottom())
 m300.dispense(Elution_buffer_vol, SA10.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -2702,11 +2703,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Elution buffer to SA11
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, Elution_buffer.bottom())
 m300.dispense(Elution_buffer_vol, SA11.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -2720,11 +2721,11 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 ### Transfer Elution buffer to SA12
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, Elution_buffer.bottom())
 m300.dispense(Elution_buffer_vol, SA12.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -2746,7 +2747,7 @@ m300.delay(minutes=2)
 
 ### Transfer Elution buffer to EA1
 m300.pick_up_tip(tipracks_300_2.wells('A1'))
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, SA1.bottom())
 m300.dispense(Elution_buffer_vol, EA1.bottom(2))
 m300.delay(seconds=5)
@@ -2757,7 +2758,7 @@ m300.return_tip()
 
 ### Transfer Elution buffer to EA2
 m300.pick_up_tip(tipracks_300_2.wells('A2'))
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, SA2.bottom())
 m300.dispense(Elution_buffer_vol, EA2.bottom(2))
 m300.delay(seconds=5)
@@ -2768,7 +2769,7 @@ m300.return_tip()
 
 ### Transfer Elution buffer to EA3
 m300.pick_up_tip(tipracks_300_2.wells('A3'))
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, SA3.bottom())
 m300.dispense(Elution_buffer_vol, EA3.bottom(2))
 m300.delay(seconds=5)
@@ -2779,7 +2780,7 @@ m300.return_tip()
 
 ### Transfer Elution buffer to EA4
 m300.pick_up_tip(tipracks_300_2.wells('A4'))
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, SA4.bottom())
 m300.dispense(Elution_buffer_vol, EA4.bottom(2))
 m300.delay(seconds=5)
@@ -2790,7 +2791,7 @@ m300.return_tip()
 
 ### Transfer Elution buffer to EA5
 m300.pick_up_tip(tipracks_300_2.wells('A5'))
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, SA5.bottom())
 m300.dispense(Elution_buffer_vol, EA5.bottom(2))
 m300.delay(seconds=5)
@@ -2801,7 +2802,7 @@ m300.return_tip()
 
 ### Transfer Elution buffer to EA6
 m300.pick_up_tip(tipracks_300_2.wells('A6'))
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, SA6.bottom())
 m300.dispense(Elution_buffer_vol, EA6.bottom(2))
 m300.delay(seconds=5)
@@ -2812,7 +2813,7 @@ m300.return_tip()
 
 ### Transfer Elution buffer to EA7
 m300.pick_up_tip(tipracks_300_2.wells('A7'))
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, SA7.bottom())
 m300.dispense(Elution_buffer_vol, EA7.bottom(2))
 m300.delay(seconds=5)
@@ -2823,7 +2824,7 @@ m300.return_tip()
 
 ### Transfer Elution buffer to EA8
 m300.pick_up_tip(tipracks_300_2.wells('A8'))
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, SA8.bottom())
 m300.dispense(Elution_buffer_vol, EA8.bottom(2))
 m300.delay(seconds=5)
@@ -2834,7 +2835,7 @@ m300.return_tip()
 
 ### Transfer Elution buffer to EA9
 m300.pick_up_tip(tipracks_300_2.wells('A9'))
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, SA9.bottom())
 m300.dispense(Elution_buffer_vol, EA9.bottom(2))
 m300.delay(seconds=5)
@@ -2845,7 +2846,7 @@ m300.return_tip()
 
 ### Transfer Elution buffer to EA10
 m300.pick_up_tip(tipracks_300_2.wells('A10'))
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, SA10.bottom())
 m300.dispense(Elution_buffer_vol, EA10.bottom(2))
 m300.delay(seconds=5)
@@ -2856,7 +2857,7 @@ m300.return_tip()
 
 ### Transfer Elution buffer to EA11
 m300.pick_up_tip(tipracks_300_2.wells('A11'))
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, SA11.bottom())
 m300.dispense(Elution_buffer_vol, EA11.bottom(2))
 m300.delay(seconds=5)
@@ -2867,7 +2868,7 @@ m300.return_tip()
 
 ### Transfer Elution buffer to EA12
 m300.pick_up_tip(tipracks_300_2.wells('A12'))
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(Elution_buffer_vol, SA12.bottom())
 m300.dispense(Elution_buffer_vol, EA12.bottom(2))
 m300.delay(seconds=5)
