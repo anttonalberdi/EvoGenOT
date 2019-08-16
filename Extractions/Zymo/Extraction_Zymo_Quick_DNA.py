@@ -402,7 +402,7 @@ m300.return_tip()
 robot.pause("Distribution of binding buffer is done. Incubate samples in 20 minutes on rotator to ensure proper binding. Press resume to continue process after incubation")
 
 ### Remove supernatant
-mag_deck.engage(heigth=34)
+mag_deck.engage(height=34)
 m300.delay(minutes=3)
 
 ### remove supernatant from SA1
