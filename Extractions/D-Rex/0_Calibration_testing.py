@@ -48,9 +48,12 @@ trough = labware.load('trough-12row', '9')          # Model for calibration
 RNA_plate = labware.load('1ml_PCR', '1')            # Model for calibration
 mag_deck = modules.load('magdeck', '7')
 sample_plate = labware.load('1ml_magPCR', '7', share=True)
+backup = labware.load('opentrons-tuberack-50ml', '6')
 
 tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
-               for slot in ['3','4','5','6']]
+               for slot in ['3','4','5']]
+
+tipracks_1000 = labware.load('tiprack-1000ul', '11', share=True)
 
 
 
@@ -63,9 +66,15 @@ m300 = instruments.P300_Multi(
     dispense_flow_rate=200,
     tip_racks=tipracks_200)
 
+p1000 = instruments.P1000_Single(
+    mount='left',
+    aspirate_flow_rate=500,
+    dispense_flow_rate=500,
+    tip_racks=tipracks_1000)
+
 #### REAGENT SETUP
 Binding_buffer1 = trough.wells('A1')
-
+ETOH_backup = backup.wells('A1')
 
 #### Plate SETUP
 SA1 = sample_plate.wells('A1')
@@ -148,3 +157,13 @@ m300.delay(seconds=3)
 m300.dispense(30, SA1.top(-26))
 m300.delay(seconds=3)
 m300.return_tip()
+
+p1000.pick_up_tip(tipracks_1000.wells('A1'))
+p1000.aspirate(1000, Binding_buffer1.top(-12))
+p1000.dispense(300, ETOH_backup.top(-20))
+p1000.delay(seconds=3)
+p1000.dispense(300, ETOH_backup.top(-25))
+p1000.delay(seconds=3)
+p1000.dispense(300, ETOH_backup.top(-30))
+p1000.delay(seconds=3)
+p1000.return_tip()
