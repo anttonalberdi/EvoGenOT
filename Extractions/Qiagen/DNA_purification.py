@@ -1,5 +1,5 @@
-# imports
-from opentrons import labware, instruments
+####### IMPORT LIBRARIES ########
+from opentrons import labware, instruments, modules, robot
 
 # metadata
 metadata = {
@@ -41,9 +41,9 @@ Trash = labware.load('One-Column-reservoir','8')
 elution_plate = labware.load('biorad-hardshell-96-PCR','10')
 
 
-tipracks_200_1 = [labware.load('tiprack-200ul', '4', share=True)
-tipracks_200_2 = [labware.load('tiprack-200ul', '5', share=True)
-tipracks_200_3 = [labware.load('tiprack-200ul', '6', share=True)
+tipracks_200_1 = labware.load('tiprack-200ul', '4', share=True)
+tipracks_200_2 = labware.load('tiprack-200ul', '5', share=True)
+tipracks_200_3 = labware.load('tiprack-200ul', '6', share=True)
 
 
 #### PIPETTE SETUP ####
@@ -54,10 +54,9 @@ m300 = instruments.P300_Multi(
     max_volume=300,
     aspirate_flow_rate=100,
     dispense_flow_rate=200,
-    tip_racks=tipracks_300_1,tipracks_300_2,tipracks_300_3)
+    tip_racks=(tipracks_300_1,tipracks_300_2,tipracks_300_3)
 
 ###  PURIFICATION REAGENTS SETUP ###
-
 SPRI_beads = trough.wells('A1')
 EtOH1 = trough.wells('A4')
 EtOH2 = trough.wells('A5')
