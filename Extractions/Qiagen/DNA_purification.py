@@ -5,7 +5,7 @@ from opentrons import labware, instruments
 metadata = {
     'protocolName': 'DNA Purification',
     'author': 'Name <lassenyholm@gmail.com>',
-    'description': 'DNA purification of PowerSoil/Fecal extracts (C1 and bead beating)",
+    'description': 'DNA purification of PowerSoil/Fecal extracts (C1 and bead beating)',
 }
 
 ### CUSTOM LABWARE ###
@@ -29,8 +29,8 @@ if plate_name not in labware.list():
         diameter=7.5,                     # diameter (mm) of each well on the plate
         depth=26.4,                       # depth (mm) of each well on the plate
         volume=1000)
-        
-        
+
+
 
 ### LABWARE SETUP ###
 
@@ -220,9 +220,9 @@ mag_deck.engage(height=16)
 m300.delay(minutes=5)
 
 
-   
-### REMOVING SUPERNATANT ###  
-   
+
+### REMOVING SUPERNATANT ###
+
 ### remove supernatant from SA1
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip(tipracks_200_1.wells('A1'))
@@ -966,4 +966,3 @@ mag_deck.disengage()
 
 
 robot.pause("Yay! \ Purification has finished \ Please store purified samples as -20°C \ Press resume when finished.")
-
