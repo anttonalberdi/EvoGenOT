@@ -184,27 +184,6 @@ temp_deck_2.set_temperature(10)
 temp_deck_1.wait_for_temp()
 temp_deck_2.wait_for_temp()
 
-### Addition of End repair mastermix to enzymes
-
-m300.set_flow_rate(aspirate=180, dispense=180)
-m300.pick_up_tip(tipracks_200.wells('A1')) # Slow down head speed 0.5X for bead handling
-m300.move_to(ER_mastermix.bottom())
-m300.mix(3, 50, ER_mastermix.bottom(4))
-max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (20), 'b': (20), 'c': (20)}
-robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=50, dispense=50)
-m300.aspirate(MM_dist_ER,ER_mastermix.bottom(1))
-m300.move_to(Enzyme_ER.bottom())
-m300.dispense(MM_dist_ER,Enzyme_ER.bottom(4))
-m300.set_flow_rate(aspirate=50, dispense=50)
-m300.mix(5, 30, Enzyme_ER.bottom(4))
-m300.delay(seconds=5)
-m300.move_to(Enzyme_ER.top(-4))
-m300.blow_out()
-max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
-robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.drop_tip()
-
 ### Addition of End repair mastermix to libraries
 
 for target in samples:
