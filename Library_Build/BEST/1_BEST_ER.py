@@ -124,8 +124,8 @@ temp_plate = labware.load('biorad-hardshell-96-PCR', '10', share=True)
 #mag_deck = modules.load('magdeck', '7')
 #mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 
-tipracks_10_1 = labware.load('tipracks-10ul', '8', share=True)
-tipracks_200_1 = labware.load('tipracks-200ul', '9', share=True)
+tipracks_10_1 = labware.load('tiprack-10ul', '8', share=True)
+tipracks_200_1 = labware.load('tiprack-200ul', '9', share=True)
 
 
 #### PIPETTE SETUP ####
