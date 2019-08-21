@@ -71,7 +71,7 @@ if not robot.is_simulating():
 
 
 temp_deck1 = modules.load('tempdeck', '7')
-Cold_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
+MM_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 # trough = labware.load('trough-12row', '2')
 # Trash = labware.load('One-Column-reservoir','3')
 temp_deck2 = modules.load('tempdeck', '10')
@@ -100,15 +100,15 @@ m300 = instruments.P300_Multi(
     tip_racks=tipracks_200)
 
 ## Enzyme SETUP
-# Enzyme_ER = Cold_plate.wells('A1')
-Enzyme_Lig = Cold_plate.wells('A2')
-# Enzyme_Fill = Cold_plate.wells('A3')
+# Enzyme_ER = MM_plate.wells('A1')
+Enzyme_Lig = MM_plate.wells('A2')
+# Enzyme_Fill = MM_plate.wells('A3')
 
 ## Reagent SETUP
-# ER_mastermix = Cold_plate.wells('A4')
-BGI_adapter = Cold_plate.wells('A5')
-Lig_mastermix = Cold_plate.wells('A6')
-# Fill_mastermix = Cold_plate.wells('A7')
+# ER_mastermix = MM_plate.wells('A4')
+BGI_adapter = MM_plate.wells('A5')
+Lig_mastermix = MM_plate.wells('A6')
+# Fill_mastermix = MM_plate.wells('A7')
 
 ## Purification reagents SETUP
 # SPRI_beads = trough.wells('A8')
