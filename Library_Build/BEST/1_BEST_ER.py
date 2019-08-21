@@ -172,11 +172,7 @@ MM_dist_ER = ER_vol * col_num
 #MM_dist_Fill = Fill_vol * col_num
 
 
-
-"""
-Blund end repair
-"""
-
+#### PROTOCOL ####
 temp_deck_1.set_temperature(10)
 temp_deck_2.set_temperature(10)
 

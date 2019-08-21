@@ -105,8 +105,7 @@ EtOH_vol = 160
 EtOH_vol2 = 150
 elution_vol = 35
 
-robot.comment("Yay! \ Purification begins!")
-
+#### PROTOCOL ####
 ### Beads addition
 mag_deck.disengage()
 
