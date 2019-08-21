@@ -206,7 +206,7 @@ m300.move_to(Enzyme_ER.top(-4))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.drop_tip()
+m300.return_tip()
 
 ### Addition of End repair mastermix to libraries
 
@@ -228,7 +228,7 @@ for target in samples:
     m10.blow_out()
     max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-    m10.drop_tip()
+    m10.return_tip()
 
 
 robot.pause("Yay! \ Please incubate in PCR machine \ at 20°C for 30 minutes, followed by 30 minutes at 65°C. \ Press resume when finished.")
