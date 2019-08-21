@@ -124,17 +124,14 @@ temp_plate = labware.load('biorad-hardshell-96-PCR', '10', share=True)
 #mag_deck = modules.load('magdeck', '7')
 #mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 
-tipracks_10 = [labware.load('tiprack-10ul', slot, share=True)
-               for slot in ['8','5', '4']]
-
-tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
-                for slot in ['9', '11']]
+tipracks_10_1 = labware.load('tipracks-10ul', '8', share=True)
+tipracks_200_1 = labware.load('tipracks-200ul', '9', share=True)
 
 
 #### PIPETTE SETUP ####
 m10 = instruments.P10_Multi(
     mount='left',
-    tip_racks=tipracks_10)
+    tip_racks=tipracks_10_1)
 
 m300 = instruments.P300_Multi(
     mount='right',
@@ -142,7 +139,7 @@ m300 = instruments.P300_Multi(
     max_volume=200,
     aspirate_flow_rate=100,
     dispense_flow_rate=200,
-    tip_racks=tipracks_200)
+    tip_racks=tipracks_200_1)
 
 ## Enzyme SETUP
 Enzyme_ER = MM_plate.wells('A1')
@@ -195,7 +192,7 @@ m300.move_to(ER_mastermix.bottom())
 m300.mix(3, 50, ER_mastermix.bottom(4))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (20), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(MM_dist_ER,ER_mastermix.bottom(1))
 m300.move_to(Enzyme_ER.bottom())
 m300.dispense(MM_dist_ER,Enzyme_ER.bottom(4))
@@ -216,7 +213,7 @@ for target in samples:
     m10.mix(3, 10, Enzyme_ER)
     max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-    m10.set_flow_rate(aspirate=25, dispense=25)
+    m10.set_flow_rate(aspirate=50, dispense=50)
     m10.aspirate(ER_vol, Enzyme_ER.bottom(1))
     m10.move_to(target.bottom())
     m10.dispense(ER_vol, target.bottom(3))
