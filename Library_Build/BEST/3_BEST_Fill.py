@@ -144,13 +144,13 @@ temp_deck_1.wait_for_temp()
 temp_deck_2.wait_for_temp()
 
 ### Addition of Fill in mastermix to enzymes
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Fill_mastermix.bottom())
 m300.mix(3, 50, Fill_mastermix.bottom(4))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (20), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=25, dispense=25)
+m300.set_flow_rate(aspirate=50, dispense=50)
 m300.aspirate(MM_dist_Fill, Fill_mastermix.bottom(1))
 m300.move_to(Enzyme_Fill.bottom())
 m300.dispense(MM_dist_Fill, Enzyme_Fill.bottom(2))
@@ -166,12 +166,12 @@ m300.drop_tip()
 
 ### Addition of Fill in mastermix to to libraries
 for target in samples:
-    m10.set_flow_rate(aspirate=50, dispense=50)
+    m10.set_flow_rate(aspirate=100, dispense=100)
     m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
     m10.mix(3, 10, Enzyme_Fill.bottom(4))
     max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (20), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-    m10.set_flow_rate(aspirate=20, dispense=20)
+    m10.set_flow_rate(aspirate=50, dispense=50)
     m10.aspirate(Fill_vol, Enzyme_Fill.bottom(1))
     m10.move_to(target.bottom())
     m10.dispense(Fill_vol, target.bottom(3))
