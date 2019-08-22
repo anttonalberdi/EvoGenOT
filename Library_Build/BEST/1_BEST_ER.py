@@ -116,7 +116,7 @@ if not robot.is_simulating():
 
 
 temp_deck1 = modules.load('tempdeck', '4')
-Cold_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
+Cold_plate = labware.load('biorad-hardshell-96-PCR', '4', share=True)
 # trough = labware.load('trough-12row', '2')
 # Trash = labware.load('One-Column-reservoir','3')
 temp_deck2 = modules.load('tempdeck', '10')
