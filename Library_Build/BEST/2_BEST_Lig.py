@@ -70,8 +70,8 @@ if not robot.is_simulating():
 
 
 
-temp_deck1 = modules.load('tempdeck', '7')
-MM_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
+temp_deck1 = modules.load('tempdeck', '4')
+MM_plate = labware.load('biorad-hardshell-96-PCR', '4', share=True)
 # trough = labware.load('trough-12row', '2')
 # Trash = labware.load('One-Column-reservoir','3')
 temp_deck2 = modules.load('tempdeck', '10')
@@ -162,7 +162,7 @@ for target in samples:
     m10.blow_out()
     max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-    m10.drop_tip()
+    m10.return_tip()
 
 
 ### Addition of End repair mastermix to enzymes
@@ -203,7 +203,7 @@ for target in samples:
     m10.blow_out()
     max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-    m10.drop_tip()
+    m10.return_tip()
 
 temp_deck_1.deactivate()
 temp_deck_2.deactivate()

@@ -71,8 +71,8 @@ if not robot.is_simulating():
 
 
 
-temp_deck1 = modules.load('tempdeck', '7')
-MM_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
+temp_deck1 = modules.load('tempdeck', '4')
+MM_plate = labware.load('biorad-hardshell-96-PCR', '4', share=True)
 # trough = labware.load('trough-12row', '2')
 # Trash = labware.load('One-Column-reservoir','3')
 temp_deck2 = modules.load('tempdeck', '10')
@@ -81,7 +81,7 @@ temp_plate = labware.load('biorad-hardshell-96-PCR', '10', share=True)
 #mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 
 tipracks_10 = [labware.load('tiprack-10ul', slot, share=True)
-               for slot in ['8','5', '4']]
+               for slot in ['8']]
 
 tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
                 for slot in ['9']]
@@ -141,7 +141,7 @@ temp_deck_2.wait_for_temp()
 
 ### Addition of Fill in mastermix to enzymes
 m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip(tipracks_200.wells('C1')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Fill_mastermix.bottom())
 m300.mix(3, 50, Fill_mastermix.bottom(4))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (20), 'b': (20), 'c': (20)}
