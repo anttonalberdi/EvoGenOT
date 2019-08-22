@@ -220,7 +220,7 @@ for target in samples:
     m10.move_to(target.bottom())
     m10.dispense(ER_vol, target.bottom(3))
     m10.set_flow_rate(aspirate=50, dispense=50)
-    m10.mix(5, 10, target.bottom(3))
+    m10.mix(5, 10, target.bottom(2))
     m10.delay(seconds=5)
     m10.set_flow_rate(aspirate=100, dispense=100)
     m10.move_to(target.top(-4))
