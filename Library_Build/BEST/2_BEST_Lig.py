@@ -80,7 +80,7 @@ temp_plate = labware.load('biorad-hardshell-96-PCR', '10', share=True)
 #mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 
 tipracks_10 = [labware.load('tiprack-10ul', slot, share=True)
-               for slot in ['8','6', '3']]
+               for slot in ['8','5']]
 
 tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
                 for slot in ['9']]
