@@ -129,7 +129,11 @@ Lig_vol = 8
 MM_dist_Lig = Lig_vol * col_num
 #MM_dist_Fill = Fill_vol * col_num
 
-#### PROTOCOL ####
+"""
+Ligase
+"""
+robot.comment("Yay! \ Ligase begins.")
+
 temp_deck_1.set_temperature(10)
 temp_deck_2.set_temperature(10)
 
@@ -163,7 +167,7 @@ for target in samples:
 
 ### Addition of End repair mastermix to enzymes
 m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip(tipracks_200.wells('B1')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Lig_mastermix.bottom())
 m300.mix(3, 50, Lig_mastermix.bottom(4))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (20), 'b': (20), 'c': (20)}
@@ -185,7 +189,7 @@ m300.drop_tip()
 ### Addition of End repair mastermix to libraries
 for target in samples:
     m10.set_flow_rate(aspirate=100, dispense=100)
-    m10.pick_up_tip(tipracks_10) # Slow down head speed 0.5X for bead handling
+    m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
     m10.mix(3, 10, Enzyme_Lig)
     max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (20), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -203,3 +207,4 @@ for target in samples:
 
 temp_deck_1.deactivate()
 temp_deck_2.deactivate()
+robot.comment("Yay! \ Please incubate in PCR machine \ at 20°C for 30 minutes, followed by 15 minutes at 65°C. \ Press resume when finished.")
