@@ -116,7 +116,7 @@ if not robot.is_simulating():
 
 
 temp_deck1 = modules.load('tempdeck', '7')
-MM_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
+Cold_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 # trough = labware.load('trough-12row', '2')
 # Trash = labware.load('One-Column-reservoir','3')
 temp_deck2 = modules.load('tempdeck', '10')
@@ -124,8 +124,11 @@ temp_plate = labware.load('biorad-hardshell-96-PCR', '10', share=True)
 #mag_deck = modules.load('magdeck', '7')
 #mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 
-tipracks_10 = labware.load('tiprack-10ul', '8', share=True)
-tipracks_200 = labware.load('tiprack-200ul', '9', share=True)
+tipracks_10 = [labware.load('tiprack-10ul', slot, share=True)
+               for slot in ['8','5', '4']]
+
+tipracks_200 = [labware.load('tiprack-200ul', slot, share=True)
+                for slot in ['9', '11']]
 
 
 #### PIPETTE SETUP ####
@@ -142,15 +145,15 @@ m300 = instruments.P300_Multi(
     tip_racks=tipracks_200)
 
 ## Enzyme SETUP
-Enzyme_ER = MM_plate.wells('A1')
-# Enzyme_Lig = MM_plate.wells('A2')
-# Enzyme_Fill = MM_plate.wells('A3')
+Enzyme_ER = Cold_plate.wells('A1')
+# Enzyme_Lig = Cold_plate.wells('A2')
+# Enzyme_Fill = Cold_plate.wells('A3')
 
 ## Reagent SETUP
-ER_mastermix = MM_plate.wells('A4')
-# BGI_adapter = MM_plate.wells('A5')
-# Lig_mastermix = MM_plate.wells('A6')
-# Fill_mastermix = MM_plate.wells('A7')
+ER_mastermix = Cold_plate.wells('A4')
+# BGI_adapter = Cold_plate.wells('A5')
+# Lig_mastermix = Cold_plate.wells('A6')
+# Fill_mastermix = Cold_plate.wells('A7')
 
 ## Purification reagents SETUP
 # SPRI_beads = trough.wells('A8')
@@ -172,7 +175,12 @@ MM_dist_ER = ER_vol * col_num
 #MM_dist_Fill = Fill_vol * col_num
 
 
-#### PROTOCOL ####
+
+"""
+Blund end repair
+"""
+robot.comment("Yay! \ Blund-end Repair begins.")
+
 temp_deck_1.set_temperature(10)
 temp_deck_2.set_temperature(10)
 
@@ -180,13 +188,14 @@ temp_deck_1.wait_for_temp()
 temp_deck_2.wait_for_temp()
 
 ### Addition of End repair mastermix to enzymes
+
 m300.set_flow_rate(aspirate=180, dispense=180)
-m300.pick_up_tip(tipracks_200.wells('A1')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(ER_mastermix.bottom())
 m300.mix(3, 50, ER_mastermix.bottom(4))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (20), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=25, dispense=25)
 m300.aspirate(MM_dist_ER,ER_mastermix.bottom(1))
 m300.move_to(Enzyme_ER.bottom())
 m300.dispense(MM_dist_ER,Enzyme_ER.bottom(4))
@@ -194,10 +203,9 @@ m300.set_flow_rate(aspirate=50, dispense=50)
 m300.mix(5, 30, Enzyme_ER.bottom(4))
 m300.delay(seconds=5)
 m300.move_to(Enzyme_ER.top(-4))
-m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.drop_tip()
+m300.return_tip()
 
 ### Addition of End repair mastermix to libraries
 
@@ -207,12 +215,12 @@ for target in samples:
     m10.mix(3, 10, Enzyme_ER)
     max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-    m10.set_flow_rate(aspirate=50, dispense=50)
+    m10.set_flow_rate(aspirate=25, dispense=25)
     m10.aspirate(ER_vol, Enzyme_ER.bottom(1))
     m10.move_to(target.bottom())
     m10.dispense(ER_vol, target.bottom(3))
     m10.set_flow_rate(aspirate=50, dispense=50)
-    m10.mix(5, 10, target.bottom(6))
+    m10.mix(5, 10, target.bottom(3))
     m10.delay(seconds=5)
     m10.set_flow_rate(aspirate=100, dispense=100)
     m10.move_to(target.top(-4))
@@ -221,7 +229,8 @@ for target in samples:
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m10.return_tip()
 
-temp_deck_1.deactivate()
-temp_deck_2.deactivate()
 
 robot.pause("Yay! \ Please incubate in PCR machine \ at 20°C for 30 minutes, followed by 30 minutes at 65°C. \ Press resume when finished.")
+
+temp_deck_1.deactivate()
+temp_deck_2.deactivate()
