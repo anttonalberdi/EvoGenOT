@@ -54,7 +54,7 @@ m300 = instruments.P300_Multi(
     max_volume=300,
     aspirate_flow_rate=100,
     dispense_flow_rate=200,
-    tip_racks=(tipracks_300_1,tipracks_300_2,tipracks_300_3)
+    tip_racks=(tipracks_300_1,tipracks_300_2,tipracks_300_3))
 
 ###  PURIFICATION REAGENTS SETUP ###
 SPRI_beads = trough.wells('A1')
