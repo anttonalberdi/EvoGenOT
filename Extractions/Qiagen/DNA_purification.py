@@ -889,7 +889,7 @@ m300.return_tip(tipracks_200_2.wells('A12'))
 ### Incubating beads with elution buffer
 m300.delay(minutes=10)
 
-mag_deck.engage()
+mag_deck.engage(height=34)
 m300.delay(minutes=5)
 
 ### Transfer Elution buffer to EA1
