@@ -37,7 +37,7 @@ if plate_name not in labware.list():
 mag_deck = modules.load('magdeck', '7')
 sample_plate = labware.load('1ml_PCR', '7', share=True)
 trough = labware.load('trough-12row', '2')
-Trash = labware.load('One-Column-reservoir','8')
+Trash = labware.load('One-Column-reservoir','9')
 elution_plate = labware.load('biorad-hardshell-96-PCR','1')
 
 
