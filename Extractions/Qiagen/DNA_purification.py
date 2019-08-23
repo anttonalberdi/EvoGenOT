@@ -212,8 +212,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip(tipracks_200_1.wells('A6'))
 
 
-robot.comment("Incubating the beads and PCR products at room temperature \
-for 10 minutes. Protocol will resume automatically.")
+
 m300.delay(minutes=10)
 mag_deck.engage(height=16)
 m300.delay(minutes=5)
@@ -890,7 +889,7 @@ m300.return_tip(tipracks_200_2.wells('A12'))
 ### Incubating beads with elution buffer
 m300.delay(minutes=10)
 
-mag_deck.engage(heigth=34)
+mag_deck.engage(heigth=16)
 m300.delay(minutes=5)
 
 ### Transfer Elution buffer to EA1
