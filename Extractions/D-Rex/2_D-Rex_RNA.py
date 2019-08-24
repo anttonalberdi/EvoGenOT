@@ -1597,7 +1597,7 @@ m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA6.bottom(5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.move_to(RA7.top(-10))
+m300.move_to(RA6.top(-10))
 m300.blow_out()
 m300.return_tip()
 
