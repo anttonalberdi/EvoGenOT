@@ -783,7 +783,7 @@ m300.reset()
 ### Transfer buffer C and beads to RA1
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip()
-m300.move(BufferC_1.top(-16))
+m300.move_to(BufferC_1.top(-16))
 m300.mix(3, BufferC_vol, BufferC_1.top(-12))
 max_speed_per_axis = {'x':(300), 'y':(300), 'z': (50), 'a': (20), 'b': (20), 'c': 20}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()), **max_speed_per_axis)
