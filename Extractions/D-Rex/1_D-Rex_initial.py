@@ -822,7 +822,7 @@ m300.return_tip()
 
 mag_deck.disengage()
 
-### Transfer buffer C and beads to SA1
+### Transfer buffer C to SA1
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down  speed 0.5X for bead handling
 m300.move_to(BufferC_1.top(-30))
@@ -843,7 +843,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.drop_tip()
 
-### Transfer buffer C and beads to SA2
+### Transfer buffer C to SA2
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(BufferC_1.top(-30))
@@ -865,7 +865,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.drop_tip()
 
-### Transfer buffer C and beads to SA3
+### Transfer buffer C to SA3
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, BufferC_vol, BufferC_1)
@@ -886,7 +886,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.drop_tip()
 
-### Transfer buffer C and beads to SA4
+### Transfer buffer C to SA4
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, BufferC_vol, BufferC_1)
@@ -907,7 +907,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.drop_tip()
 
-### Transfer buffer C and beads to SA5
+### Transfer buffer C to SA5
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, BufferC_vol, BufferC_1)
@@ -928,7 +928,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.drop_tip()
 
-### Transfer buffer C and beads to SA6
+### Transfer buffer C to SA6
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, BufferC_vol, BufferC_1)
@@ -948,7 +948,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.drop_tip()
 
-### Transfer buffer C and beads to SA7
+### Transfer buffer C to SA7
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(BufferC_1.top(-30))
@@ -969,7 +969,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.drop_tip()
 
-### Transfer buffer C and beads to SA8
+### Transfer buffer C to SA8
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(BufferC_1.top(-30))
@@ -990,7 +990,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.drop_tip()
 
-### Transfer buffer C and beads to SA9
+### Transfer buffer C to SA9
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, BufferC_vol, BufferC_2)
@@ -1010,7 +1010,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.drop_tip()
 
-### Transfer buffer C and beads to SA10
+### Transfer buffer C to SA10
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, BufferC_vol, BufferC_2)
@@ -1030,7 +1030,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.drop_tip()
 
-### Transfer buffer C and beads to SA11
+### Transfer buffer C to SA11
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, BufferC_vol, BufferC_2)
@@ -1050,7 +1050,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.drop_tip()
 
-### Transfer buffer C and beads to SA12
+### Transfer buffer C to SA12
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.mix(3, BufferC_vol, BufferC_2)
