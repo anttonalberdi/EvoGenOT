@@ -365,33 +365,137 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.return_tip()
 
-
-
 robot.comment("Incubating the beads and PCR products at room temperature \
 for 5 minutes. Protocol will resume automatically.")
 m300.delay(minutes=5)
 mag_deck.engage(height=16)
 m300.delay(minutes=2)
 
-### Resets head speed for futher processing
-max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
-robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+### Remove supernatant, by re-using tiprack 1
+### remove supernatant from MA1
+m300.set_flow_rate(aspirate=100, dispense=100)
+m300.pick_up_tip(tipracks_200_1.wells('A1'))
+m300.aspirate(180, MA1.bottom(1))
+m300.dispense(180, trash_box.wells('A1').top(-5))
+m300.delay(seconds=5)
+m300.set_flow_rate(aspirate=130, dispense=130)
+m300.blow_out(trash_box.wells('A1').top(-5))
+m300.return_tip()
 
-### Remove supernatant
-m300.transfer(180, SA1.bottom(), liquid_trash.top(-5), blow_out=True,new_tip='always')
-m300.transfer(180, SA2.bottom(), liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(180, SA3.bottom(), liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(180, SA4.bottom(), liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(180, SA5.bottom(), liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(180, SA6.bottom(), liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(180, SA7.bottom(), liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(180, SA8.bottom(), liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(180, SA9.bottom(), liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(180, SA10.bottom(), liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(180, SA11.bottom(), liquid_trash.top(-5), blow_out=True, new_tip='always')
-m300.transfer(180, SA12.bottom(), liquid_trash.top(-5), blow_out=True, new_tip='always')
+### remove supernatant from MA2
+m300.set_flow_rate(aspirate=100, dispense=100)
+m300.pick_up_tip(tipracks_200_1.wells('A2'))
+m300.aspirate(180, MA2.bottom(1))
+m300.dispense(180, trash_box.wells('A2').top(-5))
+m300.delay(seconds=5)
+m300.set_flow_rate(aspirate=130, dispense=130)
+m300.blow_out(trash_box.wells('A2').top(-5))
+m300.return_tip()
+
+### remove supernatant from MA3
+m300.set_flow_rate(aspirate=100, dispense=100)
+m300.pick_up_tip(tipracks_200_1.wells('A3'))
+m300.aspirate(180, MA3.bottom(1))
+m300.dispense(180, trash_box.wells('A3').top(-5))
+m300.delay(seconds=5)
+m300.set_flow_rate(aspirate=130, dispense=130)
+m300.blow_out(trash_box.wells('A3').top(-5))
+m300.return_tip()
+
+### remove supernatant from MA4
+m300.set_flow_rate(aspirate=100, dispense=100)
+m300.pick_up_tip(tipracks_200_1.wells('A4'))
+m300.aspirate(180, MA4.bottom(1))
+m300.dispense(180, trash_box.wells('A4').top(-5))
+m300.delay(seconds=5)
+m300.set_flow_rate(aspirate=130, dispense=130)
+m300.blow_out(trash_box.wells('A4').top(-5))
+m300.return_tip()
+
+### remove supernatant from MA5
+m300.set_flow_rate(aspirate=100, dispense=100)
+m300.pick_up_tip(tipracks_200_1.wells('A5'))
+m300.aspirate(180, MA5.bottom(1))
+m300.dispense(180, trash_box.wells('A5').top(-5))
+m300.delay(seconds=5)
+m300.set_flow_rate(aspirate=130, dispense=130)
+m300.blow_out(trash_box.wells('A5').top(-5))
+m300.return_tip()
+
+### remove supernatant from MA6
+m300.set_flow_rate(aspirate=100, dispense=100)
+m300.pick_up_tip(tipracks_200_1.wells('A6'))
+m300.aspirate(180, MA6.bottom(1))
+m300.dispense(180, trash_box.wells('A6').top(-5))
+m300.delay(seconds=5)
+m300.set_flow_rate(aspirate=130, dispense=130)
+m300.blow_out(trash_box.wells('A6').top(-5))
+m300.return_tip()
+
+### remove supernatant from MA7
+m300.set_flow_rate(aspirate=100, dispense=100)
+m300.pick_up_tip(tipracks_200_1.wells('A7'))
+m300.aspirate(180, MA7.bottom(1))
+m300.dispense(180, trash_box.wells('A7').top(-5))
+m300.delay(seconds=5)
+m300.set_flow_rate(aspirate=130, dispense=130)
+m300.blow_out(trash_box.wells('A7').top(-5))
+m300.return_tip()
+
+### remove supernatant from MA8
+m300.set_flow_rate(aspirate=100, dispense=100)
+m300.pick_up_tip(tipracks_200_1.wells('A8'))
+m300.aspirate(180, MA8.bottom(1))
+m300.dispense(180, trash_box.wells('A8').top(-5))
+m300.delay(seconds=5)
+m300.set_flow_rate(aspirate=130, dispense=130)
+m300.blow_out(trash_box.wells('A8').top(-5))
+m300.return_tip()
+
+### remove supernatant from MA9
+m300.set_flow_rate(aspirate=100, dispense=100)
+m300.pick_up_tip(tipracks_200_1.wells('A9'))
+m300.aspirate(180, MA9.bottom(1))
+m300.dispense(180, trash_box.wells('A9').top(-5))
+m300.delay(seconds=5)
+m300.set_flow_rate(aspirate=130, dispense=130)
+m300.blow_out(trash_box.wells('A9').top(-5))
+m300.return_tip()
+
+### remove supernatant from MA10
+m300.set_flow_rate(aspirate=100, dispense=100)
+m300.pick_up_tip(tipracks_200_1.wells('A10'))
+m300.aspirate(180, MA10.bottom(1))
+m300.dispense(180, trash_box.wells('A310).top(-5))
+m300.delay(seconds=5)
+m300.set_flow_rate(aspirate=130, dispense=130)
+m300.blow_out(trash_box.wells('A10').top(-5))
+m300.return_tip()
+
+### remove supernatant from MA11
+m300.set_flow_rate(aspirate=100, dispense=100)
+m300.pick_up_tip(tipracks_200_1.wells('A11'))
+m300.aspirate(180, MA11.bottom(1))
+m300.dispense(180, trash_box.wells('A11').top(-5))
+m300.delay(seconds=5)
+m300.set_flow_rate(aspirate=130, dispense=130)
+m300.blow_out(trash_box.wells('A11').top(-5))
+m300.return_tip()
+
+### remove supernatant from MA12
+m300.set_flow_rate(aspirate=100, dispense=100)
+m300.pick_up_tip(tipracks_200_1.wells('A12'))
+m300.aspirate(180, MA12.bottom(1))
+m300.dispense(180, trash_box.wells('A12').top(-5))
+m300.delay(seconds=5)
+m300.set_flow_rate(aspirate=130, dispense=130)
+m300.blow_out(trash_box.wells('A12').top(-5))
+m300.return_tip()
+
+
 
 ### Wash with EtOH1
+
 mag_deck.disengage()
 for target in samples:
     m300.set_flow_rate(aspirate=180, dispense=180)
