@@ -841,7 +841,7 @@ m300.move_to(SA1.bottom(5))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.drop_tip()
+m300.return_tip()
 
 ### Transfer buffer C to SA2
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -863,7 +863,7 @@ m300.move_to(SA2.bottom(5))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.drop_tip()
+m300.return_tip()
 
 ### Transfer buffer C to SA3
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -884,7 +884,7 @@ m300.move_to(SA3.bottom(5))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.drop_tip()
+m300.return_tip()
 
 ### Transfer buffer C to SA4
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -905,7 +905,7 @@ m300.move_to(SA4.bottom(5))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.drop_tip()
+m300.return_tip()
 
 ### Transfer buffer C to SA5
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -926,7 +926,7 @@ m300.move_to(SA5.bottom(5))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.drop_tip()
+m300.return_tip()
 
 ### Transfer buffer C to SA6
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -946,7 +946,7 @@ m300.move_to(SA6.bottom(5))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.drop_tip()
+m300.return_tip()
 
 ### Transfer buffer C to SA7
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -967,7 +967,7 @@ m300.move_to(SA7.bottom(5))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.drop_tip()
+m300.return_tip()
 
 ### Transfer buffer C to SA8
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -988,7 +988,7 @@ m300.move_to(SA8.bottom(5))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.drop_tip()
+m300.return_tip()
 
 ### Transfer buffer C to SA9
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -1008,7 +1008,7 @@ m300.move_to(SA9.bottom(5))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.drop_tip()
+m300.return_tip()
 
 ### Transfer buffer C to SA10
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -1028,7 +1028,7 @@ m300.move_to(SA10.bottom(5))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.drop_tip()
+m300.return_tip()
 
 ### Transfer buffer C to SA11
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -1048,7 +1048,7 @@ m300.move_to(SA11.bottom(5))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.drop_tip()
+m300.return_tip()
 
 ### Transfer buffer C to SA12
 m300.set_flow_rate(aspirate=100, dispense=100)
