@@ -235,7 +235,7 @@ p1000.dispense(800, EtOH1.top(-4))
 p1000.delay(seconds=2)
 p1000.move_to(EtOH1.top(-4))
 p1000.blow_out()
-p1000.return_tip()
+p1000.drop_tip()
 
 ### Transfer Wash 1 to RA7
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -541,7 +541,7 @@ p1000.dispense(800, EtOH2.top(-4))
 p1000.delay(seconds=2)
 p1000.move_to(EtOH2.top(-4))
 p1000.blow_out()
-p1000.return_tip()
+p1000.drop_tip()
 
 ### Transfer Wash 1 to RA7
 m300.set_flow_rate(aspirate=100, dispense=100)
