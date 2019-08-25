@@ -131,6 +131,8 @@ m300.transfer(250, DA10.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_o
 m300.transfer(250, DA11.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True, air_gap=30)
 m300.transfer(250, DA12.bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True, air_gap=30)
 
+mag_deck.disengage()
+
 ### Wash 1 with Ethanol, using tiprack 2
 ### Transfer Wash 1 to DA1
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -623,8 +625,6 @@ mag_deck.engage(height=34)
 m300.delay(minutes=2)
 
 ### Remove supernatant, by using re-using tiprack 3
-mag_deck.engage(height=34)
-m300.delay(minutes=2)
 
 ### remove supernatant from DA1
 m300.set_flow_rate(aspirate=100, dispense=100)
