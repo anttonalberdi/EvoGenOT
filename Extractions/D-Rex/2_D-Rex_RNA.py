@@ -1918,7 +1918,7 @@ m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(elution_plate_RNA.wells('A1').top(-10))
 m300.blow_out()
-m300.drop_tip()
+m300.return_tip()
 
 ### Transfer Elution buffer to EA2
 m300.pick_up_tip(tipracks_200_4.wells('A2'))
