@@ -92,10 +92,10 @@ EA6 = elution_plate.wells('A11')
 mag_deck.disengage()
 
 ### Transfer beads to SA1
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=75, dispense=75) #speed up
 m300.pick_up_tip(tipracks_200_1.wells('A1')) # Slow down head speed 0.5X for bead handling
 m300.move_to(SPRI_beads.top(-16))
-m300.mix(10, 200, SPRI_beads.top(-12))
+m300.mix(10, 200, SPRI_beads.top(-25))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.set_flow_rate(aspirate=25, dispense=25)
@@ -109,13 +109,13 @@ m300.move_to(SA1.top(-10))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip(tipracks_200_1.wells('A1'))
+#m300.return_tip(tipracks_200_1.wells('A1')) # Do not return
 
 ### Transfer beads to SA2
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=75, dispense=75) #speed up
 m300.pick_up_tip(tipracks_200_1.wells('A2')) # Slow down head speed 0.5X for bead handling
 m300.move_to(SPRI_beads.top(-16))
-m300.mix(10, 200, SPRI_beads.bottom(-12))
+m300.mix(10, 200, SPRI_beads.top(-12))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.set_flow_rate(aspirate=25, dispense=25)
@@ -129,10 +129,10 @@ m300.move_to(SA2.top(-10))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip(tipracks_200_1.wells('A2'))
+#m300.return_tip(tipracks_200_1.wells('A2'))
 
 ### Transfer beads to SA3
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=75, dispense=75) #speed up
 m300.pick_up_tip(tipracks_200_1.wells('A3')) # Slow down head speed 0.5X for bead handling
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(10, 200, SPRI_beads.top(-12))
@@ -149,10 +149,10 @@ m300.move_to(SA3.top(-10))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip(tipracks_200_1.wells('A3'))
+#m300.return_tip(tipracks_200_1.wells('A3'))
 
 ### Transfer beads to SA4
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=75, dispense=75) #speed up
 m300.pick_up_tip(tipracks_200_1.wells('A4')) # Slow down head speed 0.5X for bead handling
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(10, 200, SPRI_beads.top(-12))
@@ -169,10 +169,10 @@ m300.move_to(SA4.top(-10))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip(tipracks_200_1.wells('A4'))
+#m300.return_tip(tipracks_200_1.wells('A4'))
 
 ### Transfer beads to SA5
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=75, dispense=75) #speed up
 m300.pick_up_tip(tipracks_200_1.wells('A5')) # Slow down head speed 0.5X for bead handling
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(10, 200, SPRI_beads.top(-12))
@@ -189,10 +189,10 @@ m300.move_to(SA5.top(-10))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip(tipracks_200_1.wells('A5'))
+#m300.return_tip(tipracks_200_1.wells('A5'))
 
 ### Transfer beads to SA6
-m300.set_flow_rate(aspirate=50, dispense=50)
+m300.set_flow_rate(aspirate=75, dispense=75) #speed up
 m300.pick_up_tip(tipracks_200_1.wells('A6')) # Slow down head speed 0.5X for bead handling
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(10, 200, SPRI_beads.top(-12))
@@ -209,7 +209,7 @@ m300.move_to(SA6.top(-10))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip(tipracks_200_1.wells('A6'))
+#m300.return_tip(tipracks_200_1.wells('A6'))
 
 
 
