@@ -92,7 +92,7 @@ EA6 = elution_plate.wells('A11')
 mag_deck.disengage()
 
 ### Transfer beads to SA1
-m300.set_flow_rate(aspirate=100, dispense=100) 
+m300.set_flow_rate(aspirate=150, dispense=150) 
 m300.pick_up_tip(tipracks_200_1.wells('A1')) 
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(10, 200, SPRI_beads.top(-35))
@@ -112,7 +112,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 ### Transfer beads to SA2
-m300.set_flow_rate(aspirate=100, dispense=100) #speed up
+m300.set_flow_rate(aspirate=150, dispense=150) 
 m300.pick_up_tip(tipracks_200_1.wells('A2')) # Slow down head speed 0.5X for bead handling
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(10, 200, SPRI_beads.top(-35))
@@ -132,7 +132,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 ### Transfer beads to SA3
-m300.set_flow_rate(aspirate=100, dispense=100) #speed up
+m300.set_flow_rate(aspirate=150, dispense=150) 
 m300.pick_up_tip(tipracks_200_1.wells('A3')) # Slow down head speed 0.5X for bead handling
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(10, 200, SPRI_beads.top(-35))
@@ -152,7 +152,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 ### Transfer beads to SA4
-m300.set_flow_rate(aspirate=100, dispense=100) #speed up
+m300.set_flow_rate(aspirate=150, dispense=150) 
 m300.pick_up_tip(tipracks_200_1.wells('A4')) # Slow down head speed 0.5X for bead handling
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(10, 200, SPRI_beads.top(-35))
@@ -172,7 +172,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 ### Transfer beads to SA5
-m300.set_flow_rate(aspirate=100, dispense=100) #speed up
+m300.set_flow_rate(aspirate=150, dispense=150) 
 m300.pick_up_tip(tipracks_200_1.wells('A5')) # Slow down head speed 0.5X for bead handling
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(10, 200, SPRI_beads.top(-35))
@@ -192,7 +192,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 ### Transfer beads to SA6
-m300.set_flow_rate(aspirate=100, dispense=100) #speed up
+m300.set_flow_rate(aspirate=150, dispense=150) 
 m300.pick_up_tip(tipracks_200_1.wells('A6')) # Slow down head speed 0.5X for bead handling
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(10, 200, SPRI_beads.top(-35))
@@ -223,7 +223,7 @@ m300.delay(minutes=10)
 
 ### remove supernatant from SA1
 m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip(tipracks_200_1.wells('A7')) #Update tipracks
+m300.pick_up_tip(tipracks_200_1.wells('A7')) 
 m300.aspirate(bead_vol, SA1.bottom(1))
 m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
@@ -698,7 +698,6 @@ m300.return_tip(tipracks_200_2.wells('A12'))
 
 
 ### Remove wash 2 supernatant ###
-
 
 m300.delay(minutes=2)
 
