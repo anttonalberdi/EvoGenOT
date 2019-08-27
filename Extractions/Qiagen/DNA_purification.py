@@ -214,7 +214,7 @@ m300.drop_tip()
 
 
 m300.delay(minutes=10)
-mag_deck.engage(height=32) #adjust hight
+mag_deck.engage(height=33) #adjust hight
 m300.delay(minutes=10)
 
 
@@ -920,7 +920,7 @@ m300.drop_tip()
 ### Incubating beads with elution buffer
 m300.delay(minutes=10)
 
-mag_deck.engage(height=32)
+mag_deck.engage(height=33)
 m300.delay(minutes=10)
 
 ### Transfer Elution buffer to EA1
