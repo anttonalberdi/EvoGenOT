@@ -221,6 +221,8 @@ m300.delay(minutes=10)
 
 ### REMOVING SUPERNATANT ###
 
+# Figure out how to do blowout
+
 ### remove supernatant from SA1
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip(tipracks_200_1.wells('A7'))
@@ -338,6 +340,9 @@ m300.drop_tip()
 
 ### Wash with EtOH1 ####
 
+# 1. Figure out return tip
+# 2. Add additional ethanol wells
+
 ### Transfer EtOH1 to SA1
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip(tipracks_200_2.wells('A1'))
@@ -395,7 +400,7 @@ m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, EtOH_vol, SA3.bottom(5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.move_to(SA1.top(-10))
+m300.move_to(SA3.top(-10))
 m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
