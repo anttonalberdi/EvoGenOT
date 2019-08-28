@@ -185,7 +185,6 @@ for target in samples:
     m10.mix(2, 10, target.bottom(3))
     m10.delay(seconds=2)
     m10.move_to(target.top(-4))
-    m10.blow_out()
     max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m10.drop_tip()
