@@ -91,6 +91,16 @@ if plate_name not in labware.list():
         depth=15,                       # depth (mm) of each well on the plate
         volume=200)
 
+plate_name = '1ml_Covaris'
+if plate_name not in labware.list():
+    custom_plate = labware.create(
+        plate_name,                    # name of you labware
+        grid=(12, 8),                    # specify amount of (columns, rows)
+        spacing=(9, 9),               # distances (mm) between each (column, row)
+        diameter=5.2,                     # diameter (mm) of each well on the plate
+        depth=18.6,                       # depth (mm) of each well on the plate
+        volume=1000)
+
 plate_name = 'One-Column-reservoir'
 if plate_name not in labware.list():
     custom_plate = labware.create(
@@ -120,7 +130,7 @@ Cold_plate = labware.load('biorad-hardshell-96-PCR', '4', share=True)
 # trough = labware.load('trough-12row', '2')
 # Trash = labware.load('One-Column-reservoir','3')
 temp_deck2 = modules.load('tempdeck', '10')
-temp_plate = labware.load('biorad-hardshell-96-PCR', '10', share=True)
+temp_plate = labware.load('1ml_Covaris', '10', share=True)
 #mag_deck = modules.load('magdeck', '7')
 #mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 
