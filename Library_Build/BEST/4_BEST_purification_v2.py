@@ -389,7 +389,7 @@ m300.aspirate(180, MA2.bottom(1))
 m300.dispense(180, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(trash_box.wells('A2').top(-5))
+m300.blow_out(trash_box.wells('A1').top(-5))
 m300.return_tip()
 
 ### remove supernatant from MA3
@@ -399,7 +399,7 @@ m300.aspirate(180, MA3.bottom(1))
 m300.dispense(180, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(trash_box.wells('A3').top(-5))
+m300.blow_out(trash_box.wells('A1').top(-5))
 m300.return_tip()
 
 ### remove supernatant from MA4
@@ -409,7 +409,7 @@ m300.aspirate(180, MA4.bottom(1))
 m300.dispense(180, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(trash_box.wells('A4').top(-5))
+m300.blow_out(trash_box.wells('A1').top(-5))
 m300.return_tip()
 
 ### remove supernatant from MA5
@@ -419,7 +419,7 @@ m300.aspirate(180, MA5.bottom(1))
 m300.dispense(180, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(trash_box.wells('A5').top(-5))
+m300.blow_out(trash_box.wells('A1').top(-5))
 m300.return_tip()
 
 ### remove supernatant from MA6
@@ -429,7 +429,7 @@ m300.aspirate(180, MA6.bottom(1))
 m300.dispense(180, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(trash_box.wells('A6').top(-5))
+m300.blow_out(trash_box.wells('A1').top(-5))
 m300.return_tip()
 
 ### remove supernatant from MA7
@@ -439,7 +439,7 @@ m300.aspirate(180, MA7.bottom(1))
 m300.dispense(180, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(trash_box.wells('A7').top(-5))
+m300.blow_out(trash_box.wells('A1').top(-5))
 m300.return_tip()
 
 ### remove supernatant from MA8
@@ -449,7 +449,7 @@ m300.aspirate(180, MA8.bottom(1))
 m300.dispense(180, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(trash_box.wells('A8').top(-5))
+m300.blow_out(trash_box.wells('A1').top(-5))
 m300.return_tip()
 
 ### remove supernatant from MA9
@@ -459,7 +459,7 @@ m300.aspirate(180, MA9.bottom(1))
 m300.dispense(180, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(trash_box.wells('A9').top(-5))
+m300.blow_out(trash_box.wells('A1').top(-5))
 m300.return_tip()
 
 ### remove supernatant from MA10
@@ -469,7 +469,7 @@ m300.aspirate(180, MA10.bottom(1))
 m300.dispense(180, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(trash_box.wells('A10').top(-5))
+m300.blow_out(trash_box.wells('A1').top(-5))
 m300.return_tip()
 
 ### remove supernatant from MA11
