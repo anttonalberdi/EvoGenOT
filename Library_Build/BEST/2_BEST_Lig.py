@@ -162,7 +162,7 @@ for target in samples:
     m10.blow_out()
     max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-    m10.return_tip()
+    m10.drop_tip()
 
 
 ### Addition of End repair mastermix to enzymes
@@ -203,7 +203,7 @@ for target in samples:
     m10.blow_out()
     max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-    m10.return_tip()
+    m10.drop_tip()
 
 temp_deck_1.deactivate()
 temp_deck_2.deactivate()
