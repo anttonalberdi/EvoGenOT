@@ -169,7 +169,6 @@ for target in samples:
     m10.delay(seconds=3)
     m10.set_flow_rate(aspirate=180, dispense=180)
     m10.move_to(target.top(-4))
-    m10.blow_out()
     max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m10.drop_tip()
@@ -191,7 +190,6 @@ m300.mix(5, 30, Enzyme_Lig.bottom(4))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=180, dispense=180)
 m300.move_to(Enzyme_Lig.top(-4))
-m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.drop_tip()
@@ -210,7 +208,6 @@ for target in samples:
     m10.delay(seconds=5)
     m10.set_flow_rate(aspirate=100, dispense=100)
     m10.move_to(target.top(-4))
-    m10.blow_out()
     max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m10.drop_tip()
