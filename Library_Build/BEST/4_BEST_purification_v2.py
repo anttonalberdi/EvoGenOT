@@ -98,7 +98,7 @@ MA12 = mag_plate.wells('A12')
 
 sample_number = 96
 col_num = sample_number // 8 + (1 if sample_number % 8 > 0 else 0)
-samples = [col for col in DNA_plate.cols()[:col_num]]
+samples = [col for col in mag_plate.cols()[:col_num]]
 
 #### VOLUME SETUP
 
@@ -466,7 +466,7 @@ m300.return_tip()
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip(tipracks_200_1.wells('A10'))
 m300.aspirate(180, MA10.bottom(1))
-m300.dispense(180, trash_box.wells('A310).top(-5))
+m300.dispense(180, trash_box.wells('A10').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A10').top(-5))
