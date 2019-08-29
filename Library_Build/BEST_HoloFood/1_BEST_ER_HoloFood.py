@@ -5,8 +5,8 @@
 ## Description of procedure ##
 
 # BEFORE PROTOCOL BEGINS
-#
-    #End-Repai master mix reagents and volumes:
+
+    #End-Repair step master mix reagents and volumes:
     #                           x1          x96(+10)
     # T4 DNA ligase buffer	    3           318
     # Reaction enhancer	       1.5         159
@@ -17,26 +17,26 @@
     # Sample                    24.15
     # Total                     30
     #
-    # 1) Pre-mix buffers in 1.5ml tube and distribute to Column 4 (ER_mastermix) of chill_rack_96  #Should be done before and keep frozen.
-    #      T4 DNA ligase buffer	 318
-    #      Reaction enhancer     159
-    #      dNTP 25 mM	         31.8
-    #      Total                 508.8
-    #      For each well         63.6
-    #
-    # 2) Pre-mix enzymes in 1.5ml tube and distribute to Column 1 (Enzyme_ER) of chill_rack_96  #Should be done before and keep frozen.
-    #       T4 PNK	             79.5
-    #       T4 polymerase	     31.8
-    #       Total                111.3
-    #       For each well        13.9
-    #
-    # 4) Place the sample plate  and master mix plate (biorad-hardshell-96-PCR) in the tempdecks.
+# 1) Pre-mix buffers in 1.5ml tube and distribute to Column 4 (ER_mastermix) of chill_rack_96  #Should be done before and keep frozen.
+#      T4 DNA ligase buffer	 318
+#      Reaction enhancer     159
+#      dNTP 25 mM	         31.8
+#      Total                 508.8
+#      For each well         63.6
+#
+# 2) Pre-mix enzymes in 1.5ml tube and distribute to Column 1 (Enzyme_ER) of chill_rack_96  #Should be done before and keep frozen.
+#       T4 PNK	             79.5
+#       T4 polymerase	     31.8
+#       Total                111.3
+#       For each well        13.9
+#
+# 3) Place the sample plate  and master mix plate (biorad-hardshell-96-PCR) in the tempdecks.
 #
 # ROBOT PROTOCOL BEGINS
 #
-# 5) Transfer 63.6 ul from Column 4 to Column 1 (total should be around 77 ul) and mix well
+# 4) Transfer 63.6 ul from Column 4 to Column 1 (total should be around 77 ul) and mix well
 #
-# 6) Distribute 5.85 ul to each well in the plate and mix thoroughly (each well should have ca 30 ul and there should be around 7ul spare mix in the strip-tube)
+# 5) Distribute 5.85 ul to each well in the plate and mix thoroughly (each well should have ca 30 ul and there should be around 7ul spare mix in the strip-tube)
 #
 # ROBOT PROTOCOL ENDS
 #

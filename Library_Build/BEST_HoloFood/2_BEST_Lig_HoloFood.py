@@ -6,16 +6,16 @@
 
 # BEFORE PROTOCOL BEGINS
 #
-# ligation mastex mix reagents and volumes:
-#                           1X      96(+10)X
-# PEG 4000 50%              4.5     477
-# T4 DNA ligase buffer      0.75    79.5
-# T4 DNA ligase             0.75    79.5
-# BGI Adaptor               2      212
-# Mix                       8      848
-# Sample                    30 (24.15 + ER-master mix (5.85))
-#Total                      38
-#
+    # ligation step mastex mix reagents and volumes:
+    #                           1X      96(+10)X
+    # PEG 4000 50%              4.5     477
+    # T4 DNA ligase buffer      0.75    79.5
+    # T4 DNA ligase             0.75    79.5
+    # BGI Adaptor               2      212
+    # Mix                       8      848
+    # Sample                    30 (24.15 + ER-master mix (5.85))
+    #Total                      38
+    #
 # 1) Distribute 13.3 ul of BGI Adaptor to Column 5 (BGI_adaptor) of chill_rack_96
 #
 # 2) Pre-mix buffers in 1.5 ml tube and distribute to Column 6 (Lig_mastermix) of chill_rack_96
