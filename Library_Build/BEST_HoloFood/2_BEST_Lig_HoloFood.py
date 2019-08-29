@@ -6,7 +6,7 @@
 
 # BEFORE PROTOCOL BEGINS
 #
-    # ligation step mastex mix reagents and volumes:
+    # Ligation step mastex mix reagents and volumes:
     #                           1X      96(+10)X
     # PEG 4000 50%              4.5     477
     # T4 DNA ligase buffer      0.75    79.5

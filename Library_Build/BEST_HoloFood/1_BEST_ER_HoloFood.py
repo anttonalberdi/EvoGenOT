@@ -6,7 +6,7 @@
 
 # BEFORE PROTOCOL BEGINS
 
-    #End-Repair step master mix reagents and volumes:
+    # End-Repair step master mix reagents and volumes:
     #                           x1          x96(+10)
     # T4 DNA ligase buffer	    3           318
     # Reaction enhancer	       1.5         159
