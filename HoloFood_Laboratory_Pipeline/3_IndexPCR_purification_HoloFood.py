@@ -49,22 +49,12 @@ if plate_name not in labware.list():
         depth=35,                       # depth (mm) of each well on the plate
         volume=350000)
 
-plate_name = '1ml_Covaris'
-if plate_name not in labware.list():
-    custom_plate = labware.create(
-        plate_name,                    # name of you labware
-        grid=(12, 8),                    # specify amount of (columns, rows)
-        spacing=(9, 9),               # distances (mm) between each (column, row)
-        diameter=5.2,                     # diameter (mm) of each well on the plate
-        depth=18.6,                       # depth (mm) of each well on the plate
-        volume=1000)
-
 
 #### LABWARE SETUP ####
 trough = labware.load('trough-12row', '9')
 trash_box = labware.load('One-Column-reservoir', '8')
 mag_deck = modules.load('magdeck', '7')
-mag_plate = labware.load('1ml_Covaris', '7', share=True)
+mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 elution_plate = labware.load('biorad-hardshell-96-PCR','1')
 
 tipracks_200_1 = labware.load('tiprack-200ul', '3', share=True)
