@@ -1102,7 +1102,7 @@ robot.pause('add two more tipracks in slots 5 and 6')
 
 for target in samples:
     m300.set_flow_rate(aspirate=180, dispense=180)
-    m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
+    m300.pick_up_tip(tipracks_200_3) # Slow down head speed 0.5X for bead handling
     max_speed_per_axis = {'x': (300), 'y': (300), 'z': (75), 'a': (75), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m300.set_flow_rate(aspirate=40, dispense=40)
