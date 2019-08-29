@@ -61,7 +61,7 @@ if plate_name not in labware.list():
 
 
 #### LABWARE SETUP ####
-trough = labware.load('trough-12row', '10')
+trough = labware.load('trough-12row', '9')
 trash_box = labware.load('One-Column-reservoir', '8')
 mag_deck = modules.load('magdeck', '7')
 mag_plate = labware.load('1ml_Covaris', '7', share=True)
