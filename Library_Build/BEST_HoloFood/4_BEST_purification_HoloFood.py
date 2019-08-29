@@ -114,7 +114,7 @@ samples = [col for col in mag_plate.cols()[:col_num]]
 #### VOLUME SETUP
 
 sample_vol = 50
-bead_vol = 1.5*sample_vol
+bead_vol = 1.66*sample_vol
 EtOH_vol = 160
 EtOH_vol2 = 150
 Elution_vol = 35
