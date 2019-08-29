@@ -1118,6 +1118,8 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 ### Incubate elutes for 15 minutes at room temperature
 robot.pause("Please, incubate samples for 10 min at 37ºC and press resume after it")
 
+mag_deck.engage(height=13)
+
 ### Transfer elutes to new plates.
 ### Transfer Elution buffer to elution_plate A1
 m300.set_flow_rate(aspirate=50, dispense=50)
