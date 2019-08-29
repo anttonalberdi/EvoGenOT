@@ -147,7 +147,7 @@ samples = [col for col in temp_plate.cols()[:col_num]]
 
 ## Volume setup
 #ER_vol = 5.85
-#Lig_vol = 8
+#Lig_vol = 6
 Fill_vol = 7.5
 #MM_dist_ER = ER_vol * col_num
 #MM_dist_Lig = Lig_vol * col_num
