@@ -13,7 +13,7 @@
     # T4 DNA ligase             0.75    79.5
     # Mix                       6       636
     # Sample                    30 (24.15 + ER-master mix (5.85))
-    #Total                      36 (+ 2 ul BGI adaptors)
+    #Total                      36 (+ 1 ul BGI adaptors)
     #
 # 1) Distribute 13.3 ul of BGI Adaptor to Column 5 (BGI_adaptor) of chill_rack_96
 #
@@ -30,7 +30,7 @@
 #
 # 4) Transfer 2 ul of BGI adaptors to each well in the sample plate and mix thoroughly
 #
-# 5) Transfer 69.6 ul from Column 6 to Column 2
+# 5) Transfer 69.6 ul from Column 6 to Column 2 and mix
 #
 # 6) Distribute 6 ul to each well in the sample plate and mix thoroughly
 #
@@ -180,9 +180,9 @@ for target in samples:
     max_speed_per_axis = {'x': (400), 'y': (400), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m10.set_flow_rate(aspirate=50, dispense=50)
-    m10.aspirate(2,BGI_adapter.bottom(1))
+    m10.aspirate(1,BGI_adapter.bottom(1))
     m10.move_to(target.bottom())
-    m10.dispense(2, target.bottom(3))
+    m10.dispense(1, target.bottom(3))
     m10.set_flow_rate(aspirate=50, dispense=50)
     m10.mix(3, 10, target.bottom(3))
     m10.delay(seconds=3)

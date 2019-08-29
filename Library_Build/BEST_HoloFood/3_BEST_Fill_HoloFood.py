@@ -1,28 +1,39 @@
-##########################
-### BEST Library build ###
-##########################
+###################################
+### HOLOFOOD BEST library build ###
+###################################
 
 ## Description of procedure ##
-#
-#
-# Things do before procedure
-#
-#	1. Mix mastermix of End-repair, Ligase and Fill-in according to BEST-sheet and sample size.
-#				NOTE! This procedure is for full plates
-# 	2. Thaw samples in fridge and place them in a slot 2 in a chilling rack.
-#
-# Procedure
-#
-#		BEST
-# 	1.	Distribute 2µl Adapters mix into temp_deck
-#	  2.	Adds 110µl of Fill MM to Enzyme strip (8.4µl * 13 columns)
-#   3.  Distribute 10µl of Enzyme-Fill_MM to each well
-#	  4.	Incubate in PCR at 65°C for 15 min, and at 80°C for 15 min
 
+# BEFORE PROTOCOL BEGINS
+    # Fill in step mastex mix reagents and volumes:
+    #                       1X     96(+10)X
+    # Water                 4.5    477
+    # Isothermal buffer     1.5    159
+    # dNTP 25 mM            0.3    31.8
+    # Bst 2.0 Polymerase    1.2    127.2
+    # Mix                   7.5    795
+    # Sample                37
+    # Total                 44.5
+    #
+# 1) Pre-mix buffers in 1.5 ml tube and distribute to Column 7 (Fill_mastermix)
+#       Water                   477
+#       Isothermal buffers      159
+#       dNTP 25 mM              31.8
+#       For each well           83.5
 #
-#	Good Luck!
+# 2) Pre-mix enzymes in 1.5 ml tube and distribute to Column 3 (Enzyme_Fill)
+#       Bts 2.0 Polymerase      127.2
+#       For each well           15.9
 #
+# ROBOT PROTOCOL BEGINS
 #
+# 3) Transfer 83.5 ul from Column 7 to Column 3 and mix
+#
+# 4) Distribute 7.5 ul to each well in the sample plate and mix thoroughly
+
+
+
+
 ######## IMPORT LIBRARIES ########
 from opentrons import labware, instruments, modules, robot
 from opentrons.legacy_api.modules import tempdeck
@@ -137,7 +148,7 @@ samples = [col for col in temp_plate.cols()[:col_num]]
 ## Volume setup
 #ER_vol = 5.85
 #Lig_vol = 8
-Fill_vol = 10
+Fill_vol = 7.5
 #MM_dist_ER = ER_vol * col_num
 #MM_dist_Lig = Lig_vol * col_num
 MM_dist_Fill = Fill_vol * col_num
