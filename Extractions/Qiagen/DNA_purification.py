@@ -214,9 +214,9 @@ m300.drop_tip()
 
 
 
-m300.delay(minutes=10)
+#m300.delay(minutes=10)
 mag_deck.engage(height=33) 
-m300.delay(minutes=10)
+#m300.delay(minutes=10)
 
 
 
@@ -328,8 +328,6 @@ m300.drop_tip()
 
 ### Wash with EtOH1 ####
 
-# 1. Figure out return tip
-# 2. Add additional ethanol wells
 
 ### Transfer EtOH1 to SA1
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -912,10 +910,10 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 ### Incubating beads with elution buffer
-m300.delay(minutes=10)
+#m300.delay(minutes=10)
 
 mag_deck.engage(height=33)
-m300.delay(minutes=10)
+#m300.delay(minutes=10)
 
 ### Transfer Elution buffer to EA1
 m300.pick_up_tip(tipracks_200_3.wells('A7'))
