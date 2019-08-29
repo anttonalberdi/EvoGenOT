@@ -117,7 +117,7 @@ sample_vol = 50
 bead_vol = 1.66*sample_vol
 EtOH_vol = 160
 EtOH_vol2 = 150
-Elution_vol = 35   ## EBT but also could ET could be used 
+Elution_vol = 35   ## EBT but also could TE could be used 
 
 #### PROTOCOL ####
 ### Beads addition
