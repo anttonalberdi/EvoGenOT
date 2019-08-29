@@ -9,8 +9,8 @@
     # End-Repair step master mix reagents and volumes:
     #                           x1          x96(+10)
     # T4 DNA ligase buffer	    3           318
-    # Reaction enhancer	       1.5         159
-    # T4 PNK	               0.75        79.5
+    # Reaction enhancer	        1.5         159
+    # T4 PNK	                0.75        79.5
     # T4 polymerase	            0.3         31.8
     # dNTP 25 mM	            0.3         31.8
     # Mix                       5.85        620.1
@@ -36,7 +36,7 @@
 #
 # 4) Transfer 63.6 ul from Column 4 to Column 1 (total should be around 77 ul) and mix well
 #
-# 5) Distribute 5.85 ul to each well in the plate and mix thoroughly (each well should have ca 30 ul and there should be around 7ul spare mix in the strip-tube)
+# 5) Distribute 5.85 ul to each well in the plate and mix thoroughly (each well should have ca 30 ul and there should be around 7ul spare mix in chill_rack_96)
 #
 # ROBOT PROTOCOL ENDS
 #
