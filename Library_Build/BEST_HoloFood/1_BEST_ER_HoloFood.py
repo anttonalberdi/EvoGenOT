@@ -1,72 +1,50 @@
 ###################################
-### HOLOFOOD BEST library build ###
+### HOLOFOOD BEST library build ### 	NOTE! This procedure is for full plates
 ###################################
 
-## Description of procedure - Antton ##
+## Description of procedure ##
+
+# BEFORE PROTOCOL BEGINS
 #
-#                           x1          x96(+10) #the extra amount shoud be optimised based on robot behavior
-# T4 DNA ligase buffer	    3           318
-# Reaction enhancer	       1.5         159
-# T4 PNK	               0.75        79.5
-# T4 polymerase	            0.3         31.8
-# dNTP 25 mM	            0.3         31.8
-# Mix                       5.85        620.1
-# Sample                    24.15
-# Total                     30
-#
-# 1) Pre-mix buffers in 1.5ml tube and distribute to strip tubes (B-Str) #Should be done before and keep frozen
-#      T4 DNA ligase buffer	 318
-#      Reaction enhancer     159
-#      dNTP 25 mM	         31.8
-#      Total                 508.8
-#      For each well         63.6
-#
-# 2) Pre-mix enzymes in 1.5ml tube and distribute to strip tubes (E-Str) #Should be done before and keep frozen
-#       T4 PNK	             79.5
-#       T4 polymerase	     31.8
-#       Total                111.3
-#       For each well        13.9
-#
-# 3) Place B-Str in Column 1 of chill_rack_96 and E-Str in Column 3 of chill_rack_96 #Open the leads just before starting the protocol
-#
-# 4) Place the plate (biorad-hardshell-96-PCR) with the 96 samples in the tempdeck. NEED TO DECIDE ON THE FOIL! X-CROSSED?
+    #End-Repai master mix reagents and volumes:
+    #                           x1          x96(+10)
+    # T4 DNA ligase buffer	    3           318
+    # Reaction enhancer	       1.5         159
+    # T4 PNK	               0.75        79.5
+    # T4 polymerase	            0.3         31.8
+    # dNTP 25 mM	            0.3         31.8
+    # Mix                       5.85        620.1
+    # Sample                    24.15
+    # Total                     30
+    #
+    # 1) Pre-mix buffers in 1.5ml tube and distribute to Column 4 (ER_mastermix) of chill_rack_96  #Should be done before and keep frozen.
+    #      T4 DNA ligase buffer	 318
+    #      Reaction enhancer     159
+    #      dNTP 25 mM	         31.8
+    #      Total                 508.8
+    #      For each well         63.6
+    #
+    # 2) Pre-mix enzymes in 1.5ml tube and distribute to Column 1 (Enzyme_ER) of chill_rack_96  #Should be done before and keep frozen.
+    #       T4 PNK	             79.5
+    #       T4 polymerase	     31.8
+    #       Total                111.3
+    #       For each well        13.9
+    #
+    # 4) Place the sample plate  and master mix plate (biorad-hardshell-96-PCR) in the tempdecks.
 #
 # ROBOT PROTOCOL BEGINS
 #
-# 5) Transfer 63 ul from B-Str to E-Str (total should be around 77 ul) and mix well
+# 5) Transfer 63.6 ul from Column 4 to Column 1 (total should be around 77 ul) and mix well
 #
-# 6) Distribute 5.85 ul to each column in the plate and mix thoroughly (each well should have ca 30 ul and there should be around 7ul spare mix in the strip-tube)
+# 6) Distribute 5.85 ul to each well in the plate and mix thoroughly (each well should have ca 30 ul and there should be around 7ul spare mix in the strip-tube)
 #
 # ROBOT PROTOCOL ENDS
 #
 # 7) Seal the plate with thin aluminium foil
 #
 # 8) Incubate the plate 30 min 20 ºC, 30 min 65 ºC
-#
-###########
 
 
-## Description of procedure ##
-#
-#
-# Things do before procedure
-#
-#	1. Mix mastermix of End-repair, Ligase and Fill-in according to BEST-sheet and sample size.
-#				NOTE! This procedure is for full plates
-# 	2. Thaw samples in fridge and place them in a slot 2 in a chilling rack.
-#
-# Procedure
-#
-#		BEST
-# 	1.	Distribute 8µl End-Repair mix into temp_deck
-#	  2.	Adds 86µl of End Repair Master Mix to Enzyme strip (6.6µl * 13 columns)
-#   3.  Distribute 8µl of Enzyme-ER_MM to each well
-#	  4.	Incubate in PCR at 20°C for 30 min, and at 65°C for 30 min
-
-#
-#	Good Luck!
-#
-#
 ######## IMPORT LIBRARIES ########
 from opentrons import labware, instruments, modules, robot
 from opentrons.legacy_api.modules import tempdeck
