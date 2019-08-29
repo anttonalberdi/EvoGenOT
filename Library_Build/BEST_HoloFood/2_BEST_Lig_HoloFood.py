@@ -15,7 +15,7 @@
     # Sample                    30 (24.15 + ER-master mix (5.85))
     #Total                      36 (+ 1 ul BGI adaptors)
     #
-# 1) Distribute 13.3 ul of BGI Adaptor to Column 5 (BGI_adaptor) of chill_rack_96
+# 1) Distribute 19.9 ul (1.5 ul for each well) of BGI Adaptor to Column 5 (BGI_adaptor) of chill_rack_96
 #
 # 2) Pre-mix buffers in 1.5 ml tube and distribute to Column 6 (Lig_mastermix) of chill_rack_96
 #       PEG 4000 50%            477
@@ -28,7 +28,7 @@
 #
 # ROBOT PROTOCOL BEGINS
 #
-# 4) Transfer 1 ul of BGI adaptors to each well in the sample plate and mix thoroughly
+# 4) Transfer 1.5 ul of BGI adaptors to each well in the sample plate and mix thoroughly
 #
 # 5) Transfer 69.6 ul from Column 6 to Column 2 and mix
 #
