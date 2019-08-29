@@ -88,7 +88,7 @@ m300 = instruments.P300_Multi(
 SPRI_beads = trough.wells('A1')
 EtOH1 = trough.wells('A2')
 EtOH2 = trough.wells('A3')
-Elution_buffer = trough.wells('A12')
+Elution_buffer = trough.wells('A4')
 
 Liquid_trash = trash_box.wells('A1')
 
@@ -117,7 +117,7 @@ sample_vol = 50
 bead_vol = 1.66*sample_vol
 EtOH_vol = 160
 EtOH_vol2 = 150
-Elution_vol = 35   ## EBT but also could TE could be used 
+Elution_vol = 35   ## EBT but also could TE could be used
 
 #### PROTOCOL ####
 ### Beads addition
