@@ -28,7 +28,7 @@
 #
 # ROBOT PROTOCOL BEGINS
 #
-# 4) Transfer 2 ul of BGI adaptors to each well in the sample plate and mix thoroughly
+# 4) Transfer 1 ul of BGI adaptors to each well in the sample plate and mix thoroughly
 #
 # 5) Transfer 69.6 ul from Column 6 to Column 2 and mix
 #
