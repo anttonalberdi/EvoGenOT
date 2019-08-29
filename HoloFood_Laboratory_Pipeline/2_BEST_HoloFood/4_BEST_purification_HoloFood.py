@@ -115,8 +115,8 @@ samples = [col for col in mag_plate.cols()[:col_num]]
 
 sample_vol = 45
 bead_vol = 1.66*sample_vol
-EtOH_vol = 160
-EtOH_vol2 = 150
+EtOH_vol = 160      ## Ethanol volume needed to add for washing
+EtOH_vol2 = 150     ## Ethanol volume needed to remove (10 ul difference to avoid drying beads completely)
 Elution_vol = 35   ## EBT but also could TE could be used
 
 #### PROTOCOL ####

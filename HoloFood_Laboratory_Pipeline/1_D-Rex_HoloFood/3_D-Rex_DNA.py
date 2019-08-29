@@ -91,8 +91,8 @@ ETOH_backup = backup.wells('A1')
 Sample_vol = 200
 Sample_buffer_vol = 2.5*Sample_vol
 BufferC_vol = 0.9*Sample_vol
-Wash_1_vol = Sample_vol
-Wash_2_vol = 0.9*Sample_vol
+Wash_1_vol = Sample_vol         ## Ethanol volume needed to add for washing
+Wash_2_vol = 0.9*Sample_vol     ## Ethanol volume needed to remove (10 ul difference to avoid drying beads completely)
 Elution_vol = 50
 
 #### Plate SETUP
