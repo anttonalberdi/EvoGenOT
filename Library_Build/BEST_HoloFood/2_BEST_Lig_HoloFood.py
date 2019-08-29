@@ -11,10 +11,9 @@
     # PEG 4000 50%              4.5     477
     # T4 DNA ligase buffer      0.75    79.5
     # T4 DNA ligase             0.75    79.5
-    # BGI Adaptor               2      212
-    # Mix                       8      848
+    # Mix                       6       636
     # Sample                    30 (24.15 + ER-master mix (5.85))
-    #Total                      38
+    #Total                      36 (+ 2 ul BGI adaptors)
     #
 # 1) Distribute 13.3 ul of BGI Adaptor to Column 5 (BGI_adaptor) of chill_rack_96
 #
