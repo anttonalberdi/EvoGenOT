@@ -12,8 +12,8 @@
     # dNTP 25 mM            0.3    31.8
     # Bst 2.0 Polymerase    1.2    127.2
     # Mix                   7.5    795
-    # Sample                37
-    # Total                 44.5
+    # Sample                37.5 (including adaptors volume 1.5 ul)
+    # Total                 45
     #
 # 1) Pre-mix buffers in 1.5 ml tube and distribute to Column 7 (Fill_mastermix)
 #       Water                   477
