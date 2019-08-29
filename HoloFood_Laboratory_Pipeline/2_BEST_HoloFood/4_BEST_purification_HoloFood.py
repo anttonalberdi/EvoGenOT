@@ -1091,8 +1091,7 @@ m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
 m300.drop_tip()
 
-## Dry beads before elution
-m300.delay(minutes=4)
+## Dry beads before elution (removing supernatant from all wells takes more than 5 mins, should be enough for beads to dry)
 
 ## Elution of DNA
 
