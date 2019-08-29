@@ -222,6 +222,8 @@ mag_deck.engage(height=33)
 
 ### REMOVING SUPERNATANT ###
 
+#1. Fix blow out
+
 
 ### remove supernatant from SA1
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -340,6 +342,8 @@ m300.drop_tip()
 
 ### Wash with EtOH1 ####
 
+#1. Add blow out or delay when done washing
+#2. Remove delay while submerged and add it outside the liquid
 
 ### Transfer EtOH1 to SA1
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -578,6 +582,8 @@ m300.drop_tip()
 
 
 ### Wash with EtOH2 ####
+
+#1. Return tips to same column as the previous wash
 
 ### Transfer EtOH2 to SA1
 m300.set_flow_rate(aspirate=50, dispense=50)
