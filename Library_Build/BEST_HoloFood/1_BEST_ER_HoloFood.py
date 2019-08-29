@@ -40,7 +40,7 @@
 #
 # ROBOT PROTOCOL ENDS
 #
-# 7) Seal the plate with thin aluminium foil
+# 7) Cover the plate with thin aluminium seal
 #
 # 8) Incubate the plate 30 min 20 ºC, 30 min 65 ºC
 
