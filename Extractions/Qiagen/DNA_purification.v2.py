@@ -44,8 +44,8 @@ elution_plate = labware.load('biorad-hardshell-96-PCR','1')
 tipracks_200_1 = labware.load('tiprack-200ul', '4', share=True)
 tipracks_200_2 = labware.load('tiprack-200ul', '5', share=True)
 tipracks_200_3 = labware.load('tiprack-200ul', '6', share=True)
-tipracks_1000_1 = labware.load('tiprack-100ul', '10', share=True)
-tipracks_1000_2 = labware.load('tiprack-100ul', '11', share=True)
+tipracks_1000_1 = labware.load('tiprack-1000ul', '10', share=True)
+tipracks_1000_2 = labware.load('tiprack-1000ul', '11', share=True)
 
 
 
