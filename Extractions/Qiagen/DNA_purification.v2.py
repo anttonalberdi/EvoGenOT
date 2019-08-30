@@ -60,7 +60,7 @@ m300 = instruments.P300_Multi(
     tip_racks=(tipracks_200_1,tipracks_200_2,tipracks_200_3))
 
 m1000 = instruments.P1000_Single(
-    mount='right',
+    mount='left',
     min_volume=300,
     max_volume=1000,
     aspirate_flow_rate=100,
