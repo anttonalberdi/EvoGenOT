@@ -59,13 +59,15 @@ m300 = instruments.P300_Multi(
     dispense_flow_rate=200,
     tip_racks=(tipracks_200_1,tipracks_200_2,tipracks_200_3))
 
-m1000 = instruments.P1000_Single(
-    mount='left',
-    min_volume=300,
-    max_volume=1000,
-    aspirate_flow_rate=100,
-    dispense_flow_rate=200,
-    tip_racks=(tipracks_1000_1, tipracks_1000_2))
+#m1000 = instruments.P1000_Single(
+ #   mount='left',
+  #  min_volume=300,
+   # max_volume=1000,
+    #aspirate_flow_rate=100,
+    #dispense_flow_rate=200,
+    #tip_racks=(tipracks_1000_1, tipracks_1000_2))
+
+m1000 = instruments.P1000_Sulti(mount='right', tip_racks=[tipracks_1000_1, tipracks_1000_2])
 
 ###  PURIFICATION REAGENTS SETUP ###
 SPRI_beads = trough.wells('A1')
@@ -241,7 +243,7 @@ mag_deck.engage(height=33)
 
 ### remove supernatant from SA1
 m1000.set_flow_rate(aspirate=100, dispense=100)
-m1000.pick_up_tip(tipracks_1000_1.wells('A1'))
+#m1000.pick_up_tip(tipracks_1000_1.wells('A1'))
 m1000.transfer(Supernatant_vol, SA1.bottom(1), Trash.wells('A1').top(-5))
 #m1000.transfer(Supernatant_vol, plate.cols('1'), plate.cols('2'))
 #m1000.dispense(Supernatant_vol, Trash.wells('A1').top(-5))
