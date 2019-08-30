@@ -27,4 +27,35 @@ tipracks_10 = labware.load('geb_96_tiprack_10ul', '2', share=True)
 m10 = instruments.P10_Multi(mount='left', tip_racks=[tipracks_10])
 
 
-m10.transfer(10, reagent_rack('A1'), reagent_rack1('A1'))
+m10.pick_up_tip(tiprack_10.wells('A2'))
+m10.return_tip(tiprack_10.wells('A2'))
+
+m10.pick_up_tip(tiprack_10.wells('A3'))
+m10.return_tip(tiprack_10.wells('A3'))
+
+m10.pick_up_tip(tiprack_10.wells('A4'))
+m10.return_tip(tiprack_10.wells('A4'))
+
+m10.pick_up_tip(tiprack_10.wells('A5'))
+m10.return_tip(tiprack_10.wells('A5'))
+
+m10.pick_up_tip(tiprack_10.wells('A6'))
+m10.return_tip(tiprack_10.wells('A6'))
+
+m10.pick_up_tip(tiprack_10.wells('A7'))
+m10.return_tip(tiprack_10.wells('A7'))
+
+m10.pick_up_tip(tiprack_10.wells('A8'))
+m10.return_tip(tiprack_10.wells('A8'))
+
+m10.pick_up_tip(tiprack_10.wells('A9'))
+m10.return_tip(tiprack_10.wells('A9'))
+
+m10.pick_up_tip(tiprack_10.wells('A10'))
+m10.return_tip(tiprack_10.wells('A10'))
+
+m10.pick_up_tip(tiprack_10.wells('A11'))
+m10.return_tip(tiprack_10.wells('A11'))
+
+m10.pick_up_tip(tiprack_10.wells('A12'))
+m10.return_tip(tiprack_10.wells('A12'))
