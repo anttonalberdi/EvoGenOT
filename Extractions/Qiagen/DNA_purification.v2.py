@@ -59,13 +59,15 @@ m300 = instruments.P300_Multi(
     dispense_flow_rate=200,
     tip_racks=(tipracks_200_1,tipracks_200_2,tipracks_200_3))
 
-m1000 = instruments.P1000_Single(
-    mount='left',
-    min_volume=300,
-    max_volume=1000,
-    aspirate_flow_rate=100,
-    dispense_flow_rate=200,
-    tip_racks=(tipracks_1000_1, tipracks_1000_2))
+#m1000 = instruments.P1000_Single(
+ #   mount='left',
+  #  min_volume=300,
+   # max_volume=1000,
+    #aspirate_flow_rate=100,
+    #dispense_flow_rate=200,
+    #tip_racks=(tipracks_1000_1, tipracks_1000_2))
+
+m1000 = instruments.P1000_Single(mount='right', tip_racks=[tipracks_1000_1, tipracks_1000_2])
 
 ###  PURIFICATION REAGENTS SETUP ###
 SPRI_beads = trough.wells('A1')
