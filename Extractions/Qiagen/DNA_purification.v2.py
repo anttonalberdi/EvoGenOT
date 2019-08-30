@@ -248,6 +248,9 @@ m1000.transfer(Supernatant_vol, SA1.bottom(1), Trash.wells('A1').top(-5))
 #m1000.drop_tip()
 
 ### remove supernatant from SA2
+m1000.set_flow_rate(aspirate=100, dispense=100)
+m1000.pick_up_tip(tipracks_1000_1.wells())
+m1000.transfer(Supernatant_vol, SA2.bottom(1), Trash.wells('A1').top(-5))
 #m1000.set_flow_rate(aspirate=100, dispense=100)
 #m1000.pick_up_tip(tipracks_1000_1.columns('2'))
 #m1000.aspirate(Supernatant_vol, SA2.bottom(1))
@@ -257,6 +260,9 @@ m1000.transfer(Supernatant_vol, SA1.bottom(1), Trash.wells('A1').top(-5))
 
 
 ### remove supernatant from SA3
+m1000.set_flow_rate(aspirate=100, dispense=100)
+m1000.pick_up_tip(tipracks_1000_1.wells())
+m1000.transfer(Supernatant_vol, SA3.bottom(1), Trash.wells('A1').top(-5))
 #m1000.set_flow_rate(aspirate=100, dispense=100)
 #m1000.pick_up_tip(tipracks_1000_1.columns('3'))
 #m1000.aspirate(Supernatant_vol, SA3.bottom(1))
@@ -267,6 +273,9 @@ m1000.transfer(Supernatant_vol, SA1.bottom(1), Trash.wells('A1').top(-5))
 
 
 ### remove supernatant from SA4
+m1000.set_flow_rate(aspirate=100, dispense=100)
+m1000.pick_up_tip(tipracks_1000_1.wells())
+m1000.transfer(Supernatant_vol, SA4.bottom(1), Trash.wells('A1').top(-5))
 #m1000.set_flow_rate(aspirate=100, dispense=100)
 #m1000.pick_up_tip(tipracks_1000_1.columns('4'))
 #m1000.aspirate(Supernatant_vol, SA4.bottom(1))
@@ -277,6 +286,9 @@ m1000.transfer(Supernatant_vol, SA1.bottom(1), Trash.wells('A1').top(-5))
 
 
 ### remove supernatant from SA5
+m1000.set_flow_rate(aspirate=100, dispense=100)
+m1000.pick_up_tip(tipracks_1000_1.wells())
+m1000.transfer(Supernatant_vol, SA5.bottom(1), Trash.wells('A1').top(-5))
 #m1000.set_flow_rate(aspirate=100, dispense=100)
 #m1000.pick_up_tip(tipracks_1000_1.columns('5'))
 #m1000.aspirate(Supernatant_vol, SA5.bottom(1))
@@ -287,6 +299,9 @@ m1000.transfer(Supernatant_vol, SA1.bottom(1), Trash.wells('A1').top(-5))
 
 
 ### remove supernatant from SA6
+m1000.set_flow_rate(aspirate=100, dispense=100)
+m1000.pick_up_tip(tipracks_1000_1.wells())
+m1000.transfer(Supernatant_vol, SA6.bottom(1), Trash.wells('A1').top(-5))
 #m1000.set_flow_rate(aspirate=100, dispense=100)
 #m1000.pick_up_tip(tipracks_1000_1.columns('6'))
 #m1000.aspirate(Supernatant_vol, SA6.bottom(1))
