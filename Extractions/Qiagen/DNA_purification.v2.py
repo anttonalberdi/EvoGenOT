@@ -242,7 +242,7 @@ mag_deck.engage(height=33)
 ### remove supernatant from SA1
 m1000.set_flow_rate(aspirate=100, dispense=100)
 #m1000.pick_up_tip(tipracks_1000_1.columns('1'))
-m1000.transfer(Supernatant_vol, sample_plate.cols().bottom(1), Trash.wells('A1').top(-5))
+m1000.transfer(Supernatant_vol,SA1.wells().bottom(1), Trash.wells('A1').top(-5))
 #m1000.transfer(Supernatant_vol, plate.cols('1'), plate.cols('2'))
 #m1000.dispense(Supernatant_vol, Trash.wells('A1').top(-5))
 #m1000.drop_tip()
