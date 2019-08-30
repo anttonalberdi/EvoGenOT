@@ -83,7 +83,7 @@ m300 = instruments.P300_Multi(
     max_volume=200,
     aspirate_flow_rate=100,
     dispense_flow_rate=200,
-    tip_racks=[tipracks_200_1, tipracks_200_2, tipracks_200_3, tipracks_200_4, empty_tiprack])
+    tip_racks=[tipracks_200_1, tipracks_200_2, tipracks_200_3, tipracks_200_4, empty_tiprack_1, empty_tiprack_2])
 
 
 ## Purification reagents SETUP
