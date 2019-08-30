@@ -86,12 +86,12 @@ elution_vol = 30
 
 #### Sample SETUP
 
-SA1 = sample_plate.wells('A1')
-SA2 = sample_plate.wells('A3')
-SA3 = sample_plate.wells('A5')
-SA4 = sample_plate.wells('A7')
-SA5 = sample_plate.wells('A9')
-SA6 = sample_plate.wells('A11')
+#SA1 = sample_plate.wells('A1')
+#SA2 = sample_plate.wells('A3')
+#SA3 = sample_plate.wells('A5')
+#SA4 = sample_plate.wells('A7')
+#SA5 = sample_plate.wells('A9')
+#SA6 = sample_plate.wells('A11')
 
 EA1 = elution_plate.wells('A1')
 EA2 = elution_plate.wells('A3')
@@ -244,7 +244,7 @@ mag_deck.engage(height=33)
 ### remove supernatant from SA1
 m1000.set_flow_rate(aspirate=100, dispense=100)
 #m1000.pick_up_tip(tipracks_1000_1.wells())
-m1000.transfer(Supernatant_vol, SA1.bottom(1), Trash.wells('A1').top(-5))
+m1000.transfer(Supernatant_vol, sample_plate.cols('1','3', '5', '7', '9', '11')bottom(1), Trash.wells('A1').top(-5))
 #m1000.transfer(Supernatant_vol, plate.cols('1'), plate.cols('2'))
 #m1000.dispense(Supernatant_vol, Trash.wells('A1').top(-5))
 #m1000.drop_tip()
