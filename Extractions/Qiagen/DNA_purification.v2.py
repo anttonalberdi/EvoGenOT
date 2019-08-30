@@ -59,7 +59,7 @@ m300 = instruments.P300_Multi(
     dispense_flow_rate=200,
     tip_racks=(tipracks_200_1,tipracks_200_2,tipracks_200_3))
 
-m1000 = instruments.P1000_Multi(
+m1000 = instruments.P1000_Single(
     mount='right',
     min_volume=300,
     max_volume=1000,
