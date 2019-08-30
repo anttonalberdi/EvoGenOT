@@ -22,7 +22,7 @@ reagent_rack1 = labware.load('opentrons-tuberack-2ml-eppendorf', '3')
 
 
 
-tipracks_10 = labware.load('tiprack-10µl', '2', share=true)
+tipracks_10 = labware.load('tiprack-10µl', '2', share=True)
 
 m10 = instruments.P10_Multi(mount='right', tip_racks=[tiprack_10])
 
