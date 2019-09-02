@@ -19,7 +19,7 @@ metadata = {
     'protocolName': 'D-Rex Inital Extraction',
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
     'version': '1.0-optimized',
-    'SAte': '2019/08/15',
+    'date': '2019/08/15',
     'description': 'Automation of D-Rex RNA and DNA seperation for extraction protocol of stool samples in SHIELD',
 }
 

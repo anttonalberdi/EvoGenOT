@@ -194,7 +194,7 @@ for target in samples:
     m10.drop_tip()
 
 
-### Addition of End repair mastermix to enzymes
+### Addition of Ligase mastermix to enzymes
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
 m300.move_to(Lig_mastermix.bottom())
@@ -214,7 +214,7 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.drop_tip()
 
-### Addition of End repair mastermix to libraries
+### Addition of Ligase mastermix to libraries
 for target in samples:
     m10.set_flow_rate(aspirate=100, dispense=100)
     m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
