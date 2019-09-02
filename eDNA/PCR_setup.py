@@ -80,6 +80,10 @@ else:
     MM_vol = MM_vol/2
 ### PROTOCOL ###
 
+### Engage tempdeck at 10°C
+temp_deck.set_temperature(10)
+temp_deck.wait_for_temp()
+
 ### Adding MM_Fw1 to Coloumn 1-3
 samples = [setup_plate.wells('A1'), setup_plate.wells('A2'), setup_plate.wells('A3')]
 for target in samples:
