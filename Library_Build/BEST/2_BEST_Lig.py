@@ -1,24 +1,44 @@
 ##########################
-### BEST Library build ###
+### BEST library build ###
 ##########################
 
 ## Description of procedure ##
-#
-#
-# Things do before procedure
-#
-#	1. Mix mastermix of End-repair, Ligase and Fill-in according to BEST-sheet and sample size.
-#				NOTE! This procedure is for full plates
-# 	2. Thaw samples in fridge and place them in a slot 2 in a chilling rack.
-#
-# Procedure
-#
-#		BEST
-# 	1.	Distribute 2µl Adapters mix into temp_deck
-#	  2.	Adds 91µl of Ligase MM to Enzyme strip (7µl * 13 columns)
-#   3.  Distribute 8µl of Enzyme-Lig_MM to each well
-#	  4.	Incubate in PCR at 20°C for 30 min, and at 65°C for 15 min
 
+# BEFORE PROTOCOL BEGINS
+#
+    # Ligation step mastex mix reagents and volumes:
+    #                           1X      96(+10)X
+    # PEG 4000 50%              6       636
+    # T4 DNA ligase buffer      1       106
+    # T4 DNA ligase             1       106
+    # Mix                       8       848
+    # Sample                    40 (+ 2ul adaptors)
+    #Reaction size              50
+    #
+# 1) Distribute 26.5 ul (2 ul for each well) of BGI Adaptor to Column 5 (BGI_adaptor) of chill_rack_96
+#
+# 2) Pre-mix buffers in 1.5 ml tube and distribute to Column 6 (Lig_mastermix) of chill_rack_96
+#       PEG 4000 50%            636
+#       T4 DNA ligase buffer    106
+#       For each well           92.75
+#
+# 3) Pre-mix enzymes in 1.5 ml tube and distribute to Column 2 (Enzyme_Lig) of chill_rack_96
+#       T4 DNA ligase           106
+#       For each well           13.25
+#
+# ROBOT PROTOCOL BEGINS
+#
+# 4) Transfer 2 ul of BGI adaptors to each well in the sample plate and mix thoroughly
+#
+# 5) Transfer 92.75 ul from Column 6 to Column 2 and mix
+#
+# 6) Distribute 8 ul to each well in the sample plate and mix thoroughly
+#
+# ROBOT PROTOCOL ENDS
+#
+# 7) Cover the plate with thin aluminium seal
+#
+# 8) Incubate the plate 30 min 20ºC, 15 min 65ºC
 #
 #	Good Luck!
 #
@@ -132,7 +152,7 @@ col_num = sample_number // 8 + (1 if sample_number % 8 > 0 else 0)
 samples = [col for col in temp_plate.cols()[:col_num]]
 
 ## Volume setup
-#ER_vol = 5.85
+#ER_vol = 8
 Lig_vol = 8
 #Fill_vol = 10
 #MM_dist_ER = ER_vol * col_num

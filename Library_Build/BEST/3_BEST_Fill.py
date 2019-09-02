@@ -1,23 +1,35 @@
-##########################
-### BEST Library build ###
-##########################
+###########################
+###  BEST library build ###
+###########################
 
 ## Description of procedure ##
+
+# BEFORE PROTOCOL BEGINS
+    # Fill in step mastex mix reagents and volumes:
+    #                       1X     96(+10)X
+    # Water                 5.6    593.6
+    # Isothermal buffer     2      212
+    # dNTP 25 mM            0.8    84.8
+    # Bst 2.0 Polymerase    1.6    169.6
+    # Mix                   10     1060
+    # Sample                50
+    # Reaction size         60
+    #
+# 1) Pre-mix buffers in 1.5 ml tube and distribute to Column 7 (Fill_mastermix)
+#       Water                   593.6
+#       Isothermal buffers      212
+#       dNTP 25 mM              84.8
+#       For each well           111.3
 #
+# 2) Pre-mix enzymes in 1.5 ml tube and distribute to Column 3 (Enzyme_Fill)
+#       Bts 2.0 Polymerase      169.6
+#       For each well           21.2
 #
-# Things do before procedure
+# ROBOT PROTOCOL BEGINS
 #
-#	1. Mix mastermix of End-repair, Ligase and Fill-in according to BEST-sheet and sample size.
-#				NOTE! This procedure is for full plates
-# 	2. Thaw samples in fridge and place them in a slot 2 in a chilling rack.
+# 3) Transfer 11.3 ul from Column 7 to Column 3 and mix
 #
-# Procedure
-#
-#		BEST
-# 	1.	Distribute 2µl Adapters mix into temp_deck
-#	  2.	Adds 110µl of Fill MM to Enzyme strip (8.4µl * 13 columns)
-#   3.  Distribute 10µl of Enzyme-Fill_MM to each well
-#	  4.	Incubate in PCR at 65°C for 15 min, and at 80°C for 15 min
+# 4) Distribute 10 ul to each well in the sample plate and mix thoroughly
 
 #
 #	Good Luck!
@@ -135,7 +147,7 @@ col_num = sample_number // 8 + (1 if sample_number % 8 > 0 else 0)
 samples = [col for col in temp_plate.cols()[:col_num]]
 
 ## Volume setup
-#ER_vol = 5.85
+#ER_vol = 8
 #Lig_vol = 8
 Fill_vol = 10
 #MM_dist_ER = ER_vol * col_num
