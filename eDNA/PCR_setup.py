@@ -20,6 +20,9 @@ from opentrons import labware, instruments, modules, robot
 
 #### METADATA ####
 
+OT2user = 'Jacob Agerbo Rasmussen'
+OT2useremail = 'genomicsisawesome@gmail.com'
+
 metadata = {
     'protocolName': 'eDNA PCR setup',
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
@@ -225,229 +228,263 @@ for target in samples:
     m10.return_tip()
 
 ### Transfer DNA to SETUP plate A1
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.mix(3, 10, DNA_plate.wells('A1').bottom(2))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
+m10.mix(3, 10, DNA_plate.wells('A1').bottom(2))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (50), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=50, dispense=50)
-m300.aspirate(DNA_vol, DNA_plate.wells('A1').bottom(2))
-m300.dispense(DNA_vol, setup_plate.wells('A1').bottom(4))
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.mix(3, 10, setup_plate.wells('A1').bottom(5))
-m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.move_to(setup_plate.wells('A1').top(-5))
-m300.blow_out()
+m10.set_flow_rate(aspirate=50, dispense=50)
+m10.aspirate(DNA_vol, DNA_plate.wells('A1').bottom(2))
+m10.dispense(DNA_vol, setup_plate.wells('A1').bottom(4))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.mix(3, 10, setup_plate.wells('A1').bottom(5))
+m10.delay(seconds=5)
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.move_to(setup_plate.wells('A1').top(-5))
+m10.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m10.return_tip()
 
 ### Transfer DNA to SETUP plate A2
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.mix(3, 10, DNA_plate.wells('A2').bottom(2))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
+m10.mix(3, 10, DNA_plate.wells('A2').bottom(2))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (50), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=50, dispense=50)
-m300.aspirate(DNA_vol, DNA_plate.wells('A2').bottom(2))
-m300.dispense(DNA_vol, setup_plate.wells('A2').bottom(4))
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.mix(3, 10, setup_plate.wells('A2').bottom(5))
-m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.move_to(setup_plate.wells('A2').top(-5))
-m300.blow_out()
+m10.set_flow_rate(aspirate=50, dispense=50)
+m10.aspirate(DNA_vol, DNA_plate.wells('A2').bottom(2))
+m10.dispense(DNA_vol, setup_plate.wells('A2').bottom(4))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.mix(3, 10, setup_plate.wells('A2').bottom(5))
+m10.delay(seconds=5)
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.move_to(setup_plate.wells('A2').top(-5))
+m10.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m10.return_tip()
 
 ### Transfer DNA to SETUP plate A3
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.mix(3, 10, DNA_plate.wells('A3').bottom(2))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
+m10.mix(3, 10, DNA_plate.wells('A3').bottom(2))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (50), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=50, dispense=50)
-m300.aspirate(DNA_vol, DNA_plate.wells('A3').bottom(2))
-m300.dispense(DNA_vol, setup_plate.wells('A3').bottom(4))
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.mix(3, 10, setup_plate.wells('A3').bottom(5))
-m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.move_to(setup_plate.wells('A3').top(-5))
-m300.blow_out()
+m10.set_flow_rate(aspirate=50, dispense=50)
+m10.aspirate(DNA_vol, DNA_plate.wells('A3').bottom(2))
+m10.dispense(DNA_vol, setup_plate.wells('A3').bottom(4))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.mix(3, 10, setup_plate.wells('A3').bottom(5))
+m10.delay(seconds=5)
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.move_to(setup_plate.wells('A3').top(-5))
+m10.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m10.return_tip()
 
 ### Transfer DNA to SETUP plate A4
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.mix(3, 10, DNA_plate.wells('A4').bottom(2))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
+m10.mix(3, 10, DNA_plate.wells('A4').bottom(2))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (50), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=50, dispense=50)
-m300.aspirate(DNA_vol, DNA_plate.wells('A4').bottom(2))
-m300.dispense(DNA_vol, setup_plate.wells('A4').bottom(4))
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.mix(3, 10, setup_plate.wells('A4').bottom(5))
-m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.move_to(setup_plate.wells('A4').top(-5))
-m300.blow_out()
+m10.set_flow_rate(aspirate=50, dispense=50)
+m10.aspirate(DNA_vol, DNA_plate.wells('A4').bottom(2))
+m10.dispense(DNA_vol, setup_plate.wells('A4').bottom(4))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.mix(3, 10, setup_plate.wells('A4').bottom(5))
+m10.delay(seconds=5)
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.move_to(setup_plate.wells('A4').top(-5))
+m10.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m10.return_tip()
 
 ### Transfer DNA to SETUP plate A5
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.mix(3, 10, DNA_plate.wells('A5').bottom(2))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
+m10.mix(3, 10, DNA_plate.wells('A5').bottom(2))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (50), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=50, dispense=50)
-m300.aspirate(DNA_vol, DNA_plate.wells('A5').bottom(2))
-m300.dispense(DNA_vol, setup_plate.wells('A5').bottom(4))
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.mix(3, 10, setup_plate.wells('A5').bottom(5))
-m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.move_to(setup_plate.wells('A5').top(-5))
-m300.blow_out()
+m10.set_flow_rate(aspirate=50, dispense=50)
+m10.aspirate(DNA_vol, DNA_plate.wells('A5').bottom(2))
+m10.dispense(DNA_vol, setup_plate.wells('A5').bottom(4))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.mix(3, 10, setup_plate.wells('A5').bottom(5))
+m10.delay(seconds=5)
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.move_to(setup_plate.wells('A5').top(-5))
+m10.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m10.return_tip()
 
 ### Transfer DNA to SETUP plate A6
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.mix(3, 10, DNA_plate.wells('A6').bottom(2))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
+m10.mix(3, 10, DNA_plate.wells('A6').bottom(2))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (50), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=50, dispense=50)
-m300.aspirate(DNA_vol, DNA_plate.wells('A6').bottom(2))
-m300.dispense(DNA_vol, setup_plate.wells('A6').bottom(4))
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.mix(3, 10, setup_plate.wells('A6').bottom(5))
-m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.move_to(setup_plate.wells('A6').top(-5))
-m300.blow_out()
+m10.set_flow_rate(aspirate=50, dispense=50)
+m10.aspirate(DNA_vol, DNA_plate.wells('A6').bottom(2))
+m10.dispense(DNA_vol, setup_plate.wells('A6').bottom(4))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.mix(3, 10, setup_plate.wells('A6').bottom(5))
+m10.delay(seconds=5)
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.move_to(setup_plate.wells('A6').top(-5))
+m10.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m10.return_tip()
 
 ### Transfer DNA to SETUP plate A7
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.mix(3, 10, DNA_plate.wells('A7').bottom(2))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
+m10.mix(3, 10, DNA_plate.wells('A7').bottom(2))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (50), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=50, dispense=50)
-m300.aspirate(DNA_vol, DNA_plate.wells('A7').bottom(2))
-m300.dispense(DNA_vol, setup_plate.wells('A7').bottom(4))
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.mix(3, 10, setup_plate.wells('A7').bottom(5))
-m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.move_to(setup_plate.wells('A7').top(-5))
-m300.blow_out()
+m10.set_flow_rate(aspirate=50, dispense=50)
+m10.aspirate(DNA_vol, DNA_plate.wells('A7').bottom(2))
+m10.dispense(DNA_vol, setup_plate.wells('A7').bottom(4))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.mix(3, 10, setup_plate.wells('A7').bottom(5))
+m10.delay(seconds=5)
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.move_to(setup_plate.wells('A7').top(-5))
+m10.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m10.return_tip()
 
 ### Transfer DNA to SETUP plate A8
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.mix(3, 10, DNA_plate.wells('A8').bottom(2))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
+m10.mix(3, 10, DNA_plate.wells('A8').bottom(2))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (50), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=50, dispense=50)
-m300.aspirate(DNA_vol, DNA_plate.wells('A8').bottom(2))
-m300.dispense(DNA_vol, setup_plate.wells('A8').bottom(4))
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.mix(3, 10, setup_plate.wells('A8').bottom(5))
-m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.move_to(setup_plate.wells('A8').top(-5))
-m300.blow_out()
+m10.set_flow_rate(aspirate=50, dispense=50)
+m10.aspirate(DNA_vol, DNA_plate.wells('A8').bottom(2))
+m10.dispense(DNA_vol, setup_plate.wells('A8').bottom(4))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.mix(3, 10, setup_plate.wells('A8').bottom(5))
+m10.delay(seconds=5)
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.move_to(setup_plate.wells('A8').top(-5))
+m10.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m10.return_tip()
 
 ### Transfer DNA to SETUP plate A9
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.mix(3, 10, DNA_plate.wells('A9').bottom(2))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
+m10.mix(3, 10, DNA_plate.wells('A9').bottom(2))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (50), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=50, dispense=50)
-m300.aspirate(DNA_vol, DNA_plate.wells('A9').bottom(2))
-m300.dispense(DNA_vol, setup_plate.wells('A9').bottom(4))
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.mix(3, 10, setup_plate.wells('A9').bottom(5))
-m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.move_to(setup_plate.wells('A9').top(-5))
-m300.blow_out()
+m10.set_flow_rate(aspirate=50, dispense=50)
+m10.aspirate(DNA_vol, DNA_plate.wells('A9').bottom(2))
+m10.dispense(DNA_vol, setup_plate.wells('A9').bottom(4))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.mix(3, 10, setup_plate.wells('A9').bottom(5))
+m10.delay(seconds=5)
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.move_to(setup_plate.wells('A9').top(-5))
+m10.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m10.return_tip()
 
 ### Transfer DNA to SETUP plate A10
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.mix(3, 10, DNA_plate.wells('A10').bottom(2))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
+m10.mix(3, 10, DNA_plate.wells('A10').bottom(2))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (50), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=50, dispense=50)
-m300.aspirate(DNA_vol, DNA_plate.wells('A10').bottom(2))
-m300.dispense(DNA_vol, setup_plate.wells('A10').bottom(4))
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.mix(3, 10, setup_plate.wells('A10').bottom(5))
-m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.move_to(setup_plate.wells('A10').top(-5))
-m300.blow_out()
+m10.set_flow_rate(aspirate=50, dispense=50)
+m10.aspirate(DNA_vol, DNA_plate.wells('A10').bottom(2))
+m10.dispense(DNA_vol, setup_plate.wells('A10').bottom(4))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.mix(3, 10, setup_plate.wells('A10').bottom(5))
+m10.delay(seconds=5)
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.move_to(setup_plate.wells('A10').top(-5))
+m10.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m10.return_tip()
 
 ### Transfer DNA to SETUP plate A11
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.mix(3, 10, DNA_plate.wells('A11').bottom(2))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
+m10.mix(3, 10, DNA_plate.wells('A11').bottom(2))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (50), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=50, dispense=50)
-m300.aspirate(DNA_vol, DNA_plate.wells('A11').bottom(2))
-m300.dispense(DNA_vol, setup_plate.wells('A11').bottom(4))
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.mix(3, 10, setup_plate.wells('A11').bottom(5))
-m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.move_to(setup_plate.wells('A11').top(-5))
-m300.blow_out()
+m10.set_flow_rate(aspirate=50, dispense=50)
+m10.aspirate(DNA_vol, DNA_plate.wells('A11').bottom(2))
+m10.dispense(DNA_vol, setup_plate.wells('A11').bottom(4))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.mix(3, 10, setup_plate.wells('A11').bottom(5))
+m10.delay(seconds=5)
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.move_to(setup_plate.wells('A11').top(-5))
+m10.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m10.return_tip()
 
 ### Transfer DNA to SETUP plate A12
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.mix(3, 10, DNA_plate.wells('A12').bottom(2))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.pick_up_tip() # Slow down head speed 0.5X for bead handling
+m10.mix(3, 10, DNA_plate.wells('A12').bottom(2))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (50), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.set_flow_rate(aspirate=50, dispense=50)
-m300.aspirate(DNA_vol, DNA_plate.wells('A12').bottom(2))
-m300.dispense(DNA_vol, setup_plate.wells('A12').bottom(4))
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.mix(3, 10, setup_plate.wells('A12').bottom(5))
-m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=100, dispense=100)
-m300.move_to(setup_plate.wells('A12').top(-5))
-m300.blow_out()
+m10.set_flow_rate(aspirate=50, dispense=50)
+m10.aspirate(DNA_vol, DNA_plate.wells('A12').bottom(2))
+m10.dispense(DNA_vol, setup_plate.wells('A12').bottom(4))
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.mix(3, 10, setup_plate.wells('A12').bottom(5))
+m10.delay(seconds=5)
+m10.set_flow_rate(aspirate=100, dispense=100)
+m10.move_to(setup_plate.wells('A12').top(-5))
+m10.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-m300.return_tip()
+m10.return_tip()
+
+robot.home()
+
+############################
+###### Job's is done! ######
+############################
+
+# Setup for emailing at the end of the run
+import smtplib
+
+gmail_user = 'OT2.evogen@gmail.com'
+gmail_password = 'nomoreacdc'
+to = [OT2useremail]
+sent_from = gmail_user
+subject = 'OpenTron2 protocol completed'
+body = 'Dear OT2 user, \n\nThe OpenTron 2 has completed a protocol. Please remove your samples and clean the robot. \n\nThank you for using the OT2 🥳'
+
+email_text = """\
+From: %s
+To: %s
+Subject: %s
+
+%s
+""" % (sent_from, ", ".join(to), subject, body)
+try:
+    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+    server.ehlo()
+    server.login(gmail_user, gmail_password)
+    server.sendmail(sent_from, to, email_text)
+    server.close()
+
+    print ('Email sent!')
+except:
+    print ('Something went wrong...')
