@@ -52,17 +52,9 @@ if plate_name not in labware.list():
         volume=1000)
 
 mag_deck = modules.load('magdeck', '7')
-mag_plate = labware.load('1ml_PCR', '7', share=True)
+mag_plate = labware.load('1ml_PCR, '7', share=True)
 output_plate = labware.load('biorad-hardshell-96-PCR', '10')
 
-m300 = instruments.P300_Multi(
-    mount='right',
-    min_volume=30,
-    max_volume=300,
-    aspirate_flow_rate=100,
-    dispense_flow_rate=200,
-    blow_out_rate=2000)
-    #tip_racks=(tipracks_200_1,tipracks_200_2,tipracks_200_3))
 
 def run_custom_protocol(
         pipette_type: 'StringSelection...'='p300_Multi',
@@ -78,14 +70,37 @@ def run_custom_protocol(
     total_tips = sample_number*8
     tiprack_num = total_tips//96 + (1 if total_tips % 96 > 0 else 0)
     slots = ['1', '2', '3', '4', '5', '6', '9'][:tiprack_num]
-    pipette_type == 'm300':
-        tipracks = [labware.load('tiprack-200ul', slot) for slot in slots]
-        pipette = instruments.m300(
+    if pipette_type == 'p1000_Single':
+        tipracks = [labware.load('tiprack-1000ul', slot) for slot in slots]
+        pipette = instruments.P1000_Single(
             mount=pipette_mount,
             tip_racks=tipracks)
-
-
-    if pipette_type == 'p300_Multi':
+    elif pipette_type == 'p300_Single':
+        tipracks = [labware.load('tiprack-200ul', slot) for slot in slots]
+        pipette = instruments.P300_Single(
+            mount=pipette_mount,
+            tip_racks=tipracks)
+    elif pipette_type == 'p50_Single':
+        tipracks = [labware.load('tiprack-200ul', slot) for slot in slots]
+        pipette = instruments.P50_Single(
+            mount=pipette_mount,
+            tip_racks=tipracks)
+    elif pipette_type == 'p10_Single':
+        tipracks = [labware.load('tiprack-10ul', slot) for slot in slots]
+        pipette = instruments.P10_Single(
+            mount=pipette_mount,
+            tip_racks=tipracks)
+    elif pipette_type == 'p10_Multi':
+        tipracks = [labware.load('tiprack-10ul', slot) for slot in slots]
+        pipette = instruments.P10_Multi(
+            mount=pipette_mount,
+            tip_racks=tipracks)
+    elif pipette_type == 'p50_Multi':
+        tipracks = [labware.load('tiprack-200ul', slot) for slot in slots]
+        pipette = instruments.P50_Multi(
+            mount=pipette_mount,
+            tip_racks=tipracks)
+    elif pipette_type == 'p300_Multi':
         tipracks = [labware.load('tiprack-200ul', slot) for slot in slots]
         pipette = instruments.P300_Multi(
             mount=pipette_mount,
@@ -104,7 +119,7 @@ def run_custom_protocol(
         output = [well for well in output_plate.wells()[:sample_number]]
     else:
         reagent_container = labware.load('trough-12row', '11')
-        liquid_waste = labware.load('One-Column-reservoir', '9')
+            liquid_waste = labware.load('One-Column-reservoir', '9')
         if sample_number <= 48:
             col_num = (sample_number // 8 + (1 if sample_number % 8 > 0 else 0))*2
             samples = [col for col in mag_plate.cols()[:col_num] if sample_number % 2 == 1]
@@ -188,7 +203,7 @@ def run_custom_protocol(
         pipette.transfer(elution_buffer_volume, target, dest, blow_out=True)
 
 
-run_custom_protocol(**{'pipette_type': 'm300', 'pipette_mount': 'right', 'sample_number': USERsample_number, 'sample_volume': USERsample_vol, 'bead_ratio': USERbead_ratio, 'elution_buffer_volume': USERelution_vol, 'incubation_time': USERincubation_time, 'settling_time': USERsettling_time, 'drying_time': USERdrying_time})
+run_custom_protocol(**{'pipette_type': 'p300_Multi', 'pipette_mount': 'right', 'sample_number': USERsample_number, 'sample_volume': USERsample_vol, 'bead_ratio': USERbead_ratio, 'elution_buffer_volume': USERelution_vol, 'incubation_time': USERincubation_time, 'settling_time': USERsettling_time, 'drying_time': USERdrying_time})
 
 ### Send email to OT2user at end of protocol
 import smtplib
