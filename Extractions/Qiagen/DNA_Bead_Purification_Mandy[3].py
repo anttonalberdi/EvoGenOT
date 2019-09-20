@@ -52,7 +52,7 @@ if plate_name not in labware.list():
         volume=1000)
 
 mag_deck = modules.load('magdeck', '7')
-mag_plate = labware.load('1ml_PCR, '7', share=True)
+mag_plate = labware.load('1ml_PCR', '7', share=True)
 output_plate = labware.load('biorad-hardshell-96-PCR', '10')
 
 
