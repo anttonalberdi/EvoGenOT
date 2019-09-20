@@ -84,37 +84,8 @@ def run_custom_protocol(
             mount=pipette_mount,
             tip_racks=tipracks)
 
-    #if pipette_type == 'p1000_Single':
-        tipracks = [labware.load('tiprack-1000ul', slot) for slot in slots]
-        pipette = instruments.P1000_Single(
-            mount=pipette_mount,
-            tip_racks=tipracks)
-    elif pipette_type == 'p300_Single':
-        tipracks = [labware.load('tiprack-200ul', slot) for slot in slots]
-        pipette = instruments.P300_Single(
-            mount=pipette_mount,
-            tip_racks=tipracks)
-    elif pipette_type == 'p50_Single':
-        tipracks = [labware.load('tiprack-200ul', slot) for slot in slots]
-        pipette = instruments.P50_Single(
-            mount=pipette_mount,
-            tip_racks=tipracks)
-    elif pipette_type == 'p10_Single':
-        tipracks = [labware.load('tiprack-10ul', slot) for slot in slots]
-        pipette = instruments.P10_Single(
-            mount=pipette_mount,
-            tip_racks=tipracks)
-    elif pipette_type == 'p10_Multi':
-        tipracks = [labware.load('tiprack-10ul', slot) for slot in slots]
-        pipette = instruments.P10_Multi(
-            mount=pipette_mount,
-            tip_racks=tipracks)
-    elif pipette_type == 'p50_Multi':
-        tipracks = [labware.load('tiprack-200ul', slot) for slot in slots]
-        pipette = instruments.P50_Multi(
-            mount=pipette_mount,
-            tip_racks=tipracks)
-    elif pipette_type == 'p300_Multi':
+
+    if pipette_type == 'p300_Multi':
         tipracks = [labware.load('tiprack-200ul', slot) for slot in slots]
         pipette = instruments.P300_Multi(
             mount=pipette_mount,
