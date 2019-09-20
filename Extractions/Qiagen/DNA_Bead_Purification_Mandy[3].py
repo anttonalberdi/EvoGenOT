@@ -155,7 +155,7 @@ def run_custom_protocol(
     pipette.delay(minutes=incubation_time)
 
     # Engagae MagDeck and incubate
-    mag_deck.engage()
+    mag_deck.engage(height=33)
     pipette.delay(minutes=settling_time)
 
     # Remove supernatant from magnetic beads
@@ -195,7 +195,7 @@ def run_custom_protocol(
     pipette.delay(minutes=5)
 
     # Engagae MagDeck for 1 minute and remain engaged for DNA elution
-    mag_deck.engage()
+    mag_deck.engage(height=33)
     pipette.delay(minutes=settling_time)
 
     # Transfer clean PCR product to a new well
