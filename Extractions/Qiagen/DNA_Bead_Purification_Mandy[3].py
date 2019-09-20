@@ -119,7 +119,7 @@ def run_custom_protocol(
         output = [well for well in output_plate.wells()[:sample_number]]
     else:
         reagent_container = labware.load('trough-12row', '11')
-            liquid_waste = labware.load('One-Column-reservoir', '9')
+        liquid_waste = labware.load('One-Column-reservoir', '9')
         if sample_number <= 48:
             col_num = (sample_number // 8 + (1 if sample_number % 8 > 0 else 0))*2
             samples = [col for col in mag_plate.cols()[:col_num] if sample_number % 2 == 1]
