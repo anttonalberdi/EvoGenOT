@@ -55,10 +55,18 @@ mag_deck = modules.load('magdeck', '7')
 mag_plate = labware.load('1ml_PCR', '7', share=True)
 output_plate = labware.load('biorad-hardshell-96-PCR', '10')
 
+m300 = instruments.P300_Multi(
+    mount='right',
+    min_volume=30,
+    max_volume=300,
+    aspirate_flow_rate=100,
+    dispense_flow_rate=200,
+    blow_out_rate=2000,
+    #tip_racks=(tipracks_200_1,tipracks_200_2,tipracks_200_3))
 
 def run_custom_protocol(
         pipette_type: 'StringSelection...'='p300_Multi',
-        pipette_mount: 'StringSelection...'='left',
+        pipette_mount: 'StringSelection...'='right',
         sample_number: int=24,
         sample_volume: float=20,
         bead_ratio: float=1.8,
@@ -70,7 +78,13 @@ def run_custom_protocol(
     total_tips = sample_number*8
     tiprack_num = total_tips//96 + (1 if total_tips % 96 > 0 else 0)
     slots = ['1', '2', '3', '4', '5', '6', '9'][:tiprack_num]
-    if pipette_type == 'p1000_Single':
+    pipette_type='m300'
+        tipracks = [labware.load('tiprack-200ul', slot) for slot in slots]
+        pipette = instruments.m300(
+            mount=pipette_mount,
+            tip_racks=tipracks)
+
+    #if pipette_type == 'p1000_Single':
         tipracks = [labware.load('tiprack-1000ul', slot) for slot in slots]
         pipette = instruments.P1000_Single(
             mount=pipette_mount,
@@ -203,7 +217,7 @@ def run_custom_protocol(
         pipette.transfer(elution_buffer_volume, target, dest, blow_out=True)
 
 
-run_custom_protocol(**{'pipette_type': 'p300_Multi', 'pipette_mount': 'right', 'sample_number': USERsample_number, 'sample_volume': USERsample_vol, 'bead_ratio': USERbead_ratio, 'elution_buffer_volume': USERelution_vol, 'incubation_time': USERincubation_time, 'settling_time': USERsettling_time, 'drying_time': USERdrying_time})
+run_custom_protocol(**{'pipette_type': 'm300', 'pipette_mount': 'right', 'sample_number': USERsample_number, 'sample_volume': USERsample_vol, 'bead_ratio': USERbead_ratio, 'elution_buffer_volume': USERelution_vol, 'incubation_time': USERincubation_time, 'settling_time': USERsettling_time, 'drying_time': USERdrying_time})
 
 ### Send email to OT2user at end of protocol
 import smtplib
