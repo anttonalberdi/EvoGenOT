@@ -78,7 +78,7 @@ def run_custom_protocol(
     total_tips = sample_number*8
     tiprack_num = total_tips//96 + (1 if total_tips % 96 > 0 else 0)
     slots = ['1', '2', '3', '4', '5', '6', '9'][:tiprack_num]
-    pipette_type='m300'
+    pipette_type='m300':
         tipracks = [labware.load('tiprack-200ul', slot) for slot in slots]
         pipette = instruments.m300(
             mount=pipette_mount,
