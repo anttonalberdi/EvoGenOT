@@ -1,6 +1,6 @@
 from opentrons import labware, instruments, modules
 
-### USER INPUT ### 
+### USER INPUT ###
 
 OT2user = 'Mandy' # First name of user
 OT2useremail = 'mandy.boltbotnen@gmail.com' # email of user
@@ -40,7 +40,7 @@ if plate_name not in labware.list():
         diameter=81,                     # diameter (mm) of each well on the plate
         depth=35,                       # depth (mm) of each well on the plate
         volume=350000)
-		
+
 plate_name = '1ml_PCR' #Used on the magdeck together with adaptor
 if plate_name not in labware.list():
     custom_plate = labware.create(
@@ -51,8 +51,8 @@ if plate_name not in labware.list():
         depth=26.4,                       # depth (mm) of each well on the plate
         volume=1000)
 
-mag_deck = modules.load('magdeck', '8')
-mag_plate = labware.load('biorad-hardshell-96-PCR', '8', share=True)
+mag_deck = modules.load('magdeck', '7')
+mag_plate = labware.load('1ml_PCR, '7', share=True)
 output_plate = labware.load('biorad-hardshell-96-PCR', '10')
 
 
@@ -69,7 +69,7 @@ def run_custom_protocol(
 
     total_tips = sample_number*8
     tiprack_num = total_tips//96 + (1 if total_tips % 96 > 0 else 0)
-    slots = ['1', '2', '3', '4', '5', '6', '9', '11'][:tiprack_num]
+    slots = ['1', '2', '3', '4', '5', '6', '9'][:tiprack_num]
     if pipette_type == 'p1000_Single':
         tipracks = [labware.load('tiprack-1000ul', slot) for slot in slots]
         pipette = instruments.P1000_Single(
@@ -110,16 +110,16 @@ def run_custom_protocol(
 
     if mode == 'Single':
         if sample_number <= 5:
-            reagent_container = labware.load('tube-rack-2ml', '7')
-            liquid_waste = labware.load('trough-12row', '7').wells('A12')
+            reagent_container = labware.load('tube-rack-2ml', '11')
+            liquid_waste = labware.load('One-Column-reservoir', '9')
         else:
-            reagent_container = labware.load('trough-12row', '4')
-            liquid_waste = reagent_container.wells('A12')
+            reagent_container = labware.load('trough-12row', '11')
+            liquid_waste = labware.load('One-Column-reservoir', '9')
         samples = [well for well in mag_plate.wells()[:sample_number]]
         output = [well for well in output_plate.wells()[:sample_number]]
     else:
-        reagent_container = labware.load('trough-12row', '7')
-        liquid_waste = reagent_container.wells('A12')
+        reagent_container = labware.load('trough-12row', '11')
+            liquid_waste = labware.load('One-Column-reservoir', '9')
         if sample_number <= 48:
             col_num = (sample_number // 8 + (1 if sample_number % 8 > 0 else 0))*2
             samples = [col for col in mag_plate.cols()[:col_num] if sample_number % 2 == 1]
@@ -130,9 +130,9 @@ def run_custom_protocol(
             output = [col for col in output_plate.cols()[:col_num]]
 
     # Define reagents and liquid waste
-    beads = reagent_container.wells(0)
-    ethanol = reagent_container.wells(2)
-    elution_buffer = reagent_container.wells(4)
+    beads = reagent_container.wells(1)
+    ethanol = reagent_container.wells(3)
+    elution_buffer = reagent_container.wells(12)
 
     # Define bead and mix volume
     bead_volume = sample_volume*bead_ratio
