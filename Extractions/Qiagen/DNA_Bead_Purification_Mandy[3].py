@@ -66,7 +66,7 @@ m300 = instruments.P300_Multi(
 
 def run_custom_protocol(
         pipette_type: 'StringSelection...'='p300_Multi',
-        pipette_mount: 'StringSelection...'='right',
+        pipette_mount: 'StringSelection...'='left',
         sample_number: int=24,
         sample_volume: float=20,
         bead_ratio: float=1.8,
