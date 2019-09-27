@@ -50,7 +50,7 @@ trough = labware.load('trough-12row', '9')
 trash_box = labware.load('One-Column-reservoir', '8')
 mag_deck = modules.load('magdeck', '7')
 DNA_plate = labware.load('1ml_magPCR', '7', share=True)
-backup = labware.load('opentrons-tuberack-50ml', '6')
+
 
 tipracks_200_1 = labware.load('tiprack-200ul', '2', share=True)
 tipracks_200_2 = labware.load('tiprack-200ul', '3', share=True)

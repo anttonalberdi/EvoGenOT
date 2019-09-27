@@ -51,8 +51,7 @@ mag_deck = modules.load('magdeck', '7')
 sample_plate = labware.load('1ml_magPCR', '7', share=True)
 
 tipracks_200_1 = labware.load('tiprack-200ul', '4', share=True)
-tipracks_200_2 = labware.load('tiprack-200ul', '5', share=True)
-tipracks_200_3 = labware.load('tiprack-200ul', '6', share=True)
+
 
 #### PIPETTE SETUP ####
 m300 = instruments.P300_Multi(
@@ -61,7 +60,7 @@ m300 = instruments.P300_Multi(
     max_volume=200,
     aspirate_flow_rate=100,
     dispense_flow_rate=200,
-    tip_racks=[tipracks_200_1, tipracks_200_2, tipracks_200_3])
+    tip_racks=[tipracks_200_1])
 
 #### REAGENT SETUP
 Binding_buffer1 = trough.wells('A1')
