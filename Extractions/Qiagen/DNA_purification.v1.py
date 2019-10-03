@@ -44,6 +44,8 @@ elution_plate = labware.load('biorad-hardshell-96-PCR','1')
 tipracks_200_1 = labware.load('tiprack-200ul', '4', share=True)
 tipracks_200_2 = labware.load('tiprack-200ul', '5', share=True)
 tipracks_200_3 = labware.load('tiprack-200ul', '6', share=True)
+tipracks_200_4 = labware.load('tiprack-200ul', '11', share=True)
+
 
 
 #### PIPETTE SETUP ####
@@ -66,7 +68,7 @@ Elution_buffer = trough.wells('A12')
 Liquid_trash = Trash.wells('A1')
 
 sample_vol = 200
-bead_vol = sample_vol
+bead_vol = 200
 EtOH_vol = 200
 elution_vol = 30
 
@@ -252,7 +254,8 @@ m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(Trash.wells('A1').top(-5))
+m300.aspirate(5, Trash.wells('A1').top(-5))
+m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.aspirate(bead_vol, SA2.bottom(1))
@@ -271,7 +274,8 @@ m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(Trash.wells('A1').top(-5))
+m300.aspirate(5, Trash.wells('A1').top(-5))
+m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.aspirate(bead_vol, SA3.bottom(1))
@@ -290,7 +294,8 @@ m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(Trash.wells('A1').top(-5))
+m300.aspirate(5, Trash.wells('A1').top(-5))
+m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.aspirate(bead_vol, SA4.bottom(1))
@@ -309,7 +314,8 @@ m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(Trash.wells('A1').top(-5))
+m300.aspirate(5, Trash.wells('A1').top(-5))
+m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.aspirate(bead_vol, SA5.bottom(1))
@@ -328,7 +334,8 @@ m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(Trash.wells('A1').top(-5))
+m300.aspirate(5, Trash.wells('A1').top(-5))
+m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.aspirate(bead_vol, SA6.bottom(1))
@@ -370,7 +377,7 @@ m300.drop_tip(tipracks_200_1.wells('A1'))
 
 ### Transfer EtOH1 to SA2
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip(tipracks_200_2.wells('A3'))
+m300.pick_up_tip(tipracks_200_2.wells('A2'))
 m300.move_to(EtOH1.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -391,7 +398,7 @@ m300.drop_tip(tipracks_200_1.wells('A3'))
 
 ### Transfer EtOH1 to SA3
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip(tipracks_200_2.wells('A5'))
+m300.pick_up_tip(tipracks_200_2.wells('A3'))
 m300.move_to(EtOH1.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -412,7 +419,7 @@ m300.drop_tip(tipracks_200_1.wells('A5'))
 
 ### Transfer EtOH1 to SA4
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip(tipracks_200_2.wells('A7'))
+m300.pick_up_tip(tipracks_200_2.wells('A4'))
 m300.move_to(EtOH2.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -433,7 +440,7 @@ m300.drop_tip(tipracks_200_1.wells('A7'))
 
 ### Transfer EtOH1 to SA5
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip(tipracks_200_2.wells('A9'))
+m300.pick_up_tip(tipracks_200_2.wells('A5'))
 m300.move_to(EtOH2.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -454,7 +461,7 @@ m300.drop_tip(tipracks_200_1.wells('A9'))
 
 ### Transfer EtOH1 to SA6
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip(tipracks_200_2.wells('A11'))
+m300.pick_up_tip(tipracks_200_2.wells('A6'))
 m300.move_to(EtOH2.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -481,13 +488,15 @@ m300.delay(minutes=2)
 
 ### remove supernatant from SA1
 m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip(tipracks_200_1.wells('A1'))
+m300.pick_up_tip(tipracks_200_2.wells('A7'))
 m300.aspirate(EtOH_vol, SA1.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
-m300.blow_out(Trash.wells('A1').top(-5))
 m300.set_flow_rate(aspirate=130, dispense=130)
+m300.aspirate(5, Trash.wells('A1').top(-5))
+m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
+m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.aspirate(EtOH_vol, SA1.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
@@ -496,15 +505,18 @@ m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.drop_tip()
 
+
 ### remove supernatant from SA2
 m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip(tipracks_200_1.wells('A3'))
+m300.pick_up_tip(tipracks_200_2.wells('A8'))
 m300.aspirate(EtOH_vol, SA2.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
-m300.blow_out(Trash.wells('A1').top(-5))
 m300.set_flow_rate(aspirate=130, dispense=130)
+m300.aspirate(5, Trash.wells('A1').top(-5))
+m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
+m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.aspirate(EtOH_vol, SA2.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
@@ -515,13 +527,15 @@ m300.drop_tip()
 
 ### remove supernatant from SA3
 m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip(tipracks_200_1.wells('A5'))
+m300.pick_up_tip(tipracks_200_2.wells('A9'))
 m300.aspirate(EtOH_vol, SA3.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
-m300.blow_out(Trash.wells('A1').top(-5))
 m300.set_flow_rate(aspirate=130, dispense=130)
+m300.aspirate(5, Trash.wells('A1').top(-5))
+m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
+m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.aspirate(EtOH_vol, SA3.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
@@ -532,13 +546,15 @@ m300.drop_tip()
 
 ### remove supernatant from SA4
 m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip(tipracks_200_1.wells('A7'))
+m300.pick_up_tip(tipracks_200_2.wells('A10'))
 m300.aspirate(EtOH_vol, SA4.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
-m300.blow_out(Trash.wells('A1').top(-5))
 m300.set_flow_rate(aspirate=130, dispense=130)
+m300.aspirate(5, Trash.wells('A1').top(-5))
+m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
+m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.aspirate(EtOH_vol, SA4.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
@@ -549,13 +565,15 @@ m300.drop_tip()
 
 ### remove supernatant from SA5
 m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip(tipracks_200_1.wells('A9'))
+m300.pick_up_tip(tipracks_200_2.wells('A11'))
 m300.aspirate(EtOH_vol, SA5.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
-m300.blow_out(Trash.wells('A1').top(-5))
 m300.set_flow_rate(aspirate=130, dispense=130)
+m300.aspirate(5, Trash.wells('A1').top(-5))
+m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
+m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.aspirate(EtOH_vol, SA5.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
@@ -566,13 +584,15 @@ m300.drop_tip()
 
 ### remove supernatant from SA6
 m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip(tipracks_200_1.wells('A11'))
+m300.pick_up_tip(tipracks_200_2.wells('A12'))
 m300.aspirate(EtOH_vol, SA6.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
-m300.blow_out(Trash.wells('A1').top(-5))
 m300.set_flow_rate(aspirate=130, dispense=130)
+m300.aspirate(5, Trash.wells('A1').top(-5))
+m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
+m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.aspirate(EtOH_vol, SA6.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
@@ -588,7 +608,7 @@ m300.drop_tip()
 
 ### Transfer EtOH2 to SA1
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip(tipracks_200_2.wells('A2'))
+m300.pick_up_tip(tipracks_200_3.wells('A1'))
 m300.move_to(EtOH3.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -609,7 +629,7 @@ m300.drop_tip(tipracks_200_1.wells('A2'))
 
 ### Transfer EtOH2 to SA2
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip(tipracks_200_2.wells('A4')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip(tipracks_200_3.wells('A2'))
 m300.move_to(EtOH3.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -630,7 +650,7 @@ m300.drop_tip(tipracks_200_1.wells('A4'))
 
 ### Transfer EtOH2 to SA3
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip(tipracks_200_2.wells('A6')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip(tipracks_200_3.wells('A3'))
 m300.move_to(EtOH3.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -651,7 +671,7 @@ m300.drop_tip(tipracks_200_1.wells('A6'))
 
 ### Transfer EtOH2 to SA4
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip(tipracks_200_2.wells('A8')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip(tipracks_200_3.wells('A4'))
 m300.move_to(EtOH4.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -672,7 +692,7 @@ m300.drop_tip(tipracks_200_1.wells('A8'))
 
 ### Transfer EtOH2 to SA5
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip(tipracks_200_2.wells('A10')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip(tipracks_200_3.wells('A5'))
 m300.move_to(EtOH4.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -693,7 +713,7 @@ m300.drop_tip(tipracks_200_1.wells('A10'))
 
 ### Transfer EtOH2 to SA6
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip(tipracks_200_2.wells('A12')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip(tipracks_200_3.wells('A6'))
 m300.move_to(EtOH4.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -720,11 +740,15 @@ m300.delay(minutes=2)
 
 ### remove supernatant from SA1
 m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip(tipracks_200_1.wells('A2'))
+m300.pick_up_tip(tipracks_200_3.wells('A7'))
 m300.aspirate(EtOH_vol, SA1.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
+m300.blow_out(Trash.wells('A1').top(-5))
 m300.set_flow_rate(aspirate=130, dispense=130)
+m300.aspirate(5, Trash.wells('A1').top(-5))
+m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
+m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.aspirate(EtOH_vol, SA1.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
@@ -735,11 +759,15 @@ m300.drop_tip()
 
 ### remove supernatant from SA2
 m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip(tipracks_200_1.wells('A4'))
+m300.pick_up_tip(tipracks_200_3.wells('A8'))
 m300.aspirate(EtOH_vol, SA2.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
+m300.blow_out(Trash.wells('A1').top(-5))
 m300.set_flow_rate(aspirate=130, dispense=130)
+m300.aspirate(5, Trash.wells('A1').top(-5))
+m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
+m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.aspirate(EtOH_vol, SA2.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
@@ -750,11 +778,15 @@ m300.drop_tip()
 
 ### remove supernatant from SA3
 m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip(tipracks_200_1.wells('A6'))
+m300.pick_up_tip(tipracks_200_3.wells('A9'))
 m300.aspirate(EtOH_vol, SA3.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
+m300.blow_out(Trash.wells('A1').top(-5))
 m300.set_flow_rate(aspirate=130, dispense=130)
+m300.aspirate(5, Trash.wells('A1').top(-5))
+m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
+m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.aspirate(EtOH_vol, SA3.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
@@ -765,11 +797,15 @@ m300.drop_tip()
 
 ### remove supernatant from SA4
 m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip(tipracks_200_1.wells('A8'))
+m300.pick_up_tip(tipracks_200_3.wells('A10'))
 m300.aspirate(EtOH_vol, SA4.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
+m300.blow_out(Trash.wells('A1').top(-5))
 m300.set_flow_rate(aspirate=130, dispense=130)
+m300.aspirate(5, Trash.wells('A1').top(-5))
+m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
+m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.aspirate(EtOH_vol, SA4.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
@@ -780,11 +816,15 @@ m300.drop_tip()
 
 ### remove supernatant from SA5
 m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip(tipracks_200_1.wells('A10'))
+m300.pick_up_tip(tipracks_200_3.wells('A11'))
 m300.aspirate(EtOH_vol, SA5.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
+m300.blow_out(Trash.wells('A1').top(-5))
 m300.set_flow_rate(aspirate=130, dispense=130)
+m300.aspirate(5, Trash.wells('A1').top(-5))
+m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
+m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.aspirate(EtOH_vol, SA5.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
@@ -795,11 +835,15 @@ m300.drop_tip()
 
 ### remove supernatant from SA6
 m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip(tipracks_200_1.wells('A12'))
+m300.pick_up_tip(tipracks_200_3.wells('A12'))
 m300.aspirate(EtOH_vol, SA6.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
+m300.blow_out(Trash.wells('A1').top(-5))
 m300.set_flow_rate(aspirate=130, dispense=130)
+m300.aspirate(5, Trash.wells('A1').top(-5))
+m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
+m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.aspirate(EtOH_vol, SA6.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
@@ -816,7 +860,7 @@ m300.delay(minutes=5)
 
 ### Transfer Elution buffer to SA1
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip(tipracks_200_3.wells('A1'))
+m300.pick_up_tip(tipracks_200_4.wells('A1'))
 m300.move_to(Elution_buffer.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -835,7 +879,7 @@ m300.drop_tip()
 
 ### Transfer Elution buffer and beads to SA2
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip(tipracks_200_2.wells('A2'))
+m300.pick_up_tip(tipracks_200_4.wells('A2'))
 m300.move_to(Elution_buffer.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -854,7 +898,7 @@ m300.drop_tip()
 
 ### Transfer Elution buffer and beads to SA3
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip(tipracks_200_2.wells('A3'))
+m300.pick_up_tip(tipracks_200_4.wells('A3'))
 m300.move_to(Elution_buffer.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -873,7 +917,7 @@ m300.drop_tip()
 
 ### Transfer Elution buffer and beads to SA4
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip(tipracks_200_2.wells('A4'))
+m300.pick_up_tip(tipracks_200_4.wells('A4'))
 m300.move_to(Elution_buffer.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -892,7 +936,7 @@ m300.drop_tip()
 
 ### Transfer Elution buffer and beads to SA5
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip(tipracks_200_2.wells('A5'))
+m300.pick_up_tip(tipracks_200_4.wells('A5'))
 m300.move_to(Elution_buffer.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -911,7 +955,7 @@ m300.drop_tip()
 
 ### Transfer Elution buffer and beads to SA6
 m300.set_flow_rate(aspirate=50, dispense=50)
-m300.pick_up_tip(tipracks_200_2.wells('A6'))
+m300.pick_up_tip(tipracks_200_4.wells('A6'))
 m300.move_to(Elution_buffer.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -935,7 +979,7 @@ mag_deck.engage(height=33)
 #m300.delay(minutes=10)
 
 ### Transfer Elution buffer to EA1
-m300.pick_up_tip(tipracks_200_3.wells('A7'))
+m300.pick_up_tip(tipracks_200_4.wells('A7'))
 m300.set_flow_rate(aspirate=25, dispense=25)
 m300.aspirate(elution_vol, SA1.bottom())
 m300.dispense(elution_vol, EA1.bottom(2))
@@ -946,7 +990,7 @@ m300.blow_out()
 m300.drop_tip()
 
 ### Transfer Elution buffer to EA2
-m300.pick_up_tip(tipracks_200_3.wells('A8'))
+m300.pick_up_tip(tipracks_200_4.wells('A8'))
 m300.set_flow_rate(aspirate=25, dispense=25)
 m300.aspirate(elution_vol, SA2.bottom())
 m300.dispense(elution_vol, EA2.bottom(2))
@@ -957,7 +1001,7 @@ m300.blow_out()
 m300.drop_tip()
 
 ### Transfer Elution buffer to EA3
-m300.pick_up_tip(tipracks_200_3.wells('A9'))
+m300.pick_up_tip(tipracks_200_4.wells('A9'))
 m300.set_flow_rate(aspirate=25, dispense=25)
 m300.aspirate(elution_vol, SA3.bottom())
 m300.dispense(elution_vol, EA3.bottom(2))
@@ -968,7 +1012,7 @@ m300.blow_out()
 m300.drop_tip()
 
 ### Transfer Elution buffer to EA4
-m300.pick_up_tip(tipracks_200_3.wells('A10'))
+m300.pick_up_tip(tipracks_200_4.wells('A10'))
 m300.set_flow_rate(aspirate=25, dispense=25)
 m300.aspirate(elution_vol, SA4.bottom())
 m300.dispense(elution_vol, EA4.bottom(2))
@@ -979,7 +1023,7 @@ m300.blow_out()
 m300.drop_tip()
 
 ### Transfer Elution buffer to EA5
-m300.pick_up_tip(tipracks_200_3.wells('A11'))
+m300.pick_up_tip(tipracks_200_4.wells('A11'))
 m300.set_flow_rate(aspirate=25, dispense=25)
 m300.aspirate(elution_vol, SA5.bottom())
 m300.dispense(elution_vol, EA5.bottom(2))
@@ -990,7 +1034,7 @@ m300.blow_out()
 m300.drop_tip()
 
 ### Transfer Elution buffer to EA6
-m300.pick_up_tip(tipracks_200_3.wells('A12'))
+m300.pick_up_tip(tipracks_200_4.wells('A12'))
 m300.set_flow_rate(aspirate=25, dispense=25)
 m300.aspirate(elution_vol, SA6.bottom())
 m300.dispense(elution_vol, EA6.bottom(2))
