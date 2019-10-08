@@ -51,7 +51,10 @@ mag_deck = modules.load('magdeck', '7')
 sample_plate = labware.load('1ml_magPCR', '7', share=True)
 
 tipracks_200_1 = labware.load('tiprack-200ul', '4', share=True)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 01061b5242cccfd3947aa3b448037c3203ae3255
 
 #### PIPETTE SETUP ####
 m300 = instruments.P300_Multi(
@@ -63,10 +66,9 @@ m300 = instruments.P300_Multi(
     tip_racks=[tipracks_200_1])
 
 #### REAGENT SETUP
-Binding_buffer1 = trough.wells('A1')
-Binding_buffer2 = trough.wells('A2')			# Buffer B			# Buffer B
+Binding_buffer1 = trough.wells('A1')			# Buffer B			# Buffer B
 EtOH_Bind1 = trough.wells('A3')
-BufferC_1 = trough.wells('A10')
+BufferC_1 = trough.wells('A9')
 
 #### Plate SETUP
 SA1 = sample_plate.wells('A4')
