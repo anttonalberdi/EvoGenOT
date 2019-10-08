@@ -51,10 +51,6 @@ mag_deck = modules.load('magdeck', '7')
 sample_plate = labware.load('1ml_magPCR', '7', share=True)
 
 tipracks_200_1 = labware.load('tiprack-200ul', '4', share=True)
-<<<<<<< HEAD
-
-=======
->>>>>>> 01061b5242cccfd3947aa3b448037c3203ae3255
 
 #### PIPETTE SETUP ####
 m300 = instruments.P300_Multi(
