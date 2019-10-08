@@ -79,9 +79,9 @@ Liquid_trash = trash_box.wells('A1')
 
 
 #### Plate SETUP for Purification
-RA1 = RNA_plate.wells('A1')
-RA2 = RNA_plate.wells('A2')
-RA3 = RNA_plate.wells('A3')
+RA1 = RNA_plate.wells('A4')
+RA2 = RNA_plate.wells('A5')
+RA3 = RNA_plate.wells('A6')
 
 #### VOLUME SETUP
 Sample_vol = 200
@@ -315,10 +315,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 #incubating samples with DNase
-robot.pause("Please cover the plate with film and incubate 10 min 25°C at 1300 rpm. Please fill up tips before continuing process")
-##Reset tipracks for more tips
-m300.reset()
-
+m300.delay(minutes=10)
 
 ### Buffer C rebind, by using tiprack 1
 ### Transfer buffer C and beads to RA1
@@ -484,7 +481,7 @@ m300.delay(minutes=2)
 ### remove supernatant from RA1
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip(tipracks_200_2.wells('A4'))
-m300.aspirate(Wash_1_vol, RA1.bottom(1))
+m300.aspirate(Wash_1_vol, RA1.bottom())
 m300.dispense(Wash_1_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
@@ -494,7 +491,7 @@ m300.return_tip()
 ### remove supernatant from RA2
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip(tipracks_200_2.wells('A5'))
-m300.aspirate(Wash_1_vol, RA2.bottom(1))
+m300.aspirate(Wash_1_vol, RA2.bottom())
 m300.dispense(Wash_1_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
@@ -504,7 +501,7 @@ m300.return_tip()
 ### remove supernatant from RA3
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip(tipracks_200_2.wells('A6'))
-m300.aspirate(Wash_1_vol, RA3.bottom(1))
+m300.aspirate(Wash_1_vol, RA3.bottom())
 m300.dispense(Wash_1_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
@@ -561,13 +558,13 @@ m300.delay(minutes=2)
 ### remove supernatant from RA1
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip(tipracks_200_2.wells('A7'))
-m300.aspirate(125, RA1.bottom(1))
-m300.dispense(125, trash_box.wells('A1').top(-5))
+m300.aspirate(150, RA1.bottom())
+m300.dispense(150, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.aspirate(125, RA1.bottom(1))
-m300.dispense(125, trash_box.wells('A1').top(-5))
+m300.aspirate(150, RA1.bottom())
+m300.dispense(150, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
@@ -576,13 +573,13 @@ m300.return_tip()
 ### remove supernatant from RA2
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip(tipracks_200_2.wells('A8'))
-m300.aspirate(125, RA2.bottom(1))
-m300.dispense(125, trash_box.wells('A1').top(-5))
+m300.aspirate(150, RA2.bottom())
+m300.dispense(150, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.aspirate(125, RA2.bottom(1))
-m300.dispense(125, trash_box.wells('A1').top(-5))
+m300.aspirate(150, RA2.bottom())
+m300.dispense(150, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
@@ -591,13 +588,13 @@ m300.return_tip()
 ### remove supernatant from RA3
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip(tipracks_200_2.wells('A9'))
-m300.aspirate(125, RA3.bottom(1))
-m300.dispense(125, trash_box.wells('A1').top(-5))
+m300.aspirate(150, RA3.bottom())
+m300.dispense(150, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
-m300.aspirate(125, RA3.bottom(1))
-m300.dispense(125, trash_box.wells('A1').top(-5))
+m300.aspirate(150, RA3.bottom())
+m300.dispense(150, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(trash_box.wells('A1').top(-5))
@@ -653,8 +650,8 @@ max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.return_tip()
 
+m300.delay(minutes=5)
 
-robot.pause("Please cover the plate with film and incubate 5 min 25°C at 1500 rpm")
 mag_deck.engage(height=34)
 m300.delay(minutes=2)
 
