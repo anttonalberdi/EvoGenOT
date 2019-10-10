@@ -8,9 +8,11 @@ metadata = {
 }
 
 #Note: transfer all reagents to 1.5/2ml epp tubes, due to the different ring heights
+#Note: calibrate 1.5 tubes 2 mm over the top, otherwise the pippette will go far too down
 
 #### CHANGELOG ####
 
+#2019-04-25, Antton - Options for only half plate added
 #2019-03-11, Antton - Blowout added to buffer and magnesium. Mixing to primers reduced to one. pcr_plate changed to 96-PCR-tall
 #2019-03-08, Antton - Added .top() to mastermix distribution to speed up and minimise risk of uncalibration issues
 
@@ -35,7 +37,7 @@ reagent_rack = labware.load('opentrons-tuberack-2ml-eppendorf', '9', share=True)
   #A5 = dNTPs
   #A6 = TagGold
   #C1 = Mastermix1
-  #C2 = Mastermix2
+  #C2 = Mastermix2 (if >48 samples)
 
 #PCR plate
 pcr_plate = labware.load('96-PCR-tall', '6', share=True)
@@ -54,6 +56,7 @@ tiprack_200 = labware.load('labsolute-tiprack-200µl', '5')
 tiprack_10 = labware.load('labsolute-tiprack-10µl', '2')
 
 #### PIPETTES ####
+
 s50 = instruments.P50_Single(mount='left', tip_racks=[tiprack_200])
 m10 = instruments.P10_Multi(mount='right', tip_racks=[tiprack_10])
 
@@ -160,7 +163,7 @@ s50.transfer(dntpTot/2, reagent_rack.wells('A5'), reagent_rack.wells('C2'), new_
 #Pause to place polymerase in the rack (until incorporating tempdecks)
 robot.pause()
 
-#Transfer taqTot (slower pipetting) - mixing is very slow, need to think another strategy (mixing atomic is not working with space)
+#Transfer taqTot (slower pipetting)
 s50.set_flow_rate(aspirate=10, dispense=5)
 s50.transfer(taqTot/2, reagent_rack.wells('A6'), reagent_rack.wells('C1'), new_tip='always')
 s50.transfer(taqTot/2, reagent_rack.wells('A6'), reagent_rack.wells('C2'), new_tip='always')
@@ -171,8 +174,12 @@ s50.transfer(50, reagent_rack.wells('C1'), reagent_rack.wells('C1'), mix_after=(
 s50.transfer(50, reagent_rack.wells('C2'), reagent_rack.wells('C2'), mix_after=(10, 50))
 
 #### MASTERMIX DISTRIBUTION ####
-s50.transfer(indVol, reagent_rack.wells('C1'), pcr_plate.cols('1','2','3','4','5','6'))
-s50.transfer(indVol, reagent_rack.wells('C2'), pcr_plate.cols('7','8','9','10','11','12'))
+if samples == 96:
+  s50.transfer(indVol, reagent_rack.wells('C1'), pcr_plate.cols('1','2','3','4','5','6'))
+  s50.transfer(indVol, reagent_rack.wells('C2'), pcr_plate.cols('7','8','9','10','11','12'))
+elif samples == 48:
+    s50.transfer(indVol, reagent_rack.wells('C1'), pcr_plate.cols('1','2','3'))
+    s50.transfer(indVol, reagent_rack.wells('C2'), pcr_plate.cols('4','5','6'))
 
 #Pause to open primer lids
 robot.pause()

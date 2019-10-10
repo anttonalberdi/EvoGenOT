@@ -47,6 +47,7 @@ tube_rack3 = labware.load('opentrons-tuberack-2ml-eppendorf', '5', share=True)
 #Primer mix rack
 temp_deck = modules.load('tempdeck', '10')
 strips = labware.load('PCR-strip-tall', '10', share=True)
+    #Strips should go in odd columns to avoid lids to overlap with the other strips; e.g. 1, 3, 5, etc.
 
 #### TIP RACKS ####
 tiprack_200 = labware.load('labsolute-tiprack-200µl', '9')

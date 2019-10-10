@@ -14,8 +14,10 @@ UCPH's EvoGenomics section's Opentrons protocol library.
 At EvoGenomics we have our own library of OT2 protocols developed and validated by internal users. All protocols are expected to contain:
 
 * A python script with a descriptive name and version number specified (e.g. 2ml_to_96plate_v1.py).
+* Procedures requiring multiple protocol setups are required to have a prefix number in name for indication of procedure stage.
 * A readme file explaining the procedures to run the protocol (e.g. 2ml_to_96plate_v1.md)
-* Some protocols (aliquoting, PCR mixes, etc.) might require csv files with basic information about sample positions, volumes, etc. 
+* Some protocols (aliquoting, PCR mixes, etc.) might require csv files with basic information about sample positions, volumes, etc.
+
 
 ## Opentrons API documentation
 
@@ -32,13 +34,13 @@ https://docs.opentrons.com/
 ## Common nomenclature
 
 ### Modules
-* temp_deck (if multiple modules [1-n]) 
-* temp_plate  (if multiple modules [1-n]) 
-* mag_deck  (if multiple modules [1-n]) 
-* mag_plate (if multiple modules [1-n]) 
+* temp_deck (if multiple modules [1-n])
+* temp_plate  (if multiple modules [1-n])
+* mag_deck  (if multiple modules [1-n])
+* mag_plate (if multiple modules [1-n])
 
 ### Pipettes
-Code | Description 
+Code | Description
 ------------ | -------------
 s10 | 1-10 ul single channel pipette
 s50 | 5-50 ul single channel pipette
