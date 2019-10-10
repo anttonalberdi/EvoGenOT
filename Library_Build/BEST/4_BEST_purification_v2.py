@@ -50,10 +50,10 @@ if plate_name not in labware.list():
         volume=350000)
 
 #### LABWARE SETUP ####
-trough = labware.load('trough-12row', '10')
+trough = labware.load('trough-12row', '7')
 trash_box = labware.load('One-Column-reservoir', '8')
-mag_deck = modules.load('magdeck', '7')
-mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
+mag_deck = modules.load('magdeck', '10')
+mag_plate = labware.load('biorad-hardshell-96-PCR', '10', share=True)
 elution_plate = labware.load('biorad-hardshell-96-PCR','1')
 
 tipracks_200_1 = labware.load('tiprack-200ul', '3', share=True)
