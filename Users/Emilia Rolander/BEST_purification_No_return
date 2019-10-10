@@ -111,6 +111,9 @@ EtOH_vol = 130
 EtOH_vol2 = 120
 Elution_vol = 50
 
+
+### RETURN SOME OF THE TIPS ###
+
 #### PROTOCOL ####
 ### Beads addition
 mag_deck.disengage()
@@ -761,7 +764,7 @@ m300.drop_tip()
 ### Remove supernatant from MA10
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip(tipracks_200_4.wells('A10'))
-m300.aspirate(EtOH_vol, MA1.bottom(1))
+m300.aspirate(EtOH_vol, MA10.bottom(1))
 m300.dispense(EtOH_vol, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
@@ -1052,7 +1055,7 @@ m300.drop_tip()
 ### Remove supernatant from MA10
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip(tipracks_200_6.wells('A10'))
-m300.aspirate(EtOH_vol2, MA1.bottom(1))
+m300.aspirate(EtOH_vol2, MA10.bottom(1))
 m300.dispense(EtOH_vol2, trash_box.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
@@ -1080,19 +1083,19 @@ m300.blow_out(trash_box.wells('A1').top(-5))
 m300.drop_tip()
 
 ## Dry beads before elution
-m300.delay(minutes=4)
+m300.delay(minutes=5)
 
 ## Elution of DNA
 
 for target in samples:
     m300.set_flow_rate(aspirate=180, dispense=180)
-    m300.pick_up_tip(tipracks_200_7.wells())
+    m300.pick_up_tip(tipracks_200_7.wells()) ### Make sure it pick up the right tips####
     max_speed_per_axis = {'x': (300), 'y': (300), 'z': (75), 'a': (75), 'b': (20), 'c': (20)}
     robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
     m300.set_flow_rate(aspirate=40, dispense=40)
     m300.transfer(Elution_vol, Elution_buffer, target.top(-2), air_gap=0, new_tip='never')
     m300.set_flow_rate(aspirate=50, dispense=50)
-    m300.mix(3, 100, target.bottom(6))
+    m300.mix(3, 30, target.bottom(3))
     m300.delay(seconds=5)
     m300.move_to(target.top(-3))
     m300.blow_out()
