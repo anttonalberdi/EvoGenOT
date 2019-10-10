@@ -112,7 +112,6 @@ Elution_vol = 50
 ### Beads addition
 mag_deck.disengage()
 
-### DO NOT RETURN TIP ###
 
 #### Transfer beads to MA1
 m300.set_flow_rate(aspirate=100, dispense=100)
