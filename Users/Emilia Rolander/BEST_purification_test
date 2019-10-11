@@ -562,7 +562,7 @@ m300.drop_tip()
 
 ### Transfer elution buffer to MA3
 m300.set_flow_rate(aspirate=180, dispense=180)
-m300.pick_up_tip(tipracks_200_7.wells('A1'))
+m300.pick_up_tip(tipracks_200_7.wells('A3'))
 m300.aspirate(Elution_vol, Elution_buffer.top(-30))
 m300.dispense(Elution_vol, MA3.bottom(1))
 m300.set_flow_rate(aspirate=180, dispense=180)
