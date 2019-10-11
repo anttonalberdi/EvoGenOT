@@ -969,6 +969,8 @@ m300.return_tip(tipracks_200_4.wells('A12'))
 mag_deck.engage(height=16)
 m300.delay(minutes=2)
 
+### Remove ethanol all the way at the bottom
+
 ### Remove supernatant from MA1
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip(tipracks_200_6.wells('A1'))
