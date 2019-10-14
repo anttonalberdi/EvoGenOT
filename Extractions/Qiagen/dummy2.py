@@ -69,13 +69,6 @@ SA4 = sample_plate.wells('A7')
 SA5 = sample_plate.wells('A9')
 SA6 = sample_plate.wells('A11')
 
-EA1 = elution_plate.wells('A1')
-EA2 = elution_plate.wells('A3')
-EA3 = elution_plate.wells('A5')
-EA4 = elution_plate.wells('A7')
-EA5 = elution_plate.wells('A9')
-EA6 = elution_plate.wells('A11')
-
 ### REMOVING SUPERNATANT ###
 
 #1. Fix blow out (see ### remove supernatant from SA1### WHEN YOU GET BACK)
