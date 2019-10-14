@@ -1,8 +1,12 @@
 computer=ot2reduser
 #Green: ot2greenuser
+<<<<<<< HEAD
+robotip=169.254.78.98
+=======
 robotip=169.254.214.54
+>>>>>>> df3e0e4767eb3bc2780cd9f90eebc716f8755217
 
-scp /home/${computer}/github/EvoGenOT/custom_labware.py root@${robotip}:/root/
+#scp /home/${computer}/github/EvoGenOT/custom_labware.py root@${robotip}:/root/
 scp /home/${computer}/github/EvoGenOT/Amplicon_pooling/amplicon_pooling_v1_map.csv root@${robotip}:/root/csv
 scp /home/${computer}/github/EvoGenOT/Primer_mixes/primer_mixing_v1_map.csv root@${robotip}:/root/csv
 scp /home/${computer}/github/EvoGenOT/PCR_mixes/pcr_mix_96plate_v1_primers.csv
