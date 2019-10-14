@@ -757,7 +757,7 @@ m300.drop_tip()
 
 ### remove supernatant from SA2
 m300.set_flow_rate(aspirate=100, dispense=100)
-m300.pick_up_tip(tipracks_200_3.wells('A 8'))
+m300.pick_up_tip(tipracks_200_3.wells('A8'))
 m300.aspirate(EtOH_vol, SA2.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
