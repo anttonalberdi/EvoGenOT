@@ -91,7 +91,6 @@ EA6 = elution_plate.wells('A11')
 
 #### PROTOCOL ####
 
-### Do not reuse tips for removing supernatant
 
 ### Beads addition ###
 mag_deck.disengage()
@@ -119,7 +118,7 @@ m300.drop_tip()
 
 ### Transfer beads to SA2
 m300.set_flow_rate(aspirate=150, dispense=200)
-m300.pick_up_tip(tipracks_200_1.wells('A2')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip(tipracks_200_1.wells('A2')) 
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(7, 200, SPRI_beads.top(-30))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
@@ -139,7 +138,7 @@ m300.drop_tip()
 
 ### Transfer beads to SA3
 m300.set_flow_rate(aspirate=150, dispense=200)
-m300.pick_up_tip(tipracks_200_1.wells('A3')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip(tipracks_200_1.wells('A3')) 
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(7, 200, SPRI_beads.top(-30))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
@@ -159,7 +158,7 @@ m300.drop_tip()
 
 ### Transfer beads to SA4
 m300.set_flow_rate(aspirate=150, dispense=200)
-m300.pick_up_tip(tipracks_200_1.wells('A4')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip(tipracks_200_1.wells('A4')) 
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(7, 200, SPRI_beads.top(-30))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
@@ -179,7 +178,7 @@ m300.drop_tip()
 
 ### Transfer beads to SA5
 m300.set_flow_rate(aspirate=150, dispense=200)
-m300.pick_up_tip(tipracks_200_1.wells('A5')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip(tipracks_200_1.wells('A5')) 
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(7, 200, SPRI_beads.top(-30))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
@@ -199,7 +198,7 @@ m300.drop_tip()
 
 ### Transfer beads to SA6
 m300.set_flow_rate(aspirate=150, dispense=200)
-m300.pick_up_tip(tipracks_200_1.wells('A6')) # Slow down head speed 0.5X for bead handling
+m300.pick_up_tip(tipracks_200_1.wells('A6')) 
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(7, 200, SPRI_beads.top(-30))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
@@ -225,8 +224,6 @@ m300.delay(minutes=10)
 
 
 ### REMOVING SUPERNATANT ###
-
-#1. Fix blow out (see ### remove supernatant from SA1### WHEN YOU GET BACK)
 
 
 ### remove supernatant from SA1
@@ -351,9 +348,6 @@ m300.drop_tip()
 
 
 ### Wash with EtOH1 ####
-
-#1. Add blow out or delay when done washing
-#2. Remove delay while submerged and add it outside the liquid
 
 ### Transfer EtOH1 to SA1
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -592,8 +586,6 @@ m300.drop_tip()
 
 
 ### Wash with EtOH2 ####
-
-#1. Return tips to same column as the previous wash
 
 ### Transfer EtOH2 to SA1
 m300.set_flow_rate(aspirate=50, dispense=50)
