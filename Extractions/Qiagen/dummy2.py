@@ -198,7 +198,7 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 
-m300.delay(minutes=10)
+#m300.delay(minutes=10)
 mag_deck.engage(height=35)
 m300.delay(minutes=10)
 
