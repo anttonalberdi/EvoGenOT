@@ -49,7 +49,7 @@ tipracks_200_1 = labware.load('tiprack-200ul', '4', share=True)
 #### PIPETTE SETUP ####
 
 m300 = instruments.P300_Multi(
-    mount='right',
+    mount='left',
     min_volume=30,
     max_volume=300,
     aspirate_flow_rate=100,
