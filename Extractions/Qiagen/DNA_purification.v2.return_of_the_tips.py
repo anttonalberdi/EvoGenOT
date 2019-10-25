@@ -56,7 +56,7 @@ m300 = instruments.P300_Multi(
     aspirate_flow_rate=100,
     dispense_flow_rate=200,
     tip_racks=(tipracks_200_1,tipracks_200_2,tipracks_200_3))
-    
+
 
 ###  PURIFICATION REAGENTS SETUP ###
 SPRI_beads = trough.wells('A1')
@@ -92,6 +92,9 @@ EA6 = elution_plate.wells('A11')
 #### PROTOCOL ####
 
 
+ # add pause after bead aspiration
+
+
 ### Beads addition ###
 mag_deck.disengage()
 
@@ -118,7 +121,7 @@ m300.return_tip()
 
 ### Transfer beads to SA2
 m300.set_flow_rate(aspirate=150, dispense=200)
-m300.pick_up_tip(tipracks_200_1.wells('A2')) 
+m300.pick_up_tip(tipracks_200_1.wells('A2'))
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(7, 200, SPRI_beads.top(-30))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
@@ -138,7 +141,7 @@ m300.return_tip()
 
 ### Transfer beads to SA3
 m300.set_flow_rate(aspirate=150, dispense=200)
-m300.pick_up_tip(tipracks_200_1.wells('A3')) 
+m300.pick_up_tip(tipracks_200_1.wells('A3'))
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(7, 200, SPRI_beads.top(-30))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
@@ -158,7 +161,7 @@ m300.return_tip()
 
 ### Transfer beads to SA4
 m300.set_flow_rate(aspirate=150, dispense=200)
-m300.pick_up_tip(tipracks_200_1.wells('A4')) 
+m300.pick_up_tip(tipracks_200_1.wells('A4'))
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(7, 200, SPRI_beads.top(-30))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
@@ -178,7 +181,7 @@ m300.return_tip()
 
 ### Transfer beads to SA5
 m300.set_flow_rate(aspirate=150, dispense=200)
-m300.pick_up_tip(tipracks_200_1.wells('A5')) 
+m300.pick_up_tip(tipracks_200_1.wells('A5'))
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(7, 200, SPRI_beads.top(-30))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
@@ -198,7 +201,7 @@ m300.return_tip()
 
 ### Transfer beads to SA6
 m300.set_flow_rate(aspirate=150, dispense=200)
-m300.pick_up_tip(tipracks_200_1.wells('A6')) 
+m300.pick_up_tip(tipracks_200_1.wells('A6'))
 m300.move_to(SPRI_beads.top(-16))
 m300.mix(7, 200, SPRI_beads.top(-30))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
