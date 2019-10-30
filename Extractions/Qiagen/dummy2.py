@@ -91,7 +91,8 @@ EA6 = elution_plate.wells('A11')
 #### PROTOCOL ####
 
 
-
+### Don't wait for drop to fall
+## Remove bottom halv of supernatant and leave for 3 more minutes
 
 ### Beads addition ###
 mag_deck.disengage()
@@ -252,8 +253,6 @@ m300.aspirate(bead_vol, SA1.bottom(1))
 m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.air_gap(30)
-m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(Trash.wells('A1').top(-5))
 m300.drop_tip()
 
 ### remove supernatant from SA2
@@ -269,8 +268,6 @@ m300.aspirate(bead_vol, SA2.bottom(1))
 m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.air_gap(30)
-m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(Trash.wells('A1').top(-5))
 m300.drop_tip()
 
 
@@ -287,8 +284,6 @@ m300.aspirate(bead_vol, SA3.bottom(1))
 m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.air_gap(30)
-m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(Trash.wells('A1').top(-5))
 m300.drop_tip()
 
 
@@ -305,8 +300,6 @@ m300.aspirate(bead_vol, SA4.bottom(1))
 m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.air_gap(30)
-m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(Trash.wells('A1').top(-5))
 m300.drop_tip()
 
 
@@ -323,8 +316,6 @@ m300.aspirate(bead_vol, SA5.bottom(1))
 m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.air_gap(30)
-m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(Trash.wells('A1').top(-5))
 m300.drop_tip()
 
 
@@ -341,6 +332,4 @@ m300.aspirate(bead_vol, SA6.bottom(1))
 m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.air_gap(30)
-m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(Trash.wells('A1').top(-5))
 m300.drop_tip()

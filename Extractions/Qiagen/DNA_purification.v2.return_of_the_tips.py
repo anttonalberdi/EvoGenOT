@@ -92,8 +92,9 @@ EA6 = elution_plate.wells('A11')
 #### PROTOCOL ####
 
 
- # add pause after bead aspiration
-
+## Remove blowout after dispensing last bead suoernatant
+## Make identical to dummy_2
+## Make p10 take the last ethanol when removing final wash supernatant
 
 ### Beads addition ###
 mag_deck.disengage()
