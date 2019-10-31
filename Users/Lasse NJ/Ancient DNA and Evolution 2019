@@ -64,7 +64,7 @@ Liquid_trash = Trash.wells('A1')
 sample_vol = 200
 bead_vol = sample_vol
 EtOH_vol = 200
-elution_vol = 30
+elution_vol = 50
 
 #### Sample SETUP
 
@@ -72,6 +72,7 @@ SA1 = sample_plate.wells('A1')
 
 
 EA1 = elution_plate.wells('A1')
+EA2= elution_plate.wells('A2')
 
 
 
@@ -255,14 +256,25 @@ m300.delay(minutes=10)
 mag_deck.engage(height=34)
 m300.delay(minutes=10)
 
-### Transfer Elution buffer to EA1
+### Transfer aliquot 1 to EA1
 m300.pick_up_tip(tipracks_200_1.wells('A8'))
 m300.set_flow_rate(aspirate=25, dispense=25)
-m300.aspirate(elution_vol, SA1.bottom())
-m300.dispense(elution_vol, EA1.bottom(2))
+m300.aspirate(25, SA1.bottom())
+m300.dispense(25, EA1.bottom(2))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(EA1.top(-10))
+m300.blow_out()
+m300.drop_tip()
+
+### Transfer aliquot 2 to EA2
+m300.pick_up_tip(tipracks_200_1.wells('A9'))
+m300.set_flow_rate(aspirate=25, dispense=25)
+m300.aspirate(25, SA1.bottom())
+m300.dispense(25, EA2.bottom(2))
+m300.delay(seconds=5)
+m300.set_flow_rate(aspirate=130, dispense=130)
+m300.move_to(EA2.top(-10))
 m300.blow_out()
 m300.drop_tip()
 
