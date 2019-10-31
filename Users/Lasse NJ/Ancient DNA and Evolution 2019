@@ -104,7 +104,7 @@ m300.drop_tip()
 
 
 
-m300.delay(minutes=10)
+m300.delay(minutes=5)
 mag_deck.engage(height=35)
 m300.delay(minutes=10)
 
@@ -121,18 +121,12 @@ m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.delay(seconds=5)
-m300.blow_out(Trash.wells('A1').top(-5))
-m300.air_gap(20)
+m300.air_gap(30)
 m300.aspirate(bead_vol, SA1.bottom(1))
 m300.dispense(bead_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
-m300.air_gap(20)
-m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(Trash.wells('A1').top(-5))
+m300.air_gap(30)
 m300.drop_tip()
-
-
 
 
 ### Wash with EtOH1 ####
@@ -171,14 +165,14 @@ m300.aspirate(EtOH_vol, SA1.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
+m300.air_gap(50)
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.air_gap(20)
 m300.aspirate(EtOH_vol, SA1.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(Trash.wells('A1').top(-5))
-m300.air_gap(20)
+m300.air_gap(50)
 m300.drop_tip()
 
 
@@ -218,15 +212,16 @@ m300.aspirate(EtOH_vol, SA1.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.blow_out(Trash.wells('A1').top(-5))
+m300.air_gap(50)
 m300.set_flow_rate(aspirate=130, dispense=130)
-m300.air_gap(20)
 m300.aspirate(EtOH_vol, SA1.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.blow_out(Trash.wells('A1').top(-5))
-m300.air_gap(20)
+m300.air_gap(50)
 m300.drop_tip()
+
 
 
 ### Drying beads before elution ####
