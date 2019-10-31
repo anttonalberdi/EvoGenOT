@@ -98,7 +98,7 @@ EA6 = elution_plate.wells('A11')
 
 
 ### Beads addition ###
-mag_deck.engage()
+mag_deck.engage(height=35)
 
 
 
