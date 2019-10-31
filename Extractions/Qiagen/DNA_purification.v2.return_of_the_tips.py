@@ -96,6 +96,17 @@ EA6 = elution_plate.wells('A11')
 
 #### PROTOCOL ####
 
+## Add air_gap after adding first 200 ul ethanol
+
+#Problems
+
+# Tips does not come of the pipette --> ruins entire ruins
+# 1 ml PCR plate is not evenly distributed on Magdeck/magdeck adaptor. Big difference in the amount of ethanol, beads, elution buffer etc. that you Get
+# You will definetely have beads in your elution
+# A lot of randomness is sorrounding the tips. For one sample you might get 50 ul and for another one 25.
+# There's always a chance of cross-contamination
+
+
 
 ### Beads addition ###
 mag_deck.disengage()
@@ -516,9 +527,6 @@ m300.set_flow_rate(aspirate=130, dispense=130)
 m300.air_gap(30)
 m300.aspirate(EtOH_vol, SA4.bottom(1))
 m300.dispense(EtOH_vol, Trash.wells('A1').top(-5))
-m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=130, dispense=130)
-m300.blow_out(Trash.wells('A1').top(-5))
 m300.air_gap(30)
 m300.drop_tip()
 
