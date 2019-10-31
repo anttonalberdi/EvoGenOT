@@ -75,7 +75,7 @@ Liquid_trash = Trash.wells('A1')
 sample_vol = 200
 bead_vol = sample_vol
 EtOH_vol = 200
-elution_vol = 30
+elution_vol = 50
 
 #### Sample SETUP
 
