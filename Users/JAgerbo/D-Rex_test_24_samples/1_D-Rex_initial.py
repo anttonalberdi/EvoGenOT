@@ -67,14 +67,14 @@ EtOH_Bind1 = trough.wells('A3')
 BufferC_1 = trough.wells('A9')
 
 #### Plate SETUP
-SA1 = sample_plate.wells('A4')
-SA2 = sample_plate.wells('A5')
-SA3 = sample_plate.wells('A6')
+SA1 = sample_plate.wells('A7')
+SA2 = sample_plate.wells('A8')
+SA3 = sample_plate.wells('A9')
 
 
-RA1 = RNA_plate.wells('A4')
-RA2 = RNA_plate.wells('A5')
-RA3 = RNA_plate.wells('A6')
+RA1 = RNA_plate.wells('A7')
+RA2 = RNA_plate.wells('A8')
+RA3 = RNA_plate.wells('A9')
 
 
 #### VOLUME SETUP

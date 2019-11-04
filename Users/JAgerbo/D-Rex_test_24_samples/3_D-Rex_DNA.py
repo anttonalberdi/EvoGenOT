@@ -71,8 +71,8 @@ m300 = instruments.P300_Multi(
 
 Liquid_trash = trash_box.wells('A1')
 
-EtOH1 = trough.wells('A4')
-EtOH2 = trough.wells('A5')
+EtOH1 = trough.wells('A5')
+EtOH2 = trough.wells('A6')
 Elution_buffer = trough.wells('A12')
 
 #### VOLUME SETUP
@@ -84,9 +84,9 @@ Wash_2_vol = 0.9*Sample_vol
 Elution_vol = 50
 
 #### Plate SETUP
-DA1 = DNA_plate.wells('A4')
-DA2 = DNA_plate.wells('A5')
-DA3 = DNA_plate.wells('A6')
+DA1 = DNA_plate.wells('A7')
+DA2 = DNA_plate.wells('A8')
+DA3 = DNA_plate.wells('A9')
 
 sample_number = 96
 col_num = sample_number // 8 + (1 if sample_number % 8 > 0 else 0)
