@@ -77,10 +77,10 @@ m300 = instruments.P300_Multi(
 
 
 ## Purification reagents SETUP
-SPRI_beads = trough.wells('A7')
-EtOH1 = trough.wells('A8')
-EtOH2 = trough.wells('A9')
-Elution_buffer = trough.wells('A10')
+SPRI_beads = trough.wells('A1')
+EtOH1 = trough.wells('A2')
+EtOH2 = trough.wells('A3')
+Elution_buffer = trough.wells('A12')
 
 Liquid_trash = trash_box.wells('A1')
 
@@ -106,7 +106,7 @@ samples = [col for col in mag_plate.cols()[:col_num]]
 #### VOLUME SETUP
 
 sample_vol = 50
-bead_vol = 1.2*sample_vol
+bead_vol = 1*sample_vol
 EtOH_vol = 130
 EtOH_vol2 = 120
 Elution_vol = 50
