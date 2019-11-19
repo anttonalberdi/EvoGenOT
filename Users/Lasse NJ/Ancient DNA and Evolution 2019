@@ -253,7 +253,7 @@ m300.drop_tip()
 
 ### Incubating beads with elution buffer
 m300.delay(minutes=10)
-mag_deck.engage(height=34)
+mag_deck.engage(height=35)
 m300.delay(minutes=10)
 
 ### Transfer aliquot 1 to EA1
@@ -264,17 +264,6 @@ m300.dispense(25, EA1.bottom(2))
 m300.delay(seconds=5)
 m300.set_flow_rate(aspirate=130, dispense=130)
 m300.move_to(EA1.top(-10))
-m300.blow_out()
-m300.drop_tip()
-
-### Transfer aliquot 2 to EA2
-m300.pick_up_tip(tipracks_200_1.wells('A9'))
-m300.set_flow_rate(aspirate=25, dispense=25)
-m300.aspirate(25, SA1.bottom())
-m300.dispense(25, EA2.bottom(2))
-m300.delay(seconds=5)
-m300.set_flow_rate(aspirate=130, dispense=130)
-m300.move_to(EA2.top(-10))
 m300.blow_out()
 m300.drop_tip()
 
