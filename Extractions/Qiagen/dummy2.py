@@ -13,4 +13,4 @@ metadata = {
 mag_deck = modules.load('magdeck', '7')
 
 
-mag_deck.engage()
+mag_deck.engage(height=18)
