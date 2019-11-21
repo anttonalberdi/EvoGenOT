@@ -183,7 +183,7 @@ m300.drop_tip()
 ### Transfer EtOH2 to SA1
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip(tipracks_200_1.wells('A5'))
-m300.move_to(EtOH3.top(-16))
+m300.move_to(EtOH1.top(-16))
 max_speed_per_axis = {'x': (300), 'y': (300), 'z': (100), 'a': (100), 'b': (20), 'c': (20)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.set_flow_rate(aspirate=25, dispense=25)
