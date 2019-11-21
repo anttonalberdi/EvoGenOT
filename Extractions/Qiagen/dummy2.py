@@ -17,4 +17,4 @@ mag_deck = modules.load('magdeck', '7')
 
 
 ### Beads addition ###
-mag_deck.engage(height=18)
+mag_deck.engage(height=17)
