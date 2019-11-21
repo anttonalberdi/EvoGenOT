@@ -44,7 +44,7 @@ elution_plate = labware.load('biorad-hardshell-96-PCR','10')
 tipracks_200_1 = labware.load('tiprack-200ul', '4', share=True)
 tipracks_200_2 = labware.load('tiprack-200ul', '5', share=True)
 tipracks_200_3 = labware.load('tiprack-200ul', '6', share=True)
-tipracks_10_1 = labware.load('tiprack-10ul', '3', share=True)
+#tipracks_10_1 = labware.load('tiprack-10ul', '3', share=True)
 
 
 
@@ -58,9 +58,9 @@ m300 = instruments.P300_Multi(
     dispense_flow_rate=200,
     tip_racks=(tipracks_200_1,tipracks_200_2,tipracks_200_3))
 
-m10 = instruments.P10_Multi(
-    mount='right',
-    tip_racks=tipracks_10_1)
+#m10 = instruments.P10_Multi(
+    #mount='right',
+    #tip_racks=tipracks_10_1)
 
 
 ###  PURIFICATION REAGENTS SETUP ###
