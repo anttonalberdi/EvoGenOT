@@ -96,8 +96,6 @@ EA6 = elution_plate.wells('A11')
 
 #### PROTOCOL ####
 
-## Add air_gap after adding first 200 ul ethanol
-
 #Problems
 
 # Tips does not come of the pipette --> ruins entire ruins
