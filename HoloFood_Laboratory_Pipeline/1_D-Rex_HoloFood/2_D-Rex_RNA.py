@@ -774,6 +774,26 @@ robot.pause("Please cover the plate with film and incubate 10 min 25°C at 1300 
 ##Reset tipracks for more tips
 m300.reset()
 
+#### Ensure enough buffer i reservoir by adding 3ml from backup
+robot.comment("Ensure enough buffer in reservoir by adding 3ml from backup")
+p1000.set_flow_rate(aspirate=500, dispense=500)
+p1000.pick_up_tip(tipracks_1000.wells('B1'))
+p1000.aspirate(800, BufferC_backup.bottom(5))
+p1000.dispense(800, BufferC_1.top(-4))
+p1000.delay(seconds=2)
+p1000.move_to(BufferC_1.top(-4))
+p1000.blow_out()
+p1000.aspirate(800, BufferC_backup.bottom(5))
+p1000.dispense(800, BufferC_1.top(-4))
+p1000.delay(seconds=2)
+p1000.move_to(BufferC_1.top(-4))
+p1000.blow_out()
+p1000.aspirate(800, BufferC_backup.bottom(5))
+p1000.dispense(800, BufferC_1.top(-4))
+p1000.delay(seconds=2)
+p1000.move_to(BufferC_1.top(-4))
+p1000.blow_out()
+p1000.drop_tip()
 
 ### Buffer C rebind, by using tiprack 1
 ### Transfer buffer C and beads to RA1
@@ -898,6 +918,28 @@ m300.blow_out()
 max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
 robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
 m300.return_tip()
+
+#### Ensure enough buffer i reservoir by adding 3ml from backup
+robot.comment("Ensure enough buffer in reservoir by adding 3ml from backup")
+p1000.set_flow_rate(aspirate=500, dispense=500)
+p1000.pick_up_tip(tipracks_1000.wells('B1'))
+p1000.aspirate(800, BufferC_backup.bottom(5))
+p1000.dispense(800, BufferC_2.top(-4))
+p1000.delay(seconds=2)
+p1000.move_to(BufferC_2.top(-4))
+p1000.blow_out()
+p1000.aspirate(800, BufferC_backup.bottom(5))
+p1000.dispense(800, BufferC_2.top(-4))
+p1000.delay(seconds=2)
+p1000.move_to(BufferC_1.top(-4))
+p1000.blow_out()
+p1000.aspirate(800, BufferC_backup.bottom(5))
+p1000.dispense(800, BufferC_2.top(-4))
+p1000.delay(seconds=2)
+p1000.move_to(BufferC_2.top(-4))
+p1000.blow_out()
+p1000.drop_tip()
+
 
 ### Transfer buffer C and beads to RA7
 m300.set_flow_rate(aspirate=100, dispense=100)
