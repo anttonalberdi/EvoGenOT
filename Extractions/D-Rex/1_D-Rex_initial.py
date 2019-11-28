@@ -18,9 +18,9 @@ from opentrons import labware, instruments, modules, robot
 metadata = {
     'protocolName': 'D-Rex Inital Extraction',
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
-    'version': '1.0-optimized',
+    'version': '2.0',
     'date': '2019/08/15',
-    'description': 'Automation of D-Rex RNA and DNA seperation for extraction protocol of stool samples in SHIELD',
+    'description': 'Automation of D-Rex RNA and DNA seperation for extraction protocol of stool samples in SHIELD. ',
 }
 
 ### Custom LABWARE load
@@ -63,13 +63,13 @@ m300 = instruments.P300_Multi(
     dispense_flow_rate=200,
     tip_racks=[tipracks_200_1, tipracks_200_2, tipracks_200_3])
 
-#### REAGENT SETUP
-Binding_buffer1 = trough.wells('A1')
-Binding_buffer2 = trough.wells('A2')			# Buffer B			# Buffer B
-EtOH_Bind1 = trough.wells('A3')
-EtOH_Bind2 = trough.wells('A4')
-BufferC_1 = trough.wells('A10')
-BufferC_2 = trough.wells('A11')
+#### REAGENT SETUP                              description             Volume needed for protocol
+Binding_buffer1 = trough.wells('A1')            # Buffer B:              11 ml
+Binding_buffer2 = trough.wells('A2')			# Buffer B:              11 ml
+EtOH_Bind1 = trough.wells('A3')                 # EtOH + magnetic:       17.5 ml
+EtOH_Bind2 = trough.wells('A4')                 # EtOH + magnetic:       17.5 ml
+BufferC_1 = trough.wells('A5')                  # Buffer C:              10 ml
+BufferC_2 = trough.wells('A6')                  # Buffer C:              10 ml
 
 #### Plate SETUP
 SA1 = sample_plate.wells('A1')

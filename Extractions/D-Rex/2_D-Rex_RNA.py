@@ -18,7 +18,7 @@ from opentrons import labware, instruments, modules, robot
 metadata = {
     'protocolName': 'D-Rex RNA Extraction',
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
-    'version': '1.0-optimized',
+    'version': '2.0',
     'date': '2019/08/15',
     'description': 'Automation of D-Rex RNA protocol for stool samples in SHIELD',
 }
@@ -50,15 +50,12 @@ trough = labware.load('trough-12row', '9')
 mag_deck = modules.load('magdeck', '7')
 RNA_plate = labware.load('1ml_magPCR', '7', share=True)
 trash_box = labware.load('One-Column-reservoir', '8')
-backup = labware.load('opentrons-tuberack-50ml', '6')
+EtOH_wash = labware.load('One-Column-reservoir', '6')
 
 tipracks_200_1 = labware.load('tiprack-200ul', '2', share=True)
 tipracks_200_2 = labware.load('tiprack-200ul', '3', share=True)
 tipracks_200_3 = labware.load('tiprack-200ul', '4', share=True)
 tipracks_200_4 = labware.load('tiprack-200ul', '5', share=True)
-
-tipracks_1000 = labware.load('tiprack-1000ul', '11', share=True)
-
 
 
 #### PIPETTE SETUP ####
@@ -70,27 +67,17 @@ m300 = instruments.P300_Multi(
     dispense_flow_rate=200,
     tip_racks=([tipracks_200_1, tipracks_200_2, tipracks_200_3, tipracks_200_4]))
 
-p1000 = instruments.P1000_Single(
-    mount='left',
-    aspirate_flow_rate=500,
-    dispense_flow_rate=500,
-    tip_racks=tipracks_1000)
+#### REAGENT SETUP 1                           Description             Volume needed for protocol
+EtOH1 = EtOH_wash.wells('A1')                  # 80% ethanol           82.5 ml
 
-#### REAGENT SETUP
-EtOH1 = trough.wells('A5')
-EtOH2 = trough.wells('A6')
-EtOH3 = trough.wells('A7')
-EtOH4 = trough.wells('A8')
-DNase = trough.wells('A9')
-BufferC_1 = trough.wells('A10')
-BufferC_2 = trough.wells('A11')
-Elution_buffer = trough.wells('A12')
+#### REAGENT SETUP                             Description             Volume needed for protocol
+DNase = trough.wells('A9')                     # DNase Buffer          3.2 ml
+BufferC_1 = trough.wells('A7')                 # Buffer C RNA rebind   10 ml
+BufferC_2 = trough.wells('A8')                 # Buffer C RNA rebind   10 ml
+Elution_buffer = trough.wells('A12')           # Buffer D              6 ml
 
 Liquid_trash = trash_box.wells('A1')
 
-#### Backup SETUP
-ETOH_backup = backup.wells('A1')
-BufferC_backup = backup.wells('A2')
 
 #### Plate SETUP for Purification
 RA1 = RNA_plate.wells('A1')
@@ -445,8 +432,8 @@ mag_deck.disengage()
 ### Transfer Wash 2 to RA1
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.move_to(EtOH2.top(-16))
-m300.aspirate(Wash_2_vol, EtOH2.top(-12))
+m300.move_to(EtOH1.top(-16))
+m300.aspirate(Wash_2_vol, EtOH1.top(-12))
 m300.dispense(Wash_2_vol, RA1.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA1.bottom(4))
@@ -459,8 +446,8 @@ m300.return_tip()
 ### Transfer Wash 1 to RA2
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.move_to(EtOH2.top(-20))
-m300.aspirate(Wash_2_vol, EtOH2.top(-16))
+m300.move_to(EtOH1.top(-20))
+m300.aspirate(Wash_2_vol, EtOH1.top(-16))
 m300.dispense(Wash_2_vol, RA2.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA2.bottom(4))
@@ -473,7 +460,7 @@ m300.return_tip()
 ### Transfer Wash 2 to RA3
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH2.bottom(1))
+m300.aspirate(Wash_2_vol, EtOH1.bottom(1))
 m300.dispense(Wash_2_vol, RA3.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA3.bottom(4))
@@ -486,7 +473,7 @@ m300.return_tip()
 ### Transfer Wash 2 to RA4
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH2.bottom(1))
+m300.aspirate(Wash_2_vol, EtOH1.bottom(1))
 m300.dispense(Wash_2_vol, RA4.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA4.bottom(4))
@@ -499,7 +486,7 @@ m300.return_tip()
 ### Transfer Wash 2 to RA5
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH2.bottom(1))
+m300.aspirate(Wash_2_vol, EtOH1.bottom(1))
 m300.dispense(Wash_2_vol, RA5.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA5.bottom(4))
@@ -512,7 +499,7 @@ m300.return_tip()
 ### Transfer Wash 2 to RA6
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH2.bottom(1))
+m300.aspirate(Wash_2_vol, EtOH1.bottom(1))
 m300.dispense(Wash_2_vol, RA6.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA6.bottom(4))
@@ -522,31 +509,10 @@ m300.move_to(RA7.top(-10))
 m300.blow_out()
 m300.return_tip()
 
-#### Ensure enough buffer i reservoir by adding 3ml from backup
-robot.comment("Ensure enough buffer in reservoir by adding 3ml from backup")
-p1000.set_flow_rate(aspirate=500, dispense=500)
-p1000.pick_up_tip(tipracks_1000.wells('B1'))
-p1000.aspirate(800, ETOH_backup.top(-25))
-p1000.dispense(800, EtOH2.top(-4))
-p1000.delay(seconds=2)
-p1000.move_to(EtOH2.top(-4))
-p1000.blow_out()
-p1000.aspirate(800, ETOH_backup.top(-25))
-p1000.dispense(800, EtOH2.top(-4))
-p1000.delay(seconds=2)
-p1000.move_to(EtOH2.top(-4))
-p1000.blow_out()
-p1000.aspirate(800, ETOH_backup.top(-25))
-p1000.dispense(800, EtOH2.top(-4))
-p1000.delay(seconds=2)
-p1000.move_to(EtOH2.top(-4))
-p1000.blow_out()
-p1000.drop_tip()
-
 ### Transfer Wash 1 to RA7
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH2.bottom(1))
+m300.aspirate(Wash_2_vol, EtOH1.bottom(1))
 m300.dispense(Wash_2_vol, RA7.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA7.bottom(4))
@@ -559,7 +525,7 @@ m300.return_tip()
 ### Transfer Wash 1 to RA8
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH2.bottom(1))
+m300.aspirate(Wash_2_vol, EtOH1.bottom(1))
 m300.dispense(Wash_2_vol, RA8.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA8.bottom(4))
@@ -572,7 +538,7 @@ m300.return_tip()
 ### Transfer Wash 1 to RA9
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH2.bottom(1))
+m300.aspirate(Wash_2_vol, EtOH1.bottom(1))
 m300.dispense(Wash_2_vol, RA9.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA9.bottom(4))
@@ -585,7 +551,7 @@ m300.return_tip()
 ### Transfer Wash 1 to RA10
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH2.bottom(1))
+m300.aspirate(Wash_2_vol, EtOH1.bottom(1))
 m300.dispense(Wash_2_vol, RA10.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA10.bottom(4))
@@ -598,7 +564,7 @@ m300.return_tip()
 ### Transfer Wash 1 to RA11
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH2.bottom(1))
+m300.aspirate(Wash_2_vol, EtOH1.bottom(1))
 m300.dispense(Wash_2_vol, RA11.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA11.bottom(4))
@@ -611,7 +577,7 @@ m300.return_tip()
 ### Transfer Wash 1 to RA12
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH2.bottom(1))
+m300.aspirate(Wash_2_vol, EtOH1.bottom(1))
 m300.dispense(Wash_2_vol, RA12.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA12.bottom(4))
@@ -1216,8 +1182,8 @@ mag_deck.disengage()
 ### Transfer Wash 3 to RA1
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.move_to(EtOH3.top(-16))
-m300.aspirate(Wash_1_vol, EtOH3.top(-12))
+m300.move_to(EtOH1.top(-16))
+m300.aspirate(Wash_1_vol, EtOH1.top(-12))
 m300.dispense(Wash_1_vol, RA1.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_1_vol, RA1.bottom(5))
@@ -1230,8 +1196,8 @@ m300.return_tip()
 ### Transfer Wash 3 to RA2
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.move_to(EtOH3.bottom())
-m300.aspirate(Wash_1_vol, EtOH3.bottom(1))
+m300.move_to(EtOH1.bottom())
+m300.aspirate(Wash_1_vol, EtOH1.bottom(1))
 m300.dispense(Wash_1_vol, RA2.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_1_vol, RA2.bottom(5))
@@ -1244,7 +1210,7 @@ m300.return_tip()
 ### Transfer Wash 3 to RA3
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_1_vol, EtOH3.bottom(1))
+m300.aspirate(Wash_1_vol, EtOH1.bottom(1))
 m300.dispense(Wash_1_vol, RA3.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_1_vol, RA3.bottom(5))
@@ -1257,7 +1223,7 @@ m300.return_tip()
 ### Transfer Wash 3 to RA4
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_1_vol, EtOH3.bottom())
+m300.aspirate(Wash_1_vol, EtOH1.bottom())
 m300.dispense(Wash_1_vol, RA4.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_1_vol, RA4.bottom(5))
@@ -1270,7 +1236,7 @@ m300.return_tip()
 ### Transfer Wash 3 to RA5
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_1_vol, EtOH3.bottom())
+m300.aspirate(Wash_1_vol, EtOH1.bottom())
 m300.dispense(Wash_1_vol, RA5.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_1_vol, RA5.bottom(5))
@@ -1283,8 +1249,8 @@ m300.return_tip()
 ### Transfer Wash 3 to RA6
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.move_to(EtOH3.bottom())
-m300.aspirate(Wash_1_vol, EtOH3.bottom())
+m300.move_to(EtOH1.bottom())
+m300.aspirate(Wash_1_vol, EtOH1.bottom())
 m300.dispense(Wash_1_vol, RA6.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_1_vol, RA6.bottom(5))
@@ -1294,31 +1260,10 @@ m300.move_to(RA7.top(-10))
 m300.blow_out()
 m300.return_tip()
 
-#### Ensure enough buffer i reservoir by adding 3ml from backup
-robot.comment("Ensure enough buffer i reservoir by adding 3ml from backup")
-p1000.set_flow_rate(aspirate=500, dispense=400)
-p1000.pick_up_tip(tipracks_1000.wells('C1'))
-p1000.aspirate(800, ETOH_backup.top(-30))
-p1000.dispense(800, EtOH3.top(-4))
-p1000.delay(seconds=2)
-p1000.move_to(EtOH3.top(-4))
-p1000.blow_out()
-p1000.aspirate(800, ETOH_backup.top(-30))
-p1000.dispense(800, EtOH3.top(-4))
-p1000.delay(seconds=2)
-p1000.move_to(EtOH3.top(-4))
-p1000.blow_out()
-p1000.aspirate(800, ETOH_backup.top(-30))
-p1000.dispense(800, EtOH3.top(-4))
-p1000.delay(seconds=2)
-p1000.move_to(EtOH3.top(-4))
-p1000.blow_out()
-p1000.drop_tip()
-
 ### Transfer Wash 3 to RA7
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_1_vol, EtOH3.bottom())
+m300.aspirate(Wash_1_vol, EtOH1.bottom())
 m300.dispense(Wash_1_vol, RA7.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_1_vol, RA7.bottom(5))
@@ -1331,7 +1276,7 @@ m300.return_tip()
 ### Transfer Wash 3 to RA8
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_1_vol, EtOH3.bottom())
+m300.aspirate(Wash_1_vol, EtOH1.bottom())
 m300.dispense(Wash_1_vol, RA8.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_1_vol, RA8.bottom(5))
@@ -1344,7 +1289,7 @@ m300.return_tip()
 ### Transfer Wash 3 to RA9
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_1_vol, EtOH3.bottom())
+m300.aspirate(Wash_1_vol, EtOH1.bottom())
 m300.dispense(Wash_1_vol, RA9.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_1_vol, RA9.bottom(5))
@@ -1357,7 +1302,7 @@ m300.return_tip()
 ### Transfer Wash 3 to RA10
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_1_vol, EtOH3.bottom())
+m300.aspirate(Wash_1_vol, EtOH1.bottom())
 m300.dispense(Wash_1_vol, RA10.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_1_vol, RA10.bottom(5))
@@ -1370,7 +1315,7 @@ m300.return_tip()
 ### Transfer Wash 3 to RA11
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_1_vol, EtOH3.bottom())
+m300.aspirate(Wash_1_vol, EtOH1.bottom())
 m300.dispense(Wash_1_vol, RA11.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_1_vol, RA11.bottom(5))
@@ -1383,7 +1328,7 @@ m300.return_tip()
 ### Transfer Wash 3 to RA12
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_1_vol, EtOH3.bottom())
+m300.aspirate(Wash_1_vol, EtOH1.bottom())
 m300.dispense(Wash_1_vol, RA12.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_1_vol, RA12.bottom(5))
@@ -1523,8 +1468,8 @@ mag_deck.disengage()
 ### Transfer Wash 4 to RA1
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.move_to(EtOH4.top(-16))
-m300.aspirate(Wash_2_vol, EtOH4.top(-12))
+m300.move_to(EtOH1.top(-16))
+m300.aspirate(Wash_2_vol, EtOH1.top(-12))
 m300.dispense(Wash_2_vol, RA1.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA1.bottom(5))
@@ -1537,8 +1482,8 @@ m300.return_tip()
 ### Transfer Wash 4 to RA2
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.move_to(EtOH4.bottom())
-m300.aspirate(Wash_2_vol, EtOH4.bottom(1))
+m300.move_to(EtOH1.bottom())
+m300.aspirate(Wash_2_vol, EtOH1.bottom(1))
 m300.dispense(Wash_2_vol, RA2.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA2.bottom(5))
@@ -1551,7 +1496,7 @@ m300.return_tip()
 ### Transfer Wash 4 to RA3
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH4.bottom(1))
+m300.aspirate(Wash_2_vol, EtOH1.bottom(1))
 m300.dispense(Wash_2_vol, RA3.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA3.bottom(5))
@@ -1564,7 +1509,7 @@ m300.return_tip()
 ### Transfer Wash 4 to RA4
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH4.bottom())
+m300.aspirate(Wash_2_vol, EtOH1.bottom())
 m300.dispense(Wash_2_vol, RA4.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA4.bottom(5))
@@ -1577,7 +1522,7 @@ m300.return_tip()
 ### Transfer Wash 4 to RA5
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH4.bottom())
+m300.aspirate(Wash_2_vol, EtOH1.bottom())
 m300.dispense(Wash_2_vol, RA5.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA5.bottom(5))
@@ -1590,8 +1535,8 @@ m300.return_tip()
 ### Transfer Wash 4 to RA6
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.move_to(EtOH4.bottom())
-m300.aspirate(Wash_2_vol, EtOH4.bottom())
+m300.move_to(EtOH1.bottom())
+m300.aspirate(Wash_2_vol, EtOH1.bottom())
 m300.dispense(Wash_2_vol, RA6.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA6.bottom(5))
@@ -1601,31 +1546,11 @@ m300.move_to(RA6.top(-10))
 m300.blow_out()
 m300.return_tip()
 
-#### Ensure enough buffer i reservoir by adding 3ml from backup
-robot.comment("Ensure enough buffer i reservoir by adding 3ml from backup")
-p1000.set_flow_rate(aspirate=500, dispense=400)
-p1000.pick_up_tip(tipracks_1000.wells('D1'))
-p1000.aspirate(800, ETOH_backup.top(-35))
-p1000.dispense(800, EtOH4.top(-4))
-p1000.delay(seconds=2)
-p1000.move_to(EtOH4.top(-4))
-p1000.blow_out()
-p1000.aspirate(800, ETOH_backup.top(-35))
-p1000.dispense(800, EtOH4.top(-4))
-p1000.delay(seconds=2)
-p1000.move_to(EtOH4.top(-4))
-p1000.blow_out()
-p1000.aspirate(800, ETOH_backup.top(-35))
-p1000.dispense(800, EtOH4.top(-4))
-p1000.delay(seconds=2)
-p1000.move_to(EtOH4.top(-4))
-p1000.blow_out()
-p1000.drop_tip()
 
 ### Transfer Wash 4 to RA7
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH4.bottom())
+m300.aspirate(Wash_2_vol, EtOH1.bottom())
 m300.dispense(Wash_2_vol, RA7.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA7.bottom(5))
@@ -1638,7 +1563,7 @@ m300.return_tip()
 ### Transfer Wash 4 to RA8
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH4.bottom())
+m300.aspirate(Wash_2_vol, EtOH1.bottom())
 m300.dispense(Wash_2_vol, RA8.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA8.bottom(5))
@@ -1651,7 +1576,7 @@ m300.return_tip()
 ### Transfer Wash 4 to RA9
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH4.bottom())
+m300.aspirate(Wash_2_vol, EtOH1.bottom())
 m300.dispense(Wash_2_vol, RA9.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA9.bottom(5))
@@ -1664,7 +1589,7 @@ m300.return_tip()
 ### Transfer Wash 4 to RA10
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH4.bottom())
+m300.aspirate(Wash_2_vol, EtOH1.bottom())
 m300.dispense(Wash_2_vol, RA10.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA10.bottom(5))
@@ -1677,7 +1602,7 @@ m300.return_tip()
 ### Transfer Wash 4 to RA11
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH4.bottom())
+m300.aspirate(Wash_2_vol, EtOH1.bottom())
 m300.dispense(Wash_2_vol, RA11.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA11.bottom(5))
@@ -1690,7 +1615,7 @@ m300.return_tip()
 ### Transfer Wash 4 to RA12
 m300.set_flow_rate(aspirate=50, dispense=50)
 m300.pick_up_tip() # Slow down head speed 0.5X for bead handling
-m300.aspirate(Wash_2_vol, EtOH4.bottom())
+m300.aspirate(Wash_2_vol, EtOH1.bottom())
 m300.dispense(Wash_2_vol, RA12.top(-4))
 m300.set_flow_rate(aspirate=100, dispense=100)
 m300.mix(5, Wash_2_vol, RA12.bottom(5))
