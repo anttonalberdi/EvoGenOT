@@ -81,10 +81,10 @@ m10 = instruments.P10_Multi(
 
 
 ## Purification reagents SETUP
-SPRI_beads = trough.wells('A1')
-EtOH1 = trough.wells('A2')
-EtOH2 = trough.wells('A3')
-Elution_buffer = trough.wells('A12')
+SPRI_beads = trough.wells('A4')
+EtOH1 = trough.wells('A5')
+EtOH2 = trough.wells('A6')
+Elution_buffer = trough.wells('A11')
 
 Liquid_trash = trash_box.wells('A1')
 
