@@ -18,5 +18,5 @@ s50 = instruments.P50_Single(mount='left', tip_racks=[tiprack_200])
 #PROTOCOL
 temp_deck_1.set_temperature(95)
 temp_deck_1.wait_for_temp()
-s50.delay(minutes=5)
+s50.delay(minutes=20)
 temp_deck_1.deactivate()
