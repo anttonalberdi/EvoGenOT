@@ -10,5 +10,4 @@ temp_deck1 = modules.load('tempdeck', '4')
 temp_deck_1.set_temperature(95)
 temp_deck_1.wait_for_temp()
 
-
 temp_deck_1.deactivate()
