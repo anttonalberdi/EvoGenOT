@@ -41,10 +41,10 @@ Trash = labware.load('One-Column-reservoir','8')
 elution_plate = labware.load('biorad-hardshell-96-PCR','10')
 
 
-tipracks_200_1 = labware.load('opentrons_96_filtertiprack_300ul', '4', share=True)
-tipracks_200_2 = labware.load('opentrons_96_filtertiprack_300ul', '5', share=True)
-tipracks_200_3 = labware.load('opentrons_96_filtertiprack_300ul', '6', share=True)
-tipracks_10_1 = labware.load('opentrons_96_tiprack_10ul', '3', share=True)
+tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_300ul', '4')
+tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_300ul', '5')
+tipracks_200_3 = protocol.load_labware('opentrons_96_filtertiprack_300ul', '6')
+tipracks_10_1 = protocol.load_labware('opentrons_96_tiprack_10ul', '3')
 
 
 
