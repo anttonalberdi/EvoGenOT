@@ -243,9 +243,9 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.return_tip()
 
 
-m300.delay(minutes=10)
+#m300.delay(minutes=10)
 mag_deck.engage(height=17)
-m300.delay(minutes=10)
+#m300.delay(minutes=10)
 
 
 
@@ -487,7 +487,7 @@ m300.return_tip()
 
 ### Remove wash 1 supernatant ###
 
-m300.delay(minutes=2)
+#m300.delay(minutes=2)
 
 ### remove supernatant from SA1
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -717,7 +717,7 @@ m300.return_tip()
 
 ### Remove wash 2 supernatant ###
 
-m300.delay(minutes=2)
+#m300.delay(minutes=2)
 
 ### remove supernatant from SA1
 m300.set_flow_rate(aspirate=100, dispense=100)
@@ -848,7 +848,7 @@ m10.drop_tip()
 
 mag_deck.disengage()
 
-m300.delay(minutes=5)
+#m300.delay(minutes=5)
 
 ### Transfer Elution buffer to SA1
 m300.set_flow_rate(aspirate=50, dispense=50)
@@ -965,9 +965,9 @@ robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per
 m300.drop_tip()
 
 ### Incubating beads with elution buffer
-m300.delay(minutes=10)
+#m300.delay(minutes=10)
 mag_deck.engage(height=17)
-m300.delay(minutes=10)
+#m300.delay(minutes=10)
 
 ### Transfer Elution buffer to EA1
 m300.pick_up_tip(tipracks_200_3.wells('A1'))
