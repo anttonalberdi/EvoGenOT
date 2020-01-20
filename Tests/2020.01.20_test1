@@ -41,10 +41,10 @@ Trash = labware.load('One-Column-reservoir','8')
 elution_plate = labware.load('biorad-hardshell-96-PCR','10')
 
 
-tipracks_200_1 = labware.load('tiprack-200ul', '4', share=True)
-tipracks_200_2 = labware.load('tiprack-200ul', '5', share=True)
-tipracks_200_3 = labware.load('tiprack-200ul', '6', share=True)
-tipracks_10_1 = labware.load('tiprack-10ul', '3', share=True)
+tipracks_200_1 = labware.load('opentrons_96_filtertiprack_200ul', '4', share=True)
+tipracks_200_2 = labware.load('opentrons_96_filtertiprack_200ul', '5', share=True)
+tipracks_200_3 = labware.load('opentrons_96_filtertiprack_200ul', '6', share=True)
+tipracks_10_1 = labware.load('opentrons_96_tiprack_10ul', '3', share=True)
 
 
 
@@ -967,7 +967,7 @@ m300.drop_tip()
 ### Incubating beads with elution buffer
 #m300.delay(minutes=10)
 mag_deck.engage(height=17)
-#m300.delay(minutes=10)
+# m300.delay(minutes=10)
 
 ### Transfer Elution buffer to EA1
 m300.pick_up_tip(tipracks_200_3.wells('A1'))
