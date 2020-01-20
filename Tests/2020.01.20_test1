@@ -1,12 +1,8 @@
 ####### IMPORT LIBRARIES ########
-from opentrons import labware, instruments, modules, robot
+from opentrons import protocol_api, labware, instruments, modules, robot
 
 # metadata
-metadata = {
-    'protocolName': 'DNA Purification',
-    'author': 'Name <lassenyholm@gmail.com>',
-    'description': 'DNA purification of PowerSoil/Fecal extracts (C1 and bead beating)',
-}
+metadata = {'apiLevel': '2.0'}
 
 ### CUSTOM LABWARE ###
 
