@@ -30,6 +30,7 @@ if plate_name not in labware.list():
         depth=26.4,                       # depth (mm) of each well on the plate
         volume=1000)
 
+## Add pause after aspiration of ethanol and maybe a shake
 
 
 ### LABWARE SETUP ###

@@ -1,8 +1,8 @@
 ####### IMPORT LIBRARIES ########
-from opentrons import protocol_api, labware, instruments, modules, robot
+from opentrons import labware, instruments, modules, robot
 
 # metadata
-metadata = {'apiLevel': '2.0'}
+
 
 ### CUSTOM LABWARE ###
 
@@ -37,10 +37,10 @@ Trash = labware.load('One-Column-reservoir','8')
 elution_plate = labware.load('biorad-hardshell-96-PCR','10')
 
 
-tipracks_200_1 = labware.load('opentrons_96_filtertiprack_300ul', '4')
-tipracks_200_2 = labware.load('opentrons_96_filtertiprack_300ul', '5')
-tipracks_200_3 = labware.load('opentrons_96_filtertiprack_300ul', '6')
-tipracks_10_1 = labware.load('opentrons_96_tiprack_10ul', '3')
+tipracks_200_1 = labware.load('opentrons-tiprack-300ul', '4')
+tipracks_200_2 = labware.load('opentrons-tiprack-300ul', '5')
+tipracks_200_3 = labware.load('opentrons-tiprack-300ul', '6')
+tipracks_10_1 = labware.load('opentrons-tiprack-10ul', '3')
 
 
 
