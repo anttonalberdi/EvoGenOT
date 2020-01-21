@@ -13,6 +13,10 @@ metadata = {
     'apiLevel': '2.0'
     }
 
+#### NOTES ####
+# Check mixing volume
+# Check the number of mixes
+# Return tips
 
 def run(protocol_context):
 
@@ -24,9 +28,10 @@ def run(protocol_context):
         "settling_time", "drying_time"
     )
 
+
     mag_deck = protocol_context.load_module('magdeck', '1')
     mag_plate = mag_deck.load_labware(
-        'biorad_96_wellplate_200ul_pcr')
+        '1ml_pcr')
     output_plate = protocol_context.load_labware(
         'biorad_96_wellplate_200ul_pcr', '2', 'output plate')
 
@@ -51,6 +56,9 @@ def run(protocol_context):
     pipette = protocol_context.load_instrument(
         pipette_type, pipette_mount, tip_racks=tipracks)
 
+    pipette.well_bottom_clearance.aspirate = 2
+    pipette.well_bottom_clearance.dispense = 2
+
     mode = pipette_type.split('_')[1]
 
     if mode == 'single':
@@ -58,17 +66,17 @@ def run(protocol_context):
             reagent_container = protocol_context.load_labware(
                 'opentrons_24_tuberack_nest_2ml_snapcap', '4')
             liquid_waste = protocol_context.load_labware(
-                'usascientific_12_reservoir_22ml', '5').wells()[-1]
+                '12_column_reservoir', '9').wells()[-1]
         else:
             reagent_container = protocol_context.load_labware(
-                'usascientific_12_reservoir_22ml', '4')
-            liquid_waste = reagent_container.wells()[-1]
+                '12_column_reservoir', '4')
+            liquid_waste = reagent_container.wells()[11]
         samples = [well for well in mag_plate.wells()[:sample_number]]
         output = [well for well in output_plate.wells()[:sample_number]]
     else:
         reagent_container = protocol_context.load_labware(
-            'usascientific_12_reservoir_22ml', '4')
-        liquid_waste = reagent_container.wells()[-1]
+            '12_column_reservoir', '4')
+        liquid_waste = reagent_container.wells()[11]
         col_num = math.ceil(sample_number/8)
         samples = [col for col in mag_plate.rows()[0][:col_num]]
         output = [col for col in output_plate.rows()[0][:col_num]]
@@ -76,7 +84,7 @@ def run(protocol_context):
     # Define reagents and liquid waste
     beads = reagent_container.wells()[0]
     ethanol = reagent_container.wells()[1]
-    elution_buffer = reagent_container.wells()[2]
+    elution_buffer = reagent_container.wells()[11]
 
     # Define bead and mix volume
     bead_volume = sample_volume*bead_ratio
@@ -86,10 +94,12 @@ def run(protocol_context):
         mix_vol = bead_volume/2
     total_vol = bead_volume + sample_volume + 5
 
+    mag_deck.disengage()
+
     # Mix beads and PCR samples
     for target in samples:
         pipette.pick_up_tip()
-        pipette.mix(5, mix_vol, beads)
+        pipette.mix(10, mix_vol, beads)
         pipette.transfer(bead_volume, beads, target, new_tip='never')
         pipette.mix(10, mix_vol, target)
         pipette.blow_out()
@@ -99,7 +109,7 @@ def run(protocol_context):
     protocol_context.delay(minutes=incubation_time)
 
     # Engagae MagDeck and incubate
-    mag_deck.engage()
+    mag_deck.engage(height=17)
     protocol_context.delay(minutes=settling_time)
 
     # Remove supernatant from magnetic beads
@@ -140,7 +150,7 @@ def run(protocol_context):
     protocol_context.delay(minutes=5)
 
     # Engage MagDeck and remain engaged for DNA elution
-    mag_deck.engage()
+    mag_deck.engage(height=17)
     protocol_context.delay(minutes=settling_time)
 
     # Transfer clean PCR product to a new well
