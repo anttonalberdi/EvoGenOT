@@ -841,3 +841,6 @@ m10.drop_tip()
 
 ### Drying beads before elution ####
 
+mag_deck.disengage()
+
+
