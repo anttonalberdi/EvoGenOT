@@ -17,6 +17,7 @@ metadata = {
 # Check mixing volume
 # Check the number of mixes
 # Return tips
+# Add blow out after mixing with beads
 
 def run(protocol_context):
 
