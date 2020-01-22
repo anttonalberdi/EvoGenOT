@@ -17,7 +17,7 @@ def run(protocol):
     sample_plate = mag_deck.load_labware('1ml_pcr')
     elution_plate = protocol.load_labware('biorad_96_wellplate_200ul_pcr','1')
     trash = protocol.load_labware('agilent_1_reservoir_290ml','8') ## Need to be created
-    trough = protocol.load_labware('12_column_reservoir', '12')
+    trough = protocol.load_labware('12_column_reservoir', '10')
 
 
 ### Pipette tips ###
@@ -66,7 +66,9 @@ def run(protocol):
     EA6 = elution_plate['A11']
 
     ### Notes ###
-
+# Adjust ethanol workings
+    # Shake tip?
+    # Waiting for 5 seconds are not good
 
     ### Beads addition ###
     mag_deck.disengage()
