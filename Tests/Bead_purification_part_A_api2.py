@@ -41,7 +41,7 @@ def run(protocol):
 
     sample_vol = 200
     bead_vol = sample_vol
-    bead_vol_supernatant = sample_vol/3
+    bead_vol_supernatant = 400/3
     EtOH_vol = 150
     elution_vol = 50
     gap = 50
@@ -61,6 +61,13 @@ def run(protocol):
     EA4 = elution_plate['A7']
     EA5 = elution_plate['A9']
     EA6 = elution_plate['A11']
+
+    ### Notes ###
+
+    # Mix smaller volume when adding beads
+    # Add delay after aspiration of beads
+    # Increase mixing speed
+    # Add blow out after each step of removing bead supernatant
 
     ### Beads addition ###
     mag_deck.disengage()
@@ -397,7 +404,7 @@ def run(protocol):
 
     ### Transfer EtOH1 to SA4
     m300.pick_up_tip(tipracks_200_1['A10'])
-    m300.move_to(EtOH1.top(-16))
+    m300.move_to(EtOH2.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
     m300.aspirate(EtOH_vol, EtOH2.top(-35))
@@ -418,7 +425,7 @@ def run(protocol):
 
     ### Transfer EtOH1 to SA5
     m300.pick_up_tip(tipracks_200_1['A11'])
-    m300.move_to(EtOH1.top(-16))
+    m300.move_to(EtOH2.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
     m300.aspirate(EtOH_vol, EtOH2.top(-35))
@@ -439,7 +446,7 @@ def run(protocol):
 
     ### Transfer EtOH1 to SA6
     m300.pick_up_tip(tipracks_200_1['A12'])
-    m300.move_to(EtOH1.top(-16))
+    m300.move_to(EtOH2.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
     m300.aspirate(EtOH_vol, EtOH2.top(-35))
@@ -473,8 +480,8 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA1.bottom(1))
-    m300.dispense(EtOH_vol, Liquid_trash.top(-5))
+    m300.aspirate(200, SA1.bottom(1))
+    m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.drop_tip()
 
@@ -487,8 +494,8 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA2.bottom(1))
-    m300.dispense(EtOH_vol, Liquid_trash.top(-5))
+    m300.aspirate(200, SA2.bottom(1))
+    m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.drop_tip()
 
@@ -501,8 +508,8 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA3.bottom(1))
-    m300.dispense(EtOH_vol, Liquid_trash.top(-5))
+    m300.aspirate(200, SA3.bottom(1))
+    m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.drop_tip()
 
@@ -515,8 +522,8 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA4.bottom(1))
-    m300.dispense(EtOH_vol, Liquid_trash.top(-5))
+    m300.aspirate(200, SA4.bottom(1))
+    m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.drop_tip()
 
@@ -529,8 +536,8 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA5.bottom(1))
-    m300.dispense(EtOH_vol, Liquid_trash.top(-5))
+    m300.aspirate(200, SA5.bottom(1))
+    m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.drop_tip()
 
@@ -543,8 +550,8 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA6.bottom(1))
-    m300.dispense(EtOH_vol, Liquid_trash.top(-5))
+    m300.aspirate(200, SA6.bottom(1))
+    m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.drop_tip()
 
@@ -555,7 +562,7 @@ def run(protocol):
 
     ### Transfer EtOH2 to SA1
     m300.pick_up_tip(tipracks_200_2['A1'])
-    m300.move_to(EtOH1.top(-16))
+    m300.move_to(EtOH3.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
     m300.aspirate(EtOH_vol, EtOH3.top(-35))
@@ -576,7 +583,7 @@ def run(protocol):
 
     ### Transfer EtOH2 to SA2
     m300.pick_up_tip(tipracks_200_2['A2'])
-    m300.move_to(EtOH1.top(-16))
+    m300.move_to(EtOH3.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
     m300.aspirate(EtOH_vol, EtOH3.top(-35))
@@ -597,7 +604,7 @@ def run(protocol):
 
     ### Transfer EtOH2 to SA3
     m300.pick_up_tip(tipracks_200_2['A3'])
-    m300.move_to(EtOH1.top(-16))
+    m300.move_to(EtOH3.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
     m300.aspirate(EtOH_vol, EtOH3.top(-35))
@@ -618,7 +625,7 @@ def run(protocol):
 
     ### Transfer EtOH2 to SA4
     m300.pick_up_tip(tipracks_200_2['A4'])
-    m300.move_to(EtOH1.top(-16))
+    m300.move_to(EtOH4.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
     m300.aspirate(EtOH_vol, EtOH4.top(-35))
@@ -639,7 +646,7 @@ def run(protocol):
 
     ### Transfer EtOH2 to SA5
     m300.pick_up_tip(tipracks_200_2['A5'])
-    m300.move_to(EtOH1.top(-16))
+    m300.move_to(EtOH4.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
     m300.aspirate(EtOH_vol, EtOH4.top(-35))
@@ -660,7 +667,7 @@ def run(protocol):
 
     ### Transfer EtOH2 to SA6
     m300.pick_up_tip(tipracks_200_2['A6'])
-    m300.move_to(EtOH1.top(-16))
+    m300.move_to(EtOH4.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
     m300.aspirate(EtOH_vol, EtOH4.top(-35))
@@ -684,9 +691,6 @@ def run(protocol):
 
     #m300.delay(minutes=2)
 
-
-
-
     ### remove supernatant from SA1
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
@@ -696,8 +700,8 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA1.bottom(1))
-    m300.dispense(EtOH_vol, Liquid_trash.top(-5))
+    m300.aspirate(200, SA1.bottom(1))
+    m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.drop_tip()
 
@@ -710,8 +714,8 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA2.bottom(1))
-    m300.dispense(EtOH_vol, Liquid_trash.top(-5))
+    m300.aspirate(200, SA2.bottom(1))
+    m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.drop_tip()
 
@@ -724,8 +728,8 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA3.bottom(1))
-    m300.dispense(EtOH_vol, Liquid_trash.top(-5))
+    m300.aspirate(200, SA3.bottom(1))
+    m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.drop_tip()
 
@@ -738,8 +742,8 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA4.bottom(1))
-    m300.dispense(EtOH_vol, Liquid_trash.top(-5))
+    m300.aspirate(200, SA4.bottom(1))
+    m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.drop_tip()
 
@@ -752,8 +756,8 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA5.bottom(1))
-    m300.dispense(EtOH_vol, Liquid_trash.top(-5))
+    m300.aspirate(200, SA5.bottom(1))
+    m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.drop_tip()
 
@@ -766,8 +770,8 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA6.bottom(1))
-    m300.dispense(EtOH_vol, Liquid_trash.top(-5))
+    m300.aspirate(200, SA6.bottom(1))
+    m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.drop_tip()
 
