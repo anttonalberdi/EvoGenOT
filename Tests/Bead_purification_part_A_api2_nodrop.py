@@ -69,6 +69,7 @@ def run(protocol):
     # Increase mixing speed
     # Add blow out after each step of removing bead supernatant
     # No blowout after removing wash supernatant
+    # Maybe touch sides when aspirating ethanol
 
     ### Beads addition ###
     mag_deck.disengage()
