@@ -69,7 +69,8 @@ def run(protocol):
 # Adjust ethanol workings
     # Shake tip?
     # Waiting for 5 seconds are not good
-
+    # Transfer samples and then pause
+    # 
     ### Beads addition ###
     mag_deck.disengage()
 
