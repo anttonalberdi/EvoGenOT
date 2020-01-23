@@ -33,7 +33,7 @@ def run(protocol):
 
     m300 = protocol.load_instrument('p300_multi', mount='left', tip_racks=(tipracks_200_1,tipracks_200_2,tipracks_200_3))
 
-    m10 = protocol.load_instrument('p300_single', mount='right', tip_racks=(tipracks_10_1,))
+    m10 = protocol.load_instrument('p10_single', mount='right', tip_racks=(tipracks_10_1,))
 
 ###  PURIFICATION RELGENTS SETUP ###
 
