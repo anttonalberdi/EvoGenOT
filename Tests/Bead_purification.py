@@ -1,6 +1,7 @@
 
 from opentrons import protocol_api
 
+## NOTES add air gap after dispensing sample
 
 metadata = {
     'protocolName': 'DNA Purification',
@@ -91,31 +92,31 @@ def run(protocol):
 
     ### Transfer sample to MA1
     m300.pick_up_tip(tipracks_200_1['A1'])
-    m300.aspirate(sample_vol, SA1.bottom())
+    m300.aspirate(sample_vol, SA1.bottom(1))
     m300.dispense(sample_vol, MA1.top(-4))
     m300.return_tip()
 
     ### Transfer sample to MA2
     m300.pick_up_tip(tipracks_200_1['A2'])
-    m300.aspirate(sample_vol, SA2.bottom())
+    m300.aspirate(sample_vol, SA2.bottom(1))
     m300.dispense(sample_vol, MA2.top(-4))
     m300.return_tip()
 
     ### Transfer sample to MA3
     m300.pick_up_tip(tipracks_200_1['A3'])
-    m300.aspirate(sample_vol, SA3.bottom())
+    m300.aspirate(sample_vol, SA3.bottom(1))
     m300.dispense(sample_vol, MA3.top(-4))
     m300.return_tip()
 
     ### Transfer sample to MA4
     m300.pick_up_tip(tipracks_200_1['A4'])
-    m300.aspirate(sample_vol, SA4.bottom())
+    m300.aspirate(sample_vol, SA4.bottom(1))
     m300.dispense(sample_vol, MA4.top(-4))
     m300.return_tip()
 
     ### Transfer sample to MA5
     m300.pick_up_tip(tipracks_200_1['A5'])
-    m300.aspirate(sample_vol, SA5.bottom())
+    m300.aspirate(sample_vol, SA5.bottom(1))
     m300.dispense(sample_vol, MA5.top(-4))
     m300.return_tip()
 
@@ -125,7 +126,7 @@ def run(protocol):
     m300.dispense(sample_vol, MA6.top(-4))
     m300.return_tip()
 
-    protocol.pause("Remove sample plate and press resume.")
+    protocol.pause("Make sure all sample is transferred, remove sample plate and press resume.")
 
     ### beads addition ###
 
