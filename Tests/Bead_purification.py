@@ -1,7 +1,8 @@
 
 from opentrons import protocol_api
 
-## NOTES add air gap after dispensing sample
+## NOTES add air gap after dispensing sample. Use p10 to take last remaining sample from sample plate
+## m10 should dispense liquid in trash 
 
 metadata = {
     'protocolName': 'DNA Purification',
