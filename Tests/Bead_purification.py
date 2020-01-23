@@ -14,32 +14,38 @@ def run(protocol):
 ### Labware ###
 
     mag_deck = protocol.load_module('magdeck','7')
-    sample_plate = mag_deck.load_labware('1ml_pcr')
-    elution_plate = protocol.load_labware('biorad_96_wellplate_200ul_pcr','1')
-    trash = protocol.load_labware('agilent_1_reservoir_290ml','8') ## Need to be created
-    trough = protocol.load_labware('12_column_reservoir', '10')
+    mag_plate = mag_deck.load_labware('1ml_pcr')
+    sample_plate = protocol.load_labware('biorad_96_wellplate_200ul_pcr','1')
+    elution_plate = protocol.load_labware('biorad_96_wellplate_200ul_pcr','3')
+    trash = protocol.load_labware('agilent_1_reservoir_290ml','10') ## Need to be crELted
+    trough = protocol.load_labware('12_column_reservoir', '4')
 
 
 ### Pipette tips ###
 
-    tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', '4')
-    tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', '5')
-    tipracks_200_3 = protocol.load_labware('opentrons_96_filtertiprack_200ul', '6')
+    tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', '11')
+    tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', '8')
+    tipracks_200_3 = protocol.load_labware('opentrons_96_filtertiprack_200ul', '5')
+    tipracks_10_1 = protocol.load_labware('opentrons_96_filtertiprack_10ul', '2')
 
 
 ### Pipettes ###
 
     m300 = protocol.load_instrument('p300_multi', mount='left', tip_racks=(tipracks_200_1,tipracks_200_2,tipracks_200_3))
 
-###  PURIFICATION REAGENTS SETUP ###
+    m10 = protocol.load_instrument('p300_single', mount='right', tip_racks=(tipracks_10_1,))
+
+###  PURIFICATION RELGENTS SETUP ###
 
     SPRI_beads = trough['A1']
     EtOH1 = trough['A4']
     EtOH2 = trough['A5']
     EtOH3 = trough['A6']
     EtOH4 = trough['A7']
-    Elution_buffer = trough['A12']
+    elution_buffer = trough['A12']
     Liquid_trash = trash['A1']
+
+### Volumes (can be modified to fit protocol) ###
 
     sample_vol = 200
     bead_vol = sample_vol
@@ -51,130 +57,83 @@ def run(protocol):
 
     #### Sample SETUP
 
-    SA1 = sample_plate['A1']
-    SA2 = sample_plate['A3']
-    SA3 = sample_plate['A5']
-    SA4 = sample_plate['A7']
-    SA5 = sample_plate['A9']
-    SA6 = sample_plate['A11']
 
-    EA1 = elution_plate['A1']
-    EA2 = elution_plate['A3']
-    EA3 = elution_plate['A5']
-    EA4 = elution_plate['A7']
-    EA5 = elution_plate['A9']
-    EA6 = elution_plate['A11']
+    SA1 = sample_plate['A1']
+    SA2 = sample_plate['A2']
+    SA3 = sample_plate['A3']
+    SA4 = sample_plate['A4']
+    SA5 = sample_plate['A5']
+    SA6 = sample_plate['A6']
+
+    MA1 = mag_plate['A1']
+    MA2 = mag_plate['A3']
+    MA3 = mag_plate['A5']
+    MA4 = mag_plate['A7']
+    MA5 = mag_plate['A9']
+    MA6 = mag_plate['A11']
+
+    EL1 = elution_plate['A1']
+    EL2 = elution_plate['A2']
+    EL3 = elution_plate['A3']
+    EL4 = elution_plate['A4']
+    EL5 = elution_plate['A5']
+    EL6 = elution_plate['A6']
+
+
+
 
     ### Notes ###
-# Adjust ethanol workings
-    # Shake tip?
-    # Waiting for 5 seconds are not good
-    # Transfer samples and then pause
-    # 
-    ### Beads addition ###
+
+
+
+    ### Transfer samples to mag_plate ###
     mag_deck.disengage()
 
-
-    ### Transfer beads to SA1
-    m300.flow_rate.aspirate = 150
-    m300.flow_rate.dispense = 200
+    ### Transfer sample to MA1
     m300.pick_up_tip(tipracks_200_1['A1'])
-    m300.move_to(SPRI_beads.top(-16))
-    m300.mix(7, 200, SPRI_beads.top(-30))
-    m300.flow_rate.aspirate = 25
-    m300.flow_rate.dispense = 40
-    m300.aspirate(bead_vol, SPRI_beads.top(-35))
-    m300.move_to(SPRI_beads.top(-5))
-    protocol.delay(seconds=5)
-    m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(bead_vol, SA1.top(-4))
-    m300.flow_rate.aspirate = 100
-    m300.flow_rate.dispense = 100
-    m300.mix(5, bead_mix_vol, SA1.bottom(5))
-    protocol.delay(seconds=5)
-    m300.flow_rate.aspirate = 130
-    m300.flow_rate.dispense = 130
-    m300.move_to(SA1.top(-10))
-    m300.blow_out()
-    m300.air_gap(gap)
+    m300.aspirate(sample_vol, SA1.bottom())
+    m300.dispense(sample_vol, MA1.top(-4))
     m300.return_tip()
 
-    ### Transfer beads to SA2
-    m300.flow_rate.aspirate = 150
-    m300.flow_rate.dispense = 200
+    ### Transfer sample to MA2
     m300.pick_up_tip(tipracks_200_1['A2'])
-    m300.move_to(SPRI_beads.top(-16))
-    m300.mix(7, 200, SPRI_beads.top(-30))
-    m300.flow_rate.aspirate = 25
-    m300.flow_rate.dispense = 40
-    m300.aspirate(bead_vol, SPRI_beads.top(-35))
-    m300.move_to(SPRI_beads.top(-5))
-    protocol.delay(seconds=5)
-    m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(bead_vol, SA2.top(-4))
-    m300.flow_rate.aspirate = 100
-    m300.flow_rate.dispense = 100
-    m300.mix(5, bead_mix_vol, SA2.bottom(5))
-    protocol.delay(seconds=5)
-    m300.flow_rate.aspirate = 130
-    m300.flow_rate.dispense = 130
-    m300.move_to(SA2.top(-10))
-    m300.blow_out()
-    m300.air_gap(gap)
+    m300.aspirate(sample_vol, SA2.bottom())
+    m300.dispense(sample_vol, MA2.top(-4))
     m300.return_tip()
 
-    ### Transfer beads to SA3
-    m300.flow_rate.aspirate = 150
-    m300.flow_rate.dispense = 200
+    ### Transfer sample to MA3
     m300.pick_up_tip(tipracks_200_1['A3'])
-    m300.move_to(SPRI_beads.top(-16))
-    m300.mix(7, 200, SPRI_beads.top(-30))
-    m300.flow_rate.aspirate = 25
-    m300.flow_rate.dispense = 40
-    m300.aspirate(bead_vol, SPRI_beads.top(-35))
-    m300.move_to(SPRI_beads.top(-5))
-    protocol.delay(seconds=5)
-    m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(bead_vol, SA3.top(-4))
-    m300.flow_rate.aspirate = 100
-    m300.flow_rate.dispense = 100
-    m300.mix(5, bead_mix_vol, SA3.bottom(5))
-    protocol.delay(seconds=5)
-    m300.flow_rate.aspirate = 130
-    m300.flow_rate.dispense = 130
-    m300.move_to(SA3.top(-10))
-    m300.blow_out()
-    m300.air_gap(gap)
+    m300.aspirate(sample_vol, SA3.bottom())
+    m300.dispense(sample_vol, MA3.top(-4))
     m300.return_tip()
 
-    ### Transfer beads to SA4
-    m300.flow_rate.aspirate = 150
-    m300.flow_rate.dispense = 200
+    ### Transfer sample to MA4
     m300.pick_up_tip(tipracks_200_1['A4'])
-    m300.move_to(SPRI_beads.top(-16))
-    m300.mix(7, 200, SPRI_beads.top(-30))
-    m300.flow_rate.aspirate = 25
-    m300.flow_rate.dispense = 40
-    m300.aspirate(bead_vol, SPRI_beads.top(-35))
-    m300.move_to(SPRI_beads.top(-5))
-    protocol.delay(seconds=5)
-    m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(bead_vol, SA4.top(-4))
-    m300.flow_rate.aspirate = 100
-    m300.flow_rate.dispense = 100
-    m300.mix(5, bead_mix_vol, SA4.bottom(5))
-    protocol.delay(seconds=5)
-    m300.flow_rate.aspirate = 130
-    m300.flow_rate.dispense = 130
-    m300.move_to(SA4.top(-10))
-    m300.blow_out()
-    m300.air_gap(gap)
+    m300.aspirate(sample_vol, SA4.bottom())
+    m300.dispense(sample_vol, MA4.top(-4))
     m300.return_tip()
 
-    ### Transfer beads to SA5
-    m300.flow_rate.aspirate = 150
-    m300.flow_rate.dispense = 200
+    ### Transfer sample to MA5
     m300.pick_up_tip(tipracks_200_1['A5'])
+    m300.aspirate(sample_vol, SA5.bottom())
+    m300.dispense(sample_vol, MA5.top(-4))
+    m300.return_tip()
+
+    ### Transfer sample to MA6
+    m300.pick_up_tip(tipracks_200_1['A6'])
+    m300.aspirate(sample_vol, SA6.bottom())
+    m300.dispense(sample_vol, MA6.top(-4))
+    m300.return_tip()
+
+    protocol.pause("Remove sample plate and press resume.")
+
+    ### beads addition ###
+
+
+    ### Transfer beads to MA1
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 200
+    m300.pick_up_tip(tipracks_200_1['A7'])
     m300.move_to(SPRI_beads.top(-16))
     m300.mix(7, 200, SPRI_beads.top(-30))
     m300.flow_rate.aspirate = 25
@@ -183,22 +142,22 @@ def run(protocol):
     m300.move_to(SPRI_beads.top(-5))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(bead_vol, SA5.top(-4))
+    m300.dispense(bead_vol, MA1.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, bead_mix_vol, SA5.bottom(5))
+    m300.mix(5, bead_mix_vol, MA1.bottom(5))
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(SA5.top(-10))
+    m300.move_to(MA1.top(-10))
     m300.blow_out()
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### Transfer beads to SA6
+    ### Transfer beads to MA2
     m300.flow_rate.aspirate = 150
     m300.flow_rate.dispense = 200
-    m300.pick_up_tip(tipracks_200_1['A6'])
+    m300.pick_up_tip(tipracks_200_1['A8'])
     m300.move_to(SPRI_beads.top(-16))
     m300.mix(7, 200, SPRI_beads.top(-30))
     m300.flow_rate.aspirate = 25
@@ -207,14 +166,110 @@ def run(protocol):
     m300.move_to(SPRI_beads.top(-5))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(bead_vol, SA6.top(-4))
+    m300.dispense(bead_vol, MA2.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, bead_mix_vol, SA6.bottom(5))
+    m300.mix(5, bead_mix_vol, MA2.bottom(5))
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(SA6.top(-10))
+    m300.move_to(MA2.top(-10))
+    m300.blow_out()
+    m300.air_gap(gap)
+    m300.return_tip()
+
+    ### Transfer beads to MA3
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 200
+    m300.pick_up_tip(tipracks_200_1['A9'])
+    m300.move_to(SPRI_beads.top(-16))
+    m300.mix(7, 200, SPRI_beads.top(-30))
+    m300.flow_rate.aspirate = 25
+    m300.flow_rate.dispense = 40
+    m300.aspirate(bead_vol, SPRI_beads.top(-35))
+    m300.move_to(SPRI_beads.top(-5))
+    protocol.delay(seconds=5)
+    m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
+    m300.dispense(bead_vol, MA3.top(-4))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 100
+    m300.mix(5, bead_mix_vol, MA3.bottom(5))
+    protocol.delay(seconds=5)
+    m300.flow_rate.aspirate = 130
+    m300.flow_rate.dispense = 130
+    m300.move_to(MA3.top(-10))
+    m300.blow_out()
+    m300.air_gap(gap)
+    m300.return_tip()
+
+    ### Transfer beads to MA4
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 200
+    m300.pick_up_tip(tipracks_200_1['A10'])
+    m300.move_to(SPRI_beads.top(-16))
+    m300.mix(7, 200, SPRI_beads.top(-30))
+    m300.flow_rate.aspirate = 25
+    m300.flow_rate.dispense = 40
+    m300.aspirate(bead_vol, SPRI_beads.top(-35))
+    m300.move_to(SPRI_beads.top(-5))
+    protocol.delay(seconds=5)
+    m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
+    m300.dispense(bead_vol, MA4.top(-4))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 100
+    m300.mix(5, bead_mix_vol, MA4.bottom(5))
+    protocol.delay(seconds=5)
+    m300.flow_rate.aspirate = 130
+    m300.flow_rate.dispense = 130
+    m300.move_to(MA4.top(-10))
+    m300.blow_out()
+    m300.air_gap(gap)
+    m300.return_tip()
+
+    ### Transfer beads to MA5
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 200
+    m300.pick_up_tip(tipracks_200_1['A11'])
+    m300.move_to(SPRI_beads.top(-16))
+    m300.mix(7, 200, SPRI_beads.top(-30))
+    m300.flow_rate.aspirate = 25
+    m300.flow_rate.dispense = 40
+    m300.aspirate(bead_vol, SPRI_beads.top(-35))
+    m300.move_to(SPRI_beads.top(-5))
+    protocol.delay(seconds=5)
+    m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
+    m300.dispense(bead_vol, MA5.top(-4))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 100
+    m300.mix(5, bead_mix_vol, MA5.bottom(5))
+    protocol.delay(seconds=5)
+    m300.flow_rate.aspirate = 130
+    m300.flow_rate.dispense = 130
+    m300.move_to(MA5.top(-10))
+    m300.blow_out()
+    m300.air_gap(gap)
+    m300.return_tip()
+
+    ### Transfer beads to MA6
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 200
+    m300.pick_up_tip(tipracks_200_1['A12'])
+    m300.move_to(SPRI_beads.top(-16))
+    m300.mix(7, 200, SPRI_beads.top(-30))
+    m300.flow_rate.aspirate = 25
+    m300.flow_rate.dispense = 40
+    m300.aspirate(bead_vol, SPRI_beads.top(-35))
+    m300.move_to(SPRI_beads.top(-5))
+    protocol.delay(seconds=5)
+    m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
+    m300.dispense(bead_vol, MA6.top(-4))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 100
+    m300.mix(5, bead_mix_vol, MA6.bottom(5))
+    protocol.delay(seconds=5)
+    m300.flow_rate.aspirate = 130
+    m300.flow_rate.dispense = 130
+    m300.move_to(MA6.top(-10))
     m300.blow_out()
     m300.air_gap(gap)
     m300.return_tip()
@@ -229,119 +284,119 @@ def run(protocol):
     ### REMOVING SUPERNATANT ###
 
 
-    ### remove supernatant from SA1
+    ### remove supernatant from MA1
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.pick_up_tip(tipracks_200_1['A1'])
-    m300.aspirate(bead_vol_supernatant, SA1.bottom(1))
+    m300.pick_up_tip(tipracks_200_1['A7'])
+    m300.aspirate(bead_vol_supernatant, MA1.bottom(1))
     m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
     protocol.delay(seconds=5)
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(bead_vol_supernatant, SA1.bottom(1))
+    m300.aspirate(bead_vol_supernatant, MA1.bottom(1))
     m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(bead_vol_supernatant, SA1.bottom(1))
+    m300.aspirate(bead_vol_supernatant, MA1.bottom(1))
     m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### remove supernatant from SA2
+    ### remove supernatant from MA2
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.pick_up_tip(tipracks_200_1['A2'])
-    m300.aspirate(bead_vol_supernatant, SA2.bottom(1))
+    m300.pick_up_tip(tipracks_200_1['A8'])
+    m300.aspirate(bead_vol_supernatant, MA2.bottom(1))
     m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
     protocol.delay(seconds=5)
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(bead_vol_supernatant, SA2.bottom(1))
+    m300.aspirate(bead_vol_supernatant, MA2.bottom(1))
     m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(bead_vol_supernatant, SA2.bottom(1))
-    m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
-    m300.blow_out(Liquid_trash.top(-5))
-    m300.air_gap(gap)
-    m300.return_tip()
-
-
-    ### remove supernatant from SA3
-    m300.flow_rate.aspirate = 100
-    m300.flow_rate.dispense = 100
-    m300.pick_up_tip(tipracks_200_1['A3'])
-    m300.aspirate(bead_vol_supernatant, SA3.bottom(1))
-    m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
-    protocol.delay(seconds=5)
-    m300.blow_out(Liquid_trash.top(-5))
-    m300.air_gap(gap)
-    m300.aspirate(bead_vol_supernatant, SA3.bottom(1))
-    m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
-    m300.blow_out(Liquid_trash.top(-5))
-    m300.air_gap(gap)
-    m300.aspirate(bead_vol_supernatant, SA3.bottom(1))
+    m300.aspirate(bead_vol_supernatant, MA2.bottom(1))
     m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.return_tip()
 
 
-    ### remove supernatant from SA4
+    ### remove supernatant from MA3
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.pick_up_tip(tipracks_200_1['A4'])
-    m300.aspirate(bead_vol_supernatant, SA4.bottom(1))
+    m300.pick_up_tip(tipracks_200_1['A9'])
+    m300.aspirate(bead_vol_supernatant, MA3.bottom(1))
     m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
     protocol.delay(seconds=5)
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(bead_vol_supernatant, SA4.bottom(1))
+    m300.aspirate(bead_vol_supernatant, MA3.bottom(1))
     m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(bead_vol_supernatant, SA4.bottom(1))
+    m300.aspirate(bead_vol_supernatant, MA3.bottom(1))
     m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.return_tip()
 
 
-    ### remove supernatant from SA5
+    ### remove supernatant from MA4
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.pick_up_tip(tipracks_200_1['A5'])
-    m300.aspirate(bead_vol_supernatant, SA5.bottom(1))
+    m300.pick_up_tip(tipracks_200_1['A10'])
+    m300.aspirate(bead_vol_supernatant, MA4.bottom(1))
     m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
     protocol.delay(seconds=5)
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(bead_vol_supernatant, SA5.bottom(1))
+    m300.aspirate(bead_vol_supernatant, MA4.bottom(1))
     m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(bead_vol_supernatant, SA5.bottom(1))
+    m300.aspirate(bead_vol_supernatant, MA4.bottom(1))
     m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.return_tip()
 
 
-    ### remove supernatant from SA6
+    ### remove supernatant from MA5
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.pick_up_tip(tipracks_200_1['A6'])
-    m300.aspirate(bead_vol_supernatant, SA6.bottom(1))
+    m300.pick_up_tip(tipracks_200_1['A11'])
+    m300.aspirate(bead_vol_supernatant, MA5.bottom(1))
     m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
     protocol.delay(seconds=5)
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(bead_vol_supernatant, SA6.bottom(1))
+    m300.aspirate(bead_vol_supernatant, MA5.bottom(1))
     m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
-    m300.aspirate(bead_vol_supernatant, SA6.bottom(1))
+    m300.aspirate(bead_vol_supernatant, MA5.bottom(1))
+    m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
+    m300.blow_out(Liquid_trash.top(-5))
+    m300.air_gap(gap)
+    m300.return_tip()
+
+
+    ### remove supernatant from MA6
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 100
+    m300.pick_up_tip(tipracks_200_1['A12'])
+    m300.aspirate(bead_vol_supernatant, MA6.bottom(1))
+    m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
+    protocol.delay(seconds=5)
+    m300.blow_out(Liquid_trash.top(-5))
+    m300.air_gap(gap)
+    m300.aspirate(bead_vol_supernatant, MA6.bottom(1))
+    m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
+    m300.blow_out(Liquid_trash.top(-5))
+    m300.air_gap(gap)
+    m300.aspirate(bead_vol_supernatant, MA6.bottom(1))
     m300.dispense(bead_vol_supernatant, Liquid_trash.top(-5))
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
@@ -352,8 +407,8 @@ def run(protocol):
 
     ### Wash with EtOH1 ####
 
-    ### Transfer EtOH1 to SA1
-    m300.pick_up_tip(tipracks_200_1['A7'])
+    ### Transfer EtOH1 to MA1
+    m300.pick_up_tip(tipracks_200_2['A1'])
     m300.move_to(EtOH1.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
@@ -361,25 +416,25 @@ def run(protocol):
     m300.move_to(EtOH1.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA1.top(-3))
+    m300.dispense(EtOH_vol, MA1.top(-3))
     m300.air_gap(gap)
     m300.aspirate(EtOH_vol, EtOH1.top(-35))
     m300.move_to(EtOH1.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA1.top(-3))
+    m300.dispense(EtOH_vol, MA1.top(-3))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, EtOH_vol, SA1.bottom(5))
+    m300.mix(5, EtOH_vol, MA1.bottom(5))
     protocol.delay(seconds=5)
-    m300.move_to(SA1.top(-10))
+    m300.move_to(MA1.top(-10))
     m300.blow_out()
     m300.air_gap(gap)
     m300.return_tip()
 
 
-    ### Transfer EtOH1 to SA2
-    m300.pick_up_tip(tipracks_200_1['A8'])
+    ### Transfer EtOH1 to MA2
+    m300.pick_up_tip(tipracks_200_2['A2'])
     m300.move_to(EtOH1.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
@@ -387,24 +442,24 @@ def run(protocol):
     m300.move_to(EtOH1.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA2.top(-3))
+    m300.dispense(EtOH_vol, MA2.top(-3))
     m300.air_gap(gap)
     m300.aspirate(EtOH_vol, EtOH1.top(-35))
     m300.move_to(EtOH1.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA2.top(-3))
+    m300.dispense(EtOH_vol, MA2.top(-3))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, EtOH_vol, SA2.bottom(5))
+    m300.mix(5, EtOH_vol, MA2.bottom(5))
     protocol.delay(seconds=5)
-    m300.move_to(SA2.top(-10))
+    m300.move_to(MA2.top(-10))
     m300.blow_out()
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### Transfer EtOH1 to SA3
-    m300.pick_up_tip(tipracks_200_1['A9'])
+    ### Transfer EtOH1 to MA3
+    m300.pick_up_tip(tipracks_200_2['A3'])
     m300.move_to(EtOH1.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
@@ -412,24 +467,24 @@ def run(protocol):
     m300.move_to(EtOH1.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA3.top(-3))
+    m300.dispense(EtOH_vol, MA3.top(-3))
     m300.air_gap(gap)
     m300.aspirate(EtOH_vol, EtOH1.top(-35))
     m300.move_to(EtOH1.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA3.top(-3))
+    m300.dispense(EtOH_vol, MA3.top(-3))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, EtOH_vol, SA3.bottom(5))
+    m300.mix(5, EtOH_vol, MA3.bottom(5))
     protocol.delay(seconds=5)
-    m300.move_to(SA3.top(-10))
+    m300.move_to(MA3.top(-10))
     m300.blow_out()
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### Transfer EtOH1 to SA4
-    m300.pick_up_tip(tipracks_200_1['A10'])
+    ### Transfer EtOH1 to MA4
+    m300.pick_up_tip(tipracks_200_2['A4'])
     m300.move_to(EtOH2.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
@@ -437,24 +492,24 @@ def run(protocol):
     m300.move_to(EtOH2.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA4.top(-3))
+    m300.dispense(EtOH_vol, MA4.top(-3))
     m300.air_gap(gap)
     m300.aspirate(EtOH_vol, EtOH2.top(-35))
     m300.move_to(EtOH2.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA4.top(-3))
+    m300.dispense(EtOH_vol, MA4.top(-3))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, EtOH_vol, SA4.bottom(5))
+    m300.mix(5, EtOH_vol, MA4.bottom(5))
     protocol.delay(seconds=5)
-    m300.move_to(SA4.top(-10))
+    m300.move_to(MA4.top(-10))
     m300.blow_out()
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### Transfer EtOH1 to SA5
-    m300.pick_up_tip(tipracks_200_1['A11'])
+    ### Transfer EtOH1 to MA5
+    m300.pick_up_tip(tipracks_200_2['A5'])
     m300.move_to(EtOH2.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
@@ -462,24 +517,24 @@ def run(protocol):
     m300.move_to(EtOH2.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA5.top(-3))
+    m300.dispense(EtOH_vol, MA5.top(-3))
     m300.air_gap(gap)
     m300.aspirate(EtOH_vol, EtOH2.top(-35))
     m300.move_to(EtOH2.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA5.top(-3))
+    m300.dispense(EtOH_vol, MA5.top(-3))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, EtOH_vol, SA5.bottom(5))
+    m300.mix(5, EtOH_vol, MA5.bottom(5))
     protocol.delay(seconds=5)
-    m300.move_to(SA5.top(-10))
+    m300.move_to(MA5.top(-10))
     m300.blow_out()
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### Transfer EtOH1 to SA6
-    m300.pick_up_tip(tipracks_200_1['A12'])
+    ### Transfer EtOH1 to MA6
+    m300.pick_up_tip(tipracks_200_2['A6'])
     m300.move_to(EtOH2.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
@@ -487,18 +542,18 @@ def run(protocol):
     m300.move_to(EtOH2.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA6.top(-3))
+    m300.dispense(EtOH_vol, MA6.top(-3))
     m300.air_gap(gap)
     m300.aspirate(EtOH_vol, EtOH2.top(-35))
     m300.move_to(EtOH2.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA6.top(-3))
+    m300.dispense(EtOH_vol, MA6.top(-3))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, EtOH_vol, SA6.bottom(5))
+    m300.mix(5, EtOH_vol, MA6.bottom(5))
     protocol.delay(seconds=5)
-    m300.move_to(SA6.top(-10))
+    m300.move_to(MA6.top(-10))
     m300.blow_out()
     m300.air_gap(gap)
     m300.return_tip()
@@ -509,80 +564,80 @@ def run(protocol):
 
     #m300.delay(minutes=2)
 
-    ### remove supernatant from SA1
+    ### remove supernatant from MA1
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.pick_up_tip(tipracks_200_1['A7'])
-    m300.aspirate(EtOH_vol, SA1.bottom(1))
+    m300.pick_up_tip(tipracks_200_2['A1'])
+    m300.aspirate(EtOH_vol, MA1.bottom(1))
     m300.dispense(EtOH_vol, Liquid_trash.top(-5))
     protocol.delay(seconds=5)
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA1.bottom(1))
+    m300.aspirate(EtOH_vol, MA1.bottom(1))
     m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### remove supernatant from SA2
+    ### remove supernatant from MA2
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.pick_up_tip(tipracks_200_1['A8'])
-    m300.aspirate(EtOH_vol, SA2.bottom(1))
+    m300.pick_up_tip(tipracks_200_2['A2'])
+    m300.aspirate(EtOH_vol, MA2.bottom(1))
     m300.dispense(EtOH_vol, Liquid_trash.top(-5))
     protocol.delay(seconds=5)
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA2.bottom(1))
+    m300.aspirate(EtOH_vol, MA2.bottom(1))
     m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### remove supernatant from SA3
+    ### remove supernatant from MA3
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.pick_up_tip(tipracks_200_1['A9'])
-    m300.aspirate(EtOH_vol, SA3.bottom(1))
+    m300.pick_up_tip(tipracks_200_2['A3'])
+    m300.aspirate(EtOH_vol, MA3.bottom(1))
     m300.dispense(EtOH_vol, Liquid_trash.top(-5))
     protocol.delay(seconds=5)
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA3.bottom(1))
+    m300.aspirate(EtOH_vol, MA3.bottom(1))
     m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### remove supernatant from SA4
+    ### remove supernatant from MA4
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.pick_up_tip(tipracks_200_1['A10'])
-    m300.aspirate(EtOH_vol, SA4.bottom(1))
+    m300.pick_up_tip(tipracks_200_2['A4'])
+    m300.aspirate(EtOH_vol, MA4.bottom(1))
     m300.dispense(EtOH_vol, Liquid_trash.top(-5))
     protocol.delay(seconds=5)
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA4.bottom(1))
+    m300.aspirate(EtOH_vol, MA4.bottom(1))
     m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### remove supernatant from SA5
+    ### remove supernatant from MA5
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.pick_up_tip(tipracks_200_1['A11'])
-    m300.aspirate(EtOH_vol, SA5.bottom(1))
+    m300.pick_up_tip(tipracks_200_2['A5'])
+    m300.aspirate(EtOH_vol, MA5.bottom(1))
     m300.dispense(EtOH_vol, Liquid_trash.top(-5))
     protocol.delay(seconds=5)
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA5.bottom(1))
+    m300.aspirate(EtOH_vol, MA5.bottom(1))
     m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### remove supernatant from SA6
+    ### remove supernatant from MA6
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.pick_up_tip(tipracks_200_1['A12'])
-    m300.aspirate(EtOH_vol, SA6.bottom(1))
+    m300.pick_up_tip(tipracks_200_2['A6'])
+    m300.aspirate(EtOH_vol, MA6.bottom(1))
     m300.dispense(EtOH_vol, Liquid_trash.top(-5))
     protocol.delay(seconds=5)
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA6.bottom(1))
+    m300.aspirate(EtOH_vol, MA6.bottom(1))
     m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.return_tip()
@@ -592,8 +647,8 @@ def run(protocol):
 
 
 
-    ### Transfer EtOH2 to SA1
-    m300.pick_up_tip(tipracks_200_2['A1'])
+    ### Transfer EtOH2 to MA1
+    m300.pick_up_tip(tipracks_200_2['A7'])
     m300.move_to(EtOH3.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
@@ -601,24 +656,24 @@ def run(protocol):
     m300.move_to(EtOH3.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA1.top(-3))
+    m300.dispense(EtOH_vol, MA1.top(-3))
     m300.air_gap(gap)
     m300.aspirate(EtOH_vol, EtOH3.top(-35))
     m300.move_to(EtOH3.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA1.top(-3))
+    m300.dispense(EtOH_vol, MA1.top(-3))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, EtOH_vol, SA1.bottom(5))
+    m300.mix(5, EtOH_vol, MA1.bottom(5))
     protocol.delay(seconds=5)
-    m300.move_to(SA1.top(-10))
+    m300.move_to(MA1.top(-10))
     m300.blow_out()
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### Transfer EtOH2 to SA2
-    m300.pick_up_tip(tipracks_200_2['A2'])
+    ### Transfer EtOH2 to MA2
+    m300.pick_up_tip(tipracks_200_2['A8'])
     m300.move_to(EtOH3.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
@@ -626,24 +681,24 @@ def run(protocol):
     m300.move_to(EtOH3.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA2.top(-3))
+    m300.dispense(EtOH_vol, MA2.top(-3))
     m300.air_gap(gap)
     m300.aspirate(EtOH_vol, EtOH3.top(-35))
     m300.move_to(EtOH3.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA2.top(-3))
+    m300.dispense(EtOH_vol, MA2.top(-3))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, EtOH_vol, SA2.bottom(5))
+    m300.mix(5, EtOH_vol, MA2.bottom(5))
     protocol.delay(seconds=5)
-    m300.move_to(SA2.top(-10))
+    m300.move_to(MA2.top(-10))
     m300.blow_out()
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### Transfer EtOH2 to SA3
-    m300.pick_up_tip(tipracks_200_2['A3'])
+    ### Transfer EtOH2 to MA3
+    m300.pick_up_tip(tipracks_200_2['A9'])
     m300.move_to(EtOH3.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
@@ -651,24 +706,24 @@ def run(protocol):
     m300.move_to(EtOH3.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA3.top(-3))
+    m300.dispense(EtOH_vol, MA3.top(-3))
     m300.air_gap(gap)
     m300.aspirate(EtOH_vol, EtOH3.top(-35))
     m300.move_to(EtOH3.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA3.top(-3))
+    m300.dispense(EtOH_vol, MA3.top(-3))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, EtOH_vol, SA3.bottom(5))
+    m300.mix(5, EtOH_vol, MA3.bottom(5))
     protocol.delay(seconds=5)
-    m300.move_to(SA3.top(-10))
+    m300.move_to(MA3.top(-10))
     m300.blow_out()
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### Transfer EtOH2 to SA4
-    m300.pick_up_tip(tipracks_200_2['A4'])
+    ### Transfer EtOH2 to MA4
+    m300.pick_up_tip(tipracks_200_2['A10'])
     m300.move_to(EtOH4.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
@@ -676,24 +731,24 @@ def run(protocol):
     m300.move_to(EtOH4.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA4.top(-3))
+    m300.dispense(EtOH_vol, MA4.top(-3))
     m300.air_gap(gap)
     m300.aspirate(EtOH_vol, EtOH4.top(-35))
     m300.move_to(EtOH4.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA4.top(-3))
+    m300.dispense(EtOH_vol, MA4.top(-3))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, EtOH_vol, SA4.bottom(5))
+    m300.mix(5, EtOH_vol, MA4.bottom(5))
     protocol.delay(seconds=5)
-    m300.move_to(SA4.top(-10))
+    m300.move_to(MA4.top(-10))
     m300.blow_out()
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### Transfer EtOH2 to SA5
-    m300.pick_up_tip(tipracks_200_2['A5'])
+    ### Transfer EtOH2 to MA5
+    m300.pick_up_tip(tipracks_200_2['A11'])
     m300.move_to(EtOH4.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
@@ -701,24 +756,24 @@ def run(protocol):
     m300.move_to(EtOH4.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA5.top(-3))
+    m300.dispense(EtOH_vol, MA5.top(-3))
     m300.air_gap(gap)
     m300.aspirate(EtOH_vol, EtOH4.top(-35))
     m300.move_to(EtOH4.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA5.top(-3))
+    m300.dispense(EtOH_vol, MA5.top(-3))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, EtOH_vol, SA5.bottom(5))
+    m300.mix(5, EtOH_vol, MA5.bottom(5))
     protocol.delay(seconds=5)
-    m300.move_to(SA5.top(-10))
+    m300.move_to(MA5.top(-10))
     m300.blow_out()
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### Transfer EtOH2 to SA6
-    m300.pick_up_tip(tipracks_200_2['A6'])
+    ### Transfer EtOH2 to MA6
+    m300.pick_up_tip(tipracks_200_2['A12'])
     m300.move_to(EtOH4.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
@@ -726,18 +781,18 @@ def run(protocol):
     m300.move_to(EtOH4.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA6.top(-3))
+    m300.dispense(EtOH_vol, MA6.top(-3))
     m300.air_gap(gap)
     m300.aspirate(EtOH_vol, EtOH4.top(-35))
     m300.move_to(EtOH4.top(-3))
     protocol.delay(seconds=5)
     m300.touch_tip(v_offset=-2) # touch tip 2mm below the top of the current location
-    m300.dispense(EtOH_vol, SA6.top(-3))
+    m300.dispense(EtOH_vol, MA6.top(-3))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, EtOH_vol, SA6.bottom(5))
+    m300.mix(5, EtOH_vol, MA6.bottom(5))
     protocol.delay(seconds=5)
-    m300.move_to(SA6.top(-10))
+    m300.move_to(MA6.top(-10))
     m300.blow_out()
     m300.air_gap(gap)
     m300.return_tip()
@@ -747,80 +802,80 @@ def run(protocol):
 
     #m300.delay(minutes=2)
 
-    ### remove supernatant from SA1
+    ### remove supernatant from MA1
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.pick_up_tip(tipracks_200_2['A1'])
-    m300.aspirate(EtOH_vol, SA1.bottom(1))
+    m300.pick_up_tip(tipracks_200_2['A7'])
+    m300.aspirate(EtOH_vol, MA1.bottom(1))
     m300.dispense(EtOH_vol, Liquid_trash.top(-5))
     protocol.delay(seconds=5)
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA1.bottom(1))
+    m300.aspirate(EtOH_vol, MA1.bottom(1))
     m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### remove supernatant from SA2
+    ### remove supernatant from MA2
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.pick_up_tip(tipracks_200_2['A2'])
-    m300.aspirate(EtOH_vol, SA2.bottom(1))
+    m300.pick_up_tip(tipracks_200_2['A8'])
+    m300.aspirate(EtOH_vol, MA2.bottom(1))
     m300.dispense(EtOH_vol, Liquid_trash.top(-5))
     protocol.delay(seconds=5)
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA2.bottom(1))
+    m300.aspirate(EtOH_vol, MA2.bottom(1))
     m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### remove supernatant from SA3
+    ### remove supernatant from MA3
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.pick_up_tip(tipracks_200_2['A3'])
-    m300.aspirate(EtOH_vol, SA3.bottom(1))
+    m300.pick_up_tip(tipracks_200_2['A9'])
+    m300.aspirate(EtOH_vol, MA3.bottom(1))
     m300.dispense(EtOH_vol, Liquid_trash.top(-5))
     protocol.delay(seconds=5)
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA3.bottom(1))
+    m300.aspirate(EtOH_vol, MA3.bottom(1))
     m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### remove supernatant from SA4
+    ### remove supernatant from MA4
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.pick_up_tip(tipracks_200_2['A4'])
-    m300.aspirate(EtOH_vol, SA4.bottom(1))
+    m300.pick_up_tip(tipracks_200_2['A10'])
+    m300.aspirate(EtOH_vol, MA4.bottom(1))
     m300.dispense(EtOH_vol, Liquid_trash.top(-5))
     protocol.delay(seconds=5)
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA4.bottom(1))
+    m300.aspirate(EtOH_vol, MA4.bottom(1))
     m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### remove supernatant from SA5
+    ### remove supernatant from MA5
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.pick_up_tip(tipracks_200_2['A5'])
-    m300.aspirate(EtOH_vol, SA5.bottom(1))
+    m300.pick_up_tip(tipracks_200_2['A11'])
+    m300.aspirate(EtOH_vol, MA5.bottom(1))
     m300.dispense(EtOH_vol, Liquid_trash.top(-5))
     protocol.delay(seconds=5)
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA5.bottom(1))
+    m300.aspirate(EtOH_vol, MA5.bottom(1))
     m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.return_tip()
 
-    ### remove supernatant from SA6
+    ### remove supernatant from MA6
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.pick_up_tip(tipracks_200_2['A6'])
-    m300.aspirate(EtOH_vol, SA6.bottom(1))
+    m300.pick_up_tip(tipracks_200_2['A12'])
+    m300.aspirate(EtOH_vol, MA6.bottom(1))
     m300.dispense(EtOH_vol, Liquid_trash.top(-5))
     protocol.delay(seconds=5)
     m300.air_gap(gap)
-    m300.aspirate(EtOH_vol, SA6.bottom(1))
+    m300.aspirate(EtOH_vol, MA6.bottom(1))
     m300.dispense(200, Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.return_tip()
@@ -829,146 +884,155 @@ def run(protocol):
     ### Removing last bit of ethanol ####
 
 
-    ### remove supernatant from SA1
-    #m10.set_flow_rate(aspirate=100, dispense=100)
-    #m10.pick_up_tip(tipracks_10_1.wells('A1'))
-    #m10.aspirate(10, SA1.bottom(0.5))
-    #m10.return_tip()
+    ### remove supernatant from MA1
+    m10.flow_rate.aspirate = 100
+    m10.flow_rate.dispense = 100
+    m10.pick_up_tip(tipracks_10_1['A1'])
+    m10.aspirate(10, MA1.bottom(0.5))
+    m10.return_tip()
 
-    ### remove supernatant from SA2
-    #m10.set_flow_rate(aspirate=100, dispense=100)
-    #m10.pick_up_tip(tipracks_10_1.wells('A2'))
-    #m10.aspirate(10, SA2.bottom(0.5))
-    #m10.return_tip()
+    ### remove supernatant from MA2
+    m10.flow_rate.aspirate = 100
+    m10.flow_rate.dispense = 100
+    m10.pick_up_tip(tipracks_10_1['A2'])
+    m10.aspirate(10, MA2.bottom(0.5))
+    m10.return_tip()
 
-    ### remove supernatant from SA3
-    #m10.set_flow_rate(aspirate=100, dispense=100)
-    #m10.pick_up_tip(tipracks_10_1.wells('A3'))
-    #m10.aspirate(10, SA3.bottom(0.5))
-    #m10.return_tip()
+    ### remove supernatant from MA3
+    m10.flow_rate.aspirate = 100
+    m10.flow_rate.dispense = 100
+    m10.pick_up_tip(tipracks_10_1['A3'])
+    m10.aspirate(10, MA3.bottom(0.5))
+    m10.return_tip()
 
-    ### remove supernatant from SA4
-    #m10.set_flow_rate(aspirate=100, dispense=100)
-    #m10.pick_up_tip(tipracks_10_1.wells('A4'))
-    #m10.aspirate(10, SA4.bottom(0.5))
-    #m10.return_tip()
+    ### remove supernatant from MA4
+    m10.flow_rate.aspirate = 100
+    m10.flow_rate.dispense = 100
+    m10.pick_up_tip(tipracks_10_1['A4'])
+    m10.aspirate(10, MA4.bottom(0.5))
+    m10.return_tip()
 
-    ### remove supernatant from SA5
-    #m10.set_flow_rate(aspirate=100, dispense=100)
-    #m10.pick_up_tip(tipracks_10_1.wells('A5'))
-    #m10.aspirate(10, SA5.bottom(0.5))
-    #m10.return_tip()
+    ### remove supernatant from MA5
+    m10.flow_rate.aspirate = 100
+    m10.flow_rate.dispense = 100
+    m10.pick_up_tip(tipracks_10_1['A5'])
+    m10.aspirate(10, MA5.bottom(0.5))
+    m10.return_tip()
 
-    ### remove supernatant from SA6
-    #m10.set_flow_rate(aspirate=100, dispense=100)
-    #m10.pick_up_tip(tipracks_10_1.wells('A6'))
-    #m10.aspirate(10, SA6.bottom(0.5))
-    #m10.return_tip()
+    ### remove supernatant from MA6
+    m10.flow_rate.aspirate = 100
+    m10.flow_rate.dispense = 100
+    m10.pick_up_tip(tipracks_10_1['A6'])
+    m10.aspirate(10, MA6.bottom(0.5))
+    m10.return_tip()
 
 
     ### Drying beads before elution ####
-
     mag_deck.disengage()
+    #mprotocol.delay(minutes=10)
 
-### Transfer Elution buffer to SA1
-    m300.pick_up_tip(tipracks_200_2['A7'])
-    m300.move_to(Elution_buffer.top(-16))
+    protocol.pause("Make sure all ethanol is removed, add elution plate and press resume.")
+
+
+### Transfer elution buffer to MA1
+    m300.pick_up_tip(tipracks_200_3['A1'])
+    m300.move_to(elution_buffer.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
-    m300.aspirate(elution_vol, Elution_buffer.top(-35))
-    m300.dispense(elution_vol, SA1.top(-4))
+    m300.aspirate(elution_vol, elution_buffer.top(-35))
+    m300.dispense(elution_vol, MA1.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, elution_vol, SA1.bottom(2))
+    m300.mix(5, elution_vol, MA1.bottom(2))
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(SA1.bottom(10))
+    m300.move_to(MA1.bottom(10))
     m300.blow_out()
     m300.return_tip()
 
-### Transfer Elution buffer to SA2
-    m300.pick_up_tip(tipracks_200_2['A8'])
-    m300.move_to(Elution_buffer.top(-16))
+### Transfer elution buffer to MA2
+    m300.pick_up_tip(tipracks_200_3['A2'])
+    m300.move_to(elution_buffer.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
-    m300.aspirate(elution_vol, Elution_buffer.top(-35))
-    m300.dispense(elution_vol, SA2.top(-4))
+    m300.aspirate(elution_vol, elution_buffer.top(-35))
+    m300.dispense(elution_vol, MA2.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, elution_vol, SA2.bottom(2))
+    m300.mix(5, elution_vol, MA2.bottom(2))
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(SA2.bottom(10))
+    m300.move_to(MA2.bottom(10))
     m300.blow_out()
     m300.return_tip()
 
-### Transfer Elution buffer to SA3
-    m300.pick_up_tip(tipracks_200_2['A9'])
-    m300.move_to(Elution_buffer.top(-16))
+### Transfer elution buffer to MA3
+    m300.pick_up_tip(tipracks_200_3['A3'])
+    m300.move_to(elution_buffer.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
-    m300.aspirate(elution_vol, Elution_buffer.top(-35))
-    m300.dispense(elution_vol, SA3.top(-4))
+    m300.aspirate(elution_vol, elution_buffer.top(-35))
+    m300.dispense(elution_vol, MA3.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, elution_vol, SA3.bottom(2))
+    m300.mix(5, elution_vol, MA3.bottom(2))
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(SA3.bottom(10))
+    m300.move_to(MA3.bottom(10))
     m300.blow_out()
     m300.return_tip()
 
-### Transfer Elution buffer to SA4
-    m300.pick_up_tip(tipracks_200_2['A10'])
-    m300.move_to(Elution_buffer.top(-16))
+### Transfer elution buffer to MA4
+    m300.pick_up_tip(tipracks_200_3['A4'])
+    m300.move_to(elution_buffer.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
-    m300.aspirate(elution_vol, Elution_buffer.top(-35))
-    m300.dispense(elution_vol, SA4.top(-4))
+    m300.aspirate(elution_vol, elution_buffer.top(-35))
+    m300.dispense(elution_vol, MA4.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, elution_vol, SA4.bottom(2))
+    m300.mix(5, elution_vol, MA4.bottom(2))
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(SA4.bottom(10))
+    m300.move_to(MA4.bottom(10))
     m300.blow_out()
     m300.return_tip()
 
-### Transfer Elution buffer to SA5
-    m300.pick_up_tip(tipracks_200_2['A11'])
-    m300.move_to(Elution_buffer.top(-16))
+### Transfer elution buffer to MA5
+    m300.pick_up_tip(tipracks_200_3['A5'])
+    m300.move_to(elution_buffer.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
-    m300.aspirate(elution_vol, Elution_buffer.top(-35))
-    m300.dispense(elution_vol, SA5.top(-4))
+    m300.aspirate(elution_vol, elution_buffer.top(-35))
+    m300.dispense(elution_vol, MA5.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, elution_vol, SA5.bottom(2))
+    m300.mix(5, elution_vol, MA5.bottom(2))
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(SA5.bottom(10))
+    m300.move_to(MA5.bottom(10))
     m300.blow_out()
     m300.return_tip()
 
-### Transfer Elution buffer to SA6
-    m300.pick_up_tip(tipracks_200_2['A12'])
-    m300.move_to(Elution_buffer.top(-16))
+### Transfer elution buffer to MA6
+    m300.pick_up_tip(tipracks_200_3['A6'])
+    m300.move_to(elution_buffer.top(-16))
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
-    m300.aspirate(elution_vol, Elution_buffer.top(-35))
-    m300.dispense(elution_vol, SA6.top(-4))
+    m300.aspirate(elution_vol, elution_buffer.top(-35))
+    m300.dispense(elution_vol, MA6.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
-    m300.mix(5, elution_vol, SA6.bottom(2))
+    m300.mix(5, elution_vol, MA6.bottom(2))
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(SA6.bottom(10))
+    m300.move_to(MA6.bottom(10))
     m300.blow_out()
     m300.return_tip()
 
@@ -978,136 +1042,136 @@ def run(protocol):
 
 # m300.delay(minutes=10)
 
-### Transfer Elution buffer to EA1
-    m300.pick_up_tip(tipracks_200_3['A1'])
+### Transfer elution buffer to EL1
+    m300.pick_up_tip(tipracks_200_3['A7'])
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
-    m300.aspirate(elution_vol, SA1.bottom())
-    m300.dispense(elution_vol, EA1.bottom(2))
+    m300.aspirate(elution_vol, MA1.bottom())
+    m300.dispense(elution_vol, EL1.bottom(2))
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(EA1.top(-10))
+    m300.move_to(EL1.top(-10))
     m300.blow_out()
     m300.return_tip()
 
-### Transfer Elution buffer to EA2
-    m300.pick_up_tip(tipracks_200_3['A2'])
+### Transfer elution buffer to EL2
+    m300.pick_up_tip(tipracks_200_3['A8'])
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
-    m300.aspirate(elution_vol, SA2.bottom())
-    m300.dispense(elution_vol, EA2.bottom(2))
+    m300.aspirate(elution_vol, MA2.bottom())
+    m300.dispense(elution_vol, EL2.bottom(2))
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(EA2.top(-10))
+    m300.move_to(EL2.top(-10))
     m300.blow_out()
     m300.return_tip()
 
-### Transfer Elution buffer to EA3
-    m300.pick_up_tip(tipracks_200_3['A3'])
+### Transfer elution buffer to EL3
+    m300.pick_up_tip(tipracks_200_3['A9'])
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
-    m300.aspirate(elution_vol, SA3.bottom())
-    m300.dispense(elution_vol, EA3.bottom(2))
+    m300.aspirate(elution_vol, MA3.bottom())
+    m300.dispense(elution_vol, EL3.bottom(2))
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(EA3.top(-10))
+    m300.move_to(EL3.top(-10))
     m300.blow_out()
     m300.return_tip()
 
-### Transfer Elution buffer to EA4
-    m300.pick_up_tip(tipracks_200_3['A4'])
+### Transfer elution buffer to EL4
+    m300.pick_up_tip(tipracks_200_3['A10'])
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
-    m300.aspirate(elution_vol, SA4.bottom())
-    m300.dispense(elution_vol, EA4.bottom(2))
+    m300.aspirate(elution_vol, MA4.bottom())
+    m300.dispense(elution_vol, EL4.bottom(2))
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(EA4.top(-10))
+    m300.move_to(EL4.top(-10))
     m300.blow_out()
     m300.return_tip()
 
-### Transfer Elution buffer to EA5
-    m300.pick_up_tip(tipracks_200_3['A5'])
+### Transfer elution buffer to EL5
+    m300.pick_up_tip(tipracks_200_3['A11'])
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
-    m300.aspirate(elution_vol, SA5.bottom())
-    m300.dispense(elution_vol, EA5.bottom(2))
+    m300.aspirate(elution_vol, MA5.bottom())
+    m300.dispense(elution_vol, EL5.bottom(2))
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(EA5.top(-10))
+    m300.move_to(EL5.top(-10))
     m300.blow_out()
     m300.return_tip()
 
-### Transfer Elution buffer to EA6
-    m300.pick_up_tip(tipracks_200_3['A6'])
+### Transfer elution buffer to EL6
+    m300.pick_up_tip(tipracks_200_3['A12'])
     m300.flow_rate.aspirate = 25
     m300.flow_rate.dispense = 25
-    m300.aspirate(elution_vol, SA6.bottom())
-    m300.dispense(elution_vol, EA6.bottom(2))
+    m300.aspirate(elution_vol, MA6.bottom())
+    m300.dispense(elution_vol, EL6.bottom(2))
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(EA6.top(-10))
+    m300.move_to(EL6.top(-10))
     m300.blow_out()
     m300.return_tip()
 
-### Get last bit of elution buffer ### This step increases the chance of getting beads in final extract, but increases the volume of extract
+### Get last bit of elution buffer ### This step incrELses the chance of getting beads in final extract, but incrELses the volume of extract
 
-### Transfer Elution buffer to EA1
+### Transfer elution buffer to EL1
 #m10.pick_up_tip(tipracks_10_1.wells('A7'))
 #m10.set_flow_rate(aspirate=25, dispense=25)
-#m10.aspirate(10, SA1.bottom())
-#m10.dispense(10, EA1.bottom(2))
+#m10.aspirate(10, MA1.bottom())
+#m10.dispense(10, EL1.bottom(2))
 #m10.delay(seconds=5)
 #m10.set_flow_rate(aspirate=130, dispense=130)
 #m10.return_tip()
 
-### Transfer Elution buffer to EA2
+### Transfer elution buffer to EL2
 #m10.pick_up_tip(tipracks_10_1.wells('A8'))
 #m10.set_flow_rate(aspirate=25, dispense=25)
-#m10.aspirate(10, SA2.bottom())
-#m10.dispense(10, EA2.bottom(2))
+#m10.aspirate(10, MA2.bottom())
+#m10.dispense(10, EL2.bottom(2))
 #m10.delay(seconds=5)
 #m10.set_flow_rate(aspirate=130, dispense=130)
 #m10.return_tip()
 
-### Transfer Elution buffer to EA3
+### Transfer elution buffer to EL3
 #m10.pick_up_tip(tipracks_10_1.wells('A9'))
 #m10.set_flow_rate(aspirate=25, dispense=25)
-#m10.aspirate(10, SA3.bottom())
-#m10.dispense(10, EA3.bottom(2))
+#m10.aspirate(10, MA3.bottom())
+#m10.dispense(10, EL3.bottom(2))
 #m10.delay(seconds=5)
 #m10.set_flow_rate(aspirate=130, dispense=130)
 #m10.return_tip()
 
-### Transfer Elution buffer to EA4
+### Transfer elution buffer to EL4
 #m10.pick_up_tip(tipracks_10_1.wells('A10'))
 #m10.set_flow_rate(aspirate=25, dispense=25)
-#m10.aspirate(10, SA4.bottom())
-#m10.dispense(10, EA4.bottom(2))
+#m10.aspirate(10, MA4.bottom())
+#m10.dispense(10, EL4.bottom(2))
 #m10.delay(seconds=5)
 #m10.set_flow_rate(aspirate=130, dispense=130)
 #m10.return_tip()
 
-### Transfer Elution buffer to EA5
+### Transfer elution buffer to EL5
 #m10.pick_up_tip(tipracks_10_1.wells('A11'))
 #m10.set_flow_rate(aspirate=25, dispense=25)
-#m10.aspirate(10, SA5.bottom())
-#m10.dispense(10, EA5.bottom(2))
+#m10.aspirate(10, MA5.bottom())
+#m10.dispense(10, EL5.bottom(2))
 #m10.delay(seconds=5)
 #m10.set_flow_rate(aspirate=130, dispense=130)
 #m10.return_tip()
 
-### Transfer Elution buffer to EA6
+### Transfer elution buffer to EL6
 #m10.pick_up_tip(tipracks_10_1.wells('A12'))
 #m10.set_flow_rate(aspirate=25, dispense=25)
-#m10.aspirate(10, SA6.bottom())
-#m10.dispense(10, EA6.bottom(2))
+#m10.aspirate(10, MA6.bottom())
+#m10.dispense(10, EL6.bottom(2))
 #m10.delay(seconds=5)
 #m10.set_flow_rate(aspirate=130, dispense=130)
 #m10.return_tip()
@@ -1117,4 +1181,4 @@ def run(protocol):
 
 
 
-    protocol.pause("Yay! \ Purification has finished \ Please store purified samples as -20°C \ Press resume when finished.")
+    protocol.pause("Yay! \ Purification has finished \ PlELse store purified samples as -20°C \ Press resume when finished.")
