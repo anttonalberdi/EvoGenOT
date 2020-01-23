@@ -15,7 +15,7 @@ def run(protocol):
     mag_deck = protocol.load_module('magdeck','7')
     sample_plate = mag_deck.load_labware('1ml_pcr')
     trash = protocol.load_labware('agilent_1_reservoir_290ml','8') ## Need to be created
-    trough = protocol.load_labware('12_column_reservoir', '12')
+    trough = protocol.load_labware('12_column_reservoir', '10')
 
 ### Pipette tips ###
 
