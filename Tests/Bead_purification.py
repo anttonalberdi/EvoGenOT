@@ -122,7 +122,7 @@ def run(protocol):
 
     ### Transfer sample to MA6
     m300.pick_up_tip(tipracks_200_1['A6'])
-    m300.aspirate(sample_vol, SA6.bottom())
+    m300.aspirate(sample_vol, SA6.bottom(1))
     m300.dispense(sample_vol, MA6.top(-4))
     m300.return_tip()
 
