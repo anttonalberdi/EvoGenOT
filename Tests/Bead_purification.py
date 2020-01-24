@@ -2,7 +2,7 @@
 from opentrons import protocol_api
 
 ## NOTES add air gap after dispensing sample. Use p10 to take last remaining sample from sample plate
-## m10 should dispense liquid in trash 
+## m10 should dispense liquid in trash
 
 metadata = {
     'protocolName': 'DNA Purification',
@@ -403,8 +403,6 @@ def run(protocol):
     m300.blow_out(Liquid_trash.top(-5))
     m300.air_gap(gap)
     m300.return_tip()
-
-
 
 
     ### Wash with EtOH1 ####
@@ -891,6 +889,7 @@ def run(protocol):
     m10.flow_rate.dispense = 100
     m10.pick_up_tip(tipracks_10_1['A1'])
     m10.aspirate(10, MA1.bottom(0.5))
+    m10.dispense(10, Liquid_trash.top(-5))
     m10.return_tip()
 
     ### remove supernatant from MA2
@@ -898,6 +897,7 @@ def run(protocol):
     m10.flow_rate.dispense = 100
     m10.pick_up_tip(tipracks_10_1['A2'])
     m10.aspirate(10, MA2.bottom(0.5))
+    m10.dispense(10, Liquid_trash.top(-5))
     m10.return_tip()
 
     ### remove supernatant from MA3
@@ -905,6 +905,7 @@ def run(protocol):
     m10.flow_rate.dispense = 100
     m10.pick_up_tip(tipracks_10_1['A3'])
     m10.aspirate(10, MA3.bottom(0.5))
+    m10.dispense(10, Liquid_trash.top(-5))
     m10.return_tip()
 
     ### remove supernatant from MA4
@@ -912,6 +913,7 @@ def run(protocol):
     m10.flow_rate.dispense = 100
     m10.pick_up_tip(tipracks_10_1['A4'])
     m10.aspirate(10, MA4.bottom(0.5))
+    m10.dispense(10, Liquid_trash.top(-5))
     m10.return_tip()
 
     ### remove supernatant from MA5
@@ -919,6 +921,7 @@ def run(protocol):
     m10.flow_rate.dispense = 100
     m10.pick_up_tip(tipracks_10_1['A5'])
     m10.aspirate(10, MA5.bottom(0.5))
+    m10.dispense(10, Liquid_trash.top(-5))
     m10.return_tip()
 
     ### remove supernatant from MA6
@@ -926,6 +929,7 @@ def run(protocol):
     m10.flow_rate.dispense = 100
     m10.pick_up_tip(tipracks_10_1['A6'])
     m10.aspirate(10, MA6.bottom(0.5))
+    m10.dispense(10, Liquid_trash.top(-5))
     m10.return_tip()
 
 
