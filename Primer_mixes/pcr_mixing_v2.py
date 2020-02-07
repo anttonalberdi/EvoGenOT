@@ -21,7 +21,6 @@ from opentrons import labware, instruments, modules, robot
 #Custom presets
 import os,sys
 sys.path.append("/root")
-import custom_labware
 
 #### MODULES ####
 
