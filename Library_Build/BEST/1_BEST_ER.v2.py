@@ -96,7 +96,7 @@ def run(protocol):
     #### PIPETTE SETUP ####
     m300 = protocol.load_instrument('p300_multi', mount='left', tip_racks=(tipracks_200_1,tipracks_200_2))
 
-    m10 = protocol.load_instrument('p300_single', mount='right', tip_racks=(tipracks_10_1, tipracks_10_2))
+    m10 = protocol.load_instrument('p100_multi', mount='right', tip_racks=(tipracks_10_1, tipracks_10_2))
 
     ## Enzyme SETUP
     Enzyme_ER = cold_plate['A1']
