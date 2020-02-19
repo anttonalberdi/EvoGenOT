@@ -378,7 +378,6 @@ def run(protocol):
 
 
 
-
     protocol.pause("Yay! \ Please incubate in PCR machine \ at 20°C for 30 minutes, followed by 30 minutes at 65°C. \ Press resume when finished.")
 
     temp_deck_1.deactivate()
