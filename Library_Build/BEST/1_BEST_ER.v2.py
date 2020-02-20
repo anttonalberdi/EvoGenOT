@@ -71,12 +71,6 @@ def run(protocol):
     temp_deck_2._port = '/dev/ttyACM1'
 
 
-    if not protocol.is_simulating():
-    	temp_deck_1.connect()
-    	temp_deck_2.connect()
-
-
-
     cold_plate = temp_deck_1.load_labware('biorad_96_wellplate_200ul_pcr')
     # trough = labware.load('trough-12row', '2')
     # Trash = labware.load('One-Column-reservoir','3')
