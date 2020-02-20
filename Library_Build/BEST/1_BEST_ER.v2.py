@@ -129,6 +129,9 @@ def run(protocol):
     """
     protocol.comment("Yay! \ Blund-end Repair begins.")
 
+    temp_deck_1.temperature
+    temp_deck_2.temperature
+    
     temp_deck_1.set_temperature(10)
     temp_deck_2.set_temperature(10)
 
