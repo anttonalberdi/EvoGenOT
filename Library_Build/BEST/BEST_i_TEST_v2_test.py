@@ -147,21 +147,21 @@ def run(BEST):
     p50.mix(3,40,PCR_plate.wells_by_name()['A1'].bottom(3))
     # Blow out disposal volume 10 mm ABOVE the bottom of PCR well
     p50.blow_out(PCR_plate.wells_by_name()['A1'].bottom(10))
-    p50.return_tip()
+    p50.drop_tip()
 
     p50.pick_up_tip()
     p50.aspirate(32, Sample_plate.wells_by_name()['B1'].bottom())
     p50.dispense(32,PCR_plate.wells_by_name()['B1'].bottom())
     p50.mix(3,40,PCR_plate.wells_by_name()['B1'].bottom(3))
     p50.blow_out(PCR_plate.wells_by_name()['B1'].bottom(10))
-    p50.return_tip()
+    p50.drop_tip()
 
     p50.pick_up_tip()
     p50.aspirate(32, Sample_plate.wells_by_name()['C1'].bottom())
     p50.dispense(32,PCR_plate.wells_by_name()['C1'].bottom())
     p50.mix(3,40,PCR_plate.wells_by_name()['C1'].bottom(3))
     p50.blow_out(PCR_plate.wells_by_name()['C1'].bottom(10))
-    p50.return_tip()
+    p50.drop_tip()
 
 
     p50.pick_up_tip()
@@ -169,56 +169,56 @@ def run(BEST):
     p50.dispense(32,PCR_plate.wells_by_name()['D1'].bottom())
     p50.mix(3,40,PCR_plate.wells_by_name()['D1'].bottom(3))
     p50.blow_out(PCR_plate.wells_by_name()['D1'].bottom(10))
-    p50.return_tip()
+    p50.drop_tip()
 
     p50.pick_up_tip()
     p50.aspirate(32, Sample_plate.wells_by_name()['E1'].bottom())
     p50.dispense(32,PCR_plate.wells_by_name()['E1'].bottom())
     p50.mix(3,40,PCR_plate.wells_by_name()['E1'].bottom(3))
     p50.blow_out(PCR_plate.wells_by_name()['E1'].bottom(10))
-    p50.return_tip()
+    p50.drop_tip()
 
     p50.pick_up_tip()
     p50.aspirate(32, Sample_plate.wells_by_name()['F1'].bottom())
     p50.dispense(32,PCR_plate.wells_by_name()['F1'].bottom())
     p50.mix(3,40,PCR_plate.wells_by_name()['F1'].bottom(3))
     p50.blow_out(PCR_plate.wells_by_name()['F1'].bottom(10))
-    p50.return_tip()
+    p50.drop_tip()
 
     p50.pick_up_tip()
     p50.aspirate(32, Sample_plate.wells_by_name()['G1'].bottom())
     p50.dispense(32,PCR_plate.wells_by_name()['G1'].bottom())
     p50.mix(3,40,PCR_plate.wells_by_name()['G1'].bottom(3))
     p50.blow_out(PCR_plate.wells_by_name()['G1'].bottom(10))
-    p50.return_tip()
+    p50.drop_tip()
 
     p50.pick_up_tip()
     p50.aspirate(32, Sample_plate.wells_by_name()['H1'].bottom())
     p50.dispense(32,PCR_plate.wells_by_name()['H1'].bottom())
     p50.mix(3,40,PCR_plate.wells_by_name()['H1'].bottom(3))
     p50.blow_out(PCR_plate.wells_by_name()['H1'].bottom(10))
-    p50.return_tip()
+    p50.drop_tip()
 
     p50.pick_up_tip()
     p50.aspirate(32, Sample_plate.wells_by_name()['A2'].bottom())
     p50.dispense(32,PCR_plate.wells_by_name()['A2'].bottom())
     p50.mix(3,40,PCR_plate.wells_by_name()['A2'].bottom(3))
     p50.blow_out(PCR_plate.wells_by_name()['A2'].bottom(10))
-    p50.return_tip()
+    p50.drop_tip()
 
     p50.pick_up_tip()
     p50.aspirate(32, Sample_plate.wells_by_name()['B2'].bottom())
     p50.dispense(32,PCR_plate.wells_by_name()['B2'].bottom())
     p50.mix(3,40,PCR_plate.wells_by_name()['B2'].bottom(3))
     p50.blow_out(PCR_plate.wells_by_name()['B2'].bottom(10))
-    p50.return_tip()
+    p50.drop_tip()
 
     p50.pick_up_tip()
     p50.aspirate(32, Sample_plate.wells_by_name()['C2'].bottom())
     p50.dispense(32,PCR_plate.wells_by_name()['C2'].bottom())
     p50.mix(3,40,PCR_plate.wells_by_name()['C2'].bottom(3))
     p50.blow_out(PCR_plate.wells_by_name()['C2'].bottom(10))
-    p50.return_tip()
+    p50.drop_tip()
 
 
     p50.pick_up_tip()
@@ -226,35 +226,35 @@ def run(BEST):
     p50.dispense(32,PCR_plate.wells_by_name()['D2'].bottom())
     p50.mix(3,40,PCR_plate.wells_by_name()['D2'].bottom(3))
     p50.blow_out(PCR_plate.wells_by_name()['D2'].bottom(10))
-    p50.return_tip()
+    p50.drop_tip()
 
     p50.pick_up_tip()
     p50.aspirate(32, Sample_plate.wells_by_name()['E2'].bottom())
     p50.dispense(32,PCR_plate.wells_by_name()['E2'].bottom())
     p50.mix(3,40,PCR_plate.wells_by_name()['E2'].bottom(3))
     p50.blow_out(PCR_plate.wells_by_name()['E2'].bottom(10))
-    p50.return_tip()
+    p50.drop_tip()
 
     p50.pick_up_tip()
     p50.aspirate(32, Sample_plate.wells_by_name()['F2'].bottom())
     p50.dispense(32,PCR_plate.wells_by_name()['F2'].bottom())
     p50.mix(3,40,PCR_plate.wells_by_name()['F2'].bottom(3))
     p50.blow_out(PCR_plate.wells_by_name()['F2'].bottom(10))
-    p50.return_tip()
+    p50.drop_tip()
 
     p50.pick_up_tip()
     p50.aspirate(32, Sample_plate.wells_by_name()['G2'].bottom())
     p50.dispense(32,PCR_plate.wells_by_name()['G2'].bottom())
     p50.mix(3,40,PCR_plate.wells_by_name()['G2'].bottom(3))
     p50.blow_out(PCR_plate.wells_by_name()['G2'].bottom(10))
-    p50.return_tip()
+    p50.drop_tip()
 
     p50.pick_up_tip()
     p50.aspirate(32, Sample_plate.wells_by_name()['H2'].bottom())
     p50.dispense(32,PCR_plate.wells_by_name()['H2'].bottom())
     p50.mix(3,40,PCR_plate.wells_by_name()['H2'].bottom(3))
     p50.blow_out(PCR_plate.wells_by_name()['H2'].bottom(10))
-    p50.return_tip()
+    p50.drop_tip()
 
 
     PCR.close_lid()
@@ -278,7 +278,7 @@ def run(BEST):
         p10.blow_out(target)
         p10.mix(3,10,target)
         p10.blow_out(target)
-        p10.return_tip()
+        p10.drop_tip()
 
     for target in PCR_rxns2:
         p10.pick_up_tip()
@@ -287,7 +287,7 @@ def run(BEST):
         p10.blow_out(target)
         p10.mix(3,10,target)
         p10.blow_out(target)
-        p10.return_tip()
+        p10.drop_tip()
 
     for target in PCR_rxns3:
         p10.pick_up_tip()
@@ -296,7 +296,7 @@ def run(BEST):
         p10.blow_out(target)
         p10.mix(3,10,target)
         p10.blow_out(target)
-        p10.return_tip()
+        p10.drop_tip()
 
     for target in PCR_rxns4:
         p10.pick_up_tip()
@@ -305,4 +305,4 @@ def run(BEST):
         p10.blow_out(target)
         p10.mix(3,10,target)
         p10.blow_out(target)
-        p10.return_tip()
+        p10.drop_tip()
