@@ -126,78 +126,72 @@ def run(BEST):
 
     PCR.set_block_temperature(10)
     PCR.set_lid_temperature(105)
-    temp_deck.set_temperature(10)
+    temp_deck.set_temperature(20)
 
     # Set PCR profile for ER
     profile = [{'temperature': 20, 'hold_time_minutes': 30}, {'temperature': 65, 'hold_time_minutes': 30}]
 
     ### Addition of End repair mastermix to PCR machine
     p50.flow_rate.aspirate = 20
-    p50.flow_rate.dispense = 50
-    p50.pick_up_tip()
-    for target in PCR_rxns1:
-        p50.aspirate(ER_vol, MM_ER)
-        p50.dispense(ER_vol,target)
-        p50.blow_out(target)
-    for target in PCR_rxns2:
-        p50.aspirate(ER_vol, MM_ER)
-        p50.dispense(ER_vol,target)
-        p50.blow_out(target)
-    for target in PCR_rxns3:
-        p50.aspirate(ER_vol, MM_ER)
-        p50.dispense(ER_vol,target)
-        p50.blow_out(target)
-    for target in PCR_rxns4:
-        p50.aspirate(ER_vol, MM_ER)
-        p50.dispense(ER_vol,target)
-        p50.blow_out(target)
-    p50.drop_tip()
-
-    p50.flow_rate.aspirate = 20
     p50.flow_rate.dispense = 40
 
 ## Adding 32µl sample to PCR plate and mixes after
 
-    for sample in samples1:
+    for sample in 'A1':
+        p50.pick_up_tip()
         #Picking up tip from B1 of Opentrons 96 Tip Rack 300 µL on 1
-        p50.pick_up_tip()
-        for target in PCR_rxns1:
-                # Aspirating 32.0 uL from Samples 1-8 on 5 at 1.0 speed
-                p50.aspirate(32, sample)
-                # Dispensing 32.0 uL Samples 1-8 to PCR plate 1-8 in the bottom
-                p50.dispense(32,target)
-                # Mixing 40.0uL, three times in 1-8 to PCR plate in the bottom
-                p50.mix(3,40,target)
-                # Blow out disposal volume 5 mm below the top of PCR well 1 to 8
-                p50.blow_out(target)
-            p50.return_tip()
+        # Aspirating 32.0 uL from Samples 1-8 on 5 at 1.0 speed
+        p50.aspirate(32, Sample_plate.wells_by_name()[sample].bottom())
+        # Dispensing 32.0 uL Samples 1-8 to PCR plate 1-8 in the bottom
+        p50.dispense(32,PCR_plate.wells_by_name()[sample].bottom())
+        # Mixing 40.0uL, three times in 1-8 to PCR plate in the bottom
+        p50.mix(3,40,PCR_plate.wells_by_name()[sample].bottom())
+        # Setting target in top position
+        # Blow out disposal volume 5 mm below the top of PCR well 1 to 8
+        p50.blow_out(PCR_plate.wells_by_name()[sample].bottom(10))
+        p50.return_tip()
 
-    for sample in samples2:
+    for sample in 'B1':
         p50.pick_up_tip()
-        for target in PCR_rxns2:
-                p50.aspirate(32, sample)
-                p50.dispense(32,target)
-                p50.mix(3,40,target)
-                p50.blow_out(target_top)
-                p50.return_tip()
+        #Picking up tip from B1 of Opentrons 96 Tip Rack 300 µL on 1
+        # Aspirating 32.0 uL from Samples 1-8 on 5 at 1.0 speed
+        p50.aspirate(32, Sample_plate.wells_by_name()[sample].bottom())
+        # Dispensing 32.0 uL Samples 1-8 to PCR plate 1-8 in the bottom
+        p50.dispense(32,PCR_plate.wells_by_name()[sample].bottom())
+        # Mixing 40.0uL, three times in 1-8 to PCR plate in the bottom
+        p50.mix(3,40,PCR_plate.wells_by_name()[sample].bottom())
+        # Setting target in top position
+        # Blow out disposal volume 5 mm below the top of PCR well 1 to 8
+        p50.blow_out(PCR_plate.wells_by_name()[sample].bottom(10))
+        p50.return_tip()
 
-    for sample in samples3:
+    for sample in 'C1':
         p50.pick_up_tip()
-        for target in PCR_rxns3:
-                p50.aspirate(32, sample)
-                p50.dispense(32,target)
-                p50.mix(3,40,target)
-                p50.blow_out(target_top)
-                p50.return_tip()
+        #Picking up tip from B1 of Opentrons 96 Tip Rack 300 µL on 1
+        # Aspirating 32.0 uL from Samples 1-8 on 5 at 1.0 speed
+        p50.aspirate(32, Sample_plate.wells_by_name()[sample].bottom())
+        # Dispensing 32.0 uL Samples 1-8 to PCR plate 1-8 in the bottom
+        p50.dispense(32,PCR_plate.wells_by_name()[sample].bottom())
+        # Mixing 40.0uL, three times in 1-8 to PCR plate in the bottom
+        p50.mix(3,40,PCR_plate.wells_by_name()[sample].bottom())
+        # Setting target in top position
+        # Blow out disposal volume 5 mm below the top of PCR well 1 to 8
+        p50.blow_out(PCR_plate.wells_by_name()[sample].bottom(10))
+        p50.return_tip()
 
-    for sample in samples4:
+    for sample in 'D1':
         p50.pick_up_tip()
-                p50.aspirate(32, sample)
-                for target in PCR_rxns4:
-                p50.dispense(32,target)
-                p50.mix(3,40,target)
-                p50.blow_out(target_top)
-                p50.return_tip()
+        #Picking up tip from B1 of Opentrons 96 Tip Rack 300 µL on 1
+        # Aspirating 32.0 uL from Samples 1-8 on 5 at 1.0 speed
+        p50.aspirate(32, Sample_plate.wells_by_name()[sample].bottom())
+        # Dispensing 32.0 uL Samples 1-8 to PCR plate 1-8 in the bottom
+        p50.dispense(32,PCR_plate.wells_by_name()[sample].bottom())
+        # Mixing 40.0uL, three times in 1-8 to PCR plate in the bottom
+        p50.mix(3,40,PCR_plate.wells_by_name()[sample].bottom())
+        # Setting target in top position
+        # Blow out disposal volume 5 mm below the top of PCR well 1 to 8
+        p50.blow_out(PCR_plate.wells_by_name()[sample].bottom(10))
+        p50.return_tip()
 
     PCR.close_lid()
     ## Execute PCR profile
@@ -248,119 +242,3 @@ def run(BEST):
         p10.mix(3,10,target)
         p10.blow_out(target)
         p10.return_tip()
-
-# Add Ligase MM
-
-    for target in PCR_rxns1:
-        for target_top in PCR_rxns1_top:
-            p10.pick_up_tip()
-            p10.aspirate(Lig_vol, MM_Lig)
-            p10.flow_rate.dispense = 5
-            p10.dispense(Lig_vol,target)
-            p10.mix(3,10,target)
-            p10.flow_rate.dispense = 10
-            p10.blow_out(target_top)
-            p10.return_tip()
-
-    for target in PCR_rxns2:
-        for target_top in PCR_rxns1_top:
-            p10.pick_up_tip()
-            p10.aspirate(Lig_vol, MM_Lig)
-            p10.flow_rate.dispense = 5
-            p10.dispense(Lig_vol,target)
-            p10.mix(3,10,target)
-            p10.flow_rate.dispense = 10
-            p10.blow_out(target_top)
-            p10.return_tip()
-    for target in PCR_rxns3:
-        for target_top in PCR_rxns1_top:
-            p10.pick_up_tip()
-            p10.aspirate(Lig_vol, MM_Lig)
-            p10.flow_rate.dispense = 5
-            p10.dispense(Lig_vol,target)
-            p10.mix(3,10,target)
-            p10.flow_rate.dispense = 10
-            p10.blow_out(target_top)
-            p10.return_tip()
-
-    for target in PCR_rxns4:
-        for target_top in PCR_rxns1_top:
-            p10.pick_up_tip()
-            p10.aspirate(Lig_vol, MM_Lig)
-            p10.flow_rate.dispense = 5
-            p10.dispense(Lig_vol,target)
-            p10.mix(3,10,target)
-            p10.flow_rate.dispense = 10
-            p10.blow_out(target_top)
-            p10.return_tip()
-
-    profile = [
-    {'temperature': 20, 'hold_time_minutes': 30},
-    {'temperature': 65, 'hold_time_minutes': 10}]
-
-    PCR.close_lid()
-    ## Execute PCR profile
-    BEST.comment("You know.. This might NOT work!")
-
-    PCR.execute_profile(steps=profile, repetitions=1, block_max_volume=50)
-
-    PCR.open_lid()
-
-    PCR.set_block_temperature(10)
-
-    # Add Fill in MM
-    """
-    Fill in
-    """
-    BEST.comment("SHIAT! FILL IN will begin")
-
-    for target in PCR_rxns1:
-        for target_top in PCR_rxns1_top:
-            p10.pick_up_tip()
-            p10.aspirate(Fill_vol, MM_Fill)
-            p10.dispense(Fill_vol,target)
-            p10.mix(3,10,target)
-            p10.blow_out(target_top)
-            p10.return_tip()
-
-    for target in PCR_rxns2:
-        for target_top in PCR_rxns1_top:
-            p10.pick_up_tip()
-            p10.aspirate(Fill_vol, MM_Fill)
-            p10.dispense(Fill_vol,target)
-            p10.mix(3,10,target)
-            p10.blow_out(target_top)
-            p10.return_tip()
-
-    for target in PCR_rxns3:
-        for target_top in PCR_rxns3_top:
-            p10.pick_up_tip()
-            p10.aspirate(Fill_vol, MM_Fill)
-            p10.dispense(Fill_vol,target)
-            p10.mix(3,10,target)
-            p10.blow_out(target_top)
-            p10.return_tip()
-
-    for target in PCR_rxns4:
-        for target_top in PCR_rxns4_top:
-            p10.pick_up_tip()
-            p10.aspirate(Fill_vol, MM_Fill)
-            p10.dispense(Fill_vol,target)
-            p10.mix(3,10,target)
-            p10.blow_out(target_top)
-            p10.return_tip()
-
-    profile = [
-    {'temperature': 65, 'hold_time_minutes': 15},
-    {'temperature': 80, 'hold_time_minutes': 15}]
-
-    PCR.close_lid()
-        ## Execute PCR profile
-    PCR.execute_profile(steps=profile, repetitions=1, block_max_volume=60)
-
-    PCR.open_lid()
-
-    PCR.set_block_temperature(10)
-
-    BEST.comment("Work work work")
-    BEST.comment("Job's done!")
