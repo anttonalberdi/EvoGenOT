@@ -137,61 +137,125 @@ def run(BEST):
 
 ## Adding 32µl sample to PCR plate and mixes after
 
-    for sample in 'A1':
-        p50.pick_up_tip()
-        #Picking up tip from B1 of Opentrons 96 Tip Rack 300 µL on 1
-        # Aspirating 32.0 uL from Samples 1-8 on 5 at 1.0 speed
-        p50.aspirate(32, Sample_plate.wells_by_name()[sample].bottom())
-        # Dispensing 32.0 uL Samples 1-8 to PCR plate 1-8 in the bottom
-        p50.dispense(32,PCR_plate.wells_by_name()[sample].bottom())
-        # Mixing 40.0uL, three times in 1-8 to PCR plate in the bottom
-        p50.mix(3,40,PCR_plate.wells_by_name()[sample].bottom())
-        # Setting target in top position
-        # Blow out disposal volume 5 mm below the top of PCR well 1 to 8
-        p50.blow_out(PCR_plate.wells_by_name()[sample].bottom(10))
-        p50.return_tip()
+    p50.pick_up_tip()
+    #Picking up tip from B1 of Opentrons 96 Tip Rack 300 µL on 1
+    # Aspirating 32.0 uL from Samples 1-8 on 5 at 1.0 speed
+    p50.aspirate(32, Sample_plate.wells_by_name()['A1'].bottom())
+    # Dispensing 32.0 uL Samples to PCR plate in the bottom
+    p50.dispense(32,PCR_plate.wells_by_name()['A1'].bottom())
+    # Mixing 40.0uL, three times in PCR plate in the bottom
+    p50.mix(3,40,PCR_plate.wells_by_name()['A1'].bottom(3))
+    # Blow out disposal volume 10 mm ABOVE the bottom of PCR well
+    p50.blow_out(PCR_plate.wells_by_name()['A1'].bottom(10))
+    p50.return_tip()
 
-    for sample in 'B1':
-        p50.pick_up_tip()
-        #Picking up tip from B1 of Opentrons 96 Tip Rack 300 µL on 1
-        # Aspirating 32.0 uL from Samples 1-8 on 5 at 1.0 speed
-        p50.aspirate(32, Sample_plate.wells_by_name()[sample].bottom())
-        # Dispensing 32.0 uL Samples 1-8 to PCR plate 1-8 in the bottom
-        p50.dispense(32,PCR_plate.wells_by_name()[sample].bottom())
-        # Mixing 40.0uL, three times in 1-8 to PCR plate in the bottom
-        p50.mix(3,40,PCR_plate.wells_by_name()[sample].bottom())
-        # Setting target in top position
-        # Blow out disposal volume 5 mm below the top of PCR well 1 to 8
-        p50.blow_out(PCR_plate.wells_by_name()[sample].bottom(10))
-        p50.return_tip()
+    p50.pick_up_tip()
+    p50.aspirate(32, Sample_plate.wells_by_name()['B1'].bottom())
+    p50.dispense(32,PCR_plate.wells_by_name()['B1'].bottom())
+    p50.mix(3,40,PCR_plate.wells_by_name()['B1'].bottom(3))
+    p50.blow_out(PCR_plate.wells_by_name()['B1'].bottom(10))
+    p50.return_tip()
 
-    for sample in 'C1':
-        p50.pick_up_tip()
-        #Picking up tip from B1 of Opentrons 96 Tip Rack 300 µL on 1
-        # Aspirating 32.0 uL from Samples 1-8 on 5 at 1.0 speed
-        p50.aspirate(32, Sample_plate.wells_by_name()[sample].bottom())
-        # Dispensing 32.0 uL Samples 1-8 to PCR plate 1-8 in the bottom
-        p50.dispense(32,PCR_plate.wells_by_name()[sample].bottom())
-        # Mixing 40.0uL, three times in 1-8 to PCR plate in the bottom
-        p50.mix(3,40,PCR_plate.wells_by_name()[sample].bottom())
-        # Setting target in top position
-        # Blow out disposal volume 5 mm below the top of PCR well 1 to 8
-        p50.blow_out(PCR_plate.wells_by_name()[sample].bottom(10))
-        p50.return_tip()
+    p50.pick_up_tip()
+    p50.aspirate(32, Sample_plate.wells_by_name()['C1'].bottom())
+    p50.dispense(32,PCR_plate.wells_by_name()['C1'].bottom())
+    p50.mix(3,40,PCR_plate.wells_by_name()['C1'].bottom(3))
+    p50.blow_out(PCR_plate.wells_by_name()['C1'].bottom(10))
+    p50.return_tip()
 
-    for sample in 'D1':
-        p50.pick_up_tip()
-        #Picking up tip from B1 of Opentrons 96 Tip Rack 300 µL on 1
-        # Aspirating 32.0 uL from Samples 1-8 on 5 at 1.0 speed
-        p50.aspirate(32, Sample_plate.wells_by_name()[sample].bottom())
-        # Dispensing 32.0 uL Samples 1-8 to PCR plate 1-8 in the bottom
-        p50.dispense(32,PCR_plate.wells_by_name()[sample].bottom())
-        # Mixing 40.0uL, three times in 1-8 to PCR plate in the bottom
-        p50.mix(3,40,PCR_plate.wells_by_name()[sample].bottom())
-        # Setting target in top position
-        # Blow out disposal volume 5 mm below the top of PCR well 1 to 8
-        p50.blow_out(PCR_plate.wells_by_name()[sample].bottom(10))
-        p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(32, Sample_plate.wells_by_name()['D1'].bottom())
+    p50.dispense(32,PCR_plate.wells_by_name()['D1'].bottom())
+    p50.mix(3,40,PCR_plate.wells_by_name()['D1'].bottom(3))
+    p50.blow_out(PCR_plate.wells_by_name()['D1'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(32, Sample_plate.wells_by_name()['E1'].bottom())
+    p50.dispense(32,PCR_plate.wells_by_name()['E1'].bottom())
+    p50.mix(3,40,PCR_plate.wells_by_name()['E1'].bottom(3))
+    p50.blow_out(PCR_plate.wells_by_name()['E1'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(32, Sample_plate.wells_by_name()['F1'].bottom())
+    p50.dispense(32,PCR_plate.wells_by_name()['F1'].bottom())
+    p50.mix(3,40,PCR_plate.wells_by_name()['F1'].bottom(3))
+    p50.blow_out(PCR_plate.wells_by_name()['F1'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(32, Sample_plate.wells_by_name()['G1'].bottom())
+    p50.dispense(32,PCR_plate.wells_by_name()['G1'].bottom())
+    p50.mix(3,40,PCR_plate.wells_by_name()['G1'].bottom(3))
+    p50.blow_out(PCR_plate.wells_by_name()['G1'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(32, Sample_plate.wells_by_name()['H1'].bottom())
+    p50.dispense(32,PCR_plate.wells_by_name()['H1'].bottom())
+    p50.mix(3,40,PCR_plate.wells_by_name()['H1'].bottom(3))
+    p50.blow_out(PCR_plate.wells_by_name()['H1'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(32, Sample_plate.wells_by_name()['A2'].bottom())
+    p50.dispense(32,PCR_plate.wells_by_name()['A2'].bottom())
+    p50.mix(3,40,PCR_plate.wells_by_name()['A2'].bottom(3))
+    p50.blow_out(PCR_plate.wells_by_name()['A2'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(32, Sample_plate.wells_by_name()['B2'].bottom())
+    p50.dispense(32,PCR_plate.wells_by_name()['B2'].bottom())
+    p50.mix(3,40,PCR_plate.wells_by_name()['B2'].bottom(3))
+    p50.blow_out(PCR_plate.wells_by_name()['B2'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(32, Sample_plate.wells_by_name()['C2'].bottom())
+    p50.dispense(32,PCR_plate.wells_by_name()['C2'].bottom())
+    p50.mix(3,40,PCR_plate.wells_by_name()['C2'].bottom(3))
+    p50.blow_out(PCR_plate.wells_by_name()['C2'].bottom(10))
+    p50.return_tip()
+
+
+    p50.pick_up_tip()
+    p50.aspirate(32, Sample_plate.wells_by_name()['D2'].bottom())
+    p50.dispense(32,PCR_plate.wells_by_name()['D2'].bottom())
+    p50.mix(3,40,PCR_plate.wells_by_name()['D2'].bottom(3))
+    p50.blow_out(PCR_plate.wells_by_name()['D2'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(32, Sample_plate.wells_by_name()['E2'].bottom())
+    p50.dispense(32,PCR_plate.wells_by_name()['E2'].bottom())
+    p50.mix(3,40,PCR_plate.wells_by_name()['E2'].bottom(3))
+    p50.blow_out(PCR_plate.wells_by_name()['E2'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(32, Sample_plate.wells_by_name()['F2'].bottom())
+    p50.dispense(32,PCR_plate.wells_by_name()['F2'].bottom())
+    p50.mix(3,40,PCR_plate.wells_by_name()['F2'].bottom(3))
+    p50.blow_out(PCR_plate.wells_by_name()['F2'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(32, Sample_plate.wells_by_name()['G2'].bottom())
+    p50.dispense(32,PCR_plate.wells_by_name()['G2'].bottom())
+    p50.mix(3,40,PCR_plate.wells_by_name()['G2'].bottom(3))
+    p50.blow_out(PCR_plate.wells_by_name()['G2'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(32, Sample_plate.wells_by_name()['H2'].bottom())
+    p50.dispense(32,PCR_plate.wells_by_name()['H2'].bottom())
+    p50.mix(3,40,PCR_plate.wells_by_name()['H2'].bottom(3))
+    p50.blow_out(PCR_plate.wells_by_name()['H2'].bottom(10))
+    p50.return_tip()
+
 
     PCR.close_lid()
     ## Execute PCR profile
