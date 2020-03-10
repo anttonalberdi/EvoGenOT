@@ -636,6 +636,10 @@ def run(BEST):
     p10.return_tip()
 
 # Add Ligase MM
+
+    p10.flow_rate.aspirate = 5
+    p10.flow_rate.dispense = 2
+
     p10.pick_up_tip()
     p10.aspirate(Lig_vol, MM_Lig)
     p10.dispense(Lig_vol,PCR_plate.wells_by_name()['A1'].bottom(2))
@@ -883,6 +887,8 @@ def run(BEST):
     """
     BEST.comment("SHIAT! FILL IN will begin")
 
+    p10.flow_rate.aspirate = 5
+    p10.flow_rate.dispense = 10
     p10.pick_up_tip()
     p10.aspirate(Fill_vol, MM_Fill)
     p10.dispense(Fill_vol,PCR_plate.wells_by_name()['A1'].bottom(2))
