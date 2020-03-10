@@ -7,7 +7,18 @@ metadata = {
     'description': 'Simple protocol to BEST in OT-PCR',
     'apiLevel': '2.2'
 }
+###### NOTES ###########################
+#Use multipipettes when possible
 
+# Samples could be in 100 ul plate already
+    - #Thermocycler lid should open after tempdeck is cooled
+
+#Increase speed when mixing ER
+
+# When adding ligase MM, apiration needs to be super slow and the tip should probably touch the sides of the tube
+
+# Mix MMs before distributing to samples
+#######################################
 ## Description of procedure
 #
 #                           x1          x96(+10) #the extra amount shoud be optimised based on robot behavior
