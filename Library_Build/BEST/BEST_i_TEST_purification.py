@@ -80,19 +80,19 @@ def run(BEST):
     m300.flow_rate.dispense = 150
     m300.pick_up_tip()
     Mag_deck.disengage()
-
+    m300.mix(3,200,Beads)
     m300.aspirate(Bead_Vol, Beads)
     m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['A1'].bottom(2))
     m300.blow_out(Sample_plate.wells_by_name()['A1'].top(-5))
-
+    m300.mix(3,200,Beads)
     m300.aspirate(Bead_Vol, Beads)
     m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['A2'].bottom(2))
     m300.blow_out(Sample_plate.wells_by_name()['A2'].top(-5))
-
+    m300.mix(3,200,Beads)
     m300.aspirate(Bead_Vol, Beads)
     m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['A3'].bottom(2))
     m300.blow_out(Sample_plate.wells_by_name()['A3'].top(-5))
-
+    m300.mix(3,200,Beads)
     m300.aspirate(Bead_Vol, Beads)
     m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['A4'].bottom(2))
     m300.blow_out(Sample_plate.wells_by_name()['A4'].top(-5))
