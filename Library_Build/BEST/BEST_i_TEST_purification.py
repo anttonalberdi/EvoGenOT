@@ -51,7 +51,7 @@ def run(BEST):
     PCR_plate = BEST.load_labware('nest_96_wellplate_100ul_pcr_full_skirt','5', label='Non purified BEST libraries')
     trough = BEST.load_labware('usascientific_12_reservoir_22ml', '7', label='Purification reagents')
     trash_box = BEST.load_labware('agilent_1_reservoir_290ml', '8', label='liquid trash')
-    elution_plate = BEST.load_labware('biorad_96_wellplate_200ul_pcr','3', label='Purified BEST libraries')
+    TE_plate = BEST.load_labware('biorad_96_wellplate_200ul_pcr','3', label='Purified BEST libraries')
     #### Tipracks
     tipracks_300_1 = BEST.load_labware('opentrons_96_tiprack_300ul', '1')
     tipracks_300_2 = BEST.load_labware('opentrons_96_tiprack_300ul', '2')
@@ -66,17 +66,6 @@ def run(BEST):
     EtOH1 = trough.wells_by_name()['A2']
     EtOH2 = trough.wells_by_name()['A3']
     TE = trough.wells_by_name()['A4']
-    ## Sample Setup
-
-    samples1 = [well.bottom(1) for well in Sample_plate.columns()[0]]
-    samples2 = [well.bottom(1) for well in Sample_plate.columns()[1]]
-    samples3 = [well.bottom(1) for well in Sample_plate.columns()[2]]
-    samples4 = [well.bottom(1) for well in Sample_plate.columns()[3]]
-
-    TE1 = [well.bottom(1) for well in elution_plate.columns()[0]]
-    TE2 = [well.bottom(1) for well in elution_plate.columns()[1]]
-    TE3 = [well.bottom(1) for well in elution_plate.columns()[2]]
-    TE4 = [well.bottom(1) for well in elution_plate.columns()[3]]
 
     ## Volume setup
     Sample_vol = 60
@@ -361,12 +350,14 @@ def run(BEST):
     m300.dispense(TE_vol,Sample_plate.wells_by_name()['A2'].bottom(2))
     m300.mix(3,30,Sample_plate.wells_by_name()['A2'].bottom(3))
     m300.blow_out(Sample_plate.wells_by_name()['A2'].bottom(4))
+    m300.return_tip()
 
     m300.pick_up_tip()
     m300.aspirate(TE_vol, TE)
     m300.dispense(TE_vol,Sample_plate.wells_by_name()['A3'].bottom(2))
     m300.mix(3,30,Sample_plate.wells_by_name()['A3'].bottom(3))
     m300.blow_out(Sample_plate.wells_by_name()['A3'].bottom(4))
+    m300.return_tip()
 
     m300.pick_up_tip()
     m300.aspirate(TE_vol, TE)
@@ -386,9 +377,248 @@ def run(BEST):
     m300.return_tip()
 
     m300.pick_up_tip(tipracks_300_2.wells_by_name()['A4'])
-    m300.mix(4,30,Sample_plate.wells_by_name()['A3'].bottom(3))
+    m300.mix(5,30,Sample_plate.wells_by_name()['A3'].bottom(3))
     m300.return_tip()
 
     m300.pick_up_tip(tipracks_300_2.wells_by_name()['A5'])
-    m300.mix(4,30,Sample_plate.wells_by_name()['A4'].bottom(3))
+    m300.mix(5,30,Sample_plate.wells_by_name()['A4'].bottom(3))
     m300.return_tip()
+
+    BEST.delay(minutes=4, seconds=30)
+    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A2'])
+    m300.mix(5,30,Sample_plate.wells_by_name()['A1'].bottom(3))
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A3'])
+    m300.mix(5,30,Sample_plate.wells_by_name()['A2'].bottom(3))
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A4'])
+    m300.mix(5,30,Sample_plate.wells_by_name()['A3'].bottom(3))
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A5'])
+    m300.mix(5,30,Sample_plate.wells_by_name()['A4'].bottom(3))
+    m300.return_tip()
+
+    BEST.delay(minutes=4, seconds=30)
+    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A2'])
+    m300.mix(5,30,Sample_plate.wells_by_name()['A1'].bottom(3))
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A3'])
+    m300.mix(5,30,Sample_plate.wells_by_name()['A2'].bottom(3))
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A4'])
+    m300.mix(5,30,Sample_plate.wells_by_name()['A3'].bottom(3))
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A5'])
+    m300.mix(5,30,Sample_plate.wells_by_name()['A4'].bottom(3))
+    m300.return_tip()
+
+    ### Start elution of purified libraries
+    Mag_deck.engage()
+    BEST.delay(minutes=2)
+
+    ## Transfer puirified libraries to new plate
+
+    # Column 1
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['A1'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['A1'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['A1'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['B1'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['B1'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['B1'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['C1'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['C1'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['C1'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['D1'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['D1'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['D1'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['E1'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['E1'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['E1'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['F1'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['F1'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['F1'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['G1'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['G1'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['G1'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['H1'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['H1'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['H1'].bottom(10))
+    p50.return_tip()
+
+    #Column 2
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['A2'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['A2'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['A2'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['B2'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['B2'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['B2'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['C2'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['C2'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['C2'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['D2'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['D2'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['D2'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['E2'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['E2'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['E2'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['F2'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['F2'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['F2'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['G2'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['G2'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['G2'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['H2'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['H2'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['H2'].bottom(10))
+    p50.return_tip()
+
+    #Column 3
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['A3'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['A3'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['A3'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['B3'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['B3'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['B3'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['C3'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['C3'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['C3'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['D3'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['D3'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['D3'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['E3'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['E3'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['E3'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['F3'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['F3'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['F3'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['G3'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['G3'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['G3'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['H3'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['H3'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['H3'].bottom(10))
+    p50.return_tip()
+
+    #Column 4
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['A4'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['A4'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['A4'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['B4'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['B4'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['B4'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['C4'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['C4'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['C4'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['D4'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['D4'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['D4'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['E4'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['E4'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['E4'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['F4'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['F4'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['F4'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['G4'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['G4'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['G4'].bottom(10))
+    p50.return_tip()
+
+    p50.pick_up_tip()
+    p50.aspirate(30, Sample_plate.wells_by_name()['H4'].bottom(2))
+    p50.dispense(30,TE_plate.wells_by_name()['H4'].bottom(2))
+    p50.blow_out(TE_plate.wells_by_name()['H4'].bottom(10))
+    p50.return_tip()
+
+    BEST.comment("Work work work")
+    BEST.comment("Job's done!")
