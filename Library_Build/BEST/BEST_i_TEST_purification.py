@@ -59,7 +59,7 @@ def run(BEST):
     #### PIPETTE SETUP ####
     p50 = BEST.load_instrument('p50_single', mount='left', tip_racks=[tipracks_300_2])
 
-    m300 = BEST.load_instrument('p300_single', mount='right', tip_racks=[tipracks_300_1, tipracks_300_2])
+    m300 = BEST.load_instrument('p300_single', mount='right', tip_racks=[tipracks_300_1,tipracks_300_2])
 
     ## Reagent SETUP
     Beads = trough.wells_by_name()['A1']
@@ -78,25 +78,155 @@ def run(BEST):
     ### Addition of beads to empty mag plate
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 150
-    m300.pick_up_tip()
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['A1'])
     Mag_deck.disengage()
     m300.mix(3,200,Beads)
+
     m300.aspirate(Bead_Vol, Beads)
     m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['A1'].bottom(2))
     m300.blow_out(Sample_plate.wells_by_name()['A1'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['B1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['B1'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['C1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['C1'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['D1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['D1'].top(-5))
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['B1'])
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['E1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['E1'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['F1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['F1'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['G1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['G1'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['H1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['H1'].top(-5))
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['C1'])
     m300.mix(3,200,Beads)
     m300.aspirate(Bead_Vol, Beads)
     m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['A2'].bottom(2))
     m300.blow_out(Sample_plate.wells_by_name()['A2'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['B2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['B2'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['C2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['C2'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['D2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['D2'].top(-5))
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['D1'])
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['E2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['E2'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['F2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['F2'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['G2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['G2'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['H2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['H2'].top(-5))
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['E1'])
     m300.mix(3,200,Beads)
     m300.aspirate(Bead_Vol, Beads)
     m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['A3'].bottom(2))
     m300.blow_out(Sample_plate.wells_by_name()['A3'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['B3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['B3'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['C3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['C3'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['D3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['D3'].top(-5))
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['F1'])
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['E3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['E3'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['F3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['F3'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['G3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['G3'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['H3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['H3'].top(-5))
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['G1'])
     m300.mix(3,200,Beads)
     m300.aspirate(Bead_Vol, Beads)
     m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['A4'].bottom(2))
     m300.blow_out(Sample_plate.wells_by_name()['A4'].top(-5))
-    m300.drop_tip()
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['B4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['B4'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['C4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['C4'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['D4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['D4'].top(-5))
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['H1'])
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['E4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['E4'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['F4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['F4'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['G4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['G4'].top(-5))
+
+    m300.aspirate(Bead_Vol, Beads)
+    m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['H4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['H4'].top(-5))
+    m300.return_tip()
 
     ### Transfering samples to mag plate containing bead and mix samples
     #Column 1
@@ -112,6 +242,90 @@ def run(BEST):
     m300.blow_out(Sample_plate.wells_by_name()['A1'].top(-5))
     m300.return_tip()
 
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['B1'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['B1'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['B1'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['B1'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['C1'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['C1'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['C1'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['C1'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['D1'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['D1'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['D1'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['D1'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['E1'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['E1'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['E1'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['E1'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['F1'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['F1'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['F1'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['F1'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['G1'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['G1'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['G1'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['G1'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['H1'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['H1'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['H1'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['H1'].top(-5))
+    m300.return_tip()
+
     #Column 2
     m300.flow_rate.aspirate = 150
     m300.flow_rate.dispense = 300
@@ -124,6 +338,91 @@ def run(BEST):
     # Blow out disposal volume 5 mm below the top of PCR well
     m300.blow_out(Sample_plate.wells_by_name()['A2'].top(-5))
     m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['B2'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['B2'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['B2'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['B2'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['C2'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['C2'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['C2'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['C2'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['D2'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['D2'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['D2'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['D2'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['E2'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['E2'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['E2'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['E2'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['F2'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['F2'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['F2'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['F2'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['G2'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['G2'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['G2'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['G2'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['H2'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['H2'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['H2'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['H2'].top(-5))
+    m300.return_tip()
+
 
     #Column 3
     m300.flow_rate.aspirate = 150
@@ -138,6 +437,92 @@ def run(BEST):
     m300.blow_out(Sample_plate.wells_by_name()['A3'].top(-5))
     m300.return_tip()
 
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['B3'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['B3'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['B3'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['B3'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['C3'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['C3'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['C3'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['C3'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['D3'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['D3'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['D3'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['D3'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['E3'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['E3'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['E3'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['E3'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['F3'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['F3'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['F3'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['F3'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['G3'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['G3'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['G3'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['G3'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['H3'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['H3'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['H3'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['H3'].top(-5))
+    m300.return_tip()
+
+
+
     #Column 4
     m300.flow_rate.aspirate = 150
     m300.flow_rate.dispense = 300
@@ -151,7 +536,92 @@ def run(BEST):
     m300.blow_out(Sample_plate.wells_by_name()['A4'].top(-5))
     m300.return_tip()
 
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['B4'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['B4'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['B4'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['B4'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['C4'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['C4'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['C4'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['C4'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['D4'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['D4'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['D4'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['D4'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['E4'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['E4'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['E4'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['E4'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['F4'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['F4'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['F4'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['F4'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['G4'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['G4'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['G4'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['G4'].top(-5))
+    m300.return_tip()
+
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 300
+    m300.pick_up_tip()
+    m300.aspirate(Sample_vol, PCR_plate.wells_by_name()['H4'].bottom(1))
+    m300.dispense(Sample_vol,Sample_plate.wells_by_name()['H4'].bottom(2))
+    m300.flow_rate.aspirate = 100
+    m300.flow_rate.dispense = 200
+    m300.mix(3,100,Sample_plate.wells_by_name()['H4'].bottom(5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(Sample_plate.wells_by_name()['H4'].top(-5))
+    m300.return_tip()
+
     BEST.delay(minutes=5)
+
     ### Transfering supernatant from mag plate to liquid trash
     m300.flow_rate.aspirate = 150
     m300.flow_rate.dispense = 150
@@ -164,7 +634,61 @@ def run(BEST):
     m300.blow_out(trash_box['A1'])
     m300.return_tip()
 
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['B2'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['B1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['C2'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['C1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['D2'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['D1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['E2'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['E1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['F2'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['F1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['G2'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['G1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['H2'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['H1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
     #Column 2
+    ### Transfering supernatant from mag plate to liquid trash
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 150
+    Mag_deck.engage()
+    #Column 1
     m300.pick_up_tip(tipracks_300_1.wells_by_name()['A3'])
     m300.aspirate(200, Sample_plate.wells_by_name()['A2'].bottom(2))
     m300.dispense(200, trash_box['A1'].top(-5))
@@ -172,7 +696,61 @@ def run(BEST):
     m300.blow_out(trash_box['A1'])
     m300.return_tip()
 
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['B3'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['B2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['C3'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['C2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['D3'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['D2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['E3'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['E2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['F3'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['F2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['G3'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['G2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['H3'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['H2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
     #Column 3
+    ### Transfering supernatant from mag plate to liquid trash
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 150
+    Mag_deck.engage()
+    #Column 1
     m300.pick_up_tip(tipracks_300_1.wells_by_name()['A4'])
     m300.aspirate(200, Sample_plate.wells_by_name()['A3'].bottom(2))
     m300.dispense(200, trash_box['A1'].top(-5))
@@ -180,9 +758,112 @@ def run(BEST):
     m300.blow_out(trash_box['A1'])
     m300.return_tip()
 
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['B4'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['B3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['C4'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['C3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['D4'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['D3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['E4'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['E3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['F4'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['F3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['G4'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['G3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['H4'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['H3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
     #Column 4
+    ### Transfering supernatant from mag plate to liquid trash
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 150
+    Mag_deck.engage()
+    #Column 1
     m300.pick_up_tip(tipracks_300_1.wells_by_name()['A5'])
     m300.aspirate(200, Sample_plate.wells_by_name()['A4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['B5'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['B4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['C5'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['C4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['D5'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['D4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['E5'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['E4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['F5'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['F4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['G5'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['G4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['H5'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['H4'].bottom(2))
     m300.dispense(200, trash_box['A1'].top(-5))
     # Blow out disposal volume 5 mm below the top of PCR well
     m300.blow_out(trash_box['A1'])
@@ -191,8 +872,8 @@ def run(BEST):
     ### Start first wash with EtOH
     m300.flow_rate.aspirate = 150
     m300.flow_rate.dispense = 300
-
     Mag_deck.disengage()
+
     m300.pick_up_tip()
     m300.aspirate(EtOH_vol1,EtOH1)
     m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['A1'].bottom(2))
@@ -203,12 +884,125 @@ def run(BEST):
 
     m300.pick_up_tip()
     m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['B1'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['B1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['B1'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['C1'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['C1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['C1'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['D1'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['D1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['D1'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['E1'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['E1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['E1'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['F1'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['F1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['F1'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['G1'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['G1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['G1'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['H1'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['H1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['H1'].bottom(2))
+    m300.return_tip()
+
+    ##Column 2
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
     m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['A2'].bottom(2))
     # Blow out disposal volume 5 mm below the top of PCR well
     m300.mix(3,100,Sample_plate.wells_by_name()['A2'].bottom(2))
     m300.blow_out(Sample_plate.wells_by_name()['A2'].bottom(2))
     m300.return_tip()
 
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['B2'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['B2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['B2'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['C2'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['C2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['C2'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['D2'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['D2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['D2'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['E2'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['E2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['E2'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['F2'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['F2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['F2'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['G2'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['G2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['G2'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['H2'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['H2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['H2'].bottom(2))
+    m300.return_tip()
+    ##Column 3
     m300.pick_up_tip()
     m300.aspirate(EtOH_vol1,EtOH1)
     m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['A3'].bottom(2))
@@ -219,15 +1013,132 @@ def run(BEST):
 
     m300.pick_up_tip()
     m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['B3'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['B3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['B3'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['C3'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['C3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['C3'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['D3'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['D3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['D3'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['E3'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['E3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['E3'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['F3'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['F3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['F3'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['G3'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['G3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['G3'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['H3'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['H3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['H3'].bottom(2))
+    m300.return_tip()
+
+    ##Column 4
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
     m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['A4'].bottom(2))
     # Blow out disposal volume 5 mm below the top of PCR well
     m300.mix(3,100,Sample_plate.wells_by_name()['A4'].bottom(2))
     m300.blow_out(Sample_plate.wells_by_name()['A4'].bottom(2))
     m300.return_tip()
 
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['B4'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['B4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['B4'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['C4'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['C4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['C4'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['D4'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['D4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['D4'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['E4'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['E4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['E4'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['F4'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['F4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['F4'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['G4'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['G4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['G4'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol1,EtOH1)
+    m300.dispense(EtOH_vol1, Sample_plate.wells_by_name()['H4'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['H4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['H4'].bottom(2))
+    m300.return_tip()
+
     ### Transfering supernatant from mag plate to liquid trash
     Mag_deck.engage()
     BEST.delay(minutes=1)
+    #Column 1
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 150
+    Mag_deck.engage()
     #Column 1
     m300.pick_up_tip(tipracks_300_1.wells_by_name()['A6'])
     m300.aspirate(200, Sample_plate.wells_by_name()['A1'].bottom(2))
@@ -236,7 +1147,61 @@ def run(BEST):
     m300.blow_out(trash_box['A1'])
     m300.return_tip()
 
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['B6'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['B1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['C6'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['C1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['D6'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['D1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['E6'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['E1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['F6'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['F1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['G6'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['G1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['H6'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['H1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
     #Column 2
+    ### Transfering supernatant from mag plate to liquid trash
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 150
+    Mag_deck.engage()
+    #Column 1
     m300.pick_up_tip(tipracks_300_1.wells_by_name()['A7'])
     m300.aspirate(200, Sample_plate.wells_by_name()['A2'].bottom(2))
     m300.dispense(200, trash_box['A1'].top(-5))
@@ -244,7 +1209,61 @@ def run(BEST):
     m300.blow_out(trash_box['A1'])
     m300.return_tip()
 
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['B7'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['B2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['C7'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['C2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['D7'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['D2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['E7'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['E2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['F7'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['F2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['G7'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['G2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['H7'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['H2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
     #Column 3
+    ### Transfering supernatant from mag plate to liquid trash
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 150
+    Mag_deck.engage()
+    #Column 1
     m300.pick_up_tip(tipracks_300_1.wells_by_name()['A8'])
     m300.aspirate(200, Sample_plate.wells_by_name()['A3'].bottom(2))
     m300.dispense(200, trash_box['A1'].top(-5))
@@ -252,9 +1271,112 @@ def run(BEST):
     m300.blow_out(trash_box['A1'])
     m300.return_tip()
 
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['B8'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['B3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['C8'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['C3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['D8'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['D3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['E8'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['E3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['F8'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['F3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['G8'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['G3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['H8'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['H3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
     #Column 4
+    ### Transfering supernatant from mag plate to liquid trash
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 150
+    Mag_deck.engage()
+    #Column 1
     m300.pick_up_tip(tipracks_300_1.wells_by_name()['A9'])
     m300.aspirate(200, Sample_plate.wells_by_name()['A4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['B9'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['B4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['C9'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['C4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['D9'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['D4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['E9'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['E4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['F9'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['F4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['G9'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['G4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['H9'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['H4'].bottom(2))
     m300.dispense(200, trash_box['A1'].top(-5))
     # Blow out disposal volume 5 mm below the top of PCR well
     m300.blow_out(trash_box['A1'])
@@ -266,6 +1388,7 @@ def run(BEST):
     m300.flow_rate.dispense = 300
 
     Mag_deck.disengage()
+
     m300.pick_up_tip()
     m300.aspirate(EtOH_vol2,EtOH2)
     m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['A1'].bottom(2))
@@ -276,12 +1399,125 @@ def run(BEST):
 
     m300.pick_up_tip()
     m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['B1'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['B1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['B1'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['C1'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['C1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['C1'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['D1'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['D1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['D1'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['E1'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['E1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['E1'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['F1'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['F1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['F1'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['G1'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['G1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['G1'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['H1'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['H1'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['H1'].bottom(2))
+    m300.return_tip()
+
+    ##Column 2
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
     m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['A2'].bottom(2))
     # Blow out disposal volume 5 mm below the top of PCR well
     m300.mix(3,100,Sample_plate.wells_by_name()['A2'].bottom(2))
     m300.blow_out(Sample_plate.wells_by_name()['A2'].bottom(2))
     m300.return_tip()
 
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['B2'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['B2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['B2'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['C2'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['C2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['C2'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['D2'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['D2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['D2'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['E2'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['E2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['E2'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['F2'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['F2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['F2'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['G2'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['G2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['G2'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['H2'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['H2'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['H2'].bottom(2))
+    m300.return_tip()
+    ##Column 3
     m300.pick_up_tip()
     m300.aspirate(EtOH_vol2,EtOH2)
     m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['A3'].bottom(2))
@@ -292,16 +1528,133 @@ def run(BEST):
 
     m300.pick_up_tip()
     m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['B3'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['B3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['B3'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['C3'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['C3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['C3'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['D3'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['D3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['D3'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['E3'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['E3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['E3'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['F3'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['F3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['F3'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['G3'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['G3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['G3'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['H3'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['H3'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['H3'].bottom(2))
+    m300.return_tip()
+
+    ##Column 4
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
     m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['A4'].bottom(2))
     # Blow out disposal volume 5 mm below the top of PCR well
     m300.mix(3,100,Sample_plate.wells_by_name()['A4'].bottom(2))
     m300.blow_out(Sample_plate.wells_by_name()['A4'].bottom(2))
     m300.return_tip()
 
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['B4'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['B4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['B4'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['C4'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['C4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['C4'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['D4'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['D4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['D4'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['E4'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['E4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['E4'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['F4'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['F4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['F4'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['G4'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['G4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['G4'].bottom(2))
+    m300.return_tip()
+
+    m300.pick_up_tip()
+    m300.aspirate(EtOH_vol2,EtOH2)
+    m300.dispense(EtOH_vol2, Sample_plate.wells_by_name()['H4'].bottom(2))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.mix(3,100,Sample_plate.wells_by_name()['H4'].bottom(2))
+    m300.blow_out(Sample_plate.wells_by_name()['H4'].bottom(2))
+    m300.return_tip()
+
     ### Transfering supernatant from mag plate to liquid trash
     Mag_deck.engage()
     BEST.delay(minutes=1)
     #Column 1
+    ### Transfering supernatant from mag plate to liquid trash
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 150
+
     m300.pick_up_tip(tipracks_300_1.wells_by_name()['A10'])
     m300.aspirate(200, Sample_plate.wells_by_name()['A1'].bottom(2))
     m300.dispense(200, trash_box['A1'].top(-5))
@@ -309,7 +1662,61 @@ def run(BEST):
     m300.blow_out(trash_box['A1'])
     m300.return_tip()
 
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['B10'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['B1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['C10'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['C1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['D10'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['D1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['E10'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['E1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['F10'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['F1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['G10'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['G1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['H10'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['H1'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
     #Column 2
+    ### Transfering supernatant from mag plate to liquid trash
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 150
+    Mag_deck.engage()
+
     m300.pick_up_tip(tipracks_300_1.wells_by_name()['A11'])
     m300.aspirate(200, Sample_plate.wells_by_name()['A2'].bottom(2))
     m300.dispense(200, trash_box['A1'].top(-5))
@@ -317,7 +1724,61 @@ def run(BEST):
     m300.blow_out(trash_box['A1'])
     m300.return_tip()
 
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['B11'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['B2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['C11'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['C2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['D11'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['D2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['E11'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['E2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['F11'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['F2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['G11'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['G2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['H11'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['H2'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
     #Column 3
+    ### Transfering supernatant from mag plate to liquid trash
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 150
+    Mag_deck.engage()
+
     m300.pick_up_tip(tipracks_300_1.wells_by_name()['A12'])
     m300.aspirate(200, Sample_plate.wells_by_name()['A3'].bottom(2))
     m300.dispense(200, trash_box['A1'].top(-5))
@@ -325,7 +1786,61 @@ def run(BEST):
     m300.blow_out(trash_box['A1'])
     m300.return_tip()
 
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['B12'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['B3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['C12'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['C3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['D12'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['D3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['E12'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['E3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['F12'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['F3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['G12'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['G3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_1.wells_by_name()['H12'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['H3'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
     #Column 4
+    ### Transfering supernatant from mag plate to liquid trash
+    m300.flow_rate.aspirate = 150
+    m300.flow_rate.dispense = 150
+    Mag_deck.engage()
+    #Column 1
     m300.pick_up_tip(tipracks_300_2.wells_by_name()['A1'])
     m300.aspirate(200, Sample_plate.wells_by_name()['A4'].bottom(2))
     m300.dispense(200, trash_box['A1'].top(-5))
@@ -333,90 +1848,548 @@ def run(BEST):
     m300.blow_out(trash_box['A1'])
     m300.return_tip()
 
+    m300.pick_up_tip(tipracks_300_2.wells_by_name()['B1'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['B4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_2.wells_by_name()['C1'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['C4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_2.wells_by_name()['D1'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['D4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_2.wells_by_name()['E1'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['E4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_2.wells_by_name()['F1'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['F4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_2.wells_by_name()['G1'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['G4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
+    m300.pick_up_tip(tipracks_300_2.wells_by_name()['H1'])
+    m300.aspirate(200, Sample_plate.wells_by_name()['H4'].bottom(2))
+    m300.dispense(200, trash_box['A1'].top(-5))
+    # Blow out disposal volume 5 mm below the top of PCR well
+    m300.blow_out(trash_box['A1'])
+    m300.return_tip()
+
     ### Start drying of beads before elution
     Mag_deck.disengage()
-    BEST.delay(minutes=3)
+    BEST.delay(seconds=30)
 
     ### Adding elution buffer
-    m300.pick_up_tip()
-    m300.aspirate(TE_vol, TE)
-    m300.dispense(TE_vol,Sample_plate.wells_by_name()['A1'].bottom(2))
-    m300.mix(3,30,Sample_plate.wells_by_name()['A1'].bottom(3))
-    m300.blow_out(Sample_plate.wells_by_name()['A1'].bottom(4))
-    m300.return_tip()
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['A2'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['A1'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['A1'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['A1'].bottom(4))
+    p50.return_tip()
 
-    m300.pick_up_tip()
-    m300.aspirate(TE_vol, TE)
-    m300.dispense(TE_vol,Sample_plate.wells_by_name()['A2'].bottom(2))
-    m300.mix(3,30,Sample_plate.wells_by_name()['A2'].bottom(3))
-    m300.blow_out(Sample_plate.wells_by_name()['A2'].bottom(4))
-    m300.return_tip()
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['B2'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['B1'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['B1'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['B1'].bottom(4))
+    p50.return_tip()
 
-    m300.pick_up_tip()
-    m300.aspirate(TE_vol, TE)
-    m300.dispense(TE_vol,Sample_plate.wells_by_name()['A3'].bottom(2))
-    m300.mix(3,30,Sample_plate.wells_by_name()['A3'].bottom(3))
-    m300.blow_out(Sample_plate.wells_by_name()['A3'].bottom(4))
-    m300.return_tip()
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['C2'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['C1'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['C1'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['C1'].bottom(4))
+    p50.return_tip()
 
-    m300.pick_up_tip()
-    m300.aspirate(TE_vol, TE)
-    m300.dispense(TE_vol,Sample_plate.wells_by_name()['A4'].bottom(2))
-    m300.mix(3,30,Sample_plate.wells_by_name()['A4'].bottom(3))
-    m300.blow_out(Sample_plate.wells_by_name()['A4'].bottom(4))
-    m300.return_tip()
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['D2'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['D1'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['D1'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['D1'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['E2'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['E1'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['E1'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['E1'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['F2'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['F1'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['F1'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['F1'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['G2'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['G1'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['G1'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['G1'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['H2'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['H1'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['H1'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['H1'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['A3'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['A2'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['A2'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['A2'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['B3'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['B2'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['B2'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['B2'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['C3'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['C2'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['C2'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['C2'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['D3'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['D2'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['D2'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['D2'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['E3'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['E2'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['E2'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['E2'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['F3'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['F2'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['F2'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['F2'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['G3'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['G2'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['G2'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['G2'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['H3'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['H2'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['H2'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['H2'].bottom(4))
+    p50.return_tip()
+
+    ## Column 3
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['A4'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['A3'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['A3'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['A3'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['B4'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['B3'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['B3'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['B3'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['C4'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['C3'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['C3'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['C3'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['D4'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['D3'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['D3'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['D3'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['E4'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['E3'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['E3'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['E3'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['F4'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['F3'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['F3'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['F3'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['G4'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['G3'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['G3'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['G3'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['H4'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['H3'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['H3'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['H3'].bottom(4))
+    p50.return_tip()
+
+    ## Column 4
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['A5'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['A4'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['A4'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['A4'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['B5'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['B4'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['B4'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['B4'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['C5'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['C4'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['C4'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['C4'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['D5'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['D4'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['D4'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['D4'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['E5'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['E4'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['E4'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['E4'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['F5'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['F4'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['F4'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['F4'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['G5'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['G4'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['G4'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['G4'].bottom(4))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['H5'])
+    p50.aspirate(TE_vol, TE)
+    p50.dispense(TE_vol,Sample_plate.wells_by_name()['H4'].bottom(2))
+    p50.mix(3,30,Sample_plate.wells_by_name()['H4'].bottom(3))
+    p50.blow_out(Sample_plate.wells_by_name()['H4'].bottom(4))
+    p50.return_tip()
 
     ### Incubate beads in 15 minutes and mix them every fifth minute
-    BEST.delay(minutes=4, seconds=30)
-    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A2'])
-    m300.mix(5,30,Sample_plate.wells_by_name()['A1'].bottom(3))
-    m300.return_tip()
+    BEST.delay(minutes=2, seconds=30)
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['A6'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['A1'].bottom(3))
+    p50.return_tip()
 
-    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A3'])
-    m300.mix(5,30,Sample_plate.wells_by_name()['A2'].bottom(3))
-    m300.return_tip()
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['B6'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['B1'].bottom(3))
+    p50.return_tip()
 
-    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A4'])
-    m300.mix(5,30,Sample_plate.wells_by_name()['A3'].bottom(3))
-    m300.return_tip()
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['C6'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['C1'].bottom(3))
+    p50.return_tip()
 
-    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A5'])
-    m300.mix(5,30,Sample_plate.wells_by_name()['A4'].bottom(3))
-    m300.return_tip()
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['D6'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['D1'].bottom(3))
+    p50.return_tip()
 
-    BEST.delay(minutes=4, seconds=30)
-    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A2'])
-    m300.mix(5,30,Sample_plate.wells_by_name()['A1'].bottom(3))
-    m300.return_tip()
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['E6'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['E1'].bottom(3))
+    p50.return_tip()
 
-    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A3'])
-    m300.mix(5,30,Sample_plate.wells_by_name()['A2'].bottom(3))
-    m300.return_tip()
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['F6'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['F1'].bottom(3))
+    p50.return_tip()
 
-    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A4'])
-    m300.mix(5,30,Sample_plate.wells_by_name()['A3'].bottom(3))
-    m300.return_tip()
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['G6'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['G1'].bottom(3))
+    p50.return_tip()
 
-    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A5'])
-    m300.mix(5,30,Sample_plate.wells_by_name()['A4'].bottom(3))
-    m300.return_tip()
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['H6'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['H1'].bottom(3))
+    p50.return_tip()
 
-    BEST.delay(minutes=4, seconds=30)
-    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A2'])
-    m300.mix(5,30,Sample_plate.wells_by_name()['A1'].bottom(3))
-    m300.return_tip()
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['A7'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['A2'].bottom(3))
+    p50.return_tip()
 
-    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A3'])
-    m300.mix(5,30,Sample_plate.wells_by_name()['A2'].bottom(3))
-    m300.return_tip()
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['B7'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['B2'].bottom(3))
+    p50.return_tip()
 
-    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A4'])
-    m300.mix(5,30,Sample_plate.wells_by_name()['A3'].bottom(3))
-    m300.return_tip()
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['C7'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['C2'].bottom(3))
+    p50.return_tip()
 
-    m300.pick_up_tip(tipracks_300_2.wells_by_name()['A5'])
-    m300.mix(5,30,Sample_plate.wells_by_name()['A4'].bottom(3))
-    m300.return_tip()
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['D7'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['D2'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['E7'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['E2'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['F7'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['F2'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['G7'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['G2'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['H7'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['H2'].bottom(3))
+    p50.return_tip()
+
+    ## Column 3
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['A8'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['A3'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['B8'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['B3'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['C8'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['C3'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['D8'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['D3'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['E8'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['E3'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['F8'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['F3'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['G8'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['G3'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['H8'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['H3'].bottom(3))
+    p50.return_tip()
+
+    ## Column 4
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['A9'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['A4'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['B9'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['B4'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['C9'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['C4'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['D9'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['D4'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['E9'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['E4'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['F9'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['F4'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['G9'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['G4'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['H9'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['H4'].bottom(3))
+    p50.return_tip()
+
+    BEST.delay(minutes=2, seconds=30)
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['A6'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['A1'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['B6'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['B1'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['C6'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['C1'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['D6'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['D1'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['E6'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['E1'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['F6'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['F1'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['G6'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['G1'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['H6'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['H1'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['A7'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['A2'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['B7'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['B2'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['C7'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['C2'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['D7'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['D2'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['E7'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['E2'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['F7'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['F2'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['G7'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['G2'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['H7'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['H2'].bottom(3))
+    p50.return_tip()
+
+    ## Column 3
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['A8'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['A3'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['B8'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['B3'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['C8'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['C3'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['D8'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['D3'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['E8'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['E3'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['F8'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['F3'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['G8'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['G3'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['H8'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['H3'].bottom(3))
+    p50.return_tip()
+
+    ## Column 4
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['A9'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['A4'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['B9'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['B4'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['C9'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['C4'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['D9'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['D4'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['E9'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['E4'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['F9'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['F4'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['G9'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['G4'].bottom(3))
+    p50.return_tip()
+
+    p50.pick_up_tip(tipracks_300_2.wells_by_name()['H9'])
+    p50.mix(3,30,Sample_plate.wells_by_name()['H4'].bottom(3))
+    p50.return_tip()
 
     ### Start elution of purified libraries
     Mag_deck.engage()
