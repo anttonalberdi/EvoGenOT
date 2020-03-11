@@ -59,7 +59,7 @@ def run(BEST):
     #### PIPETTE SETUP ####
     p50 = BEST.load_instrument('p50_single', mount='left', tip_racks=[tipracks_300_2])
 
-    m300 = BEST.load_instrument('p300_multi', mount='right', tip_racks=[tipracks_300_1, tipracks_300_2])
+    m300 = BEST.load_instrument('p300_single', mount='right', tip_racks=[tipracks_300_1, tipracks_300_2])
 
     ## Reagent SETUP
     Beads = trough.wells_by_name()['A1']
