@@ -47,7 +47,7 @@ def run(BEST):
     Mag_deck = BEST.load_module('magdeck', '4')
     Sample_plate = Mag_deck.load_labware('biorad_96_wellplate_200ul_pcr',label='Samples on MagDeck')
 
-    # others
+    # others#
     PCR_plate = BEST.load_labware('nest_96_wellplate_100ul_pcr_full_skirt','5', label='Non purified BEST libraries')
     trough = BEST.load_labware('usascientific_12_reservoir_22ml', '7', label='Purification reagents')
     trash_box = BEST.load_labware('agilent_1_reservoir_290ml', '8', label='liquid trash')
