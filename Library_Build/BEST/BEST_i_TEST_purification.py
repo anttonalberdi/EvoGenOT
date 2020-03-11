@@ -92,6 +92,7 @@ def run(BEST):
     m300.pick_up_tip()
     Mag_deck.disengage()
 
+    m300.mix(10,200,trough.wells_by_name()['A1'].bottom(5))
     m300.aspirate(Bead_Vol, Beads)
     m300.dispense(Bead_Vol,Sample_plate.wells_by_name()['A1'].bottom(2))
     m300.blow_out(Sample_plate.wells_by_name()['A1'].top(-5))
