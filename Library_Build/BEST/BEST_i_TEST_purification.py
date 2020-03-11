@@ -362,12 +362,14 @@ def run(BEST):
     m300.dispense(TE_vol,Sample_plate.wells_by_name()['A2'].bottom(2))
     m300.mix(3,30,Sample_plate.wells_by_name()['A2'].bottom(3))
     m300.blow_out(Sample_plate.wells_by_name()['A2'].bottom(4))
+    m300.return_tip()
 
     m300.pick_up_tip()
     m300.aspirate(TE_vol, TE)
     m300.dispense(TE_vol,Sample_plate.wells_by_name()['A3'].bottom(2))
     m300.mix(3,30,Sample_plate.wells_by_name()['A3'].bottom(3))
     m300.blow_out(Sample_plate.wells_by_name()['A3'].bottom(4))
+    m300.return_tip()
 
     m300.pick_up_tip()
     m300.aspirate(TE_vol, TE)
