@@ -13,6 +13,7 @@ metadata = {
 def run(protocol):
         #### LABWARE SETUP ####
         mag_deck = protocol.load_module('magdeck', 10)
+        
 
 
         trough = protocol.load_labware('trough-12row', 7)                       # to add proper model of labware from https://labware.opentrons.com/
