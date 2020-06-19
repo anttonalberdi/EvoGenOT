@@ -33,7 +33,7 @@ from opentrons import protocol_api
 metadata = {
     'protocolName': 'BEST_Purification',
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
-    'apiLevel': '2.0',
+    'apiLevel': '2.2',
     'description': 'Purification procedure of Automated single tube library preparation after Carøe et al. 2017',
     }
 
@@ -45,10 +45,10 @@ def run(protocol):
     trough = protocol.load_labware('usascientific_12_reservoir_22ml', 7)                       # to add proper model of labware from https://labware.opentrons.com/
     trash_box = protocol.load_labware('agilent_1_reservoir_290ml', 8)            # to add proper model of labware
     mag_plate = mag_deck.load_labware('biorad_96_wellplate_200ul_pcr')
-    elution_plate = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 1)
+    elution_plate = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 2)
 
-    tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 3)
-    tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 4)
+    tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 4)
+    tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 1)
     tipracks_200_3 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 5)
     tipracks_200_4 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 6)
 
@@ -414,6 +414,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA2
@@ -426,6 +427,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA3
@@ -438,6 +440,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA4
@@ -450,6 +453,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA5
@@ -462,6 +466,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA6
@@ -474,6 +479,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA7
@@ -486,6 +492,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA8
@@ -498,6 +505,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA9
@@ -510,6 +518,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA10
@@ -522,6 +531,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA11
@@ -534,6 +544,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA12
@@ -546,6 +557,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### Wash 1 with Ethanol, using tiprack 2
@@ -554,7 +566,7 @@ def run(protocol):
     m300.flow_rate.dispense = 100
     m300.pick_up_tip(tipracks_200_2['A1']) # Slow down head speed 0.5X for bead handling
     m300.move_to(EtOH1.top(-16))
-    m300.aspirate(EtOH_vol, EtOH1.top(-12))
+    m300.aspirate(EtOH_vol, EtOH1.bottom(2))
     m300.dispense(EtOH_vol, MA1.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
@@ -562,7 +574,7 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(MA1.top(-10))
+    m300.move_to(MA1.top(-4))
     m300.blow_out()
     m300.return_tip()
 
@@ -571,7 +583,7 @@ def run(protocol):
     m300.flow_rate.dispense = 100
     m300.pick_up_tip(tipracks_200_2['A2']) # Slow down head speed 0.5X for bead handling
     m300.move_to(EtOH1.top(-16))
-    m300.aspirate(EtOH_vol, EtOH1.top(-12))
+    m300.aspirate(EtOH_vol, EtOH1.bottom(2))
     m300.dispense(EtOH_vol, MA2.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
@@ -579,7 +591,7 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(MA2.top(-10))
+    m300.move_to(MA2.top(-4))
     m300.blow_out()
     m300.return_tip()
 
@@ -588,7 +600,7 @@ def run(protocol):
     m300.flow_rate.dispense = 100
     m300.pick_up_tip(tipracks_200_2['A3']) # Slow down head speed 0.5X for bead handling
     m300.move_to(EtOH1.top(-16))
-    m300.aspirate(EtOH_vol, EtOH1.top(-12))
+    m300.aspirate(EtOH_vol, EtOH1.bottom(2))
     m300.dispense(EtOH_vol, MA3.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
@@ -596,7 +608,7 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(MA3.top(-10))
+    m300.move_to(MA3.top(-4))
     m300.blow_out()
     m300.return_tip()
 
@@ -605,7 +617,7 @@ def run(protocol):
     m300.flow_rate.dispense = 100
     m300.pick_up_tip(tipracks_200_2['A4']) # Slow down head speed 0.5X for bead handling
     m300.move_to(EtOH1.top(-16))
-    m300.aspirate(EtOH_vol, EtOH1.top(-12))
+    m300.aspirate(EtOH_vol, EtOH1.bottom(2))
     m300.dispense(EtOH_vol, MA4.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
@@ -613,7 +625,7 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(MA4.top(-10))
+    m300.move_to(MA4.top(-4))
     m300.blow_out()
     m300.return_tip()
 
@@ -622,7 +634,7 @@ def run(protocol):
     m300.flow_rate.dispense = 100
     m300.pick_up_tip(tipracks_200_2['A5']) # Slow down head speed 0.5X for bead handling
     m300.move_to(EtOH1.top(-16))
-    m300.aspirate(EtOH_vol, EtOH1.top(-12))
+    m300.aspirate(EtOH_vol, EtOH1.bottom(2))
     m300.dispense(EtOH_vol, MA5.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
@@ -630,7 +642,7 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(MA5.top(-10))
+    m300.move_to(MA5.top(-4))
     m300.blow_out()
     m300.return_tip()
 
@@ -639,7 +651,7 @@ def run(protocol):
     m300.flow_rate.dispense = 100
     m300.pick_up_tip(tipracks_200_2['A6']) # Slow down head speed 0.5X for bead handling
     m300.move_to(EtOH1.top(-16))
-    m300.aspirate(EtOH_vol, EtOH1.top(-12))
+    m300.aspirate(EtOH_vol, EtOH1.bottom(2))
     m300.dispense(EtOH_vol, MA6.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
@@ -647,7 +659,7 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(MA6.top(-10))
+    m300.move_to(MA6.top(-4))
     m300.blow_out()
     m300.return_tip()
 
@@ -656,7 +668,7 @@ def run(protocol):
     m300.flow_rate.dispense = 100
     m300.pick_up_tip(tipracks_200_2['A7']) # Slow down head speed 0.5X for bead handling
     m300.move_to(EtOH1.top(-16))
-    m300.aspirate(EtOH_vol, EtOH1.top(-12))
+    m300.aspirate(EtOH_vol, EtOH1.bottom(2))
     m300.dispense(EtOH_vol, MA7.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
@@ -664,7 +676,7 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(MA7.top(-10))
+    m300.move_to(MA7.top(-4))
     m300.blow_out()
     m300.return_tip()
 
@@ -673,7 +685,7 @@ def run(protocol):
     m300.flow_rate.dispense = 100
     m300.pick_up_tip(tipracks_200_2['A8']) # Slow down head speed 0.5X for bead handling
     m300.move_to(EtOH1.top(-16))
-    m300.aspirate(EtOH_vol, EtOH1.top(-12))
+    m300.aspirate(EtOH_vol, EtOH1.bottom(2))
     m300.dispense(EtOH_vol, MA8.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
@@ -681,7 +693,7 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(MA8.top(-10))
+    m300.move_to(MA8.top(-4))
     m300.blow_out()
     m300.return_tip()
 
@@ -690,7 +702,7 @@ def run(protocol):
     m300.flow_rate.dispense = 100
     m300.pick_up_tip(tipracks_200_2['A9']) # Slow down head speed 0.5X for bead handling
     m300.move_to(EtOH1.top(-16))
-    m300.aspirate(EtOH_vol, EtOH1.top(-12))
+    m300.aspirate(EtOH_vol, EtOH1.bottom(2))
     m300.dispense(EtOH_vol, MA9.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
@@ -698,7 +710,7 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(MA9.top(-10))
+    m300.move_to(MA9.top(-4))
     m300.blow_out()
     m300.return_tip()
 
@@ -707,7 +719,7 @@ def run(protocol):
     m300.flow_rate.dispense = 100
     m300.pick_up_tip(tipracks_200_2['A10']) # Slow down head speed 0.5X for bead handling
     m300.move_to(EtOH1.top(-16))
-    m300.aspirate(EtOH_vol, EtOH1.top(-12))
+    m300.aspirate(EtOH_vol, EtOH1.bottom(2))
     m300.dispense(EtOH_vol, MA10.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
@@ -715,7 +727,7 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(MA10.top(-10))
+    m300.move_to(MA10.top(-4))
     m300.blow_out()
     m300.return_tip()
 
@@ -724,7 +736,7 @@ def run(protocol):
     m300.flow_rate.dispense = 100
     m300.pick_up_tip(tipracks_200_2['A11']) # Slow down head speed 0.5X for bead handling
     m300.move_to(EtOH1.top(-16))
-    m300.aspirate(EtOH_vol, EtOH1.top(-12))
+    m300.aspirate(EtOH_vol, EtOH1.bottom(2))
     m300.dispense(EtOH_vol, MA11.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
@@ -732,7 +744,7 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(MA11.top(-10))
+    m300.move_to(MA11.top(-4))
     m300.blow_out()
     m300.return_tip()
 
@@ -741,7 +753,7 @@ def run(protocol):
     m300.flow_rate.dispense = 100
     m300.pick_up_tip(tipracks_200_2['A12']) # Slow down head speed 0.5X for bead handling
     m300.move_to(EtOH1.top(-16))
-    m300.aspirate(EtOH_vol, EtOH1.top(-12))
+    m300.aspirate(EtOH_vol, EtOH1.bottom(2))
     m300.dispense(EtOH_vol, MA12.top(-4))
     m300.flow_rate.aspirate = 100
     m300.flow_rate.dispense = 100
@@ -749,7 +761,7 @@ def run(protocol):
     protocol.delay(seconds=5)
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
-    m300.move_to(MA12.top(-10))
+    m300.move_to(MA12.top(-4))
     m300.blow_out()
     m300.return_tip()
 
@@ -767,6 +779,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA2
@@ -779,6 +792,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA3
@@ -791,6 +805,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA4
@@ -803,6 +818,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA5
@@ -815,6 +831,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA6
@@ -827,6 +844,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA7
@@ -839,6 +857,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA8
@@ -851,6 +870,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA9
@@ -863,6 +883,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA10
@@ -875,6 +896,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA11
@@ -887,6 +909,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### remove supernatant from MA12
@@ -899,6 +922,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 130
     m300.flow_rate.dispense = 130
     m300.blow_out(trash_box['A1'].top(-5))
+    m300.air_gap(height = 2)
     m300.return_tip()
 
     ### Wash 2 with Ethanol, using tiprack 3
