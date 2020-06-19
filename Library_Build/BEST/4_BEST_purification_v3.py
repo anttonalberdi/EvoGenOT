@@ -29,7 +29,7 @@
 from opentrons import protocol_api
 
 #### METADATA ####
- 
+
 metadata = {
     'protocolName': 'BEST_Purification',
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',

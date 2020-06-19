@@ -64,8 +64,8 @@ metadata = {
 def run(protocol):
 
     #### LABWARE SETUP ####
-    temp_deck_1 = protocol.load_module('tempdeck', '4')
-    temp_deck_2 = protocol.load_module('tempdeck', '10')
+    temp_deck_1 = protocol.load_module('tempdeck', 4)
+    temp_deck_2 = protocol.load_module('tempdeck', 10)
 
     temp_deck_1._port = '/dev/ttyACM0'
     temp_deck_2._port = '/dev/ttyACM1'
@@ -78,11 +78,11 @@ def run(protocol):
     #mag_deck = modules.load('magdeck', '7')
     #mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 
-    tipracks_10_1 = protocol.load_labware('opentrons_96_filtertiprack_10ul', '5')
-    tipracks_10_2 = protocol.load_labware('opentrons_96_filtertiprack_10ul', '8')
+    tipracks_10_1 = protocol.load_labware('opentrons_96_filtertiprack_10ul', 5)
+    tipracks_10_2 = protocol.load_labware('opentrons_96_filtertiprack_10ul', 8)
 
-    tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', '9')
-    tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', '11')
+    tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 9)
+    tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 11)
 
 
 
@@ -125,13 +125,13 @@ def run(protocol):
 
 
     """
-    Blund end repair
+    Blunt end repair
     """
-    protocol.comment("Yay! \ Blund-end Repair begins.")
+    protocol.comment("Yay! \ Blunt-end Repair begins.")
 
     temp_deck_1.temperature
     temp_deck_2.temperature
-    
+
     temp_deck_1.set_temperature(10)
     temp_deck_2.set_temperature(10)
 

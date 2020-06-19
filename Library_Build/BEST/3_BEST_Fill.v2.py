@@ -53,8 +53,8 @@ def run(protocol):
 
 
 #### LABWARE SETUP ####
-    temp_deck_1 = protocol.load_module('tempdeck', '4')
-    temp_deck_2 = protocol.load_module('tempdeck', '10')
+    temp_deck_1 = protocol.load_module('tempdeck', 4)
+    temp_deck_2 = protocol.load_module('tempdeck', 10)
 
     temp_deck_1._port = '/dev/ttyACM0'
     temp_deck_2._port = '/dev/ttyACM1'
@@ -73,10 +73,10 @@ def run(protocol):
 #mag_deck = modules.load('magdeck', '7')
 #mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 
-    tipracks_10_1 = protocol.load_labware('opentrons_96_filtertiprack_10ul', '5')
+    tipracks_10_1 = protocol.load_labware('opentrons_96_filtertiprack_10ul', 5)
 
 
-    tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', '9')
+    tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 9)
 
 
 
@@ -130,6 +130,7 @@ def run(protocol):
     m300.flow_rate.aspirate = 50
     m300.flow_rate.dispense = 50
     m300.aspirate(MM_dist_Fill, Fill_mastermix.bottom(1))
+
     m300.move_to(Enzyme_Fill.bottom())
     m300.dispense(MM_dist_Fill, Enzyme_Fill.bottom(2))
     m300.mix(5, 30, Enzyme_Fill.bottom(4))
@@ -210,7 +211,7 @@ def run(protocol):
     m10.move_to(temp_plate['A4'].top(-4))
     m10.return_tip()
 
-    ### Addition of Fill in mastermix to column 1
+    ### Addition of Fill in mastermix to column 5
     m10.flow_rate.aspirate = 100
     m10.flow_rate.dispense = 100
     m10.pick_up_tip(tipracks_10_1['A5']) # Slow down head speed 0.5X for bead handling
@@ -227,7 +228,7 @@ def run(protocol):
     m10.move_to(temp_plate['A5'].top(-4))
     m10.return_tip()
 
-    ### Addition of Fill in mastermix to column 1
+    ### Addition of Fill in mastermix to column 6
     m10.flow_rate.aspirate = 100
     m10.flow_rate.dispense = 100
     m10.pick_up_tip(tipracks_10_1['A6']) # Slow down head speed 0.5X for bead handling
@@ -244,7 +245,7 @@ def run(protocol):
     m10.move_to(temp_plate['A6'].top(-4))
     m10.return_tip()
 
-    ### Addition of Fill in mastermix to column 1
+    ### Addition of Fill in mastermix to column 7
     m10.flow_rate.aspirate = 100
     m10.flow_rate.dispense = 100
     m10.pick_up_tip(tipracks_10_1['A7']) # Slow down head speed 0.5X for bead handling
@@ -261,7 +262,7 @@ def run(protocol):
     m10.move_to(temp_plate['A7'].top(-4))
     m10.return_tip()
 
-    ### Addition of Fill in mastermix to column 1
+    ### Addition of Fill in mastermix to column 8
     m10.flow_rate.aspirate = 100
     m10.flow_rate.dispense = 100
     m10.pick_up_tip(tipracks_10_1['A8']) # Slow down head speed 0.5X for bead handling
@@ -278,7 +279,7 @@ def run(protocol):
     m10.move_to(temp_plate['A8'].top(-4))
     m10.return_tip()
 
-    ### Addition of Fill in mastermix to column 1
+    ### Addition of Fill in mastermix to column 9
     m10.flow_rate.aspirate = 100
     m10.flow_rate.dispense = 100
     m10.pick_up_tip(tipracks_10_1['A9']) # Slow down head speed 0.5X for bead handling
@@ -295,7 +296,7 @@ def run(protocol):
     m10.move_to(temp_plate['A9'].top(-4))
     m10.return_tip()
 
-    ### Addition of Fill in mastermix to column 1
+    ### Addition of Fill in mastermix to column 10
     m10.flow_rate.aspirate = 100
     m10.flow_rate.dispense = 100
     m10.pick_up_tip(tipracks_10_1['A10']) # Slow down head speed 0.5X for bead handling
@@ -312,7 +313,7 @@ def run(protocol):
     m10.move_to(temp_plate['A10'].top(-4))
     m10.return_tip()
 
-    ### Addition of Fill in mastermix to column 1
+    ### Addition of Fill in mastermix to column 11
     m10.flow_rate.aspirate = 100
     m10.flow_rate.dispense = 100
     m10.pick_up_tip(tipracks_10_1['A11']) # Slow down head speed 0.5X for bead handling
@@ -329,7 +330,7 @@ def run(protocol):
     m10.move_to(temp_plate['A11'].top(-4))
     m10.return_tip()
 
-    ### Addition of Fill in mastermix to column 1
+    ### Addition of Fill in mastermix to column 12
     m10.flow_rate.aspirate = 100
     m10.flow_rate.dispense = 100
     m10.pick_up_tip(tipracks_10_1['A12']) # Slow down head speed 0.5X for bead handling

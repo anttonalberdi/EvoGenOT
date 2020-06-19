@@ -96,6 +96,7 @@ MA10 = mag_plate.wells('A10')
 MA11 = mag_plate.wells('A11')
 MA12 = mag_plate.wells('A12')
 
+## Sample Setup
 sample_number = 96
 col_num = sample_number // 8 + (1 if sample_number % 8 > 0 else 0)
 samples = [col for col in mag_plate.cols()[:col_num]]
