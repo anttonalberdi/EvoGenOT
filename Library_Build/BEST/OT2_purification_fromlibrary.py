@@ -24,7 +24,7 @@ def run(protocol_context):
         "settling_time", "drying_time"
     )
 
-    mag_deck = protocol_context.load_module('magdeck', '1')
+    mag_deck = protocol_context.load_module('magdeck', '10')
     mag_plate = mag_deck.load_labware(
         'biorad_96_wellplate_200ul_pcr')
     output_plate = protocol_context.load_labware(
@@ -38,7 +38,7 @@ def run(protocol_context):
     if pip_range == 'p1000':
         tip_name = 'opentrons_96_tiprack_1000ul'
     elif pip_range == 'p300' or pip_range == 'p50':
-        tip_name = 'opentrons_96_tiprack_200ul'
+        tip_name = 'opentrons_96_filtertiprack_200ul'
     elif pip_range == 'p20':
         tip_name = 'opentrons_96_tiprack_20ul'
     else:
