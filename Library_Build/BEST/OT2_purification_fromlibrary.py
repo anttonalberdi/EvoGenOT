@@ -96,11 +96,11 @@ def run(protocol_context):
         pipette.return_tip()
 
     # Incubate beads and PCR product at RT for 5 minutes
-    protocol_context.delay(minutes=incubation_time)
+    #protocol_context.delay(minutes=incubation_time)
 
     # Engagae MagDeck and incubate
     mag_deck.engage()
-    protocol_context.delay(minutes=settling_time)
+    #protocol_context.delay(minutes=settling_time)
 
     # Remove supernatant from magnetic beads
     pipette.flow_rate.aspirate = 25
@@ -119,7 +119,7 @@ def run(protocol_context):
             pipette.transfer(200, target, liquid_waste, air_gap=air_vol)
 
     # Dry at RT
-    protocol_context.delay(minutes=drying_time)
+    #protocol_context.delay(minutes=drying_time)
 
     # Disengage MagDeck
     mag_deck.disengage()
@@ -137,11 +137,11 @@ def run(protocol_context):
         pipette.drop_tip()
 
     # Incubate at RT
-    protocol_context.delay(minutes=5)
+#    protocol_context.delay(minutes=5)
 
     # Engage MagDeck and remain engaged for DNA elution
     mag_deck.engage()
-    protocol_context.delay(minutes=settling_time)
+    #protocol_context.delay(minutes=settling_time)
 
     # Transfer clean PCR product to a new well
     for target, dest in zip(samples, output):
