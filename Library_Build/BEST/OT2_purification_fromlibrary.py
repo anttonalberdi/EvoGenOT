@@ -38,7 +38,7 @@ def run(protocol_context):
     if pip_range == 'p1000':
         tip_name = 'opentrons_96_tiprack_1000ul'
     elif pip_range == 'p300' or pip_range == 'p50':
-        tip_name = 'opentrons_96_tiprack_300ul'
+        tip_name = 'opentrons_96_tiprack_200ul'
     elif pip_range == 'p20':
         tip_name = 'opentrons_96_tiprack_20ul'
     else:
