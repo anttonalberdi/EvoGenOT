@@ -52,7 +52,7 @@ from opentrons import protocol_api
 metadata = {
     'protocolName': 'BEST_Lib_build_96_sample',
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
-    'apiLevel': '2.0',
+    'apiLevel': '2.2',
     'description': 'End Repair of Automated single tube library preperation after Carøe et al. 2017',
     }
 
@@ -77,7 +77,7 @@ def run(protocol):
     MM_plate = temp_deck_1.load_labware('biorad_96_wellplate_200ul_pcr')
 # trough = labware.load('trough-12row', '2')
 # Trash = labware.load('One-Column-reservoir','3')
-    temp_plate = temp_deck_2.load_labware('96_wellplate_200ul_covaris')
+    temp_plate = temp_deck_2.load_labware('biorad_96_wellplate_200ul_pcr')
 #mag_deck = modules.load('magdeck', '7')
 #mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 
@@ -128,225 +128,28 @@ def run(protocol):
     temp_deck_1.set_temperature(10) #  API 2 automatically wait for the tempdeck to reach this temperature
     temp_deck_2.set_temperature(10)
 
-
+    list_of_cols = ['A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12']
 
 ### Addition of Adapters
 
-### Adding adaptors to Column 1
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A1']) # Slow down head speed 0.5X for bead handling
-    m10.move_to(BGI_adapter.bottom())
-    m10.mix(3, 5, BGI_adapter.bottom(4))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.aspirate(2, BGI_adapter.bottom(1))
-    m10.move_to(temp_plate['A1'].bottom())
-    m10.dispense(2, temp_plate['A1'].bottom(3))
-    m10.mix(3, 10, temp_plate['A1'].bottom(3))
-    protocol.delay(seconds=3)
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.move_to(temp_plate['A1'].top(-4))
-    m10.return_tip()
+    for i in list_of_cols:
+        m10.flow_rate.aspirate = 180
+        m10.flow_rate.dispense = 180
+        m10.pick_up_tip(tipracks_10_1[i]) # Slow down head speed 0.5X for bead handling
+        m10.move_to(BGI_adapter.bottom())
+        m10.mix(3, 5, BGI_adapter.bottom(4))
+        m10.flow_rate.aspirate = 50
+        m10.flow_rate.dispense = 50
+        m10.aspirate(2, BGI_adapter.bottom(1))
+        m10.move_to(temp_plate[i].bottom())
+        m10.dispense(2, temp_plate[i].bottom(3))
+        m10.mix(3, 10, temp_plate[i].bottom(3))
+        protocol.delay(seconds=3)
+        m10.flow_rate.aspirate = 180
+        m10.flow_rate.dispense = 180
+        m10.move_to(temp_plate[i].top(-4))
+        m10.return_tip()
 
-### Adding adaptors to Column 2
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A2']) # Slow down head speed 0.5X for bead handling
-    m10.move_to(BGI_adapter.bottom())
-    m10.mix(3, 5, BGI_adapter.bottom(4))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.aspirate(2, BGI_adapter.bottom(1))
-    m10.move_to(temp_plate['A2'].bottom())
-    m10.dispense(2, temp_plate['A2'].bottom(3))
-    m10.mix(3, 10, temp_plate['A2'].bottom(3))
-    protocol.delay(seconds=3)
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.move_to(temp_plate['A2'].top(-4))
-    m10.return_tip()
-
-### Adding adaptors to Column 3
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A3']) # Slow down head speed 0.5X for bead handling
-    m10.move_to(BGI_adapter.bottom())
-    m10.mix(3, 5, BGI_adapter.bottom(4))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.aspirate(2, BGI_adapter.bottom(1))
-    m10.move_to(temp_plate['A3'].bottom())
-    m10.dispense(2, temp_plate['A3'].bottom(3))
-    m10.mix(3, 10, temp_plate['A3'].bottom(3))
-    protocol.delay(seconds=3)
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.move_to(temp_plate['A3'].top(-4))
-    m10.return_tip()
-
-### Adding adaptors to Column 4
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A4']) # Slow down head speed 0.5X for bead handling
-    m10.move_to(BGI_adapter.bottom())
-    m10.mix(3, 5, BGI_adapter.bottom(4))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.aspirate(2, BGI_adapter.bottom(1))
-    m10.move_to(temp_plate['A4'].bottom())
-    m10.dispense(2, temp_plate['A4'].bottom(3))
-    m10.mix(3, 10, temp_plate['A4'].bottom(3))
-    protocol.delay(seconds=3)
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.move_to(temp_plate['A4'].top(-4))
-    m10.return_tip()
-
-### Adding adaptors to Column 5
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A5']) # Slow down head speed 0.5X for bead handling
-    m10.move_to(BGI_adapter.bottom())
-    m10.mix(3, 5, BGI_adapter.bottom(4))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.aspirate(2, BGI_adapter.bottom(1))
-    m10.move_to(temp_plate['A5'].bottom())
-    m10.dispense(2, temp_plate['A5'].bottom(3))
-    m10.mix(3, 10, temp_plate['A5'].bottom(3))
-    protocol.delay(seconds=3)
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.move_to(temp_plate['A5'].top(-4))
-    m10.return_tip()
-
-### Adding adaptors to Column 6
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A6']) # Slow down head speed 0.5X for bead handling
-    m10.move_to(BGI_adapter.bottom())
-    m10.mix(3, 5, BGI_adapter.bottom(4))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.aspirate(2, BGI_adapter.bottom(1))
-    m10.move_to(temp_plate['A6'].bottom())
-    m10.dispense(2, temp_plate['A6'].bottom(3))
-    m10.mix(3, 10, temp_plate['A6'].bottom(3))
-    protocol.delay(seconds=3)
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.move_to(temp_plate['A6'].top(-4))
-    m10.return_tip()
-
-### Adding adaptors to Column 7
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A7']) # Slow down head speed 0.5X for bead handling
-    m10.move_to(BGI_adapter.bottom())
-    m10.mix(3, 5, BGI_adapter.bottom(4))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.aspirate(2, BGI_adapter.bottom(1))
-    m10.move_to(temp_plate['A7'].bottom())
-    m10.dispense(2, temp_plate['A7'].bottom(3))
-    m10.mix(3, 10, temp_plate['A7'].bottom(3))
-    protocol.delay(seconds=3)
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.move_to(temp_plate['A7'].top(-4))
-    m10.return_tip()
-
-### Adding adaptors to Column 8
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A8']) # Slow down head speed 0.5X for bead handling
-    m10.move_to(BGI_adapter.bottom())
-    m10.mix(3, 5, BGI_adapter.bottom(4))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.aspirate(2, BGI_adapter.bottom(1))
-    m10.move_to(temp_plate['A8'].bottom())
-    m10.dispense(2, temp_plate['A8'].bottom(3))
-    m10.mix(3, 10, temp_plate['A8'].bottom(3))
-    protocol.delay(seconds=3)
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.move_to(temp_plate['A8'].top(-4))
-    m10.return_tip()
-
-### Adding adaptors to Column 9
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A9']) # Slow down head speed 0.5X for bead handling
-    m10.move_to(BGI_adapter.bottom())
-    m10.mix(3, 5, BGI_adapter.bottom(4))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.aspirate(2, BGI_adapter.bottom(1))
-    m10.move_to(temp_plate['A9'].bottom())
-    m10.dispense(2, temp_plate['A9'].bottom(3))
-    m10.mix(3, 10, temp_plate['A9'].bottom(3))
-    protocol.delay(seconds=3)
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.move_to(temp_plate['A9'].top(-4))
-    m10.return_tip()
-
-### Adding adaptors to Column 10
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A10']) # Slow down head speed 0.5X for bead handling
-    m10.move_to(BGI_adapter.bottom())
-    m10.mix(3, 5, BGI_adapter.bottom(4))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.aspirate(2, BGI_adapter.bottom(1))
-    m10.move_to(temp_plate['A10'].bottom())
-    m10.dispense(2, temp_plate['A10'].bottom(3))
-    m10.mix(3, 10, temp_plate['A10'].bottom(3))
-    protocol.delay(seconds=3)
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.move_to(temp_plate['A10'].top(-4))
-    m10.return_tip()
-
-### Adding adaptors to Column 11
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A11']) # Slow down head speed 0.5X for bead handling
-    m10.move_to(BGI_adapter.bottom())
-    m10.mix(3, 5, BGI_adapter.bottom(4))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.aspirate(2, BGI_adapter.bottom(1))
-    m10.move_to(temp_plate['A11'].bottom())
-    m10.dispense(2, temp_plate['A11'].bottom(3))
-    m10.mix(3, 10, temp_plate['A11'].bottom(3))
-    protocol.delay(seconds=3)
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.move_to(temp_plate['A11'].top(-4))
-    m10.return_tip()
-
-### Adding adaptors to Column 12
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A12']) # Slow down head speed 0.5X for bead handling
-    m10.move_to(BGI_adapter.bottom())
-    m10.mix(3, 5, BGI_adapter.bottom(4))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.aspirate(2, BGI_adapter.bottom(1))
-    m10.move_to(temp_plate['A12'].bottom())
-    m10.dispense(2, temp_plate['A12'].bottom(3))
-    m10.mix(3, 10, temp_plate['A12'].bottom(3))
-    protocol.delay(seconds=3)
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.move_to(temp_plate['A12'].top(-4))
-    m10.return_tip()
 
 
 
@@ -369,217 +172,22 @@ def run(protocol):
     m300.return_tip()
 
 ### Addition of Ligase mastermix to libraries
-
-### Adding mastermix to Column 1
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.pick_up_tip(tipracks_10_2['A1']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_Lig)
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.transfer(Lig_vol, Enzyme_Lig.bottom(1), temp_plate['A1'].bottom(2), new_tip='never')
-    m10.flow_rate.aspirate = 40
-    m10.flow_rate.dispense = 40
-    m10.mix(5, 10, temp_plate['A1'].bottom(6))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A1'].top(-4))
-    m10.return_tip()
-
-### Adding mastermix to Column 2
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.pick_up_tip(tipracks_10_2['A2']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_Lig)
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.transfer(Lig_vol, Enzyme_Lig.bottom(1), temp_plate['A2'].bottom(2), new_tip='never')
-    m10.flow_rate.aspirate = 40
-    m10.flow_rate.dispense = 40
-    m10.mix(5, 10, temp_plate['A2'].bottom(6))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A2'].top(-4))
-    m10.return_tip()
-
-### Adding mastermix to Column 3
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.pick_up_tip(tipracks_10_2['A3']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_Lig)
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.transfer(Lig_vol, Enzyme_Lig.bottom(1), temp_plate['A3'].bottom(2), new_tip='never')
-    m10.flow_rate.aspirate = 40
-    m10.flow_rate.dispense = 40
-    m10.mix(5, 10, temp_plate['A3'].bottom(6))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A3'].top(-4))
-    m10.return_tip()
-
-### Adding mastermix to Column 4
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.pick_up_tip(tipracks_10_2['A4']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_Lig)
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.transfer(Lig_vol, Enzyme_Lig.bottom(1), temp_plate['A4'].bottom(2), new_tip='never')
-    m10.flow_rate.aspirate = 40
-    m10.flow_rate.dispense = 40
-    m10.mix(5, 10, temp_plate['A4'].bottom(6))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A4'].top(-4))
-    m10.return_tip()
-
-
-### Adding mastermix to Column 5
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.pick_up_tip(tipracks_10_2['A5']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_Lig)
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.transfer(Lig_vol, Enzyme_Lig.bottom(1), temp_plate['A5'].bottom(2), new_tip='never')
-    m10.flow_rate.aspirate = 40
-    m10.flow_rate.dispense = 40
-    m10.mix(5, 10, temp_plate['A5'].bottom(6))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A5'].top(-4))
-    m10.return_tip()
-
-### Adding mastermix to Column 6
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.pick_up_tip(tipracks_10_2['A6']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_Lig)
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.transfer(Lig_vol, Enzyme_Lig.bottom(1), temp_plate['A6'].bottom(2), new_tip='never')
-    m10.flow_rate.aspirate = 40
-    m10.flow_rate.dispense = 40
-    m10.mix(5, 10, temp_plate['A6'].bottom(6))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A6'].top(-4))
-    m10.return_tip()
-
-
-### Adding mastermix to Column 7
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.pick_up_tip(tipracks_10_2['A7']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_Lig)
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.transfer(Lig_vol, Enzyme_Lig.bottom(1), temp_plate['A7'].bottom(2), new_tip='never')
-    m10.flow_rate.aspirate = 40
-    m10.flow_rate.dispense = 40
-    m10.mix(5, 10, temp_plate['A7'].bottom(6))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A7'].top(-4))
-    m10.return_tip()
-
-
-### Adding mastermix to Column 8
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.pick_up_tip(tipracks_10_2['A8']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_Lig)
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.transfer(Lig_vol, Enzyme_Lig.bottom(1), temp_plate['A8'].bottom(2), new_tip='never')
-    m10.flow_rate.aspirate = 40
-    m10.flow_rate.dispense = 40
-    m10.mix(5, 10, temp_plate['A8'].bottom(6))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A8'].top(-4))
-    m10.return_tip()
-
-
-### Adding mastermix to Column 9
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.pick_up_tip(tipracks_10_2['A9']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_Lig)
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.transfer(Lig_vol, Enzyme_Lig.bottom(1), temp_plate['A9'].bottom(2), new_tip='never')
-    m10.flow_rate.aspirate = 40
-    m10.flow_rate.dispense = 40
-    m10.mix(5, 10, temp_plate['A9'].bottom(6))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A9'].top(-4))
-    m10.return_tip()
-
-
-### Adding mastermix to Column 10
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.pick_up_tip(tipracks_10_2['A10']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_Lig)
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.transfer(Lig_vol, Enzyme_Lig.bottom(1), temp_plate['A10'].bottom(2), new_tip='never')
-    m10.flow_rate.aspirate = 40
-    m10.flow_rate.dispense = 40
-    m10.mix(5, 10, temp_plate['A10'].bottom(6))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A10'].top(-4))
-    m10.return_tip()
-
-
-### Adding mastermix to Column 11
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.pick_up_tip(tipracks_10_2['A11']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_Lig)
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.transfer(Lig_vol, Enzyme_Lig.bottom(1), temp_plate['A11'].bottom(2), new_tip='never')
-    m10.flow_rate.aspirate = 40
-    m10.flow_rate.dispense = 40
-    m10.mix(5, 10, temp_plate['A11'].bottom(6))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A11'].top(-4))
-    m10.return_tip()
-
-
-### Adding mastermix to Column 12
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.pick_up_tip(tipracks_10_2['A12']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_Lig)
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.transfer(Lig_vol, Enzyme_Lig.bottom(1), temp_plate['A12'].bottom(2), new_tip='never')
-    m10.flow_rate.aspirate = 40
-    m10.flow_rate.dispense = 40
-    m10.mix(5, 10, temp_plate['A12'].bottom(6))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A12'].top(-4))
-    m10.return_tip()
+    for i in list_of_cols:
+        m10.flow_rate.aspirate = 100
+        m10.flow_rate.dispense = 100
+        m10.pick_up_tip(tipracks_10_2[i]) # Slow down head speed 0.5X for bead handling
+        m10.mix(3, 10, Enzyme_Lig)
+        m10.flow_rate.aspirate = 50
+        m10.flow_rate.dispense = 50
+        m10.transfer(Lig_vol, Enzyme_Lig.bottom(1), temp_plate[i].bottom(2), new_tip='never')
+        m10.flow_rate.aspirate = 40
+        m10.flow_rate.dispense = 40
+        m10.mix(5, 10, temp_plate[i].bottom(6))
+        protocol.delay(seconds=5)
+        m10.flow_rate.aspirate = 100
+        m10.flow_rate.dispense = 100
+        m10.move_to(temp_plate[i].top(-4))
+        m10.return_tip()
 
     temp_deck_1.deactivate()
     temp_deck_2.deactivate()

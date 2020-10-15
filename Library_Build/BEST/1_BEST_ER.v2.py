@@ -57,7 +57,7 @@ from opentrons import protocol_api
 metadata = {
     'protocolName': 'BEST_Lib_build_96_sample',
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
-    'apiLevel': '2.0',
+    'apiLevel': '2.2',
     'description': 'End Repair of Automated single tube library preperation after Carøe et al. 2017',
     }
 
@@ -74,7 +74,7 @@ def run(protocol):
     cold_plate = temp_deck_1.load_labware('biorad_96_wellplate_200ul_pcr')
     # trough = labware.load('trough-12row', '2')
     # Trash = labware.load('One-Column-reservoir','3')
-    temp_plate = temp_deck_2.load_labware('96_wellplate_200ul_covaris')
+    temp_plate = temp_deck_2.load_labware('biorad_96_wellplate_200ul_pcr')
     #mag_deck = modules.load('magdeck', '7')
     #mag_plate = labware.load('biorad-hardshell-96-PCR', '7', share=True)
 
@@ -122,7 +122,7 @@ def run(protocol):
     #MM_dist_Lig = Lig_vol * col_num
     #MM_dist_Fill = Fill_vol * col_num
 
-
+    list_of_cols = ['A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12']
 
     """
     Blunt end repair
@@ -156,224 +156,25 @@ def run(protocol):
 
     ### Addition of End repair mastermix to libraries
 
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A1']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_ER)
-    m10.flow_rate.aspirate = 25
-    m10.flow_rate.dispense = 25
-    m10.aspirate(ER_vol, Enzyme_ER.bottom(1))
-    m10.move_to(temp_plate['A1'].bottom())
-    m10.dispense(ER_vol, temp_plate['A1'].bottom(3))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.mix(5, 10, temp_plate['A1'].bottom(2))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A1'].top(-4))
-    m10.return_tip()
+    for i in list_of_cols:
 
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A2']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_ER)
-    m10.flow_rate.aspirate = 25
-    m10.flow_rate.dispense = 25
-    m10.aspirate(ER_vol, Enzyme_ER.bottom(1))
-    m10.move_to(temp_plate['A2'].bottom())
-    m10.dispense(ER_vol, temp_plate['A2'].bottom(3))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.mix(5, 10, temp_plate['A2'].bottom(2))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A2'].top(-4))
-    m10.return_tip()
-
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A3']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_ER)
-    m10.flow_rate.aspirate = 25
-    m10.flow_rate.dispense = 25
-    m10.aspirate(ER_vol, Enzyme_ER.bottom(1))
-    m10.move_to(temp_plate['A3'].bottom())
-    m10.dispense(ER_vol, temp_plate['A3'].bottom(3))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.mix(5, 10, temp_plate['A3'].bottom(2))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A3'].top(-4))
-    m10.return_tip()
-
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A4']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_ER)
-    m10.flow_rate.aspirate = 25
-    m10.flow_rate.dispense = 25
-    m10.aspirate(ER_vol, Enzyme_ER.bottom(1))
-    m10.move_to(temp_plate['A4'].bottom())
-    m10.dispense(ER_vol, temp_plate['A4'].bottom(3))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.mix(5, 10, temp_plate['A4'].bottom(2))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A4'].top(-4))
-    m10.return_tip()
-
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A5']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_ER)
-    m10.flow_rate.aspirate = 25
-    m10.flow_rate.dispense = 25
-    m10.aspirate(ER_vol, Enzyme_ER.bottom(1))
-    m10.move_to(temp_plate['A5'].bottom())
-    m10.dispense(ER_vol, temp_plate['A5'].bottom(3))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.mix(5, 10, temp_plate['A5'].bottom(2))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A5'].top(-4))
-    m10.return_tip()
-
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A6']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_ER)
-    m10.flow_rate.aspirate = 25
-    m10.flow_rate.dispense = 25
-    m10.aspirate(ER_vol, Enzyme_ER.bottom(1))
-    m10.move_to(temp_plate['A6'].bottom())
-    m10.dispense(ER_vol, temp_plate['A6'].bottom(3))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.mix(5, 10, temp_plate['A6'].bottom(2))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A6'].top(-4))
-    m10.return_tip()
-
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A7']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_ER)
-    m10.flow_rate.aspirate = 25
-    m10.flow_rate.dispense = 25
-    m10.aspirate(ER_vol, Enzyme_ER.bottom(1))
-    m10.move_to(temp_plate['A7'].bottom())
-    m10.dispense(ER_vol, temp_plate['A7'].bottom(3))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.mix(5, 10, temp_plate['A7'].bottom(2))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A7'].top(-4))
-    m10.return_tip()
-
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A8']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_ER)
-    m10.flow_rate.aspirate = 25
-    m10.flow_rate.dispense = 25
-    m10.aspirate(ER_vol, Enzyme_ER.bottom(1))
-    m10.move_to(temp_plate['A8'].bottom())
-    m10.dispense(ER_vol, temp_plate['A8'].bottom(3))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.mix(5, 10, temp_plate['A8'].bottom(2))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A8'].top(-4))
-    m10.return_tip()
-
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A9']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_ER)
-    m10.flow_rate.aspirate = 25
-    m10.flow_rate.dispense = 25
-    m10.aspirate(ER_vol, Enzyme_ER.bottom(1))
-    m10.move_to(temp_plate['A9'].bottom())
-    m10.dispense(ER_vol, temp_plate['A9'].bottom(3))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.mix(5, 10, temp_plate['A9'].bottom(2))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A9'].top(-4))
-    m10.return_tip()
-
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A10']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_ER)
-    m10.flow_rate.aspirate = 25
-    m10.flow_rate.dispense = 25
-    m10.aspirate(ER_vol, Enzyme_ER.bottom(1))
-    m10.move_to(temp_plate['A10'].bottom())
-    m10.dispense(ER_vol, temp_plate['A10'].bottom(3))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.mix(5, 10, temp_plate['A10'].bottom(2))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A10'].top(-4))
-    m10.return_tip()
-
-
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A11']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_ER)
-    m10.flow_rate.aspirate = 25
-    m10.flow_rate.dispense = 25
-    m10.aspirate(ER_vol, Enzyme_ER.bottom(1))
-    m10.move_to(temp_plate['A11'].bottom())
-    m10.dispense(ER_vol, temp_plate['A11'].bottom(3))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.mix(5, 10, temp_plate['A11'].bottom(2))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A11'].top(-4))
-    m10.return_tip()
-
-    m10.flow_rate.aspirate = 180
-    m10.flow_rate.dispense = 180
-    m10.pick_up_tip(tipracks_10_1['A12']) # Slow down head speed 0.5X for bead handling
-    m10.mix(3, 10, Enzyme_ER)
-    m10.flow_rate.aspirate = 25
-    m10.flow_rate.dispense = 25
-    m10.aspirate(ER_vol, Enzyme_ER.bottom(1))
-    m10.move_to(temp_plate['A12'].bottom())
-    m10.dispense(ER_vol, temp_plate['A12'].bottom(3))
-    m10.flow_rate.aspirate = 50
-    m10.flow_rate.dispense = 50
-    m10.mix(5, 10, temp_plate['A12'].bottom(2))
-    protocol.delay(seconds=5)
-    m10.flow_rate.aspirate = 100
-    m10.flow_rate.dispense = 100
-    m10.move_to(temp_plate['A12'].top(-4))
-    m10.return_tip()
-
-
+        m10.flow_rate.aspirate = 180
+        m10.flow_rate.dispense = 180
+        m10.pick_up_tip(tipracks_10_1[i]) # Slow down head speed 0.5X for bead handling
+        m10.mix(3, 10, Enzyme_ER)
+        m10.flow_rate.aspirate = 25
+        m10.flow_rate.dispense = 25
+        m10.aspirate(ER_vol, Enzyme_ER.bottom(1))
+        m10.move_to(temp_plate[i].bottom())
+        m10.dispense(ER_vol, temp_plate[i].bottom(3))
+        m10.flow_rate.aspirate = 50
+        m10.flow_rate.dispense = 50
+        m10.mix(5, 10, temp_plate[i].bottom(2))
+        protocol.delay(seconds=5)
+        m10.flow_rate.aspirate = 100
+        m10.flow_rate.dispense = 100
+        m10.move_to(temp_plate[i].top(-4))
+        m10.return_tip()
 
     protocol.pause("Yay! \ Please incubate in PCR machine \ at 20°C for 30 minutes, followed by 30 minutes at 65°C. \ Press resume when finished.")
 
