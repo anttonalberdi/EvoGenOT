@@ -90,8 +90,6 @@ def run(protocol):
         m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
         m300.move_to(SPRI_beads.top(-30))
         m300.mix(3, bead_vol, SPRI_beads.bottom(2))
-        # max_speed_per_axis                 ==> see end of protocol for info (if need to add them)
-        # robot.head_speed                   ==> see end of protocol for info
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
         m300.aspirate(bead_vol, SPRI_beads.bottom(2))
@@ -101,10 +99,10 @@ def run(protocol):
         m300.flow_rate.dispense = 100
         m300.mix(5, bead_vol, mag_plate[i].bottom(4))
         protocol.delay(seconds=5)
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
+        # m300.flow_rate.aspirate = 100
+        # m300.flow_rate.dispense = 100
         m300.move_to(mag_plate[i].top(-4))
-        m300.blow_out()
+        m300.blow_out(mag_plate[i].top(-4))
         # max_speed_per_axis
         # robot.head_speed
         m300.return_tip()
@@ -129,7 +127,7 @@ def run(protocol):
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
         m300.blow_out(trash_box['A1'].top(-5))
-        m300.air_gap(height = 2)
+        m300.air_gap(height = 3)
         m300.return_tip()
 
 
@@ -148,8 +146,10 @@ def run(protocol):
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
-        m300.move_to(mag_plate[i].top(-4))
-        m300.blow_out()
+        #m300.move_to(mag_plate[i].top(-4))
+        m300.blow_out(mag_plate[i].top(-4))
+        m300.air_gap(height = 3)
+        # m300.touch_tip()
         m300.return_tip()
 
     mag_deck.engage(height=16)    # or mag_mod ?
@@ -167,7 +167,7 @@ def run(protocol):
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
         m300.blow_out(trash_box['A1'].top(-5))
-        m300.air_gap(height = 2)
+        m300.air_gap(height = 3)
         m300.drop_tip()
 
 
@@ -186,8 +186,10 @@ def run(protocol):
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
-        m300.move_to(mag_plate[i].top(-10))
-        m300.blow_out()
+        # m300.move_to(mag_plate[i].top(-4))
+        m300.blow_out(mag_plate[i].top(-4))
+        m300.air_gap(height = 3)
+        # m300.touch_tip()
         m300.return_tip()
 
 
@@ -206,6 +208,7 @@ def run(protocol):
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
         m300.blow_out(trash_box['A1'].top(-5))
+        m300.air_gap(height = 3)
         m300.return_tip()
 
 
@@ -224,8 +227,8 @@ def run(protocol):
         m300.flow_rate.dispense = 50
         m300.mix(3, Elution_vol, mag_plate[i].bottom(5))
         protocol.delay(seconds=5)
-        m300.move_to(mag_plate[i].top(-10))
-        m300.blow_out()
+        # m300.move_to(mag_plate[i].top(-10))
+        m300.blow_out(mag_plate[i].top(-10))
         m300.return_tip()
 
     ## Incubate elutes for 15 minutes at room temperature
@@ -246,6 +249,6 @@ def run(protocol):
         m300.blow_out()
         m300.return_tip()
 
-    mag_deck.disengage()    # or mag_mod ?
+    mag_deck.disengage()
 
     protocol.pause("Yay! \ Purification has finished \ Please store purified libraries as -20°C \ Press resume when finished.")
