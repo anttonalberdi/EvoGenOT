@@ -83,8 +83,9 @@ def run(protocol):
 
     list_of_cols = ['A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12']
     list_of_cols = ['A1','A2','A3','A4']
+
+    #### Transfer beads to mag_plate
     for i in list_of_cols:
-        #### Transfer beads to mag_plate
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
@@ -115,11 +116,11 @@ def run(protocol):
 
     #protocol.delay(minutes=5)
     mag_deck.engage()
-    #protocol.delay(minutes=2)
+    protocol.delay(minutes=2)
 
+    ### Remove supernatant, by re-using tiprack 1
+    ### remove supernatant from mag_plate
     for i in list_of_cols:
-        ### Remove supernatant, by re-using tiprack 1
-        ### remove supernatant from mag_plate
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
@@ -192,7 +193,7 @@ def run(protocol):
 
 
     mag_deck.engage(height=16)
-    #protocol.delay(minutes=2)
+    protocol.delay(minutes=2)
 
     for i in list_of_cols:
         ### Remove supernatant, by re-using tiprack 3
@@ -200,8 +201,8 @@ def run(protocol):
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_3[i]) # Slow down head speed 0.5X for bead handling
-        m300.aspirate(180, mag_plate[i].bottom(0.5))
-        m300.dispense(180, trash_box['A1'].top(-5))
+        m300.aspirate(200, mag_plate[i].bottom(0.5))
+        m300.dispense(200, trash_box['A1'].top(-5))
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
@@ -211,7 +212,7 @@ def run(protocol):
 
 
     # Dry beads before elution
-    #protocol.delay(minutes=4)
+    protocol.delay(minutes=4)
     mag_deck.disengage()
 
     for i in list_of_cols:
@@ -240,8 +241,8 @@ def run(protocol):
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
         m300.pick_up_tip(tipracks_200_4[i])
-        m300.aspirate(Elution_vol, mag_plate[i].bottom(0.5))
-        m300.dispense(Elution_vol, elution_plate[i].bottom(2))
+        m300.aspirate(55, mag_plate[i].bottom(0.5))
+        m300.dispense(55, elution_plate[i].bottom(2))
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
