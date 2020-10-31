@@ -18,7 +18,7 @@ from opentrons import protocol_api
 metadata = {
     'protocolName': 'D-Rex RNA Extraction',
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
-    'update': 'Martina Cardinali <martina.cardinali.4@gmai.com',
+    'update': 'Martina Cardinali <martina.cardinali.4@gmail.com',
     'apiLevel': '2.2',
     'date': '2020/10/31',
     'description': 'Automation of D-Rex RNA protocol for stool samples in SHIELD',
