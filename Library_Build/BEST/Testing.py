@@ -53,7 +53,8 @@ def run(protocol):
     tipracks_200_4 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 6)
 
     #### PIPETTE SETUP ####
-    m300 = protocol.load_instrument('p300_multi_gen2', mount='left', tip_racks=(tipracks_200_1, tipracks_200_2, tipracks_200_3, tipracks_200_4))
+    m300 = protocol.load_instrument('p300_multi_gen2', mount='left',
+                                    tip_racks=(tipracks_200_1, tipracks_200_2, tipracks_200_3, tipracks_200_4))
             # From the v1 the mount is right, but all the other protocols switch from right in v1 to left in v2. Why? Also here?
 
     ## Purification reagents SETUP
@@ -81,6 +82,7 @@ def run(protocol):
     ### Beads addition
     mag_deck.disengage()
 
+    #### Plate SETUP
     list_of_cols = ['A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12']
     list_of_cols = ['A1','A2','A3','A4']
 
@@ -102,12 +104,10 @@ def run(protocol):
         m300.flow_rate.dispense = 100
         m300.mix(5, bead_vol, mag_plate[i].bottom(4))
         protocol.delay(seconds=5)
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
+        # m300.flow_rate.aspirate = 100
+        # m300.flow_rate.dispense = 100
         m300.move_to(mag_plate[i].top(-4))
         m300.blow_out()
-        # max_speed_per_axis
-        # robot.head_speed
         m300.return_tip()
 
 
