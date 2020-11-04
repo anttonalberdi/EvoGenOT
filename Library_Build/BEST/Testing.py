@@ -52,11 +52,12 @@ def run(protocol):
     tipracks_200_3 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 5)
     tipracks_200_4 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 6)
     tipracks_10_1 = protocol.load_labware('opentrons_96_filtertiprack_20ul', 3)
+    tipracks_10_2 = protocol.load_labware('opentrons_96_filtertiprack_20ul', 9)
 
     #### PIPETTE SETUP ####
     m300 = protocol.load_instrument('p300_multi_gen2', mount='left',
                                     tip_racks=(tipracks_200_1, tipracks_200_2, tipracks_200_3, tipracks_200_4))
-            # From the v1 the mount is right, but all the other protocols switch from right in v1 to left in v2. Why? Also here?
+    m20 = protocol.load_instrument('p20_multi_gen2', mount='right', tip_racks=(tipracks_10_1, tipracks_10_2))
 
     ## Purification reagents SETUP
     SPRI_beads = trough['A1']
@@ -116,7 +117,7 @@ def run(protocol):
     for 5 minutes. Protocol will resume automatically.")
 
     #protocol.delay(minutes=5)
-    mag_deck.engage(25)
+    mag_deck.engage(22)
     #protocol.delay(minutes=2)
 
     ### Remove supernatant, by re-using tiprack 1
@@ -132,7 +133,7 @@ def run(protocol):
         m300.flow_rate.dispense = 130
         m300.blow_out(trash_box['A1'].top(-5))
         m300.air_gap(height = 2)
-        m300.return_tip()
+        m300.drop_tip()
 
 
     for i in list_of_cols:
@@ -141,7 +142,6 @@ def run(protocol):
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_2[i]) # Slow down head speed 0.5X for bead handling
-        m300.move_to(EtOH1.top(-16))
         m300.aspirate(EtOH_vol, EtOH1.bottom(4))
         m300.dispense(EtOH_vol, mag_plate[i].top(-4))
         m300.flow_rate.aspirate = 100
@@ -154,7 +154,6 @@ def run(protocol):
         m300.blow_out()
         m300.return_tip()
 
-    #mag_deck.engage(height=16)    # or mag_mod ?
     #protocol.delay(minutes=2)
 
     for i in list_of_cols:
@@ -179,7 +178,6 @@ def run(protocol):
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_3[i]) # Slow down head speed 0.5X for bead handling
-        m300.move_to(EtOH2.top(-16))
         m300.aspirate(EtOH_vol2, EtOH2.bottom(4))
         m300.dispense(EtOH_vol2, mag_plate[i].top(-4))
         m300.flow_rate.aspirate = 100
@@ -209,22 +207,22 @@ def run(protocol):
         m300.air_gap(height = 2)
         m300.drop_tip()
 
-        ### Remove remaining supernatant of Wash 2 with pipette 10
+    ### Remove remaining supernatant of Wash 2 with pipette 10
     for i in list_of_cols:
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
-        m300.pick_up_tip(tipracks_10_1[i]) # Slow down head speed 0.5X for bead handling
-        m300.aspirate(10, mag_plate[i].bottom(0.3))
-        m300.dispense(10, trash_box['A1'].top(-5))
+        m20.flow_rate.aspirate = 100
+        m20.flow_rate.dispense = 100
+        m20.pick_up_tip(tipracks_10_1[i]) # Slow down head speed 0.5X for bead handling
+        m20.aspirate(10, mag_plate[i].bottom(0.2))
+        m20.dispense(10, trash_box['A1'].top(-5))
         protocol.delay(seconds=5)
-        m300.flow_rate.aspirate = 130
-        m300.flow_rate.dispense = 130
-        m300.blow_out(trash_box['A1'].top(-5))
-        m300.air_gap(height = 2)
-        m300.drop_tip()
+        m20.flow_rate.aspirate = 130
+        m20.flow_rate.dispense = 130
+        m20.blow_out(trash_box['A1'].top(-5))
+        m20.air_gap(height = 2)
+        m20.return_tip()
 
     # Dry beads before elution
-    #protocol.delay(minutes=4)
+    protocol.delay(minutes=4)
     mag_deck.disengage()
 
     for i in list_of_cols:
@@ -232,7 +230,6 @@ def run(protocol):
         m300.flow_rate.aspirate = 40
         m300.flow_rate.dispense = 40
         m300.pick_up_tip(tipracks_200_4[i]) # Slow down head speed 0.5X for bead handling
-        m300.move_to(Elution_buffer.top(-16))
         m300.aspirate(Elution_vol, Elution_buffer.bottom(4))
         m300.dispense(Elution_vol, mag_plate[i].bottom(4))
         m300.flow_rate.aspirate = 50
@@ -246,24 +243,13 @@ def run(protocol):
 
     ## Incubate elutes for 15 minutes at room temperature
     protocol.pause("Please, incubate samples for 10 min at 37ºC and press resume after it")
-    mag_deck.engage(height=25)
-    protocol.delay(minutes=3)
-
-    odd_cols = ['A1','A3','A5','A7','A9','A11']
-    even_cols = ['A2','A4','A6','A8','A10','A12']
+    mag_deck.engage(height=22)
+    protocol.delay(minutes=5)
 
     for i in list_of_cols:
-        m300.flow_rate.aspirate = 5
-        m300.flow_rate.dispense = 5
+        m300.flow_rate.aspirate = 10
+        m300.flow_rate.dispense = 50
         m300.pick_up_tip(tipracks_200_4[i])
-        m300.move_to(mag_plate[i].bottom(1.5))
-        for l in range(0, len(list_of_cols)):
-            if l % 2:   # if the index is even, the col is odd
-                # here the arm should move to left (1, 2 mm)
-            else:       # if the index is odd, the col is even
-                # here the arm should move to the right
-        # continue toward the bottom of the well, probably we cannot use bottom for the aspirate
-        # as it corresponds to the bottom-center of the well
         m300.aspirate(55, mag_plate[i].bottom(0.5))
         m300.dispense(55, elution_plate[i].bottom(2))
         protocol.delay(seconds=5)
