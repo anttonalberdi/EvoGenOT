@@ -114,9 +114,9 @@ def run(protocol):
     protocol.comment("Incubating the beads and PCR products at room temperature \
     for 5 minutes. Protocol will resume automatically.")
 
-    protocol.delay(minutes=5)
-    mag_deck.engage()
-    protocol.delay(minutes=2)
+    #protocol.delay(minutes=5)
+    mag_deck.engage(18)
+    #protocol.delay(minutes=2)
 
     ### Remove supernatant, by re-using tiprack 1
     ### remove supernatant from mag_plate
@@ -192,8 +192,8 @@ def run(protocol):
         m300.return_tip()
 
 
-    mag_deck.engage(height=16)
-    protocol.delay(minutes=2)
+    #mag_deck.engage(height=16)
+    #protocol.delay(minutes=2)
 
     for i in list_of_cols:
         ### Remove supernatant after Wash2, by re-using tiprack 3
@@ -212,7 +212,7 @@ def run(protocol):
 
 
     # Dry beads before elution
-    protocol.delay(minutes=4)
+    #protocol.delay(minutes=4)
     mag_deck.disengage()
 
     for i in list_of_cols:
@@ -231,15 +231,17 @@ def run(protocol):
         m300.blow_out()
         m300.return_tip()
 
-    mag_deck.engage(height=16)
+
     ## Incubate elutes for 15 minutes at room temperature
     protocol.pause("Please, incubate samples for 10 min at 37ºC and press resume after it")
+    mag_deck.engage(height=18)
+    protocol.delay(minutes=3)
 
     for i in list_of_cols:
         ## Transfer elutes to new plates.
         ## Transfer Elution buffer to elution_plate
-        m300.flow_rate.aspirate = 25
-        m300.flow_rate.dispense = 25
+        m300.flow_rate.aspirate = 15
+        m300.flow_rate.dispense = 15
         m300.pick_up_tip(tipracks_200_4[i])
         m300.aspirate(55, mag_plate[i].bottom(0.5))
         m300.dispense(55, elution_plate[i].bottom(2))
