@@ -246,11 +246,19 @@ def run(protocol):
     mag_deck.engage(height=22)
     protocol.delay(minutes=5)
 
-    for i in list_of_cols:
-        m300.flow_rate.aspirate = 10
-        m300.flow_rate.dispense = 50
+    odd_cols = ['A1','A3','A5','A7','A9','A11']
+    even_cols = ['A2','A4','A6','A8','A10','A12']
+
+    from opentrons import types
+
+    for i in odd_cols:
+        m300.flow_rate.aspirate = 5
+        m300.flow_rate.dispense = 5
         m300.pick_up_tip(tipracks_200_4[i])
-        m300.aspirate(55, mag_plate[i].bottom(0.5))
+        center_location = mag_plate[i].bottom(1.5)
+        left_location = center_location.move(types.Point(x=-1.5, y=0, z=-1))
+        m300.move_to(center_location)
+        m300.aspirate(55, left_location)
         m300.dispense(55, elution_plate[i].bottom(2))
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
@@ -258,6 +266,46 @@ def run(protocol):
         m300.move_to(elution_plate[i].top(-10))
         m300.blow_out()
         m300.return_tip()
+
+    for i in even_cols:
+        m300.flow_rate.aspirate = 5
+        m300.flow_rate.dispense = 5
+        m300.pick_up_tip(tipracks_200_4[i])
+        center_location = mag_plate[i].bottom(1.5)
+        right_location = center_location.move(types.Point(x=1.5, y=0, z=-1))
+        m300.move_to(center_location)
+        m300.aspirate(55, right_location)
+        m300.dispense(55, elution_plate[i].bottom(2))
+        protocol.delay(seconds=5)
+        m300.flow_rate.aspirate = 130
+        m300.flow_rate.dispense = 130
+        m300.move_to(elution_plate[i].top(-10))
+        m300.blow_out()
+        m300.return_tip()
+
+    # for i in list_of_cols:
+    #     m300.flow_rate.aspirate = 5
+    #     m300.flow_rate.dispense = 5
+    #     m300.pick_up_tip(tipracks_200_4[i])
+    #     center_location = mag_plate[i].bottom(1.5)
+    #     left_location = center_location.move(types.Point(x=-1.5, y=0, z=-1))
+    #     right_location = center_location.move(types.Point(x=1.5, y=0, z=-1))
+    #     for l in range(0, len(list_of_cols)):
+    #         if l % 2:   # if the index is even, the col is odd
+    #             m300.move_to(left_location)
+    #             m300.aspirate(55)    # here the arm should move to left (1, 2 mm)
+    #         else:       # if the index is odd, the col is even
+    #             m300.move_to(right_location)
+    #             m300.aspirate(55)   # here the arm should move to the right
+    #     # continue toward the bottom of the well, probably we cannot use bottom for the aspirate
+    #     # as it corresponds to the bottom-center of the well
+    #     m300.dispense(55, elution_plate[i].bottom(2))
+    #     protocol.delay(seconds=5)
+    #     m300.flow_rate.aspirate = 130
+    #     m300.flow_rate.dispense = 130
+    #     m300.move_to(elution_plate[i].top(-10))
+    #     m300.blow_out()
+    #     m300.return_tip()
 
     mag_deck.disengage()    # or mag_mod ?
 
