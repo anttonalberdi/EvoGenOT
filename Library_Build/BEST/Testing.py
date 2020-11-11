@@ -33,6 +33,7 @@ from opentrons import protocol_api
 metadata = {
     'protocolName': 'BEST_Purification',
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
+    'update': 'Martina Cardinali <martina.cardinali.4@gmail.com'
     'apiLevel': '2.2',
     'description': 'Purification procedure of Automated single tube library preparation after Carøe et al. 2017',
     }
@@ -207,7 +208,7 @@ def run(protocol):
         m300.air_gap(height = 2)
         m300.drop_tip()
 
-    ### Remove remaining supernatant of Wash 2 with pipette 10
+    ### Remove remaining supernatant of Wash 2 with pipette 20
     for i in list_of_cols:
         m20.flow_rate.aspirate = 100
         m20.flow_rate.dispense = 100
@@ -222,7 +223,7 @@ def run(protocol):
         m20.return_tip()
 
     # Dry beads before elution
-    protocol.delay(minutes=4)
+    #protocol.delay(minutes=4)
     mag_deck.disengage()
 
     for i in list_of_cols:
@@ -244,10 +245,10 @@ def run(protocol):
     ## Incubate elutes for 15 minutes at room temperature
     protocol.pause("Please, incubate samples for 10 min at 37ºC and press resume after it")
     mag_deck.engage(height=22)
-    protocol.delay(minutes=5)
+    #protocol.delay(minutes=5)
 
-    odd_cols = ['A1','A3','A5','A7','A9','A11']
-    even_cols = ['A2','A4','A6','A8','A10','A12']
+    odd_cols = ['A1','A3']#,'A5','A7','A9','A11']
+    even_cols = ['A2','A4']#,'A6','A8','A10','A12']
 
     from opentrons import types
 
