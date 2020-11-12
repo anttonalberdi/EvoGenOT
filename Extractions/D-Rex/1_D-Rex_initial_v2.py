@@ -18,7 +18,7 @@ from opentrons import protocol_api
 metadata = {
     'protocolName': 'D-Rex Inital Extraction',
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
-    'update': 'Martina Cardinali <martina.cardinali.4@gmail.com',
+    'update': 'Martina Cardinali <martina.cardinali.4@gmail.com>',
     'apiLevel': '2.2',
     'date': '2020/10/31',
     'description': 'Automation of D-Rex RNA and DNA seperation for extraction protocol of stool samples in SHIELD. ',
@@ -105,7 +105,8 @@ def run(protocol):
         m300.blow_out()
         # max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
         # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-        m300.return_tip()
+        m300.drop_tip()
+
 
     ### Transfer buffer B2 and beads to sample plate (col 7 to 12)
     for i in list_of_cols[6:]:
@@ -127,7 +128,9 @@ def run(protocol):
         m300.blow_out()
         # max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
         # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-        m300.return_tip()
+        m300.drop_tip()
+
+    protocol.pause('Cover DNA plate with foil and spin down. Incubate for 15 minutes at 10 ºC at 1500 rpm.')
 
     ## add beads and EtOH binding buffer 1 to RNA plate (col 1 to 6)
     for i in list_of_cols[:6]:
@@ -140,7 +143,9 @@ def run(protocol):
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
         m300.aspirate(EtOH_buffer_vol, EtOH_Bind1.top(-12))
-        m300.dispense(EtOH_buffer_vol, RNA_plate[i].bottom(4))   # *2 ?? check volume
+        m300.dispense(EtOH_buffer_vol, RNA_plate[i].bottom(4))
+        m300.aspirate(EtOH_buffer_vol, EtOH_Bind1.top(-12))
+        m300.dispense(EtOH_buffer_vol, RNA_plate[i].bottom(4))
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         protocol.delay(seconds=5)
@@ -161,7 +166,9 @@ def run(protocol):
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
         m300.aspirate(EtOH_buffer_vol, EtOH_Bind2.top(-12))
-        m300.dispense(EtOH_buffer_vol, RNA_plate[i].bottom(4))   # *2 ?? check volume
+        m300.dispense(EtOH_buffer_vol, RNA_plate[i].bottom(4))
+        m300.aspirate(EtOH_buffer_vol, EtOH_Bind1.top(-12))
+        m300.dispense(EtOH_buffer_vol, RNA_plate[i].bottom(4))
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         protocol.delay(seconds=5)
@@ -171,11 +178,7 @@ def run(protocol):
         # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
         m300.return_tip()       # or drop tip?
 
-    # #Dropping tip after aliquoting beads and Ethanol
-    # m300.drop_tip()
-
-    ## Incubate beads
-    protocol.delay(minutes=5)
+    protocol.pause('Please, take DNA plate from incubator and shortly spin down at 1000 xg. Then, place it on the magnet.')
 
     ## Transfer supernatant
     mag_deck.engage(height=34)
@@ -183,15 +186,14 @@ def run(protocol):
 
     #### Transfer supernatant to RNA_plate
     for i in list_of_cols:
-        m300.pick_up_tip(tipracks_200_1[i])) # Slow down head speed 0.5X for bead handling
+        m300.pick_up_tip(tipracks_200_3[i]))
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
-        m300.aspirate(165, sample_plate[i].bottom(2))
-        m300.dispense(165, RNA_plate[i].top(-2))
+        m300.aspirate(175, sample_plate[i].bottom(2))
+        m300.dispense(175, RNA_plate[i].top(-2))
         m300.blow_out()
-        # ANCORA??????
-        # m300.aspirate(165, SA1.bottom(2))
-        # m300.dispense(165, RA1.bottom(4))
+        m300.aspirate(175, sample_plate[i].bottom(2))
+        m300.dispense(175, RNA_plate[i].bottom(4))
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.mix(3, 200, RNA_plate[i].bottom(2))
@@ -204,54 +206,11 @@ def run(protocol):
         # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
         m300.return_tip()
 
-    #### Adding BufferC to beads with DNA
-
     mag_deck.disengage()
 
-    ## add buffer C1 to beads with DNA (col 1 to 6)
-    for i in list_of_cols[:6]:
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
-        m300.pick_up_tip(tipracks_200_2[i]) # Slow down head speed 0.5X for bead handling
-        m300.mix(3, BufferC_vol, BufferC_1.top(-28))
-        # max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
-        # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-        m300.flow_rate.aspirate = 50
-        m300.flow_rate.dispense = 50
-        m300.aspirate(BufferC_vol, BufferC_1.top(-28))
-        m300.dispense(BufferC_vol, sample_plate[i].bottom(4))   # *2 ?? check volume
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
-        m300.mix(8, BufferC_vol, sample_plate[i].bottom(2))
-        protocol.delay(seconds=5)
-        m300.move_to(sample_plate[i].bottom(5))
-        m300.blow_out()
-        # max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
-        # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-        m300.return_tip()       # or drop tip?
-
-    ## add buffer C2 to beads with DNA (col 7 to 12)
-    for i in list_of_cols[6:]:
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
-        m300.pick_up_tip(tipracks_200_2[i]) # Slow down head speed 0.5X for bead handling
-        m300.mix(3, BufferC_vol, BufferC_2.top(-28))
-        # max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
-        # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-        m300.flow_rate.aspirate = 50
-        m300.flow_rate.dispense = 50
-        m300.aspirate(BufferC_vol, BufferC_2.top(-28))
-        m300.dispense(BufferC_vol, sample_plate[i].bottom(4))   # *2 ?? check volume
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
-        m300.mix(8, BufferC_vol, sample_plate[i].bottom(2))
-        protocol.delay(seconds=5)
-        m300.move_to(sample_plate[i].bottom(5))
-        m300.blow_out()
-        # max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
-        # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-        m300.return_tip()       # or drop tip?
-
+    protocol.pause('Please cover DNA plate with foil and store in the fridge until purification (same or following day)')
+    protocol.pause('Please cover RNA plate with foil and spin it down. Incubate 15 min 10°C at 1000 rpm. \
+    Let the beads settle 5 min. Shortly spin down the plate at 1000 xg.')
     ############################
     ###### Job is done! ######
     ############################
