@@ -54,8 +54,8 @@ def run(protocol):
     trough = protocol.load_labware('trough-12row', 9)
     mag_deck = protocol.load_labware('magdeck', 7)
     RNA_plate = protocol.load_labware('1ml_magPCR', 7)
-    trash_box = protocol.load_labware('One-Column-reservoir', 8)
-    EtOH_wash = protocol.load_labware('One-Column-reservoir', 6)
+    trash_box = protocol.load_labware('agilent_1_reservoir_290ml', 8)
+    EtOH_wash = protocol.load_labware('agilent_1_reservoir_290ml', 6)
 
     tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 2)
     tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 3)

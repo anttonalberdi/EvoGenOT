@@ -54,6 +54,7 @@ def run(protocol):
     RNA_plate = protocol.load_labware('1ml_PCR', 1)
     mag_deck = protocol.load_labware('magdeck', 7)
     sample_plate = protocol.load_labware('1ml_magPCR', 7, share=True)
+    mag_plate = mag_deck.load_labware('')
 
     tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 4)
     tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 5)
@@ -73,6 +74,7 @@ def run(protocol):
 
     #### Plate SETUP
     list_of_cols = ['A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12']
+    list_of_cols = ['A1','A2','A3','A4']
 
     #### VOLUME SETUP
     Sample_vol = 200
