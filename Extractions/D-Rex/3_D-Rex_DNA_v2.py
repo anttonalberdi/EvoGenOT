@@ -47,11 +47,11 @@ metadata = {
 
 def run(protocol):
     #### LABWARE SETUP ####
-    elution_plate_DNA = protocol.load_labware('biorad-hardshell-96-PCR', 1)
-    trough = protocol.load_labware('trough-12row', 9)
+    elution_plate_DNA = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 1)
+    trough = protocol.load_labware('usascientific_12_reservoir_22ml', 9)
     trash_box = protocol.load_labware('agilent_1_reservoir_290ml', 8)
     mag_deck = protocol.load_labware('magdeck', 7)
-    DNA_plate = protocol.load_labware('1ml_magPCR', 7)#, share=True)
+    DNA_plate = mag_deck.load_labware('1ml_magPCR')#, share=True)
 
 
     tipracks_200_1 = protocol.load_labware('tiprack-200ul', 2, share=True)

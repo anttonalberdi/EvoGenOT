@@ -50,11 +50,10 @@ metadata = {
 
 def run(protocol):
     #### LABWARE SETUP ####
-    trough = protocol.load_labware('trough-12row', 9)
+    trough = protocol.load_labware('usascientific_12_reservoir_22ml', 9)
     RNA_plate = protocol.load_labware('1ml_PCR', 1)
     mag_deck = protocol.load_labware('magdeck', 7)
-    sample_plate = protocol.load_labware('1ml_magPCR', 7, share=True)
-    mag_plate = mag_deck.load_labware('')
+    sample_plate = mag_deck.load_labware('1ml_magPCR')
 
     tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 4)
     tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 5)

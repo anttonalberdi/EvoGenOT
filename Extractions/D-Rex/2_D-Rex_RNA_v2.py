@@ -50,10 +50,10 @@ metadata = {
 
 def run(protocol):
     #### LABWARE SETUP ####
-    elution_plate_RNA = protocol.load_labware('biorad-hardshell-96-PCR', 1)
-    trough = protocol.load_labware('trough-12row', 9)
+    elution_plate_RNA = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 1)
+    trough = protocol.load_labware('usascientific_12_reservoir_22ml', 9)
     mag_deck = protocol.load_labware('magdeck', 7)
-    RNA_plate = protocol.load_labware('1ml_magPCR', 7)
+    RNA_plate = mag_deck.load_labware('1ml_magPCR')
     trash_box = protocol.load_labware('agilent_1_reservoir_290ml', 8)
     EtOH_wash = protocol.load_labware('agilent_1_reservoir_290ml', 6)
 
