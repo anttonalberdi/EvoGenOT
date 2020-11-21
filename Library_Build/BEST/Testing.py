@@ -33,7 +33,7 @@ from opentrons import protocol_api
 metadata = {
     'protocolName': 'BEST_Purification',
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
-    'update': 'Martina Cardinali <martina.cardinali.4@gmail.com'
+    'update': 'Martina Cardinali <martina.cardinali.4@gmail.com>',
     'apiLevel': '2.2',
     'description': 'Purification procedure of Automated single tube library preparation after Carøe et al. 2017',
     }
@@ -43,8 +43,8 @@ def run(protocol):
     mag_deck = protocol.load_module('magdeck', 10)
 
 
-    trough = protocol.load_labware('usascientific_12_reservoir_22ml', 7)                       # to add proper model of labware from https://labware.opentrons.com/
-    trash_box = protocol.load_labware('agilent_1_reservoir_290ml', 8)            # to add proper model of labware
+    trough = protocol.load_labware('usascientific_12_reservoir_22ml', 7)
+    trash_box = protocol.load_labware('agilent_1_reservoir_290ml', 8)
     mag_plate = mag_deck.load_labware('biorad_96_wellplate_200ul_pcr')
     elution_plate = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 2)
 
@@ -218,9 +218,7 @@ def run(protocol):
         protocol.delay(seconds=5)
         m20.flow_rate.aspirate = 130
         m20.flow_rate.dispense = 130
-        m20.blow_out(trash_box['A1'].top(-5))
-        m20.air_gap(height = 2)
-        m20.return_tip()
+        m20.drop_tip()
 
     # Dry beads before elution
     #protocol.delay(minutes=4)
@@ -266,7 +264,7 @@ def run(protocol):
         m300.flow_rate.dispense = 130
         m300.move_to(elution_plate[i].top(-10))
         m300.blow_out()
-        m300.return_tip()
+        m300.drop_tip()
 
     for i in even_cols:
         m300.flow_rate.aspirate = 5
@@ -282,7 +280,7 @@ def run(protocol):
         m300.flow_rate.dispense = 130
         m300.move_to(elution_plate[i].top(-10))
         m300.blow_out()
-        m300.return_tip()
+        m300.drop_tip()
 
     # for i in list_of_cols:
     #     m300.flow_rate.aspirate = 5
