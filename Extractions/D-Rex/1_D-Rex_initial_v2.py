@@ -51,9 +51,9 @@ metadata = {
 def run(protocol):
     #### LABWARE SETUP ####
     trough = protocol.load_labware('trough-12row', 9)
-    RNA_plate = protocol.load_labware('1ml_PCR', 1)
+    RNA_plate = protocol.load_labware('biorad_96_wellplate_1000ul', 1)
     mag_deck = protocol.load_labware('magdeck', 7)
-    sample_plate = protocol.load_labware('1ml_magPCR', 7, share=True)
+    sample_plate = protocol.load_labware('biorad_96_wellplate_1000ul', 7, share=True)
 
     tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 4)
     tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 5)
@@ -61,7 +61,7 @@ def run(protocol):
 
     #### PIPETTE SETUP ####
     m300 = protocol.load_instrument('p300_multi_gen2', mount='left',
-                                    tip_racks=(tipracks_200_1, tipracks_200_2, tipracks_200_3))
+                                    tip_racks=(tipracks_200_1, tipracks_200_2, tipracks_200_3, tipracks_200_4))
 
     #### REAGENT SETUP                              description             Volume needed for protocol
     Binding_buffer1 = trough['A1']            # Buffer B:              11 ml
@@ -73,7 +73,7 @@ def run(protocol):
 
     #### Plate SETUP
     list_of_cols = ['A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12']
-
+    list_of_cols = ['A1','A2','A3']
     #### VOLUME SETUP
     Sample_vol = 200
     Binding_buffer_vol = Sample_vol*1
@@ -183,15 +183,15 @@ def run(protocol):
 
     #### Transfer supernatant to RNA_plate
     for i in list_of_cols:
-        m300.pick_up_tip(tipracks_200_1[i])) # Slow down head speed 0.5X for bead handling
+        m300.pick_up_tip(tipracks_200_3[i]) # Slow down head speed 0.5X for bead handling
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
         m300.aspirate(165, sample_plate[i].bottom(2))
         m300.dispense(165, RNA_plate[i].top(-2))
         m300.blow_out()
         # ANCORA??????
-        # m300.aspirate(165, SA1.bottom(2))
-        # m300.dispense(165, RA1.bottom(4))
+        m300.aspirate(165, SA1.bottom(2))
+        m300.dispense(165, RA1.bottom(4))
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.mix(3, 200, RNA_plate[i].bottom(2))
@@ -212,7 +212,7 @@ def run(protocol):
     for i in list_of_cols[:6]:
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
-        m300.pick_up_tip(tipracks_200_2[i]) # Slow down head speed 0.5X for bead handling
+        m300.pick_up_tip(tipracks_200_4[i]) # Slow down head speed 0.5X for bead handling
         m300.mix(3, BufferC_vol, BufferC_1.top(-28))
         # max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
         # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -234,7 +234,7 @@ def run(protocol):
     for i in list_of_cols[6:]:
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
-        m300.pick_up_tip(tipracks_200_2[i]) # Slow down head speed 0.5X for bead handling
+        m300.pick_up_tip(tipracks_200_4[i]) # Slow down head speed 0.5X for bead handling
         m300.mix(3, BufferC_vol, BufferC_2.top(-28))
         # max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
         # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
