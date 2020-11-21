@@ -82,52 +82,7 @@ def run(protocol):
 
     #### PROTOCOL ####
 
-    #### Adding BufferC to beads with DNA
-    ## add buffer C1 to beads with DNA (col 1 to 6)
-    for i in list_of_cols[:6]:
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
-        m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
-        m300.mix(3, BufferC_vol, BufferC_1.top(-28))
-        # max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
-        # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-        m300.flow_rate.aspirate = 50
-        m300.flow_rate.dispense = 50
-        m300.aspirate(BufferC_vol, BufferC_1.top(-28))
-        m300.dispense(BufferC_vol, sample_plate[i].bottom(4))   # *2 ?? check volume
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
-        m300.mix(8, BufferC_vol, sample_plate[i].bottom(2))
-        protocol.delay(seconds=5)
-        m300.move_to(sample_plate[i].bottom(5))
-        m300.blow_out()
-        # max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
-        # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-        m300.return_tip()       # or drop tip?
-
-    ## add buffer C2 to beads with DNA (col 7 to 12)
-    for i in list_of_cols[6:]:
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
-        m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
-        m300.mix(3, BufferC_vol, BufferC_2.top(-28))
-        # max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
-        # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-        m300.flow_rate.aspirate = 50
-        m300.flow_rate.dispense = 50
-        m300.aspirate(BufferC_vol, BufferC_2.top(-28))
-        m300.dispense(BufferC_vol, sample_plate[i].bottom(4))   # *2 ?? check volume
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
-        m300.mix(8, BufferC_vol, sample_plate[i].bottom(2))
-        protocol.delay(seconds=5)
-        m300.move_to(sample_plate[i].bottom(5))
-        m300.blow_out()
-        # max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
-        # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
-        m300.return_tip()       # or drop tip?
-
-    mag_deck.engage(height=34)
+    mag_deck.engage()
     protocol.delay(minutes=2)
 
     ## Remove Buffer C   -> do not know if it will work, need to check!
