@@ -50,10 +50,10 @@ metadata = {
 
 def run(protocol):
     #### LABWARE SETUP ####
-    elution_plate_RNA = protocol.load_labware('biorad-hardshell-96-PCR', 1)
-    trough = protocol.load_labware('trough-12row', 9)
-    mag_deck = protocol.load_labware('magdeck', 7)
-    RNA_plate = protocol.load_labware('1ml_magPCR', 7)
+    elution_plate_RNA = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 1)
+    trough = protocol.load_labware('usascientific_12_reservoir_22ml', 9)
+    mag_deck = protocol.load_module('magdeck', 7)
+    RNA_plate = mag_deck.load_labware('biorad_96_wellplate_1000ul')
     trash_box = protocol.load_labware('One-Column-reservoir', 8)
     EtOH_wash = protocol.load_labware('One-Column-reservoir', 6)
 
@@ -175,7 +175,7 @@ def run(protocol):
 
     ### Wash 2 with Ethanol, using tiprack 3
     ### Transfer Wash 2 to RNA_plate
-    for i list_of_cols:
+    for i in list_of_cols:
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_3[i]) # Slow down head speed 0.5X for bead handling
@@ -269,7 +269,7 @@ def run(protocol):
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_1[i])
         m300.aspirate(125, RNA_plate[i].bottom(1))
-        m300.dispense(125, trash_box['A1']).top(-5))
+        m300.dispense(125, trash_box['A1'].top(-5))
         m300.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
