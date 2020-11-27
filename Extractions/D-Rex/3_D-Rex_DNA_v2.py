@@ -11,7 +11,7 @@
 
 
 ######## IMPORT LIBRARIES ########
-from opentrons import labware, instruments, modules, robot
+from opentrons import protocol_api
 
 #### METADATA ####
 
@@ -19,7 +19,7 @@ metadata = {
     'protocolName': 'Extraction_DNA_RNA',
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
     'update': 'Martina Cardinali <martina.cardinali.4@gmail.com>',
-    'version': '2.2',
+    'apiLevel': '2.2',
     'date': '2020/11/09',
     'description': 'Automation of D-Rex DNA protocol for stool samples in SHIELD',
 }
@@ -29,14 +29,15 @@ def run(protocol):
     elution_plate_DNA = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 1)
     trough = protocol.load_labware('usascientific_12_reservoir_22ml', 9)
     trash_box = protocol.load_labware('agilent_1_reservoir_290ml', 8)
-    mag_deck = protocol.load_labware('magdeck', 7)
+    mag_deck = protocol.load_module('magdeck', 7)
     DNA_plate = mag_deck.load_labware('biorad_96_wellplate_1000ul')#, share=True)
+    EtOH_wash = protocol.load_labware('agilent_1_reservoir_290ml', 6)
 
 
-    tipracks_200_1 = protocol.load_labware('tiprack-200ul', 2, share=True)
-    tipracks_200_2 = protocol.load_labware('tiprack-200ul', 3, share=True)
-    tipracks_200_3 = protocol.load_labware('tiprack-200ul', 4, share=True)
-    tipracks_200_4 = protocol.load_labware('tiprack-200ul', 5, share=True)
+    tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 2)#, share=True)
+    tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 3)#, share=True)
+    tipracks_200_3 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 4)#, share=True)
+    tipracks_200_4 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 5)#, share=True)
 
     #### PIPETTE SETUP ####
     m300 = protocol.load_instrument('p300_multi_gen2', mount='left',
@@ -58,11 +59,11 @@ def run(protocol):
     Elution_vol = 50
 
     list_of_cols = ['A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12']
-
+    list_of_cols = ['A1','A2','A3','A4']
     #### PROTOCOL ####
 
-    mag_deck.engage()
-    protocol.delay(minutes=2)
+    mag_deck.engage(height_from_base=0)
+    #protocol.delay(minutes=2)
 
     ## Remove Buffer C   -> do not know if it will work, need to check!
     # what about tiprack??
@@ -87,8 +88,8 @@ def run(protocol):
         m300.blow_out()
         m300.return_tip()
 
-    mag_deck.engage(height=34)
-    m300.delay(minutes=2)
+    mag_deck.engage(height_from_base=0)
+    #protocol.delay(minutes=2)
 
     for i in list_of_cols:
         ### Remove supernatant, by re-using tiprack 2
@@ -108,7 +109,7 @@ def run(protocol):
 
     for i in list_of_cols[:6]:
         ## Ethanol Wash 2, by using tiprack 3
-        ### Transfer Wash 2 to DA1
+        ### Transfer Wash 2 to DNA_plate
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_3[i]) # Slow down head speed 0.5X for bead handling
@@ -161,8 +162,8 @@ def run(protocol):
         m300.blow_out()
         m300.return_tip()
 
-    mag_deck.engage(height=34)
-    protocol.delay(minutes=2)
+    mag_deck.engage(height_from_base=0)
+    #protocol.delay(minutes=2)
 
     ### Remove supernatant, by re-using tiprack 3
 
@@ -173,7 +174,7 @@ def run(protocol):
         m300.pick_up_tip(tipracks_200_3[i])
         m300.aspirate(Wash_2_vol, DNA_plate[i].bottom(1))
         m300.dispense(Wash_2_vol, trash_box['A1'].top(-5))
-        m300.delay(seconds=5)
+        protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
         m300.blow_out(trash_box['A1'].top(-5))
@@ -192,11 +193,11 @@ def run(protocol):
         # max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (50), 'b': (20), 'c': (20)}
         # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
         m300.aspirate(Elution_vol, Elution_buffer.bottom(1))
-        m300.dispense(Elution_vol, DNA_plate[i].top(-2))
+        m300.dispense(Elution_vol, DNA_plate[i].top(-5))
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
-        m300.move_to(RNA_plate[i].bottom(5))
+        m300.move_to(DNA_plate[i].bottom(5))
         m300.blow_out()
         # max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
         # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
@@ -204,8 +205,8 @@ def run(protocol):
 
     protocol.pause("Please cover the plate with foil and incubate 5 min 25°C at 1500 rpm")
 
-    mag_deck.engage(height=34)
-    protocol.delay(minutes=5)
+    mag_deck.engage(height_from_base=0)
+    #protocol.delay(minutes=5)
 
     for i in list_of_cols:
         ### Transfer Elution buffer to elution_plate
