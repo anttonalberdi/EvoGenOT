@@ -24,34 +24,13 @@ metadata = {
     'description': 'Automation of D-Rex DNA protocol for stool samples in SHIELD',
 }
 
-### Custom LABWARE load
-# plate_name = '1ml_magPCR'
-# if plate_name not in labware.list():
-#     custom_plate = labware.create(
-#         plate_name,                    # name of you labware
-#         grid=(12, 8),                    # specify amount of (columns, rows)
-#         spacing=(9, 9),               # distances (mm) between each (column, row)
-#         diameter=7.5,                     # diameter (mm) of each well on the plate
-#         depth=26.4,                       # depth (mm) of each well on the plate
-#         volume=1000)
-#
-# plate_name = 'One-Column-reservoir'
-# if plate_name not in labware.list():
-#     custom_plate = labware.create(
-#         plate_name,                    # name of you labware
-#         grid=(1, 1),                    # specify amount of (columns, rows)
-#         spacing=(0, 0),               # distances (mm) between each (column, row)
-#         diameter=81,                     # diameter (mm) of each well on the plate
-#         depth=35,                       # depth (mm) of each well on the plate
-#         volume=350000)
-
 def run(protocol):
     #### LABWARE SETUP ####
     elution_plate_DNA = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 1)
     trough = protocol.load_labware('usascientific_12_reservoir_22ml', 9)
     trash_box = protocol.load_labware('agilent_1_reservoir_290ml', 8)
     mag_deck = protocol.load_labware('magdeck', 7)
-    DNA_plate = mag_deck.load_labware('1ml_magPCR')#, share=True)
+    DNA_plate = mag_deck.load_labware('biorad_96_wellplate_1000ul')#, share=True)
 
 
     tipracks_200_1 = protocol.load_labware('tiprack-200ul', 2, share=True)

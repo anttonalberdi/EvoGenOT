@@ -24,30 +24,6 @@ metadata = {
     'description': 'Automation of D-Rex RNA protocol for stool samples in SHIELD',
 }
 
-# These labwares must be re-created and added to the Opentrons App in the EHI computer
-
-### Custom LABWARE load
-
-# plate_name = '1ml_magPCR'
-# if plate_name not in labware.list():
-#     custom_plate = labware.create(
-#         plate_name,                    # name of you labware
-#         grid=(12, 8),                    # specify amount of (columns, rows)
-#         spacing=(9, 9),               # distances (mm) between each (column, row)
-#         diameter=7.5,                     # diameter (mm) of each well on the plate
-#         depth=26.4,                       # depth (mm) of each well on the plate
-#         volume=1000)
-#
-# plate_name = 'One-Column-reservoir'
-# if plate_name not in labware.list():
-#     custom_plate = labware.create(
-#         plate_name,                    # name of you labware
-#         grid=(1, 1),                    # specify amount of (columns, rows)
-#         spacing=(0, 0),               # distances (mm) between each (column, row)
-#         diameter=81,                     # diameter (mm) of each well on the plate
-#         depth=35,                       # depth (mm) of each well on the plate
-#         volume=350000)
-
 def run(protocol):
     #### LABWARE SETUP ####
     elution_plate_RNA = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 1)
