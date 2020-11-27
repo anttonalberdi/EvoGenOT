@@ -109,6 +109,7 @@ def run(protocol):
         m300.blow_out()
         m300.return_tip()
 
+    protocol.pause("Ensure enough buffer in the reservoir")
 ### probably to cancel:
     # #### Ensure enough buffer i reservoir by adding 3ml from backup
     # robot.comment("Ensure enough buffer i reservoir by adding 3ml from backup")
