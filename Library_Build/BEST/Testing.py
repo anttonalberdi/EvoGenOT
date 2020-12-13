@@ -68,11 +68,6 @@ def run(protocol):
 
     Liquid_trash = trash_box['A1']
 
-    ## Sample Setup
-    sample_number = 96
-    col_num = sample_number // 8 + (1 if sample_number % 8 > 0 else 0)
-    samples = [col for col in mag_plate.columns()[:col_num]]
-
     #### VOLUME SETUP
 
     sample_vol = 50
@@ -216,8 +211,6 @@ def run(protocol):
         m20.aspirate(10, mag_plate[i].bottom(0.2))
         m20.dispense(10, trash_box['A1'].top(-5))
         protocol.delay(seconds=5)
-        m20.flow_rate.aspirate = 130
-        m20.flow_rate.dispense = 130
         m20.drop_tip()
 
     # Dry beads before elution
