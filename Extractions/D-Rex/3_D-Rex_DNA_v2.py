@@ -1,14 +1,6 @@
 ## Description of procedure ##
-#
-#
-# Things do before procedure
-#
-#	1. Bead beat samples at maximum speed for 5 minutes
-# 	2. Spin down samples 10.000 rpm for 1 minute
-#	3. Transfer 200µl lysed sample to a deep well plate
 
 ### Procedure ###
-
 
 ######## IMPORT LIBRARIES ########
 from opentrons import protocol_api
@@ -21,7 +13,7 @@ metadata = {
     'update': 'Martina Cardinali <martina.cardinali.4@gmail.com>',
     'apiLevel': '2.2',
     'date': '2020/11/09',
-    'description': 'Automation of D-Rex DNA protocol for stool samples in SHIELD',
+    'description': 'Automation of D-Rex DNA protocol',
 }
 
 def run(protocol):
@@ -38,6 +30,7 @@ def run(protocol):
     tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 3)#, share=True)
     tipracks_200_3 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 4)#, share=True)
     tipracks_200_4 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 5)#, share=True)
+    tipracks_200_5 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 7)#, share=True)
 
     #### PIPETTE SETUP ####
     m300 = protocol.load_instrument('p300_multi_gen2', mount='left',
@@ -46,8 +39,7 @@ def run(protocol):
     #### REAGENT SETUP                          Description             Volume needed for protocol
     EtOH1 = EtOH_wash['A1']                   # 80% Ethanol           82.5 ml
     Elution_buffer = trough['A12']            # EBT                   6 ml
-    BufferC_1 = trough['A5']                  # Buffer C:              10 ml
-    BufferC_2 = trough['A6']                  # Buffer C:              10 ml
+    BufferC = trough['A5']                    # Buffer C:             19.8 ml
     Liquid_trash = trash_box['A1']
 
     #### VOLUME SETUP
@@ -62,11 +54,34 @@ def run(protocol):
     list_of_cols = ['A1','A2','A3','A4']
     #### PROTOCOL ####
 
-    mag_deck.engage(height_from_base=0)
-    #protocol.delay(minutes=2)
+    mag_deck.disengage()
 
-    ## Remove Buffer C   -> do not know if it will work, need to check!
-    # what about tiprack??
+    ## add Buffer C to beads with DNA
+    for i in list_of_cols:
+        m300.flow_rate.aspirate = 100
+        m300.flow_rate.dispense = 100
+        m300.pick_up_tip(tipracks_200_5[i]) # Slow down head speed 0.5X for bead handling
+        m300.mix(3, BufferC_vol, BufferC.top(-28))
+        # max_speed_per_axis = {'x': (300), 'y': (300), 'z': (50), 'a': (20), 'b': (20), 'c': (20)}
+        # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+        m300.flow_rate.aspirate = 50
+        m300.flow_rate.dispense = 50
+        m300.aspirate(BufferC_vol, BufferC.top(-28))
+        m300.dispense(BufferC_vol, sample_plate[i].bottom(4))   # *2 ?? check volume
+        m300.flow_rate.aspirate = 100
+        m300.flow_rate.dispense = 100
+        m300.mix(8, BufferC_vol, sample_plate[i].bottom(2))
+        protocol.delay(seconds=5)
+        m300.move_to(sample_plate[i].bottom(5))
+        m300.blow_out()
+        # max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
+        # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+        m300.return_tip()       # or drop tip?
+
+    mag_deck.engage(height_from_base=0)
+    #protocol.delay(minutes=4)
+
+    # transfer supernatant from DNA_plate to liquid trash
     for i in list_of_cols:
         m300.transfer(250, DNA_plate[i].bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True, air_gap=30)
 
