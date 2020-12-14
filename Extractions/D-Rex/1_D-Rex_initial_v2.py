@@ -30,7 +30,7 @@ def run(protocol):
     trough = protocol.load_labware('usascientific_12_reservoir_22ml', 6)
     RNA_plate = protocol.load_labware('biorad_96_wellplate_1000ul', 3)
     mag_deck = protocol.load_module('magdeck', 7)
-    sample_plate = mag_deck.load_labware('biorad_96_wellplate_1000ul')
+    sample_plate = mag_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
 
     tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 4)
     tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 9)   # only first 2 cols needed for transfering beads and EtOH binding buffer to RNA_plate
@@ -179,13 +179,13 @@ def run(protocol):
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
         #m300.transfer(350, sample_plate[i].bottom(2), RNA_plate[i].bottom(4), new_tip='once',  blow_out =True, air_gap=30)
-        m300.aspirate(175, sample_plate[i].bottom(2))
-        m300.dispense(175, RNA_plate[i].bottom(4))
+        m300.aspirate(200, sample_plate[i].bottom(2))
+        m300.dispense(200, RNA_plate[i].bottom(4))
         m300.blow_out(RNA_plate[i].top(-5))
         #m300.air_gap(height=2)
         m300.touch_tip(v_offset=-3)                    # remove comment if need to eliminate drops around the tip
-        m300.aspirate(190, sample_plate[i].bottom(1))
-        m300.dispense(190, RNA_plate[i].bottom(4))
+        m300.aspirate(200, sample_plate[i].bottom(1))
+        m300.dispense(200, RNA_plate[i].bottom(4))
         m300.blow_out(RNA_plate[i].top(-5))
         #m300.air_gap(height=2)
         m300.flow_rate.aspirate = 100
