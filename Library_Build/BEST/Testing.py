@@ -91,21 +91,15 @@ def run(protocol):
         m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
         #m300.move_to(SPRI_beads.top(-30))
         m300.mix(5, bead_vol, SPRI_beads.bottom(4))
-        # max_speed_per_axis                 ==> see end of protocol for info (if need to add them)
-        # robot.head_speed                   ==> see end of protocol for info
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
         m300.aspirate(bead_vol, SPRI_beads.bottom(4))
-        m300.move_to(mag_plate[i].bottom(1))
         m300.dispense(bead_vol, mag_plate[i].bottom(4))
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.mix(5, bead_vol, mag_plate[i].bottom(4))
         protocol.delay(seconds=5)
-        # m300.flow_rate.aspirate = 100
-        # m300.flow_rate.dispense = 100
-        m300.move_to(mag_plate[i].top(-4))
-        m300.blow_out()
+        m300.blow_out(mag_plate[i].top(-4))
         m300.return_tip()
 
 
@@ -140,14 +134,11 @@ def run(protocol):
         m300.pick_up_tip(tipracks_200_2[i]) # Slow down head speed 0.5X for bead handling
         m300.aspirate(EtOH_vol, EtOH1.bottom(4))
         m300.dispense(EtOH_vol, mag_plate[i].top(-4))
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
         m300.mix(5, wash_mix, mag_plate[i].bottom(5))
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
-        m300.move_to(mag_plate[i].top(-4))
-        m300.blow_out()
+        m300.blow_out(mag_plate[i].top(-4))
         m300.return_tip()
 
     #protocol.delay(minutes=2)
@@ -176,14 +167,11 @@ def run(protocol):
         m300.pick_up_tip(tipracks_200_3[i]) # Slow down head speed 0.5X for bead handling
         m300.aspirate(EtOH_vol2, EtOH2.bottom(4))
         m300.dispense(EtOH_vol2, mag_plate[i].top(-4))
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
         m300.mix(5, wash_mix, mag_plate[i].bottom(5))
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
-        m300.move_to(mag_plate[i].top(-10))
-        m300.blow_out()
+        m300.blow_out(mag_plate[i].top(-10))
         m300.return_tip()
 
     #protocol.delay(minutes=2)
@@ -207,7 +195,7 @@ def run(protocol):
     for i in list_of_cols:
         m20.flow_rate.aspirate = 100
         m20.flow_rate.dispense = 100
-        m20.pick_up_tip(tipracks_10_1[i]) # Slow down head speed 0.5X for bead handling
+        m20.pick_up_tip(tipracks_10_1[i])
         m20.aspirate(10, mag_plate[i].bottom(0.2))
         m20.dispense(10, trash_box['A1'].top(-5))
         protocol.delay(seconds=5)
@@ -228,8 +216,7 @@ def run(protocol):
         m300.flow_rate.dispense = 50
         m300.mix(5, 20, mag_plate[i].bottom(2))
         protocol.delay(seconds=5)
-        m300.move_to(mag_plate[i].top(-10))
-        m300.blow_out()
+        m300.blow_out(mag_plate[i].top(-10))
         m300.return_tip()
 
 
@@ -255,8 +242,7 @@ def run(protocol):
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
-        m300.move_to(elution_plate[i].top(-10))
-        m300.blow_out()
+        m300.blow_out(elution_plate[i].top(-10))
         m300.drop_tip()
 
     for i in even_cols:
@@ -271,8 +257,7 @@ def run(protocol):
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
-        m300.move_to(elution_plate[i].top(-10))
-        m300.blow_out()
+        m300.blow_out(elution_plate[i].top(-10))
         m300.drop_tip()
 
     # for i in list_of_cols:
@@ -295,8 +280,7 @@ def run(protocol):
     #     protocol.delay(seconds=5)
     #     m300.flow_rate.aspirate = 130
     #     m300.flow_rate.dispense = 130
-    #     m300.move_to(elution_plate[i].top(-10))
-    #     m300.blow_out()
+    #     m300.blow_out(elution_plate[i].top(-10))
     #     m300.return_tip()
 
     mag_deck.disengage()    # or mag_mod ?

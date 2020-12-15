@@ -48,7 +48,7 @@ def run(protocol):
 
     #### Plate SETUP
     list_of_cols = ['A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12']
-    list_of_cols = ['A1','A2','A7','A8']
+    list_of_cols = ['A1','A2','A3','A4','A5'.'A6']
     #### VOLUME SETUP
     Sample_vol = 200
     Binding_buffer_vol = Sample_vol*1
@@ -56,7 +56,6 @@ def run(protocol):
 
     #### PROTOCOL ####
 
-    ## add beads and sample binding buffer to DNA/sample plate
     mag_deck.disengage()
 
     ### Transfer buffer B1 (trough col 1) and beads to sample plate (col 1 to 6)
@@ -80,7 +79,6 @@ def run(protocol):
         # max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
         # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
         m300.return_tip()
-
 
     ### Transfer buffer B2 (trough col 2) and beads to sample plate (col 7 to 12)
     for i in list_of_cols[6:]:
@@ -108,8 +106,14 @@ def run(protocol):
 
     ## Add beads and EtOH binding buffer (trough col 4) to RNA plate (col 1 to 6)
     m300.pick_up_tip(tipracks_200_2['A1'])
-    for i in list_of_cols:
+    for i in list_of_cols[:6]:
         m300.transfer(350, EtOH_Bind1.bottom(3), RNA_plate[i].bottom(4), mix_before=(5,200), new_tip='never')
+    m300.drop_tip()
+
+    ## Add beads and EtOH binding buffer (trough col 5) to RNA plate (col 7 to 12)
+    m300.pick_up_tip(tipracks_200_2['A2'])
+    for i in list_of_cols[6:]:
+        m300.transfer(350, EtOH_Bind2.bottom(3), RNA_plate[i].bottom(4), mix_before=(5,200), new_tip='never')
     m300.drop_tip()
     # ## Add beads and EtOH binding buffer (trough col 4) to RNA plate (col 1 to 6)
     # for i in list_of_cols[:6]:
@@ -159,50 +163,47 @@ def run(protocol):
 
     protocol.pause('Please, take DNA plate from incubator and then, place it on the magnet.')
 
-    # Reuse tiprack 1 to mix sample with beads and buffer after incubation
-    for i in list_of_cols:
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
-        m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
-        m300.mix(5, 200, sample_plate[i].bottom(4))
-        m300.blow_out(sample_plate[i].top(-5))
-        #m300.air_gap(height=2)
-        m300.drop_tip()
+    # # Reuse tiprack 1 to mix sample with beads and buffer after incubation
+    # for i in list_of_cols:
+    #     m300.flow_rate.aspirate = 100
+    #     m300.flow_rate.dispense = 100
+    #     m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
+    #     m300.mix(5, 200, sample_plate[i].bottom(4))
+    #     m300.blow_out(sample_plate[i].top(-5))
+    #     #m300.air_gap(height=2)
+    #     m300.drop_tip()
 
     ## Transfer supernatant
-    mag_deck.engage(height_from_base=0)
-    #protocol.delay(minutes=7)
+    mag_deck.engage(height=34)
+    protocol.delay(minutes=7)
 
     #### Transfer supernatant to RNA_plate
     for i in list_of_cols:
         m300.pick_up_tip(tipracks_200_3[i]) # Slow down head speed 0.5X for bead handling
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
-        #m300.transfer(350, sample_plate[i].bottom(2), RNA_plate[i].bottom(4), new_tip='once',  blow_out =True, air_gap=30)
         m300.aspirate(200, sample_plate[i].bottom(2))
         m300.dispense(200, RNA_plate[i].bottom(4))
+        protocol.delay(seconds=5)
         m300.blow_out(RNA_plate[i].top(-5))
-        #m300.air_gap(height=2)
-        m300.touch_tip(v_offset=-3)                    # remove comment if need to eliminate drops around the tip
-        m300.aspirate(200, sample_plate[i].bottom(1))
-        m300.dispense(200, RNA_plate[i].bottom(4))
+        m300.air_gap(height=2)
+        m300.touch_tip(v_offset=-3)
+        m300.aspirate(150, sample_plate[i].bottom(1))
+        m300.dispense(150, RNA_plate[i].bottom(4))
+        protocol.delay(seconds=5)
         m300.blow_out(RNA_plate[i].top(-5))
-        #m300.air_gap(height=2)
+        m300.air_gap(height=2)
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.mix(3, 200, RNA_plate[i].bottom(2))
         protocol.delay(seconds=5)
-        m300.flow_rate.aspirate = 150
-        m300.flow_rate.dispense = 150
-        m300.move_to(RNA_plate[i].top(-4))
-        m300.blow_out()
-        # max_speed_per_axis = {'x': (600), 'y': (400), 'z': (100), 'a': (100), 'b': (40),'c': (40)}
-        # robot.head_speed(combined_speed=max(max_speed_per_axis.values()),**max_speed_per_axis)
+        m300.blow_out(RNA_plate[i].top(-4))
+        m300.air_gap(height=2)
         m300.return_tip()
 
     mag_deck.disengage()
 
-    protocol.pause("Cover DNA plate with aluminium seal and store in fridge until purification the same or following day.Continue with purification of RNA plate.")
+    protocol.pause("Cover DNA plate with aluminium seal and store in fridge until purification the same or following day. Continue with RNA purification. Cover RNA plate with foil and incubate it for 15 min at 10°C.")
 
     ############################
     ###### Job is done! ######
