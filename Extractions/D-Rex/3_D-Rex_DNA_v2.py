@@ -40,7 +40,8 @@ def run(protocol):
     m20 = protocol.load_instrument('p20_multi_gen2', mount='right', tip_racks=(tipracks_10_1, tipracks_10_2))
 
     #### REAGENT SETUP                          Description             Volume needed for protocol
-    EtOH1 = EtOH_wash['A1']                   # 80% Ethanol           82.5 ml
+    EtOH1 = trough['A1']                   # 80% Ethanol           # Wash 1 11 ml
+    EtOH2 = trough['A2']                   # 80% Ethanol           # Wash 2 11 ml
 
     Elution_buffer = trough['A12']            # EBT                   6 ml
     BufferC_1 = trough['A5']                    # Buffer C:             10.8 ml
@@ -142,7 +143,7 @@ def run(protocol):
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_4[i])
-        m300.aspirate(Wash_1_vol, EtOH1.top(-12))
+        m300.aspirate(Wash_1_vol, EtOH1.bottom(3))
         m300.dispense(Wash_1_vol, DNA_plate[i].top(-4))
         m300.mix(5, Wash_1_vol, DNA_plate[i].bottom(4))
         protocol.delay(seconds=5)
@@ -182,7 +183,7 @@ def run(protocol):
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
-        m300.aspirate(Wash_2_vol, EtOH1.top(-12))
+        m300.aspirate(Wash_2_vol, EtOH2.bottom(3))
         m300.dispense(Wash_2_vol, DNA_plate[i].top(-4))
         m300.mix(5, Wash_2_vol, DNA_plate[i].bottom(4))
         protocol.delay(seconds=5)
