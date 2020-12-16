@@ -89,6 +89,7 @@ def run(protocol):
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.mix(5, BufferC_vol, DNA_plate[i].bottom(2))
+        m300.move_to(DNA_plate[i].bottom(5))
         protocol.delay(seconds=5)
         m300.blow_out(DNA_plate[i].bottom(5))
         m300.air_gap(height=2)
@@ -107,6 +108,7 @@ def run(protocol):
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.mix(5, BufferC_vol, DNA_plate[i].bottom(2))
+        m300.move_to(DNA_plate[i].bottom(5))
         protocol.delay(seconds=5)
         m300.blow_out(DNA_plate[i].bottom(5))
         m300.air_gap(height=2)
@@ -115,9 +117,22 @@ def run(protocol):
     mag_deck.engage(height=34)
     protocol.delay(minutes=4)
 
-    # transfer supernatant from DNA_plate to liquid trash
+    ### Transfer supernatant from DNA_plate to liquid trash
     for i in list_of_cols:
-        m300.transfer(280, DNA_plate[i].bottom(1), Liquid_trash.top(-4), new_tip='once',  blow_out =True, air_gap=30)
+        m300.flow_rate.aspirate = 25
+        m300.flow_rate.dispense = 100
+        m300.pick_up_tip(tipracks_200_3[i])
+        m300.aspirate(200, DNA_plate[i].bottom(3))
+        m300.dispense(200, Liquid_trash.top(-4))
+        protocol.delay(seconds=5)
+        m300.blow_out()
+        m300.air_gap(height=2)
+        m300.aspirate(100, DNA_plate[i].bottom(3))
+        m300.dispense(100, Liquid_trash.top(-4))
+        protocol.delay(seconds=5)
+        m300.blow_out()
+        m300.air_gap(height=2)
+        m300.drop_tip()
 
     mag_deck.disengage()
 
@@ -140,9 +155,9 @@ def run(protocol):
     mag_deck.engage(height=34)
     protocol.delay(minutes=2)
 
+    ### Remove supernatant, by re-using tiprack 4
+    ### remove supernatant from DNA_plate
     for i in list_of_cols:
-        ### Remove supernatant, by re-using tiprack 4
-        ### remove supernatant from DNA_plate
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_4[i])
@@ -161,9 +176,9 @@ def run(protocol):
     ##Reset tipracks for more tips
     m300.reset_tipracks()
 
+    ## Ethanol Wash 2, by using tiprack 1
+    ### Transfer Wash 2 to DNA_plate
     for i in list_of_cols:
-        ## Ethanol Wash 2, by using tiprack 1
-        ### Transfer Wash 2 to DNA_plate
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
@@ -180,9 +195,8 @@ def run(protocol):
     mag_deck.engage(height=34)
     protocol.delay(minutes=3)
 
-    ### Remove supernatant, by re-using tiprack 1
+    ### Remove supernatant from DNA_plate by re-using tiprack 1
     for i in list_of_cols:
-        ### remove supernatant from DNA_plate
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_1[i])
@@ -208,9 +222,10 @@ def run(protocol):
 
     #### Dry beads before elution (removing supernatant from all wells takes more than 5 mins, should be enough for beads to dry)
     protocol.delay(minutes=5)
-    ## Elution
+
     mag_deck.disengage()
 
+    ## Elution
     #### Transfer elution buffer to DNA_plate
     for i in list_of_cols:
         m300.flow_rate.aspirate = 50
@@ -227,8 +242,8 @@ def run(protocol):
     mag_deck.engage(height=34)
     protocol.delay(minutes=5)
 
+    ### Transfer elutes to elution_plate
     for i in list_of_cols:
-        ### Transfer elutes to elution_plate
         m300.pick_up_tip(tipracks_200_2[i])
         m300.flow_rate.aspirate = 5
         m300.flow_rate.dispense = 50
