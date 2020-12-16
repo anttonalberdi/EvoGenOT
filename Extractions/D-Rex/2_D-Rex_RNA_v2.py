@@ -105,7 +105,6 @@ def run(protocol):
         m300.air_gap(height = 2)
         m300.drop_tip()
 
-    # Step with pipette of 20ul to add?
     mag_deck.disengage()
 
     ### Wash 1 with Ethanol, using tiprack 2
@@ -191,7 +190,7 @@ def run(protocol):
 
     mag_deck.disengage()
     ## Dry beads before DNase treatment
-    protocol.delay(minutes=4)
+    protocol.delay(minutes=2)
 
 
     ### Adding DNAse to RNA_plate, by using tiprack 4
@@ -357,7 +356,7 @@ def run(protocol):
         m20.drop_tip()
 
     ## Dry beads before elution (removing supernatant from all wells takes more than 5 mins, should be enough for beads to dry)
-    protocol.delay(minutes=5)
+    protocol.delay(minutes=2)
     ## Elution
     mag_deck.disengage()
 

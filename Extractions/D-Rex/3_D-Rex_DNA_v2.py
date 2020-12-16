@@ -221,7 +221,7 @@ def run(protocol):
         m20.drop_tip()
 
     #### Dry beads before elution (removing supernatant from all wells takes more than 5 mins, should be enough for beads to dry)
-    protocol.delay(minutes=5)
+    protocol.delay(minutes=2)
 
     mag_deck.disengage()
 
