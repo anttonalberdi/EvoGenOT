@@ -62,8 +62,8 @@ def run(protocol):
 
     ### Transfer buffer B1 (trough col 1) and beads to sample plate (col 1 to 6)
     for i in list_of_cols[:6]:
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
+        m300.flow_rate.aspirate = 150
+        m300.flow_rate.dispense = 150
         m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
         m300.mix(5, Binding_buffer_vol, Binding_buffer1.bottom(3))
         m300.flow_rate.aspirate = 50
@@ -80,8 +80,8 @@ def run(protocol):
 
     ### Transfer buffer B2 (trough col 2) and beads to sample plate (col 7 to 12)
     for i in list_of_cols[6:]:
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
+        m300.flow_rate.aspirate = 150
+        m300.flow_rate.dispense = 150
         m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
         m300.mix(5, Binding_buffer_vol, Binding_buffer2.bottom(3))
         m300.flow_rate.aspirate = 50
@@ -140,7 +140,7 @@ def run(protocol):
 
     ## Transfer supernatant
     mag_deck.engage(height=34)
-    protocol.delay(minutes=7)
+    protocol.delay(minutes=3)
 
     #### Transfer supernatant to RNA_plate
     for i in list_of_cols:
@@ -158,8 +158,8 @@ def run(protocol):
         #protocol.delay(seconds=5)
         #m300.blow_out(RNA_plate[i].top(-5))
         #m300.air_gap(height=2)
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
+        m300.flow_rate.aspirate = 150
+        m300.flow_rate.dispense = 150
         m300.mix(3, 200, RNA_plate[i].bottom(2))
         m300.move_to(RNA_plate[i].top(-4))
         protocol.delay(seconds=5)
