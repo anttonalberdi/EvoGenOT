@@ -26,7 +26,7 @@ metadata = {
 
 def run(protocol):
     #### LABWARE SETUP ####
-    elution_plate_RNA = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 1)
+    elution_plate_RNA = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 3)
     trough = protocol.load_labware('usascientific_12_reservoir_22ml', 9)
     mag_deck = protocol.load_module('magdeck', 7)
     RNA_plate = mag_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
@@ -34,11 +34,11 @@ def run(protocol):
     #EtOH_wash = protocol.load_labware('agilent_1_reservoir_290ml', 6)
 
     tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 2)
-    tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 3)
-    tipracks_200_3 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 4)
+    tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 4)
+    tipracks_200_3 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 1)
     tipracks_200_4 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 5)
     tipracks_10_1 = protocol.load_labware('opentrons_96_filtertiprack_20ul', 8)
-    tipracks_10_2 = protocol.load_labware('opentrons_96_filtertiprack_20ul', 11)
+    tipracks_10_2 = protocol.load_labware('opentrons_96_filtertiprack_20ul', 6)
 
 
     #### PIPETTE SETUP ####
@@ -122,11 +122,12 @@ def run(protocol):
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
         m300.blow_out(trash_box['A1'].top(-5))
+        protocol.delay(seconds=5)
         #m300.air_gap(height=2)
         m300.aspirate(125, RNA_plate[i].bottom(1))
         m300.dispense(125, trash_box['A1'].top(-5))
-        protocol.delay(seconds=5)
         m300.blow_out(trash_box['A1'].top(-5))
+        protocol.delay(seconds=5)
         m300.air_gap(height=2)
         m300.drop_tip()
 
@@ -140,12 +141,15 @@ def run(protocol):
         m300.pick_up_tip(tipracks_200_2[i])
         m300.aspirate(Wash_1_vol, EtOH1.bottom(3))
         m300.dispense(Wash_1_vol, RNA_plate[i].top(-4))
-        m300.mix(5, Wash_1_vol, RNA_plate[i].bottom(5))
+        m300.mix(5, Wash_1_vol, RNA_plate[i].bottom(3))
+        protocol.delay(seconds=5)
         m300.blow_out(RNA_plate[i].top(-10))
         protocol.delay(seconds=5)
+        m300.air_gap(height=2)
         m300.return_tip()
 
     mag_deck.engage(height=34)
+    protocol.delay(minutes=2)
 
     for i in list_of_cols:
         ## Remove supernatant, by re-using tiprack 2
@@ -159,6 +163,7 @@ def run(protocol):
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
         m300.blow_out(trash_box['A1'].top(-5))
+        protocol.delay(seconds=5)
         m300.air_gap(height=2)
         m300.drop_tip()
 
@@ -172,13 +177,16 @@ def run(protocol):
         m300.pick_up_tip(tipracks_200_3[i])
         m300.aspirate(Wash_2_vol, EtOH2.bottom(3))
         m300.dispense(Wash_2_vol, RNA_plate[i].top(-4))
-        m300.mix(5, Wash_2_vol, RNA_plate[i].bottom(5))
+        m300.mix(5, Wash_2_vol, RNA_plate[i].bottom(3))
+        m300.move_to(RNA_plate[i].top(-10))
         protocol.delay(seconds=5)
         m300.blow_out(RNA_plate[i].top(-10))
         protocol.delay(seconds=5)
+        m300.air_gap(height=2)
         m300.return_tip()
 
     mag_deck.engage(height=34)
+    protocol.delay(minutes=2)
 
     for i in list_of_cols:
         ## Remove supernatant, by re-using tiprack 3
@@ -192,6 +200,7 @@ def run(protocol):
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
         m300.blow_out(trash_box['A1'].top(-5))
+        protocol.delay(seconds=5)
         m300.air_gap(height=2)
         m300.drop_tip()
 
@@ -202,7 +211,7 @@ def run(protocol):
         m20.flow_rate.aspirate = 50
         m20.flow_rate.dispense = 50
         m20.pick_up_tip(tipracks_10_2[i])
-        m20.aspirate(10, RNA_plate[i].bottom(1))
+        m20.aspirate(10, RNA_plate[i].bottom(0.2))
         m20.dispense(10, trash_box['A1'].top(-5))
         protocol.delay(seconds=5)
         m20.drop_tip()
@@ -220,8 +229,8 @@ def run(protocol):
         m300.aspirate(Elution_vol, Elution_buffer.bottom(2))
         m300.dispense(Elution_vol, RNA_plate[i].top(-2))
         m300.mix(5, 30, RNA_plate[i].bottom(2))
-        protocol.delay(seconds=5)
         m300.blow_out(RNA_plate[i].bottom(5))
+        protocol.delay(seconds=5)
         m300.return_tip()
 
     protocol.delay(minutes=5)
