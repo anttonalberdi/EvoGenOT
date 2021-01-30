@@ -1,7 +1,7 @@
 ## Description of procedure ##
 #
 #
-# Things do before procedure
+# Things to do before procedure
 #
 #	1. Bead beat samples at maximum speed for 5 minutes (If needed do Proteinase K for digestion of tissue)
 # 	2. Spin down samples 10.000 rpm for 1 minute
@@ -108,7 +108,27 @@ def run(protocol):
 
     # ## Add beads and EtOH binding buffer (trough col 4) to RNA plate (col 1 to 3)
     m300.pick_up_tip(tipracks_200_2['A1'])
-    for i in list_of_cols[:3]:
+    for i in list_of_cols[0]:
+        m300.flow_rate.aspirate = 150
+        m300.flow_rate.dispense = 150
+        m300.mix(5, 200, EtOH_Bind1.bottom(3))
+        m300.flow_rate.aspirate = 50
+        m300.flow_rate.dispense = 50
+        m300.transfer(350, EtOH_Bind1.bottom(7), RNA_plate[i].bottom(4), new_tip='never')
+        m300.move_to(RNA_plate[i].top(-6))
+        m300.blow_out()
+        protocol.delay(seconds=5)
+    for i in list_of_cols[1]:
+        m300.flow_rate.aspirate = 150
+        m300.flow_rate.dispense = 150
+        m300.mix(5, 200, EtOH_Bind1.bottom(3))
+        m300.flow_rate.aspirate = 50
+        m300.flow_rate.dispense = 50
+        m300.transfer(350, EtOH_Bind1.bottom(5), RNA_plate[i].bottom(4), new_tip='never')
+        m300.move_to(RNA_plate[i].top(-6))
+        m300.blow_out()
+        protocol.delay(seconds=5)
+    for i in list_of_cols[2]:
         m300.flow_rate.aspirate = 150
         m300.flow_rate.dispense = 150
         m300.mix(5, 200, EtOH_Bind1.bottom(3))
@@ -122,7 +142,27 @@ def run(protocol):
 
     ## Add beads and EtOH binding buffer (trough col 5) to RNA plate (col 4 to 6)
     m300.pick_up_tip(tipracks_200_2['A2'])
-    for i in list_of_cols[3:6]:
+    for i in list_of_cols[3]:
+        m300.flow_rate.aspirate = 150
+        m300.flow_rate.dispense = 150
+        m300.mix(5, 200, EtOH_Bind2.bottom(3))
+        m300.flow_rate.aspirate = 50
+        m300.flow_rate.dispense = 50
+        m300.transfer(350, EtOH_Bind2.bottom(7), RNA_plate[i].bottom(4), new_tip='never')
+        m300.move_to(RNA_plate[i].top(-6))
+        m300.blow_out()
+        protocol.delay(seconds=5)
+    for i in list_of_cols[4]:
+        m300.flow_rate.aspirate = 150
+        m300.flow_rate.dispense = 150
+        m300.mix(5, 200, EtOH_Bind2.bottom(3))
+        m300.flow_rate.aspirate = 50
+        m300.flow_rate.dispense = 50
+        m300.transfer(350, EtOH_Bind2.bottom(5), RNA_plate[i].bottom(4), new_tip='never')
+        m300.move_to(RNA_plate[i].top(-6))
+        m300.blow_out()
+        protocol.delay(seconds=5)
+    for i in list_of_cols[5]:
         m300.flow_rate.aspirate = 150
         m300.flow_rate.dispense = 150
         m300.mix(5, 200, EtOH_Bind2.bottom(3))
@@ -136,7 +176,27 @@ def run(protocol):
 
     ## Add beads and EtOH binding buffer (trough col 5) to RNA plate (col 7 to 9)
     m300.pick_up_tip(tipracks_200_2['A3'])
-    for i in list_of_cols[6:9]:
+    for i in list_of_cols[6]:
+        m300.flow_rate.aspirate = 150
+        m300.flow_rate.dispense = 150
+        m300.mix(5, 200, EtOH_Bind3.bottom(3))
+        m300.flow_rate.aspirate = 50
+        m300.flow_rate.dispense = 50
+        m300.transfer(350, EtOH_Bind3.bottom(7), RNA_plate[i].bottom(4), new_tip='never')
+        m300.move_to(RNA_plate[i].top(-6))
+        m300.blow_out()
+        protocol.delay(seconds=5)
+    for i in list_of_cols[7]:
+        m300.flow_rate.aspirate = 150
+        m300.flow_rate.dispense = 150
+        m300.mix(5, 200, EtOH_Bind3.bottom(3))
+        m300.flow_rate.aspirate = 50
+        m300.flow_rate.dispense = 50
+        m300.transfer(350, EtOH_Bind3.bottom(5), RNA_plate[i].bottom(4), new_tip='never')
+        m300.move_to(RNA_plate[i].top(-6))
+        m300.blow_out()
+        protocol.delay(seconds=5)
+    for i in list_of_cols[8]:
         m300.flow_rate.aspirate = 150
         m300.flow_rate.dispense = 150
         m300.mix(5, 200, EtOH_Bind3.bottom(3))
@@ -150,7 +210,27 @@ def run(protocol):
 
     ## Add beads and EtOH binding buffer (trough col 5) to RNA plate (col 10 to 12)
     m300.pick_up_tip(tipracks_200_2['A4'])
-    for i in list_of_cols[9:]:
+    for i in list_of_cols[9]:
+        m300.flow_rate.aspirate = 150
+        m300.flow_rate.dispense = 150
+        m300.mix(5, 200, EtOH_Bind4.bottom(3))
+        m300.flow_rate.aspirate = 50
+        m300.flow_rate.dispense = 50
+        m300.transfer(350, EtOH_Bind4.bottom(7), RNA_plate[i].bottom(4), new_tip='never')
+        m300.move_to(RNA_plate[i].top(-6))
+        m300.blow_out()
+        protocol.delay(seconds=5)
+    for i in list_of_cols[10]:
+        m300.flow_rate.aspirate = 150
+        m300.flow_rate.dispense = 150
+        m300.mix(5, 200, EtOH_Bind4.bottom(3))
+        m300.flow_rate.aspirate = 50
+        m300.flow_rate.dispense = 50
+        m300.transfer(350, EtOH_Bind4.bottom(5), RNA_plate[i].bottom(4), new_tip='never')
+        m300.move_to(RNA_plate[i].top(-6))
+        m300.blow_out()
+        protocol.delay(seconds=5)
+    for i in list_of_cols[11]:
         m300.flow_rate.aspirate = 150
         m300.flow_rate.dispense = 150
         m300.mix(5, 200, EtOH_Bind4.bottom(3))
