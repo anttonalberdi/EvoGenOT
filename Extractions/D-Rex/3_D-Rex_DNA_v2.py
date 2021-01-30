@@ -20,24 +20,24 @@ def run(protocol):
     #### LABWARE SETUP ####
     elution_plate_DNA = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 1)
     trough = protocol.load_labware('usascientific_12_reservoir_22ml', 9)
-    trash_box = protocol.load_labware('agilent_1_reservoir_290ml', 10)
+    trash_box = protocol.load_labware('agilent_1_reservoir_290ml', 11)
     mag_deck = protocol.load_module('magdeck', 7)
     DNA_plate = mag_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
-    EtOH_wash = protocol.load_labware('agilent_1_reservoir_290ml', 6)
 
 
     tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 2)
     tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 3)
     tipracks_200_3 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 4)
     tipracks_200_4 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 5)
+    tipracks_200_5 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 10)
+    tipracks_200_6 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 6)
 
-    tipracks_10_1 = protocol.load_labware('opentrons_96_filtertiprack_20ul', 11)
-    tipracks_10_2 = protocol.load_labware('opentrons_96_filtertiprack_20ul', 6)
+    tipracks_10_1 = protocol.load_labware('opentrons_96_filtertiprack_20ul', 8)
 
     #### PIPETTE SETUP ####
     m300 = protocol.load_instrument('p300_multi_gen2', mount='left',
                                             tip_racks=(tipracks_200_1, tipracks_200_2, tipracks_200_3, tipracks_200_4))
-    m20 = protocol.load_instrument('p20_multi_gen2', mount='right', tip_racks=(tipracks_10_1, tipracks_10_2))
+    m20 = protocol.load_instrument('p20_multi_gen2', mount='right', tip_racks=[tipracks_10_1])
 
     #### REAGENT SETUP                          Description             Volume needed for protocol
     EtOH1 = trough['A1']                   # 80% Ethanol           # Wash 1 11 ml
@@ -89,7 +89,7 @@ def run(protocol):
         m300.dispense(BufferC_vol, DNA_plate[i].bottom(4))   # *2 ?? check volume
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
-        m300.mix(5, BufferC_vol, DNA_plate[i].bottom(2))
+        m300.mix(5, 170, DNA_plate[i].bottom(2))
         m300.move_to(DNA_plate[i].bottom(5))
         protocol.delay(seconds=5)
         m300.blow_out(DNA_plate[i].bottom(5))
@@ -146,7 +146,7 @@ def run(protocol):
         m300.pick_up_tip(tipracks_200_4[i])
         m300.aspirate(Wash_1_vol, EtOH1.bottom(3))
         m300.dispense(Wash_1_vol, DNA_plate[i].top(-4))
-        m300.mix(5, Wash_1_vol, DNA_plate[i].bottom(4))
+        m300.mix(5, 170, DNA_plate[i].bottom(2))
         m300.move_to(DNA_plate[i].top(-10))
         protocol.delay(seconds=5)
         m300.blow_out()
@@ -171,12 +171,14 @@ def run(protocol):
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
         m300.blow_out(trash_box['A1'].top(-5))
+        protocol.delay(seconds=5)
+        m300.blow_out()
         m300.air_gap(height = 2)
         m300.drop_tip()
 
     mag_deck.disengage()
 
-    protocol.pause("Please substitute tip racks 1 and 2 before continuing.")
+    #protocol.pause("Please substitute tip racks 1 and 2 before continuing.")
     ##Reset tipracks for more tips
     m300.reset_tipracks()
 
@@ -185,10 +187,10 @@ def run(protocol):
     for i in list_of_cols:
         m300.flow_rate.aspirate = 150
         m300.flow_rate.dispense = 150
-        m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
+        m300.pick_up_tip(tipracks_200_5[i]) # Slow down head speed 0.5X for bead handling
         m300.aspirate(Wash_2_vol, EtOH2.bottom(3))
         m300.dispense(Wash_2_vol, DNA_plate[i].top(-4))
-        m300.mix(5, Wash_2_vol, DNA_plate[i].bottom(4))
+        m300.mix(5, 170, DNA_plate[i].bottom(2))
         m300.move_to(DNA_plate[i].top(-4))
         protocol.delay(seconds=5)
         m300.blow_out()
@@ -205,13 +207,15 @@ def run(protocol):
     for i in list_of_cols:
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
-        m300.pick_up_tip(tipracks_200_1[i])
+        m300.pick_up_tip(tipracks_200_5[i])
         m300.aspirate(Wash_2_vol, DNA_plate[i].bottom(1))
         m300.dispense(Wash_2_vol, trash_box['A1'].top(-5))
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
         m300.blow_out(trash_box['A1'].top(-5))
+        protocol.delay(seconds=5)
+        m300.blow_out()
         m300.air_gap(height = 2)
         m300.drop_tip()
 
@@ -219,7 +223,7 @@ def run(protocol):
     for i in list_of_cols:
         m20.flow_rate.aspirate = 50
         m20.flow_rate.dispense = 50
-        m20.pick_up_tip(tipracks_10_2[i])
+        m20.pick_up_tip(tipracks_10_1[i])
         m20.aspirate(10, DNA_plate[i].bottom(0.5))
         m20.dispense(10, trash_box['A1'].top(-5))
         m20.blow_out()
@@ -238,7 +242,7 @@ def run(protocol):
     for i in list_of_cols:
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
-        m300.pick_up_tip(tipracks_200_2[i])
+        m300.pick_up_tip(tipracks_200_6[i])
         m300.aspirate(Elution_vol, Elution_buffer.bottom(2))
         m300.dispense(Elution_vol, DNA_plate[i].top(-5))
         m300.mix(5, 30, DNA_plate[i].bottom(2))
@@ -252,7 +256,7 @@ def run(protocol):
 
     ### Transfer elutes to elution_plate
     for i in list_of_cols:
-        m300.pick_up_tip(tipracks_200_2[i])
+        m300.pick_up_tip(tipracks_200_6[i])
         m300.flow_rate.aspirate = 5
         m300.flow_rate.dispense = 50
         m300.aspirate(70, DNA_plate[i].bottom(1))

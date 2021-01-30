@@ -141,7 +141,7 @@ def run(protocol):
         m300.pick_up_tip(tipracks_200_2[i])
         m300.aspirate(Wash_1_vol, EtOH1.bottom(3))
         m300.dispense(Wash_1_vol, RNA_plate[i].top(-4))
-        m300.mix(5, Wash_1_vol, RNA_plate[i].bottom(2))
+        m300.mix(5, 170, RNA_plate[i].bottom(2))
         m300.move_to(RNA_plate[i].top(-10))
         protocol.delay(seconds=5)
         m300.blow_out()
@@ -166,8 +166,8 @@ def run(protocol):
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
         m300.blow_out(trash_box['A1'].top(-5))
-        protocol.delay(seconds=5)
-        m300.air_gap(height=2)
+        # protocol.delay(seconds=5)
+        # m300.air_gap(height=2)
         m300.drop_tip()
 
     ## Ethanol Wash 4, by using tiprack 3
@@ -180,7 +180,7 @@ def run(protocol):
         m300.pick_up_tip(tipracks_200_3[i])
         m300.aspirate(Wash_2_vol, EtOH2.bottom(3))
         m300.dispense(Wash_2_vol, RNA_plate[i].top(-4))
-        m300.mix(5, Wash_2_vol, RNA_plate[i].bottom(2))
+        m300.mix(5, 170, RNA_plate[i].bottom(2))
         m300.move_to(RNA_plate[i].top(-10))
         protocol.delay(seconds=5)
         m300.blow_out()
@@ -205,8 +205,8 @@ def run(protocol):
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
         m300.blow_out(trash_box['A1'].top(-5))
-        protocol.delay(seconds=5)
-        m300.air_gap(height=2)
+        # protocol.delay(seconds=5)
+        # m300.air_gap(height=2)
         m300.drop_tip()
 
     # remove the remaining supernatant with 20ul pipette
@@ -218,7 +218,9 @@ def run(protocol):
         m20.pick_up_tip(tipracks_10_2[i])
         m20.aspirate(10, RNA_plate[i].bottom(0.2))
         m20.dispense(10, trash_box['A1'].top(-5))
-        protocol.delay(seconds=5)
+        m20.blow_out()
+        # protocol.delay(seconds=5)
+        # m20.air_gap()
         m20.drop_tip()
 
     ## Dry beads before elution (removing supernatant from all wells takes more than 5 mins, should be enough for beads to dry)
