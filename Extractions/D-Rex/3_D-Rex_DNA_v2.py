@@ -59,6 +59,7 @@ def run(protocol):
 
     list_of_cols = ['A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12']
     list_of_cols = ['A1','A2','A3','A4','A5','A6']
+
     #### PROTOCOL ####
 
     mag_deck.engage(height=34)
@@ -142,13 +143,15 @@ def run(protocol):
         ### Wash 1 with Ethanol, using tiprack 4
         ### Transfer Wash 1 to DNA_plate
         m300.flow_rate.aspirate = 150
-        m300.flow_rate.dispense = 150
+        m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_4[i])
         m300.aspirate(Wash_1_vol, EtOH1.bottom(3))
         m300.dispense(Wash_1_vol, DNA_plate[i].top(-4))
         m300.mix(5, 170, DNA_plate[i].bottom(2))
         m300.move_to(DNA_plate[i].top(-10))
         protocol.delay(seconds=5)
+        m300.flow_rate.aspirate = 130
+        m300.flow_rate.dispense = 130
         m300.blow_out()
         protocol.delay(seconds=5)
         m300.blow_out()
@@ -186,13 +189,15 @@ def run(protocol):
     ### Transfer Wash 2 to DNA_plate
     for i in list_of_cols:
         m300.flow_rate.aspirate = 150
-        m300.flow_rate.dispense = 150
+        m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_5[i]) # Slow down head speed 0.5X for bead handling
         m300.aspirate(Wash_2_vol, EtOH2.bottom(3))
         m300.dispense(Wash_2_vol, DNA_plate[i].top(-4))
         m300.mix(5, 170, DNA_plate[i].bottom(2))
-        m300.move_to(DNA_plate[i].top(-4))
+        m300.move_to(DNA_plate[i].top(-10))
         protocol.delay(seconds=5)
+        m300.flow_rate.aspirate = 130
+        m300.flow_rate.dispense = 130
         m300.blow_out()
         protocol.delay(seconds=5)
         m300.blow_out()
@@ -221,10 +226,10 @@ def run(protocol):
 
     ### Remove the remaining supernatant with 20ul pipette
     for i in list_of_cols:
-        m20.flow_rate.aspirate = 50
-        m20.flow_rate.dispense = 50
+        m20.flow_rate.aspirate = 100
+        m20.flow_rate.dispense = 100
         m20.pick_up_tip(tipracks_10_1[i])
-        m20.aspirate(10, DNA_plate[i].bottom(0.5))
+        m20.aspirate(10, DNA_plate[i].bottom(0.2))
         m20.dispense(10, trash_box['A1'].top(-5))
         m20.blow_out()
         protocol.delay(seconds=5)

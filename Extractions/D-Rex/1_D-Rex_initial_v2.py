@@ -45,11 +45,11 @@ def run(protocol):
     Binding_buffer2 = trough['A2']			  # Buffer B:              11 ml
     EtOH_Bind1 = trough['A4']                 # EtOH + magnetic:       10.8 ml EtOH + 405ul beads
     EtOH_Bind2 = trough['A5']                 # EtOH + magnetic:       10.8 ml EtOH + 405ul beads
-    EtOH_Bind3 = trough['A6']                 # EtOH + magnetic:       10.8 ml EtOH + 405ul beads
-    EtOH_Bind4 = trough['A7']                 # EtOH + magnetic:       10.8 ml EtOH + 405ul beads
+    #EtOH_Bind3 = trough['A6']                 # EtOH + magnetic:       10.8 ml EtOH + 405ul beads
+    #EtOH_Bind4 = trough['A7']                 # EtOH + magnetic:       10.8 ml EtOH + 405ul beads
 
     #### Plate SETUP
-    list_of_cols = ['A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12']
+    #list_of_cols = ['A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12']
     list_of_cols = ['A1','A2','A3','A4','A5','A6']
     #### VOLUME SETUP
     Sample_vol = 200
@@ -124,7 +124,7 @@ def run(protocol):
     m300.flow_rate.dispense = 200
     m300.mix(2, 200, EtOH_Bind1.bottom(3))
     m300.mix(2, 200, EtOH_Bind1.bottom(5))
-    m300.mix(1, 200, EtOH_Bind1.bottom(8))
+    m300.mix(2, 200, EtOH_Bind1.bottom(8))
     m300.flow_rate.aspirate = 50
     m300.flow_rate.dispense = 50
     m300.aspirate(175, EtOH_Bind1.bottom(10))
@@ -146,7 +146,7 @@ def run(protocol):
     m300.flow_rate.dispense = 200
     m300.mix(2, 200, EtOH_Bind1.bottom(3))
     m300.mix(2, 200, EtOH_Bind1.bottom(5))
-    m300.mix(1, 200, EtOH_Bind1.bottom(8))
+    m300.mix(2, 200, EtOH_Bind1.bottom(8))
     m300.flow_rate.aspirate = 50
     m300.flow_rate.dispense = 50
     m300.aspirate(175, EtOH_Bind1.bottom(8))
@@ -168,7 +168,7 @@ def run(protocol):
     m300.flow_rate.dispense = 200
     m300.mix(2, 200, EtOH_Bind1.bottom(3))
     m300.mix(2, 200, EtOH_Bind1.bottom(5))
-    m300.mix(1, 200, EtOH_Bind1.bottom(8))
+    m300.mix(2, 200, EtOH_Bind1.bottom(8))
     m300.aspirate(175, EtOH_Bind1.bottom(3))
     m300.dispense(175, RNA_plate['A3'].bottom(4))
     m300.flow_rate.aspirate = 200
@@ -187,54 +187,62 @@ def run(protocol):
     ## Add beads and EtOH binding buffer (trough col 5) to RNA plate (col 4 to 6)
     m300.pick_up_tip(tipracks_200_2['A2'])
 
-    m300.flow_rate.aspirate = 150
-    m300.flow_rate.dispense = 150
-    m300.mix(5, 200, EtOH_Bind2.bottom(3))
+    m300.flow_rate.aspirate = 200
+    m300.flow_rate.dispense = 200
+    m300.mix(2, 200, EtOH_Bind2.bottom(3))
+    m300.mix(2, 200, EtOH_Bind2.bottom(5))
+    m300.mix(2, 200, EtOH_Bind2.bottom(8))
     m300.flow_rate.aspirate = 50
     m300.flow_rate.dispense = 50
     m300.aspirate(175, EtOH_Bind2.bottom(10))
     m300.dispense(175, RNA_plate['A4'].bottom(4))
-    m300.flow_rate.aspirate = 150
-    m300.flow_rate.dispense = 150
-    m300.mix(3, 200, EtOH_Bind2.bottom(3))
+    m300.flow_rate.aspirate = 200
+    m300.flow_rate.dispense = 200
+    m300.mix(2, 200, EtOH_Bind2.bottom(3))
+    m300.mix(2, 200, EtOH_Bind2.bottom(5))
+    m300.mix(1, 200, EtOH_Bind2.bottom(8))
     m300.flow_rate.aspirate = 50
     m300.flow_rate.dispense = 50
-    m300.aspirate(175, EtOH_Bind2.bottom(6))
+    m300.aspirate(175, EtOH_Bind2.bottom(8))
     m300.dispense(175, RNA_plate['A4'].bottom(4))
     m300.move_to(RNA_plate['A4'].top(-6))
     m300.blow_out()
     protocol.delay(seconds=5)
 
-    m300.flow_rate.aspirate = 150
-    m300.flow_rate.dispense = 150
-    m300.mix(5, 200, EtOH_Bind2.bottom(3))
+    m300.flow_rate.aspirate = 200
+    m300.flow_rate.dispense = 200
+    m300.mix(2, 200, EtOH_Bind2.bottom(3))
+    m300.mix(2, 200, EtOH_Bind2.bottom(5))
+    m300.mix(2, 200, EtOH_Bind2.bottom(8))
     m300.flow_rate.aspirate = 50
     m300.flow_rate.dispense = 50
     m300.aspirate(175, EtOH_Bind2.bottom(8))
     m300.dispense(175, RNA_plate['A5'].bottom(4))
-    m300.flow_rate.aspirate = 150
-    m300.flow_rate.dispense = 150
-    m300.mix(3, 200, EtOH_Bind2.bottom(3))
+    m300.flow_rate.aspirate = 200
+    m300.flow_rate.dispense = 200
+    m300.mix(2, 200, EtOH_Bind2.bottom(3))
+    m300.mix(2, 200, EtOH_Bind2.bottom(5))
+    m300.mix(1, 200, EtOH_Bind2.bottom(8))
     m300.flow_rate.aspirate = 50
     m300.flow_rate.dispense = 50
-    m300.aspirate(175, EtOH_Bind2.bottom(6))
+    m300.aspirate(175, EtOH_Bind2.bottom(5))
     m300.dispense(175, RNA_plate['A5'].bottom(4))
     m300.move_to(RNA_plate['A5'].top(-6))
     m300.blow_out()
     protocol.delay(seconds=5)
 
-    m300.flow_rate.aspirate = 150
-    m300.flow_rate.dispense = 150
-    m300.mix(5, 200, EtOH_Bind2.bottom(3))
-    m300.flow_rate.aspirate = 50
-    m300.flow_rate.dispense = 50
-    m300.aspirate(175, EtOH_Bind2.bottom(6))
+    m300.flow_rate.aspirate = 200
+    m300.flow_rate.dispense = 200
+    m300.mix(2, 200, EtOH_Bind2.bottom(3))
+    m300.mix(2, 200, EtOH_Bind2.bottom(5))
+    m300.mix(2, 200, EtOH_Bind2.bottom(8))
+    m300.aspirate(175, EtOH_Bind2.bottom(3))
     m300.dispense(175, RNA_plate['A6'].bottom(4))
-    m300.flow_rate.aspirate = 150
-    m300.flow_rate.dispense = 150
-    m300.mix(3, 200, EtOH_Bind2.bottom(3))
-    m300.flow_rate.aspirate = 50
-    m300.flow_rate.dispense = 50
+    m300.flow_rate.aspirate = 200
+    m300.flow_rate.dispense = 200
+    m300.mix(2, 200, EtOH_Bind2.bottom(3))
+    m300.mix(2, 200, EtOH_Bind2.bottom(5))
+    m300.mix(1, 200, EtOH_Bind2.bottom(8))
     m300.aspirate(175, EtOH_Bind2.bottom(3))
     m300.dispense(175, RNA_plate['A6'].bottom(4))
     m300.move_to(RNA_plate['A6'].top(-6))

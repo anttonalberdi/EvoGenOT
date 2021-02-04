@@ -137,13 +137,15 @@ def run(protocol):
     for i in list_of_cols:
     ### Transfer Wash 3 to RNA_plate
         m300.flow_rate.aspirate = 150
-        m300.flow_rate.dispense = 150
+        m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_2[i])
         m300.aspirate(Wash_1_vol, EtOH1.bottom(3))
         m300.dispense(Wash_1_vol, RNA_plate[i].top(-4))
-        m300.mix(5, 170, RNA_plate[i].bottom(2))
+        m300.mix(5, 170, RNA_plate[i].bottom(5))
         m300.move_to(RNA_plate[i].top(-10))
         protocol.delay(seconds=5)
+        m300.flow_rate.aspirate = 130
+        m300.flow_rate.dispense = 130
         m300.blow_out()
         protocol.delay(seconds=5)
         m300.blow_out()
@@ -176,13 +178,15 @@ def run(protocol):
     for i in list_of_cols:
         ### Transfer Wash 4 to RNA_plate
         m300.flow_rate.aspirate = 150
-        m300.flow_rate.dispense = 150
+        m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_3[i])
         m300.aspirate(Wash_2_vol, EtOH2.bottom(3))
         m300.dispense(Wash_2_vol, RNA_plate[i].top(-4))
-        m300.mix(5, 170, RNA_plate[i].bottom(2))
+        m300.mix(5, 170, RNA_plate[i].bottom(5))
         m300.move_to(RNA_plate[i].top(-10))
         protocol.delay(seconds=5)
+        m300.flow_rate.aspirate = 130
+        m300.flow_rate.dispense = 130
         m300.blow_out()
         protocol.delay(seconds=5)
         m300.blow_out()
@@ -244,10 +248,6 @@ def run(protocol):
     mag_deck.engage(height=34)
     protocol.delay(minutes=5)
 
-    odd_cols = ['A1','A3']#,'A5','A7','A9','A11']
-    even_cols = ['A2','A4']#,'A6','A8','A10','A12']
-
-    from opentrons import types
 
     ### Transfer elutes to elution_plate
     for i in list_of_cols:
