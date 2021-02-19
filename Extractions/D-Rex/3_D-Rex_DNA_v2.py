@@ -20,7 +20,7 @@ def run(protocol):
     #### LABWARE SETUP ####
     elution_plate_DNA = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 1)
     trough = protocol.load_labware('usascientific_12_reservoir_22ml', 9)
-    trash_box = protocol.load_labware('agilent_1_reservoir_290ml', 11)
+    trash_box = protocol.load_labware('agilent_1_reservoir_290ml', 8)
     mag_deck = protocol.load_module('magdeck', 7)
     DNA_plate = mag_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
 
@@ -32,7 +32,7 @@ def run(protocol):
     tipracks_200_5 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 10)
     tipracks_200_6 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 6)
 
-    tipracks_10_1 = protocol.load_labware('opentrons_96_filtertiprack_20ul', 8)
+    tipracks_10_1 = protocol.load_labware('opentrons_96_filtertiprack_20ul', 11)
 
     #### PIPETTE SETUP ####
     m300 = protocol.load_instrument('p300_multi_gen2', mount='left',
@@ -64,6 +64,8 @@ def run(protocol):
 
     mag_deck.engage(height=34)
 
+    protocol.delay(minutes=4)
+
     #### Transfer remaining supernatant to trash
     for i in list_of_cols:
         m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
@@ -80,10 +82,8 @@ def run(protocol):
 
     ## add Buffer C to beads with DNA (col 1 to 6)
     for i in list_of_cols[:6]:
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_2[i]) # Slow down head speed 0.5X for bead handling
-        m300.mix(3, BufferC_vol, BufferC_1.bottom(4))
+        # m300.mix(3, BufferC_vol, BufferC_1.bottom(4))
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
         m300.aspirate(BufferC_vol, BufferC_1.bottom(2))
@@ -210,7 +210,7 @@ def run(protocol):
 
     ### Remove supernatant from DNA_plate by re-using tiprack 1
     for i in list_of_cols:
-        m300.flow_rate.aspirate = 100
+        m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_5[i])
         m300.aspirate(Wash_2_vol, DNA_plate[i].bottom(1))
@@ -226,7 +226,7 @@ def run(protocol):
 
     ### Remove the remaining supernatant with 20ul pipette
     for i in list_of_cols:
-        m20.flow_rate.aspirate = 100
+        m20.flow_rate.aspirate = 50
         m20.flow_rate.dispense = 100
         m20.pick_up_tip(tipracks_10_1[i])
         m20.aspirate(10, DNA_plate[i].bottom(0.2))

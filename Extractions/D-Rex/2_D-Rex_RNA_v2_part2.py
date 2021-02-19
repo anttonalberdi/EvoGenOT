@@ -37,14 +37,13 @@ def run(protocol):
     tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 4)
     tipracks_200_3 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 1)
     tipracks_200_4 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 5)
-    tipracks_10_1 = protocol.load_labware('opentrons_96_filtertiprack_20ul', 8)
-    tipracks_10_2 = protocol.load_labware('opentrons_96_filtertiprack_20ul', 6)
+    tipracks_10_1 = protocol.load_labware('opentrons_96_filtertiprack_20ul', 6)
 
 
     #### PIPETTE SETUP ####
     m300 = protocol.load_instrument('p300_multi_gen2', mount='left',
                                         tip_racks=(tipracks_200_1, tipracks_200_2, tipracks_200_3, tipracks_200_4))
-    m20 = protocol.load_instrument('p20_multi_gen2', mount='right', tip_racks=(tipracks_10_1, tipracks_10_2))
+    m20 = protocol.load_instrument('p20_multi_gen2', mount='right', tip_racks=[tipracks_10_1])
 
     #### REAGENT SETUP 1                           Description             Volume needed for protocol
     #EtOH1 = EtOH_wash['A1']                 # 80% ethanol           88 ml in tot, but I would add 44 + 44
@@ -76,7 +75,7 @@ def run(protocol):
     ### Transfer buffer C and beads to RNA_plate
     for i in list_of_cols[:6]:
         m300.pick_up_tip(tipracks_200_1[i])
-        m300.mix(3, BufferC_vol, BufferC_1.bottom(4))
+        # m300.mix(3, BufferC_vol, BufferC_1.bottom(4))
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
         m300.aspirate(BufferC_vol, BufferC_1.bottom(2))
@@ -141,7 +140,7 @@ def run(protocol):
         m300.pick_up_tip(tipracks_200_2[i])
         m300.aspirate(Wash_1_vol, EtOH1.bottom(3))
         m300.dispense(Wash_1_vol, RNA_plate[i].top(-4))
-        m300.mix(5, 170, RNA_plate[i].bottom(5))
+        m300.mix(5, 170, RNA_plate[i].bottom(2))
         m300.move_to(RNA_plate[i].top(-10))
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
@@ -159,7 +158,7 @@ def run(protocol):
     for i in list_of_cols:
         ## Remove supernatant, by re-using tiprack 2
         ### remove supernatant from RNA_plate
-        m300.flow_rate.aspirate = 100
+        m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_2[i])
         m300.aspirate(Wash_1_vol, RNA_plate[i].bottom(1))
@@ -182,7 +181,7 @@ def run(protocol):
         m300.pick_up_tip(tipracks_200_3[i])
         m300.aspirate(Wash_2_vol, EtOH2.bottom(3))
         m300.dispense(Wash_2_vol, RNA_plate[i].top(-4))
-        m300.mix(5, 170, RNA_plate[i].bottom(5))
+        m300.mix(5, 170, RNA_plate[i].bottom(2))
         m300.move_to(RNA_plate[i].top(-10))
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
@@ -200,7 +199,7 @@ def run(protocol):
     for i in list_of_cols:
         ## Remove supernatant, by re-using tiprack 3
         ### remove supernatant from RNA_plate
-        m300.flow_rate.aspirate = 100
+        m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_3[i])
         m300.aspirate(Wash_2_vol, RNA_plate[i].bottom(1))
@@ -219,7 +218,7 @@ def run(protocol):
         ### remove supernatant from RNA_plate
         m20.flow_rate.aspirate = 50
         m20.flow_rate.dispense = 50
-        m20.pick_up_tip(tipracks_10_2[i])
+        m20.pick_up_tip(tipracks_10_1[i])
         m20.aspirate(10, RNA_plate[i].bottom(0.2))
         m20.dispense(10, trash_box['A1'].top(-5))
         m20.blow_out()
@@ -260,7 +259,7 @@ def run(protocol):
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
-        m300.blow_out(elution_plate_RNA[i].top(-10))
+        m300.blow_out(elution_plate_RNA[i].top(-5))
         m300.drop_tip()
 
     mag_deck.disengage()
