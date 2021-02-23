@@ -205,7 +205,7 @@ def run(protocol):
     m300.blow_out()
     protocol.delay(seconds=5)
 
-    m300.drop_tip()
+    m300.return_tip()
 
     ## Add beads and EtOH binding buffer (trough col 5) to RNA plate (col 4 to 6)
     m300.pick_up_tip(tipracks_200_2['A2'])
@@ -276,7 +276,7 @@ def run(protocol):
     m300.blow_out()
     protocol.delay(seconds=5)
 
-    m300.drop_tip()
+    m300.return_tip()
 
     ## Add beads and EtOH binding buffer (trough col 5) to RNA plate (col 7 to 9)
     # m300.pick_up_tip(tipracks_200_2['A3'])
@@ -311,7 +311,7 @@ def run(protocol):
     # m300.blow_out()
     # protocol.delay(seconds=5)
     #
-    # m300.drop_tip()
+    # m300.return_tip()
 
     ## Add beads and EtOH binding buffer (trough col 5) to RNA plate (col 10 to 12)
     # m300.pick_up_tip(tipracks_200_2['A4'])
@@ -346,7 +346,7 @@ def run(protocol):
     # m300.blow_out()
     # protocol.delay(seconds=5)
     #
-    # m300.drop_tip()
+    # m300.return_tip()
 
 #    protocol.pause('Please, take DNA plate from incubator and then, place it on the magnet.')
 
@@ -370,7 +370,7 @@ def run(protocol):
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
         m300.aspirate(200, sample_plate[i].bottom(3))
-        m300.dispense(200, RNA_plate[i].bottom(9))       # is height.bottom = 8 good?
+        m300.dispense(200, RNA_plate[i].top(-5))       # is height.bottom = 8 good?
         m300.flow_rate.aspirate = 150
         m300.flow_rate.dispense = 150
         #m300.mix(3, 200, RNA_plate[i].bottom(6)) # do not mix to avoid to touch the EtOH and in this way bring it back to the DNA_plate
@@ -384,7 +384,7 @@ def run(protocol):
         #m300.blow_out(RNA_plate[i].top(-5))
         #m300.air_gap(height=2)
         m300.flow_rate.aspirate = 80
-        m300.flow_rate.dispense = 80
+        m300.flow_rate.dispense = 150
         m300.mix(3, 200, RNA_plate[i].bottom(11))
         m300.move_to(RNA_plate[i].top(-3))
         protocol.delay(seconds=5)

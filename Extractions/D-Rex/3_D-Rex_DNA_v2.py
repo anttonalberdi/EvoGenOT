@@ -71,8 +71,8 @@ def run(protocol):
         m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
-        m300.aspirate(70, DNA_plate[i].bottom(1))
-        m300.dispense(70, Liquid_trash.top(-4))
+        m300.aspirate(70, DNA_plate[i].bottom(2))
+        m300.dispense(70, Liquid_trash.top(-3))
         protocol.delay(seconds=5)
         m300.blow_out()
         m300.air_gap(height=2)
@@ -87,13 +87,13 @@ def run(protocol):
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
         m300.aspirate(BufferC_vol, BufferC_1.bottom(2))
-        m300.dispense(BufferC_vol, DNA_plate[i].bottom(4))   # *2 ?? check volume
+        m300.dispense(BufferC_vol, DNA_plate[i].bottom(5))   # *2 ?? check volume
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
-        m300.mix(5, 170, DNA_plate[i].bottom(2))
-        m300.move_to(DNA_plate[i].bottom(5))
+        m300.mix(5, 170, DNA_plate[i].bottom(3))
+        m300.move_to(DNA_plate[i].bottom(6))
         protocol.delay(seconds=5)
-        m300.blow_out(DNA_plate[i].bottom(5))
+        m300.blow_out(DNA_plate[i].bottom(6))
         m300.air_gap(height=2)
         m300.return_tip()
 
@@ -102,17 +102,17 @@ def run(protocol):
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_2[i]) # Slow down head speed 0.5X for bead handling
-        m300.mix(3, BufferC_vol, BufferC_2.bottom(4))
+        m300.mix(3, BufferC_vol, BufferC_2.bottom(5))
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
-        m300.aspirate(BufferC_vol, BufferC_2.bottom(2))
-        m300.dispense(BufferC_vol, DNA_plate[i].bottom(4))   # *2 ?? check volume
+        m300.aspirate(BufferC_vol, BufferC_2.bottom(3))
+        m300.dispense(BufferC_vol, DNA_plate[i].bottom(5))   # *2 ?? check volume
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
-        m300.mix(5, BufferC_vol, DNA_plate[i].bottom(2))
-        m300.move_to(DNA_plate[i].bottom(5))
+        m300.mix(5, BufferC_vol, DNA_plate[i].bottom(3))
+        m300.move_to(DNA_plate[i].bottom(6))
         protocol.delay(seconds=5)
-        m300.blow_out(DNA_plate[i].bottom(5))
+        m300.blow_out(DNA_plate[i].bottom(6))
         m300.air_gap(height=2)
         m300.return_tip()
 
@@ -124,13 +124,13 @@ def run(protocol):
         m300.flow_rate.aspirate = 25
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_3[i])
-        m300.aspirate(200, DNA_plate[i].bottom(2))
-        m300.dispense(200, Liquid_trash.top(-4))
+        m300.aspirate(200, DNA_plate[i].bottom(3))
+        m300.dispense(200, Liquid_trash.top(-3))
         m300.blow_out()
         protocol.delay(seconds=5)
         m300.blow_out()
-        m300.aspirate(100, DNA_plate[i].bottom(0.5))
-        m300.dispense(100, Liquid_trash.top(-4))
+        m300.aspirate(100, DNA_plate[i].bottom(1.5))
+        m300.dispense(100, Liquid_trash.top(-3))
         protocol.delay(seconds=5)
         m300.blow_out()
         m300.flow_rate.aspirate = 100
@@ -145,17 +145,17 @@ def run(protocol):
         m300.flow_rate.aspirate = 150
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_4[i])
-        m300.aspirate(Wash_1_vol, EtOH1.bottom(3))
-        m300.dispense(Wash_1_vol, DNA_plate[i].top(-4))
+        m300.aspirate(Wash_1_vol, EtOH1.bottom(4))
+        m300.dispense(Wash_1_vol, DNA_plate[i].top(-3))
         m300.mix(5, 170, DNA_plate[i].bottom(2))
-        m300.move_to(DNA_plate[i].top(-10))
+        m300.move_to(DNA_plate[i].top(-9))
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
         m300.blow_out()
         protocol.delay(seconds=5)
         m300.blow_out()
-        m300.touch_tip(v_offset=-3)
+        m300.touch_tip(v_offset=-2)
         m300.air_gap(height=2)
         m300.return_tip()
 
@@ -168,12 +168,12 @@ def run(protocol):
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_4[i])
-        m300.aspirate(Wash_1_vol, DNA_plate[i].bottom(1))
-        m300.dispense(Wash_1_vol, trash_box['A1'].top(-5))
+        m300.aspirate(Wash_1_vol, DNA_plate[i].bottom(2))
+        m300.dispense(Wash_1_vol, trash_box['A1'].top(-4))
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
-        m300.blow_out(trash_box['A1'].top(-5))
+        m300.blow_out(trash_box['A1'].top(-4))
         protocol.delay(seconds=5)
         m300.blow_out()
         m300.air_gap(height = 2)
@@ -191,17 +191,17 @@ def run(protocol):
         m300.flow_rate.aspirate = 150
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_5[i]) # Slow down head speed 0.5X for bead handling
-        m300.aspirate(Wash_2_vol, EtOH2.bottom(3))
-        m300.dispense(Wash_2_vol, DNA_plate[i].top(-4))
+        m300.aspirate(Wash_2_vol, EtOH2.bottom(4))
+        m300.dispense(Wash_2_vol, DNA_plate[i].top(-3))
         m300.mix(5, 170, DNA_plate[i].bottom(2))
-        m300.move_to(DNA_plate[i].top(-10))
+        m300.move_to(DNA_plate[i].top(-9))
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
         m300.blow_out()
         protocol.delay(seconds=5)
         m300.blow_out()
-        m300.touch_tip(v_offset=-3)
+        m300.touch_tip(v_offset=-2)
         m300.air_gap(height=2)
         m300.return_tip()
 
@@ -213,12 +213,12 @@ def run(protocol):
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_5[i])
-        m300.aspirate(Wash_2_vol, DNA_plate[i].bottom(1))
-        m300.dispense(Wash_2_vol, trash_box['A1'].top(-5))
+        m300.aspirate(Wash_2_vol, DNA_plate[i].bottom(2))
+        m300.dispense(Wash_2_vol, trash_box['A1'].top(-4))
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
-        m300.blow_out(trash_box['A1'].top(-5))
+        m300.blow_out(trash_box['A1'].top(-4))
         protocol.delay(seconds=5)
         m300.blow_out()
         m300.air_gap(height = 2)
@@ -229,8 +229,8 @@ def run(protocol):
         m20.flow_rate.aspirate = 50
         m20.flow_rate.dispense = 100
         m20.pick_up_tip(tipracks_10_1[i])
-        m20.aspirate(10, DNA_plate[i].bottom(0.2))
-        m20.dispense(10, trash_box['A1'].top(-5))
+        m20.aspirate(10, DNA_plate[i].bottom(1.2))
+        m20.dispense(10, trash_box['A1'].top(-4))
         m20.blow_out()
         protocol.delay(seconds=5)
         m20.blow_out()
@@ -248,11 +248,11 @@ def run(protocol):
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
         m300.pick_up_tip(tipracks_200_6[i])
-        m300.aspirate(Elution_vol, Elution_buffer.bottom(2))
-        m300.dispense(Elution_vol, DNA_plate[i].top(-5))
-        m300.mix(5, 30, DNA_plate[i].bottom(2))
+        m300.aspirate(Elution_vol, Elution_buffer.bottom(3))
+        m300.dispense(Elution_vol, DNA_plate[i].top(-4))
+        m300.mix(5, 30, DNA_plate[i].bottom(3))
         protocol.delay(seconds=5)
-        m300.blow_out(DNA_plate[i].bottom(5))
+        m300.blow_out(DNA_plate[i].bottom(6))
         m300.return_tip()
 
     protocol.delay(minutes=5)
@@ -264,12 +264,12 @@ def run(protocol):
         m300.pick_up_tip(tipracks_200_6[i])
         m300.flow_rate.aspirate = 5
         m300.flow_rate.dispense = 50
-        m300.aspirate(70, DNA_plate[i].bottom(1))
-        m300.dispense(70, elution_plate_DNA[i].bottom(2))
+        m300.aspirate(70, DNA_plate[i].bottom(2))
+        m300.dispense(70, elution_plate_DNA[i].bottom(3))
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
-        m300.blow_out(elution_plate_DNA[i].top(-10))
+        m300.blow_out(elution_plate_DNA[i].top(-9))
         m300.drop_tip()
 
     mag_deck.disengage()
