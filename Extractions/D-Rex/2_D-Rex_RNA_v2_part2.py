@@ -49,12 +49,12 @@ def run(protocol):
     #EtOH1 = EtOH_wash['A1']                 # 80% ethanol           88 ml in tot, but I would add 44 + 44
 
     #### REAGENT SETUP                             Description             Volume needed for protocol
-    DNase = trough['A9']                    # DNase Buffer          3.3 ml
-    BufferC_1 = trough['A7']                # Buffer C RNA rebind   11 ml
-    BufferC_2 = trough['A8']                # Buffer C RNA rebind   11 ml
-    Elution_buffer = trough['A12']          # Buffer D              5.5 ml
-    EtOH1 = trough['A1']                    # Wash 1 and 3 (to refill for the 3) 11 ml
-    EtOH2 = trough['A2']                    # Wash 2 and 4 (to refill for the 4) 11 ml
+    DNase = trough['A8']                    # DNase Buffer          3.3 ml
+    BufferC_1 = trough['A6']                # Buffer C RNA rebind   11 ml
+    # BufferC_2 = trough['A8']                # Buffer C RNA rebind   11 ml
+    Elution_buffer = trough['A7']          # Buffer D              5.5 ml
+    EtOH1 = trough['A4']                    # Wash 1 and 3 (to refill for the 3) 11 ml
+    EtOH2 = trough['A5']                    # Wash 2 and 4 (to refill for the 4) 11 ml
 
     Liquid_trash = trash_box['A1']
 

@@ -27,7 +27,7 @@ metadata = {
 
 def run(protocol):
     #### LABWARE SETUP ####
-    trough = protocol.load_labware('usascientific_12_reservoir_22ml', 6)
+    trough = protocol.load_labware('usascientific_12_reservoir_22ml', 3)
     RNA_plate = protocol.load_labware('biorad_96_wellplate_1000ul', 1)
     mag_deck = protocol.load_module('magdeck', 7)
     sample_plate = mag_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
@@ -42,11 +42,12 @@ def run(protocol):
 
     #### REAGENT SETUP                              description             Volume needed for protocol
     Binding_buffer1 = trough['A1']            # Buffer B:              11 ml
-    Binding_buffer2 = trough['A2']			  # Buffer B:              11 ml   # not neeeded if running half plate
-    EtOH_Bind1 = trough['A4']                 # EtOH + magnetic:       10.8 ml EtOH + 405ul beads
-    EtOH_Bind2 = trough['A5']                 # EtOH + magnetic:       10.8 ml EtOH + 405ul beads
-    #EtOH_Bind3 = trough['A6']                # EtOH + magnetic:       10.8 ml EtOH + 405ul beads
-    #EtOH_Bind4 = trough['A7']                # EtOH + magnetic:       10.8 ml EtOH + 405ul beads
+    # Binding_buffer2 = trough['A2']			  # Buffer B:              11 ml   # not neeeded if running half plate
+### If running complete plate, move EtOH1_Bind1 to trough['A3'] and EtOH1_Bind2 to trough['A4']
+    EtOH_Bind1 = trough['A2']                 # EtOH + magnetic:       10.8 ml EtOH + 405ul beads
+    EtOH_Bind2 = trough['A3']                 # EtOH + magnetic:       10.8 ml EtOH + 405ul beads
+    #EtOH_Bind3 = trough['A5']                # EtOH + magnetic:       10.8 ml EtOH + 405ul beads    # not neeeded if running half plate
+    #EtOH_Bind4 = trough['A6']                # EtOH + magnetic:       10.8 ml EtOH + 405ul beads    # not neeeded if running half plate
 
     #### Plate SETUP
     #list_of_cols = ['A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12']
@@ -148,7 +149,7 @@ def run(protocol):
     m300.mix(2, 200, EtOH_Bind1.bottom(9))
     m300.flow_rate.aspirate = 50
     m300.flow_rate.dispense = 50
-    m300.aspirate(175, EtOH_Bind1.bottom(11))
+    m300.aspirate(175, EtOH_Bind1.bottom(4))
     m300.dispense(175, RNA_plate['A1'].bottom(5))
     # m300.flow_rate.aspirate = 200
     # m300.flow_rate.dispense = 200
@@ -170,7 +171,7 @@ def run(protocol):
     m300.mix(2, 200, EtOH_Bind1.bottom(9))
     m300.flow_rate.aspirate = 50
     m300.flow_rate.dispense = 50
-    m300.aspirate(175, EtOH_Bind1.bottom(9))
+    m300.aspirate(175, EtOH_Bind1.bottom(4))
     m300.dispense(175, RNA_plate['A2'].bottom(5))
     # m300.flow_rate.aspirate = 200
     # m300.flow_rate.dispense = 200
@@ -190,7 +191,7 @@ def run(protocol):
     m300.mix(2, 200, EtOH_Bind1.bottom(4))
     m300.mix(2, 200, EtOH_Bind1.bottom(6))
     m300.mix(2, 200, EtOH_Bind1.bottom(9))
-    m300.flow_rate.aspirate = 50
+    m300.flow_rate.aspirate = 150
     m300.flow_rate.dispense = 50
     m300.aspirate(175, EtOH_Bind1.bottom(4))
     m300.dispense(175, RNA_plate['A3'].bottom(5))
@@ -259,7 +260,7 @@ def run(protocol):
     m300.mix(2, 200, EtOH_Bind2.bottom(4))
     m300.mix(2, 200, EtOH_Bind2.bottom(6))
     m300.mix(2, 200, EtOH_Bind2.bottom(9))
-    m300.flow_rate.aspirate = 50
+    m300.flow_rate.aspirate = 150
     m300.flow_rate.dispense = 50
     m300.aspirate(175, EtOH_Bind2.bottom(4))
     m300.dispense(175, RNA_plate['A6'].bottom(5))
@@ -364,8 +365,8 @@ def run(protocol):
     mag_deck.engage(height=34)
     protocol.delay(minutes=3)
 
-    #### Transfer supernatant to RNA_plate
-    for i in list_of_cols:
+# first 3 cols mixed at different heights to see if the solution gets mixed properly
+    for i in list_of_cols[:3]:
         m300.pick_up_tip(tipracks_200_3[i]) # Slow down head speed 0.5X for bead handling
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
@@ -384,8 +385,44 @@ def run(protocol):
         #m300.blow_out(RNA_plate[i].top(-5))
         #m300.air_gap(height=2)
         m300.flow_rate.aspirate = 80
+        m300.flow_rate.dispense = 200
+        m300.mix(1, 200, RNA_plate[i].bottom(11))
+        m300.mix(1, 200, RNA_plate[i].bottom(8))
+        m300.mix(1, 200, RNA_plate[i].bottom(5))
+        m300.move_to(RNA_plate[i].top(-3))
+        protocol.delay(seconds=5)
+        m300.blow_out(RNA_plate[i].top(-3))
+        #m300.air_gap(height=2)
+        m300.touch_tip(v_offset=-2)
+        protocol.delay(seconds=2)
+        #m300.drop_tip()
+        m300.return_tip()
+
+
+    #### Transfer supernatant to RNA_plate
+    for i in list_of_cols[3:6]:
+        m300.pick_up_tip(tipracks_200_3[i]) # Slow down head speed 0.5X for bead handling
+        m300.flow_rate.aspirate = 50
+        m300.flow_rate.dispense = 50
+        m300.aspirate(200, sample_plate[i].bottom(3))
+        m300.dispense(200, RNA_plate[i].top(-5))       # is height.bottom = 8 good?
+        m300.flow_rate.aspirate = 150
         m300.flow_rate.dispense = 150
-        m300.mix(3, 200, RNA_plate[i].bottom(11))
+        #m300.mix(3, 200, RNA_plate[i].bottom(6)) # do not mix to avoid to touch the EtOH and in this way bring it back to the DNA_plate
+        #protocol.delay(seconds=5)
+        m300.blow_out(RNA_plate[i].top(-3))
+        #m300.air_gap(height=2)
+        m300.touch_tip(v_offset=-3)
+        m300.aspirate(150, sample_plate[i].bottom(2))
+        m300.dispense(150, RNA_plate[i].bottom(5))
+        #protocol.delay(seconds=5)
+        #m300.blow_out(RNA_plate[i].top(-5))
+        #m300.air_gap(height=2)
+        m300.flow_rate.aspirate = 80
+        m300.flow_rate.dispense = 200
+        m300.mix(1, 200, RNA_plate[i].bottom(5))
+        m300.mix(1, 200, RNA_plate[i].bottom(8))
+        m300.mix(1, 200, RNA_plate[i].bottom(11))
         m300.move_to(RNA_plate[i].top(-3))
         protocol.delay(seconds=5)
         m300.blow_out(RNA_plate[i].top(-3))
