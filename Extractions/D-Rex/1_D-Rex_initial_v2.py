@@ -139,6 +139,9 @@ def run(protocol):
     #     m300.transfer(350, EtOH_Bind1.bottom(3), RNA_plate[i].bottom(4), mix_before=(3,200), new_tip='never')
     # m300.drop_tip()
 
+    mag_deck.engage(height=34)
+    protocol.delay(minutes=3)
+
     ## Add beads and EtOH binding buffer (trough col 4) to RNA plate (col 1 to 3)
     m300.pick_up_tip(tipracks_200_2['A1'])
 
@@ -362,8 +365,6 @@ def run(protocol):
     #     m300.drop_tip()
 
     ## Transfer supernatant
-    mag_deck.engage(height=34)
-    protocol.delay(minutes=3)
 
 # first 3 cols mixed at different heights to see if the solution gets mixed properly
     for i in list_of_cols[:3]:
@@ -380,7 +381,7 @@ def run(protocol):
         #m300.air_gap(height=2)
         m300.touch_tip(v_offset=-3)
         m300.aspirate(150, sample_plate[i].bottom(2))
-        m300.dispense(150, RNA_plate[i].bottom(5))
+        m300.dispense(180, RNA_plate[i].bottom(5))
         #protocol.delay(seconds=5)
         #m300.blow_out(RNA_plate[i].top(-5))
         #m300.air_gap(height=2)
@@ -414,7 +415,7 @@ def run(protocol):
         #m300.air_gap(height=2)
         m300.touch_tip(v_offset=-3)
         m300.aspirate(150, sample_plate[i].bottom(2))
-        m300.dispense(150, RNA_plate[i].bottom(5))
+        m300.dispense(200, RNA_plate[i].bottom(5))
         #protocol.delay(seconds=5)
         #m300.blow_out(RNA_plate[i].top(-5))
         #m300.air_gap(height=2)
