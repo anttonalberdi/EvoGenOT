@@ -380,6 +380,7 @@ def run(protocol):
         m300.blow_out(RNA_plate[i].top(-3))
         #m300.air_gap(height=2)
         m300.touch_tip(v_offset=-3)
+        m300.flow_rate.dispense = 50
         m300.aspirate(150, sample_plate[i].bottom(2))
         m300.dispense(180, RNA_plate[i].bottom(5))
         #protocol.delay(seconds=5)
@@ -414,6 +415,7 @@ def run(protocol):
         m300.blow_out(RNA_plate[i].top(-3))
         #m300.air_gap(height=2)
         m300.touch_tip(v_offset=-3)
+        m300.flow_rate.dispense = 50
         m300.aspirate(150, sample_plate[i].bottom(2))
         m300.dispense(200, RNA_plate[i].bottom(5))
         #protocol.delay(seconds=5)
