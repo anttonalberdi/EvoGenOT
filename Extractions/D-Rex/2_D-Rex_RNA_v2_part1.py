@@ -28,12 +28,15 @@ def run(protocol):
     #### LABWARE SETUP ####
     #elution_plate_RNA = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 2)
     trough = protocol.load_labware('usascientific_12_reservoir_22ml', 3)
-    mag_deck = protocol.load_module('magdeck', 10)
+    mag_deck = protocol.load_module('magdeck', 7)
     RNA_plate = mag_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
-    trash_box = protocol.load_labware('agilent_1_reservoir_290ml', 7)
+    trash_box = protocol.load_labware('agilent_1_reservoir_290ml', 4)
+    # Load a Temperature Module GEN1 in deck slot 10.
+    temp_deck = protocol.load_module('tempdeck', 10)
+    incubation_plate = temp_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
 
     tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 2)
-    tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 4)
+    tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 8)
     tipracks_200_3 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 1)
     tipracks_200_4 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 5)
     tipracks_10_1 = protocol.load_labware('opentrons_96_filtertiprack_20ul', 6)
@@ -70,14 +73,58 @@ def run(protocol):
     Elution_vol = 50
     BufferC_vol = 1.0*Sample_vol
 
-    #protocol.pause("Please get RNA plate from incubator and place it on the magnet.")
+    #protocol.pause("Please get RNA plate from incubator and place it on the incubator.")
 
     #### PROTOCOL ####
-    mag_deck.engage(height=34)
-    #protocol.delay(minutes=3)
-    protocol.delay(minutes=5)
 
-    ## Remove supernatant, using tiprack 1
+## Position RNA plate on temp_deck
+    temp_deck.set_temperature(10)
+    #protocol.delay(minutes=15)
+    protocol.delay(minutes=1)
+
+    ## Move all the 750ul into the rack on the magnetic deck using tiprack 1
+    for i in list_of_cols[:6]:
+        m300.flow_rate.aspirate = 25
+        m300.flow_rate.dispense = 100
+        m300.pick_up_tip(tipracks_200_1[i])
+        m300.mix(4, 200, incubation_plate[i].bottom(6))
+        m300.aspirate(200, incubation_plate[i].bottom(9))
+        m300.dispense(200, RNA_plate.bottom(5))
+        m300.flow_rate.dispense = 200
+        m300.blow_out(RNA_plate.top(-3))
+        protocol.delay(seconds=5)
+        m300.touch_tip(v_offset=-5, radius=0.8)
+        #m300.air_gap(height = 2)
+        m300.flow_rate.dispense = 100
+        m300.aspirate(200, incubation_plate[i].bottom(7))
+        m300.dispense(200, RNA_plate.bottom(7))
+        m300.flow_rate.dispense = 200
+        m300.blow_out(RNA_plate.top(-3))
+        protocol.delay(seconds=5)
+        m300.touch_tip(v_offset=-5, radius=0.8)
+        #m300.air_gap(height = 2)
+        m300.flow_rate.dispense = 100
+        m300.aspirate(200, incubation_plate[i].bottom(5))
+        m300.dispense(200, RNA_plate.bottom(9))
+        m300.flow_rate.dispense = 200
+        m300.blow_out(RNA_plate.top(-3))
+        protocol.delay(seconds=5)
+        m300.touch_tip(v_offset=-5, radius=0.8)
+        #m300.air_gap(height = 2)
+        m300.flow_rate.dispense = 100
+        m300.aspirate(200, incubation_plate[i].bottom(2))
+        m300.dispense(200, RNA_plate.top(-3))
+        m300.flow_rate.dispense = 200
+        m300.blow_out(RNA_plate.top(-2)) # check if the tip touches the liquid at this height
+        protocol.delay(seconds=2)
+        m300.air_gap(height = 2)
+        m300.return_tip()
+
+    mag_deck.engage(height=34)
+    #protocol.delay(minutes=5)
+    protocol.delay(minutes=1)
+
+    ## Remove supernatant from RNA_plate above magnetic deck, using tiprack 1
     for i in list_of_cols[:6]:
         m300.flow_rate.aspirate = 25
         m300.flow_rate.dispense = 100
@@ -87,24 +134,12 @@ def run(protocol):
         m300.flow_rate.dispense = 200
         protocol.delay(seconds=5)
         m300.blow_out(Liquid_trash.top(-3))
-        protocol.delay(seconds=2)
-        m300.blow_out(Liquid_trash.top(-3))
-        protocol.delay(seconds=5)
-        m300.blow_out(Liquid_trash.top(-3))
-        protocol.delay(seconds=2)
-        m300.blow_out(Liquid_trash.top(-3))
         #m300.air_gap(height = 2)
         m300.flow_rate.dispense = 100
         m300.aspirate(200, RNA_plate[i].bottom(7))
         m300.dispense(200, Liquid_trash.top(-3))
         m300.flow_rate.dispense = 200
         protocol.delay(seconds=5)
-        m300.blow_out(Liquid_trash.top(-3))
-        protocol.delay(seconds=2)
-        m300.blow_out(Liquid_trash.top(-3))
-        protocol.delay(seconds=5)
-        m300.blow_out(Liquid_trash.top(-3))
-        protocol.delay(seconds=2)
         m300.blow_out(Liquid_trash.top(-3))
         #m300.air_gap(height = 2)
         m300.flow_rate.dispense = 100
@@ -114,12 +149,6 @@ def run(protocol):
         protocol.delay(seconds=5)
         m300.blow_out(Liquid_trash.top(-3))
         protocol.delay(seconds=2)
-        m300.blow_out(Liquid_trash.top(-3))
-        #m300.air_gap(height = 2)
-        protocol.delay(seconds=5)
-        m300.blow_out(Liquid_trash.top(-3))
-        protocol.delay(seconds=2)
-        m300.blow_out(Liquid_trash.top(-3))
         m300.flow_rate.dispense = 100
         m300.aspirate(200, RNA_plate[i].bottom(2))
         m300.dispense(200, Liquid_trash.top(-3))
@@ -127,9 +156,8 @@ def run(protocol):
         protocol.delay(seconds=5)
         m300.blow_out(Liquid_trash.top(-3))
         protocol.delay(seconds=2)
-        m300.blow_out(Liquid_trash.top(-3))
         m300.air_gap(height = 2)
-        m300.drop_tip()
+        m300.return_tip()
     #
     # for i in list_of_cols[3:6]:
     #     m300.flow_rate.aspirate = 25
@@ -215,7 +243,7 @@ def run(protocol):
         m300.blow_out(trash_box['A1'].top(-4))
         protocol.delay(seconds=5)
         m300.air_gap(height = 2)
-        m300.drop_tip()
+        m300.return_tip()
 
     mag_deck.disengage()
 
@@ -260,7 +288,7 @@ def run(protocol):
         m300.blow_out(trash_box['A1'].top(-4))
         protocol.delay(seconds=5)
         m300.air_gap(height = 2)
-        m300.drop_tip()
+        m300.return_tip()
 
     ### Remove the remaining supernatant with 20ul pipette
     for i in list_of_cols:
@@ -272,7 +300,7 @@ def run(protocol):
         m20.blow_out()
         # protocol.delay(seconds=5)
         # m20.blow_out()
-        m20.drop_tip()
+        m20.return_tip()
 
     ## Dry beads before DNase treatment
     protocol.delay(minutes=2)
@@ -292,9 +320,9 @@ def run(protocol):
         m300.blow_out()
         m300.touch_tip(v_offset=-3)
         #m300.air_gap(height = 2)
-        m300.drop_tip()
+        m300.return_tip()
 
     protocol.home()
 
-    protocol.pause("Please incubate samples with DNase for 10 minutes, meanwhile refill EtOH for wash 3 and 4 and substitue all tipracks \
-                    Empty the trash box and then you are ready to continue with RNA extraction part 2!")
+    protocol.pause("Please refill EtOH for wash 3 and 4 and substitute all tipracks \
+                    Continue with RNA extraction part 2!")

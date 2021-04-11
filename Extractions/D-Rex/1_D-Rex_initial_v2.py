@@ -31,6 +31,10 @@ def run(protocol):
     RNA_plate = protocol.load_labware('biorad_96_wellplate_1000ul', 1)
     mag_deck = protocol.load_module('magdeck', 7)
     sample_plate = mag_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
+    # Load a Temperature Module GEN1 in deck slot 10.
+    temp_deck = protocol.load_module('tempdeck', 10)
+    incubation_plate = temp_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
+
 
     tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 4)
     tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 3)   # only first 2 cols needed for transfering beads and EtOH binding buffer to RNA_plate
@@ -58,7 +62,7 @@ def run(protocol):
     EtOH_buffer_vol = 175
 
     #### PROTOCOL ####
-
+    ## Place plate with sample above temp_deck
     mag_deck.disengage()
 
     ### Transfer buffer B1 (trough col 1) and beads to sample plate (col 1 to 6)
@@ -90,7 +94,9 @@ def run(protocol):
     #     protocol.delay(seconds=5)
     #     m300.return_tip()
 
-    ### Transfer buffer B1 (trough col 1) and beads to sample plate (col 1 to 6)
+    temp_deck.set_temperature(10)
+
+    ### Transfer buffer B1 (trough col 1) and beads to incubation plate (col 1 to 6)
     for i in list_of_cols[:6]:
         m300.flow_rate.aspirate = 150
         m300.flow_rate.dispense = 150
@@ -99,17 +105,18 @@ def run(protocol):
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
         m300.aspirate(Binding_buffer_vol, Binding_buffer1.bottom(4))
-        m300.dispense(Binding_buffer_vol, sample_plate[i].bottom(5))
+        m300.dispense(Binding_buffer_vol, incubation_plate[i].bottom(5))
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
-        m300.mix(4, Binding_buffer_vol, sample_plate[i].bottom(6))
-        m300.move_to(sample_plate[i].top(-5))
+        m300.mix(4, Binding_buffer_vol, incubation_plate[i].bottom(6))
+        m300.move_to(incubation_plate[i].top(-5))
         m300.blow_out()
         protocol.delay(seconds=5)
         m300.blow_out()
-        m300.touch_tip(v_offset=-5, radius=0.9)
+        m300.touch_tip(v_offset=-5, radius=0.8)
         m300.air_gap(height=2)
         m300.return_tip()
+
 
 # to make equal to the part above ->    ### Transfer buffer B2 (trough col 2) and beads to sample plate (col 7 to 12)
     for i in list_of_cols[6:]:
@@ -139,8 +146,54 @@ def run(protocol):
     #     m300.transfer(350, EtOH_Bind1.bottom(3), RNA_plate[i].bottom(4), mix_before=(3,200), new_tip='never')
     # m300.drop_tip()
 
+    # Incubate the samples at 10°C for 10 minutes (should be 15 but since the temp_deck is at right temperature since before, it should be enough to delay for 10 minutes)
+    #protocol.delay(minutes=10)
+    protocol.delay(minutes=1)
+
+    # transfer all the 400ul into the rack on the magnetic module (col 1 to 6) using same tips as before
+    for i in list_of_cols[:6]:
+        m300.flow_rate.aspirate = 150
+        m300.flow_rate.dispense = 150
+        m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
+        m300.mix(4, 200, incubation_plate[i].bottom(4))
+        m300.flow_rate.aspirate = 50
+        m300.flow_rate.dispense = 50
+        m300.aspirate(200, incubation_plate[i].bottom(4))
+        m300.dispense(200, sample_plate[i].bottom(5))
+        m300.flow_rate.aspirate = 100
+        m300.flow_rate.dispense = 100
+        #m300.mix(4, Binding_buffer_vol, incubation_plate[i].bottom(6))
+        m300.move_to(sample_plate[i].top(-5))
+        m300.blow_out()
+        protocol.delay(seconds=5)
+        m300.blow_out()
+        m300.touch_tip(v_offset=-5, radius=0.8)
+        m300.air_gap(height=2)
+        m300.flow_rate.aspirate = 50
+        m300.flow_rate.dispense = 50
+        m300.aspirate(200, incubation_plate[i].bottom(4))
+        m300.dispense(200, sample_plate[i].bottom(5))
+        m300.flow_rate.aspirate = 100
+        m300.flow_rate.dispense = 100
+        #m300.mix(4, Binding_buffer_vol, incubation_plate[i].bottom(6))
+        m300.move_to(sample_plate[i].top(-5))
+        m300.blow_out()
+        protocol.delay(seconds=5)
+        m300.blow_out()
+        m300.touch_tip(v_offset=-5, radius=0.8)
+        m300.air_gap(height=2)
+        m300.return_tip()
+
+    # engage the magnetic module
     mag_deck.engage(height=34)
-    protocol.delay(minutes=3)
+
+    # deactivate temp_deck
+    temp_mod.deactivate()
+
+    # wait for the beads to seat ------> no need to wait for the beads to seat since the magnetic module is activated since I
+    #start moving the samples + binding buffer and beads from incubation rack to sample rack
+    # Also, the next step is preparing the RNA plate so a voja per quando è pronta se se so sittati i beads!
+    #protocol.delay(minutes=3)
 
     ## Add beads and EtOH binding buffer (trough col 4) to RNA plate (col 1 to 3)
     m300.pick_up_tip(tipracks_200_2['A1'])
@@ -364,7 +417,7 @@ def run(protocol):
     #     #m300.air_gap(height=2)
     #     m300.drop_tip()
 
-    ## Transfer supernatant
+    ## Transfer supernatant from DNA_plate to RNA_plate
 
 # first 3 cols mixed at different heights to see if the solution gets mixed properly
     for i in list_of_cols[:3]:
@@ -437,7 +490,7 @@ def run(protocol):
 
     mag_deck.disengage()
 
-    protocol.pause("Cover DNA plate with aluminium seal and store in fridge until purification the same or following day. Continue with RNA purification. Cover RNA plate with foil and incubate it for 15 min at 10°C.")
+    protocol.pause("Cover DNA plate with aluminium seal and store in fridge until purification the same or following day. Continue with RNA purification.")
 
     ############################
     ###### Job is done! ######
