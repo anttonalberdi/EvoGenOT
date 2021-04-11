@@ -27,7 +27,7 @@ metadata = {
 def run(protocol):
     #### LABWARE SETUP ####
     #elution_plate_RNA = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 2)
-    trough = protocol.load_labware('usascientific_12_reservoir_22ml', 3)
+    trough = protocol.load_labware('usascientific_12_reservoir_22ml', 2)
     mag_deck = protocol.load_module('magdeck', 7)
     RNA_plate = mag_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
     trash_box = protocol.load_labware('agilent_1_reservoir_290ml', 4)
@@ -35,7 +35,7 @@ def run(protocol):
     temp_deck = protocol.load_module('tempdeck', 10)
     incubation_plate = temp_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
 
-    tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 2)
+    tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 3)
     tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 8)
     tipracks_200_3 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 1)
     tipracks_200_4 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 5)
@@ -81,41 +81,43 @@ def run(protocol):
     temp_deck.set_temperature(10)
     #protocol.delay(minutes=15)
     protocol.delay(minutes=1)
+    temp_deck.deactivate()
 
     ## Move all the 750ul into the rack on the magnetic deck using tiprack 1
     for i in list_of_cols[:6]:
-        m300.flow_rate.aspirate = 25
+        m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_1[i])
         m300.mix(4, 200, incubation_plate[i].bottom(6))
         m300.aspirate(200, incubation_plate[i].bottom(9))
-        m300.dispense(200, RNA_plate.bottom(5))
+        m300.dispense(200, RNA_plate[i].bottom(5))
         m300.flow_rate.dispense = 200
-        m300.blow_out(RNA_plate.top(-3))
+        m300.blow_out(RNA_plate[i].top(-3))
         protocol.delay(seconds=5)
         m300.touch_tip(v_offset=-5, radius=0.8)
         #m300.air_gap(height = 2)
         m300.flow_rate.dispense = 100
         m300.aspirate(200, incubation_plate[i].bottom(7))
-        m300.dispense(200, RNA_plate.bottom(7))
+        m300.dispense(200, RNA_plate[i].bottom(7))
         m300.flow_rate.dispense = 200
-        m300.blow_out(RNA_plate.top(-3))
+        m300.blow_out(RNA_plate[i].top(-3))
         protocol.delay(seconds=5)
         m300.touch_tip(v_offset=-5, radius=0.8)
         #m300.air_gap(height = 2)
         m300.flow_rate.dispense = 100
-        m300.aspirate(200, incubation_plate[i].bottom(5))
-        m300.dispense(200, RNA_plate.bottom(9))
+        m300.aspirate(200, incubation_plate[i].bottom(3.5))
+        m300.dispense(200, RNA_plate[i].bottom(9))
         m300.flow_rate.dispense = 200
-        m300.blow_out(RNA_plate.top(-3))
+        m300.blow_out(RNA_plate[i].top(-3))
         protocol.delay(seconds=5)
         m300.touch_tip(v_offset=-5, radius=0.8)
         #m300.air_gap(height = 2)
         m300.flow_rate.dispense = 100
-        m300.aspirate(200, incubation_plate[i].bottom(2))
-        m300.dispense(200, RNA_plate.top(-3))
+        m300.aspirate(200, incubation_plate[i].bottom(1.2))
+        m300.dispense(200, RNA_plate[i].top(-3))
+        m300.flow_rate.aspirate = 200
         m300.flow_rate.dispense = 200
-        m300.blow_out(RNA_plate.top(-2)) # check if the tip touches the liquid at this height
+        m300.blow_out(RNA_plate[i].top(-2)) # check if the tip touches the liquid at this height
         protocol.delay(seconds=2)
         m300.air_gap(height = 2)
         m300.return_tip()
@@ -143,14 +145,14 @@ def run(protocol):
         m300.blow_out(Liquid_trash.top(-3))
         #m300.air_gap(height = 2)
         m300.flow_rate.dispense = 100
-        m300.aspirate(200, RNA_plate[i].bottom(5))
+        m300.aspirate(200, RNA_plate[i].bottom(3.5))
         m300.dispense(200, Liquid_trash.top(-3))
         m300.flow_rate.dispense = 200
         protocol.delay(seconds=5)
         m300.blow_out(Liquid_trash.top(-3))
         protocol.delay(seconds=2)
         m300.flow_rate.dispense = 100
-        m300.aspirate(200, RNA_plate[i].bottom(2))
+        m300.aspirate(200, RNA_plate[i].bottom(1.2))
         m300.dispense(200, Liquid_trash.top(-3))
         m300.flow_rate.dispense = 200
         protocol.delay(seconds=5)

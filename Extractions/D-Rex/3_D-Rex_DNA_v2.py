@@ -19,7 +19,7 @@ metadata = {
 def run(protocol):
     #### LABWARE SETUP ####
     elution_plate_DNA = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 1)
-    trough = protocol.load_labware('usascientific_12_reservoir_22ml', 3)
+    trough = protocol.load_labware('usascientific_12_reservoir_22ml', 2)
     trash_box = protocol.load_labware('agilent_1_reservoir_290ml', 8)
     mag_deck = protocol.load_module('magdeck', 7)
     DNA_plate = mag_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
@@ -27,7 +27,7 @@ def run(protocol):
     temp_deck = protocol.load_module('tempdeck', 10)
     incubation_plate = temp_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
 
-    tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 2)
+    tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 3)
     tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 6)
     tipracks_200_3 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 4)
     tipracks_200_4 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 5)
@@ -283,8 +283,9 @@ def run(protocol):
         m300.return_tip()
 
     temp_deck.set_temperature(25)
-    protocol.delay(minutes=5)
-
+    #protocol.delay(minutes=5)
+    protocol.delay(minutes=1)
+    temp_deck.deactivate()
     mag_deck.engage(height=34)
 
     #### Move elutes back to plate on magnetic_deck

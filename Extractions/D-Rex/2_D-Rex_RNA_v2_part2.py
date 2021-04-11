@@ -26,19 +26,19 @@ metadata = {
 
 def run(protocol):
     #### LABWARE SETUP ####
-    elution_plate_RNA = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 2)
-    trough = protocol.load_labware('usascientific_12_reservoir_22ml', 3)
+    elution_plate_RNA = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 1)
+    trough = protocol.load_labware('usascientific_12_reservoir_22ml', 2)
     mag_deck = protocol.load_module('magdeck', 7)
     RNA_plate = mag_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
-    trash_box = protocol.load_labware('agilent_1_reservoir_290ml', 8)
+    trash_box = protocol.load_labware('usascientific_12_reservoir_22ml', 8)
     #EtOH_wash = protocol.load_labware('agilent_1_reservoir_290ml', 6)
     # Load a Temperature Module GEN1 in deck slot 10.
     temp_deck = protocol.load_module('tempdeck', 10)
     incubation_plate = temp_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
 
-    tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 2)
+    tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 3)
     tipracks_200_2 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 4)
-    tipracks_200_3 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 1)
+    tipracks_200_3 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 9)
     tipracks_200_4 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 5)
     tipracks_10_1 = protocol.load_labware('opentrons_96_filtertiprack_20ul', 6)
 
@@ -78,7 +78,7 @@ def run(protocol):
 
     temp_deck.set_temperature(25)
     #protocol.delay(minutes=10)
-    protocol.delary(minutes=1)
+    protocol.delay(minutes=1)
 
     ### Buffer C rebind, by using tiprack 1
     ### Transfer buffer C and beads to RNA_plate(incubation_plate)
@@ -110,13 +110,14 @@ def run(protocol):
         m300.mix(5, BufferC_vol, incubation_plate[i].bottom(2))
         m300.blow_out(incubation_plate[i].bottom(5))
         protocol.delay(seconds=5)
-        m300.air_gap(height=2)
+        #m300.air_gap(height=2)
         m300.return_tip()
 
     # Incubate for 10 min at 25°C (temp already set from before)
     #protocol.delay(minutes=7)
     protocol.delay(minutes=1)
     mag_deck.engage(height=34)
+    temp_deck.deactivate()
 
     # Move all solutions to plate above magnetic_deck (RNA_plate)
     for i in list_of_cols:
@@ -126,15 +127,14 @@ def run(protocol):
         m300.aspirate(125, incubation_plate[i].bottom(2))
         m300.dispense(125, RNA_plate[i].top(-4))
         protocol.delay(seconds=5)
-        m300.air_gap(height=2)
-        m300.aspirate(125, incubation_plate[i].bottom(1.5))
+        #m300.air_gap(height=2)
+        m300.aspirate(125, incubation_plate[i].bottom(1.2))
         m300.dispense(125, RNA_plate[i].top(-4))
         m300.blow_out(RNA_plate[i].top(-4))
         protocol.delay(seconds=5)
         m300.air_gap(height=2)
         m300.return_tip()
 
-    temp_mod.deactivate()
 
     ### Remove supernatant from RNA_plate by re-using tiprack 1
     for i in list_of_cols:
@@ -142,17 +142,20 @@ def run(protocol):
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_1[i])
         m300.aspirate(125, RNA_plate[i].bottom(2))
-        m300.dispense(125, trash_box['A1'].top(-4))
-        protocol.delay(seconds=5)
+        m300.dispense(125, trash_box[i].top(-4))
+        protocol.delay(seconds=2)
+        m300.touch_tip(v_offset=-5, radius=0.8)
         #m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 130
-        m300.blow_out(trash_box['A1'].top(-4))
-        protocol.delay(seconds=5)
+        m300.blow_out(trash_box[i].top(-4))
+        protocol.delay(seconds=2)
+        m300.touch_tip(v_offset=-5, radius=0.8)
         #m300.air_gap(height=2)
         m300.aspirate(125, RNA_plate[i].bottom(1.5))
-        m300.dispense(125, trash_box['A1'].top(-4))
-        m300.blow_out(trash_box['A1'].top(-4))
-        protocol.delay(seconds=5)
+        m300.dispense(125, trash_box[i].top(-4))
+        m300.blow_out(trash_box[i].top(-4))
+        protocol.delay(seconds=2)
+        m300.touch_tip(v_offset=-5, radius=0.8)
         m300.air_gap(height=2)
         m300.return_tip()
 
@@ -188,15 +191,15 @@ def run(protocol):
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_2[i])
         m300.aspirate(Wash_1_vol, RNA_plate[i].bottom(1.5))
-        m300.dispense(Wash_1_vol, trash_box['A1'].top(-4))
+        m300.dispense(Wash_1_vol, trash_box[i].top(-4))
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 200
-        m300.blow_out(trash_box['A1'].top(-4))
+        m300.blow_out(trash_box[i].top(-4))
         protocol.delay(seconds=5)
-        m300.blow_out(trash_box['A1'].top(-4))
+        m300.blow_out(trash_box[i].top(-4))
         protocol.delay(seconds=5)
-        m300.blow_out(trash_box['A1'].top(-4))
+        m300.blow_out(trash_box[i].top(-4))
         protocol.delay(seconds=5)
         m300.air_gap(height = 2)
         # protocol.delay(seconds=5)
@@ -235,15 +238,15 @@ def run(protocol):
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_3[i])
         m300.aspirate(Wash_2_vol, RNA_plate[i].bottom(1.2))
-        m300.dispense(Wash_2_vol, trash_box['A1'].top(-4))
+        m300.dispense(Wash_2_vol, trash_box[i].top(-4))
         protocol.delay(seconds=5)
         m300.flow_rate.aspirate = 130
         m300.flow_rate.dispense = 200
-        m300.blow_out(trash_box['A1'].top(-4))
+        m300.blow_out(trash_box[i].top(-4))
         protocol.delay(seconds=5)
-        m300.blow_out(trash_box['A1'].top(-4))
+        m300.blow_out(trash_box[i].top(-4))
         protocol.delay(seconds=5)
-        m300.blow_out(trash_box['A1'].top(-4))
+        m300.blow_out(trash_box[i].top(-4))
         protocol.delay(seconds=5)
         m300.air_gap(height = 2)
         # protocol.delay(seconds=5)
@@ -256,7 +259,7 @@ def run(protocol):
         m20.flow_rate.dispense = 100
         m20.pick_up_tip(tipracks_10_1[i])
         m20.aspirate(10, RNA_plate[i].bottom(1))
-        m20.dispense(10, trash_box['A1'].top(-4))
+        m20.dispense(10, trash_box[i].top(-4))
         m20.blow_out()
         # protocol.delay(seconds=5)
         # m20.air_gap()

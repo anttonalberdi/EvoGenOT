@@ -27,7 +27,7 @@ metadata = {
 
 def run(protocol):
     #### LABWARE SETUP ####
-    trough = protocol.load_labware('usascientific_12_reservoir_22ml', 3)
+    trough = protocol.load_labware('usascientific_12_reservoir_22ml', 2)
     RNA_plate = protocol.load_labware('biorad_96_wellplate_1000ul', 1)
     mag_deck = protocol.load_module('magdeck', 7)
     sample_plate = mag_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
@@ -149,6 +149,7 @@ def run(protocol):
     # Incubate the samples at 10°C for 10 minutes (should be 15 but since the temp_deck is at right temperature since before, it should be enough to delay for 10 minutes)
     #protocol.delay(minutes=10)
     protocol.delay(minutes=1)
+    temp_deck.deactivate()
 
     # transfer all the 400ul into the rack on the magnetic module (col 1 to 6) using same tips as before
     for i in list_of_cols[:6]:
@@ -168,10 +169,10 @@ def run(protocol):
         protocol.delay(seconds=5)
         m300.blow_out()
         m300.touch_tip(v_offset=-5, radius=0.8)
-        m300.air_gap(height=2)
+        #m300.air_gap(height=2)
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
-        m300.aspirate(200, incubation_plate[i].bottom(4))
+        m300.aspirate(200, incubation_plate[i].bottom(1.2))
         m300.dispense(200, sample_plate[i].bottom(5))
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
@@ -188,7 +189,7 @@ def run(protocol):
     mag_deck.engage(height=34)
 
     # deactivate temp_deck
-    temp_mod.deactivate()
+    temp_deck.deactivate()
 
     # wait for the beads to seat ------> no need to wait for the beads to seat since the magnetic module is activated since I
     #start moving the samples + binding buffer and beads from incubation rack to sample rack
