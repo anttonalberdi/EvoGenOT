@@ -94,93 +94,111 @@ def run(protocol):
     #     protocol.delay(seconds=5)
     #     m300.return_tip()
 
-    temp_deck.set_temperature(10)
 
     ### Transfer buffer B1 (trough col 1) and beads to incubation plate (col 1 to 6)
     for i in list_of_cols[:6]:
         m300.flow_rate.aspirate = 150
         m300.flow_rate.dispense = 150
         m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
-        m300.mix(4, Binding_buffer_vol, Binding_buffer1.bottom(4))
+        m300.mix(4, Binding_buffer_vol, Binding_buffer1.bottom(4.8))
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
-        m300.aspirate(Binding_buffer_vol, Binding_buffer1.bottom(4))
-        m300.dispense(Binding_buffer_vol, incubation_plate[i].bottom(5))
+        m300.aspirate(Binding_buffer_vol, Binding_buffer1.bottom(4.8))
+        m300.dispense(Binding_buffer_vol, incubation_plate[i].bottom(5.8))
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
-        m300.mix(4, Binding_buffer_vol, incubation_plate[i].bottom(6))
+        m300.mix(4, Binding_buffer_vol, incubation_plate[i].bottom(6.8))
         m300.move_to(incubation_plate[i].top(-5))
         m300.blow_out()
         protocol.delay(seconds=5)
         m300.blow_out()
-        m300.touch_tip(v_offset=-5, radius=0.8)
+        m300.touch_tip(v_offset=-5, radius=0.7)
         m300.air_gap(height=2)
         m300.return_tip()
 
 
-# to make equal to the part above ->    ### Transfer buffer B2 (trough col 2) and beads to sample plate (col 7 to 12)
+# to make equal to the part above ->    ### Transfer buffer B2 (trough col 2) and beads to incubation plate (col 7 to 12)
     for i in list_of_cols[6:]:
         m300.flow_rate.aspirate = 150
         m300.flow_rate.dispense = 150
         m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
-        m300.mix(5, Binding_buffer_vol, Binding_buffer2.bottom(4))
+        m300.mix(5, Binding_buffer_vol, Binding_buffer2.bottom(4.8))
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
-        m300.aspirate(Binding_buffer_vol, Binding_buffer2.bottom(4))
-        m300.dispense(Binding_buffer_vol, sample_plate[i].bottom(5))
+        m300.aspirate(Binding_buffer_vol, Binding_buffer2.bottom(4.8))
+        m300.dispense(Binding_buffer_vol, sample_plate[i].bottom(5.8))
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
-        m300.mix(5, Binding_buffer_vol, sample_plate[i].bottom(6))
+        m300.mix(5, Binding_buffer_vol, sample_plate[i].bottom(6.8))
         m300.move_to(sample_plate[i].top(-5))
         m300.blow_out()
         protocol.delay(seconds=5)
         m300.drop_tip()
 
-    # protocol.pause('Cover DNA plate with foil. Incubate for 15 minutes at 10 ºC at 1500 rpm. Meanwhile proceed with next step.')
-    #
-    # ## Add beads and EtOH binding buffer (trough col 4) to RNA plate (col 1 to 3)
-    # m300.pick_up_tip(tipracks_200_2['A1'])
-    # for i in list_of_cols[:3]:
-    #     m300.flow_rate.aspirate = 100
-    #     m300.flow_rate.dispense = 100
-    #     m300.transfer(350, EtOH_Bind1.bottom(3), RNA_plate[i].bottom(4), mix_before=(3,200), new_tip='never')
-    # m300.drop_tip()
+    temp_deck.set_temperature(10)
 
-    # Incubate the samples at 10°C for 10 minutes (should be 15 but since the temp_deck is at right temperature since before, it should be enough to delay for 10 minutes)
-    #protocol.delay(minutes=10)
+    # Incubate the samples at 10°C for 15 minutes
+    #protocol.delay(minutes=15)
     protocol.delay(minutes=1)
     temp_deck.deactivate()
 
-    # transfer all the 400ul into the rack on the magnetic module (col 1 to 6) using same tips as before
-    for i in list_of_cols[:6]:
-        m300.flow_rate.aspirate = 150
-        m300.flow_rate.dispense = 150
+    # Transfer all the 400ul into the rack on the magnetic module (col 1 to 6) using same tips as before
+    for i in list_of_cols[:3]:
         m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
-        m300.mix(4, 200, incubation_plate[i].bottom(4))
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
-        m300.aspirate(200, incubation_plate[i].bottom(4))
-        m300.dispense(200, sample_plate[i].bottom(5))
+        m300.aspirate(150, incubation_plate[i].bottom(4.8))
+        m300.dispense(150, sample_plate[i].bottom(5.8))
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
-        #m300.mix(4, Binding_buffer_vol, incubation_plate[i].bottom(6))
         m300.move_to(sample_plate[i].top(-5))
         m300.blow_out()
-        protocol.delay(seconds=5)
-        m300.blow_out()
+        protocol.delay(seconds=2)
         m300.touch_tip(v_offset=-5, radius=0.8)
-        #m300.air_gap(height=2)
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
-        m300.aspirate(200, incubation_plate[i].bottom(1.2))
-        m300.dispense(200, sample_plate[i].bottom(5))
+        m300.aspirate(150, incubation_plate[i].bottom(2))
+        m300.dispense(150, sample_plate[i].bottom(5.8))
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
-        #m300.mix(4, Binding_buffer_vol, incubation_plate[i].bottom(6))
         m300.move_to(sample_plate[i].top(-5))
         m300.blow_out()
-        protocol.delay(seconds=5)
+        protocol.delay(seconds=2)
+        m300.touch_tip(v_offset=-5, radius=0.8)
+        m300.flow_rate.aspirate = 50
+        m300.flow_rate.dispense = 50
+        m300.aspirate(100, incubation_plate[i].bottom(1.8))
+        m300.dispense(100, sample_plate[i].bottom(5.8))
+        m300.flow_rate.aspirate = 100
+        m300.flow_rate.dispense = 100
+        m300.move_to(sample_plate[i].top(-5))
         m300.blow_out()
+        protocol.delay(seconds=2)
+        m300.touch_tip(v_offset=-5, radius=0.8)
+        m300.air_gap(height=2)
+        m300.return_tip()
+
+    for i in list_of_cols[3:6]:
+        m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
+        m300.flow_rate.aspirate = 50
+        m300.flow_rate.dispense = 50
+        m300.aspirate(200, incubation_plate[i].bottom(4.8))
+        m300.dispense(200, sample_plate[i].bottom(5.8))
+        m300.flow_rate.aspirate = 100
+        m300.flow_rate.dispense = 100
+        m300.move_to(sample_plate[i].top(-5))
+        m300.blow_out()
+        protocol.delay(seconds=2)
+        m300.touch_tip(v_offset=-5, radius=0.8)
+        m300.flow_rate.aspirate = 50
+        m300.flow_rate.dispense = 50
+        m300.aspirate(200, incubation_plate[i].bottom(2))
+        m300.dispense(200, sample_plate[i].bottom(5.8))
+        m300.flow_rate.aspirate = 100
+        m300.flow_rate.dispense = 100
+        m300.move_to(sample_plate[i].top(-5))
+        m300.blow_out()
+        protocol.delay(seconds=2)
         m300.touch_tip(v_offset=-5, radius=0.8)
         m300.air_gap(height=2)
         m300.return_tip()
@@ -196,18 +214,19 @@ def run(protocol):
     # Also, the next step is preparing the RNA plate so a voja per quando è pronta se se so sittati i beads!
     #protocol.delay(minutes=3)
 
+    ## Prepare RNA_plate
     ## Add beads and EtOH binding buffer (trough col 4) to RNA plate (col 1 to 3)
     m300.pick_up_tip(tipracks_200_2['A1'])
 
     m300.flow_rate.aspirate = 200
     m300.flow_rate.dispense = 200
-    m300.mix(2, 200, EtOH_Bind1.bottom(4))
-    m300.mix(2, 200, EtOH_Bind1.bottom(6))
-    m300.mix(2, 200, EtOH_Bind1.bottom(9))
+    m300.mix(2, 200, EtOH_Bind1.bottom(4.8))
+    m300.mix(2, 200, EtOH_Bind1.bottom(6.8))
+    m300.mix(2, 200, EtOH_Bind1.bottom(9.8))
     m300.flow_rate.aspirate = 50
     m300.flow_rate.dispense = 50
-    m300.aspirate(175, EtOH_Bind1.bottom(4))
-    m300.dispense(175, RNA_plate['A1'].bottom(5))
+    m300.aspirate(175, EtOH_Bind1.bottom(4.8))
+    m300.dispense(175, RNA_plate['A1'].bottom(5.8))
     # m300.flow_rate.aspirate = 200
     # m300.flow_rate.dispense = 200
     # m300.mix(2, 200, EtOH_Bind1.bottom(3))
@@ -215,50 +234,50 @@ def run(protocol):
     # m300.mix(1, 200, EtOH_Bind1.bottom(8))
     # m300.flow_rate.aspirate = 50
     # m300.flow_rate.dispense = 50
-    m300.aspirate(175, EtOH_Bind1.bottom(9))
-    m300.dispense(175, RNA_plate['A1'].bottom(5))
+    m300.aspirate(175, EtOH_Bind1.bottom(9.8))
+    m300.dispense(175, RNA_plate['A1'].bottom(5.8))
     m300.move_to(RNA_plate['A1'].top(-5))
     m300.blow_out()
     protocol.delay(seconds=5)
 
     m300.flow_rate.aspirate = 200
     m300.flow_rate.dispense = 200
-    m300.mix(2, 200, EtOH_Bind1.bottom(4))
-    m300.mix(2, 200, EtOH_Bind1.bottom(6))
-    m300.mix(2, 200, EtOH_Bind1.bottom(9))
+    m300.mix(2, 200, EtOH_Bind1.bottom(4.8))
+    m300.mix(2, 200, EtOH_Bind1.bottom(6.8))
+    m300.mix(2, 200, EtOH_Bind1.bottom(9.8))
     m300.flow_rate.aspirate = 50
     m300.flow_rate.dispense = 50
-    m300.aspirate(175, EtOH_Bind1.bottom(4))
-    m300.dispense(175, RNA_plate['A2'].bottom(5))
+    m300.aspirate(175, EtOH_Bind1.bottom(4.8))
+    m300.dispense(175, RNA_plate['A2'].bottom(5.8))
     # m300.flow_rate.aspirate = 200
     # m300.flow_rate.dispense = 200
-    # m300.mix(2, 200, EtOH_Bind1.bottom(3))
     # m300.mix(2, 200, EtOH_Bind1.bottom(5))
     # m300.mix(1, 200, EtOH_Bind1.bottom(8))
+    # m300.mix(2, 200, EtOH_Bind1.bottom(3))
     # m300.flow_rate.aspirate = 50
     # m300.flow_rate.dispense = 50
-    m300.aspirate(175, EtOH_Bind1.bottom(6))
-    m300.dispense(175, RNA_plate['A2'].bottom(5))
+    m300.aspirate(175, EtOH_Bind1.bottom(6.8))
+    m300.dispense(175, RNA_plate['A2'].bottom(5.8))
     m300.move_to(RNA_plate['A2'].top(-5))
     m300.blow_out()
     protocol.delay(seconds=5)
 
     m300.flow_rate.aspirate = 200
     m300.flow_rate.dispense = 200
-    m300.mix(2, 200, EtOH_Bind1.bottom(4))
-    m300.mix(2, 200, EtOH_Bind1.bottom(6))
-    m300.mix(2, 200, EtOH_Bind1.bottom(9))
+    m300.mix(2, 200, EtOH_Bind1.bottom(4.8))
+    m300.mix(2, 200, EtOH_Bind1.bottom(6.8))
+    m300.mix(2, 200, EtOH_Bind1.bottom(9.8))
     m300.flow_rate.aspirate = 150
     m300.flow_rate.dispense = 50
-    m300.aspirate(175, EtOH_Bind1.bottom(4))
-    m300.dispense(175, RNA_plate['A3'].bottom(5))
+    m300.aspirate(175, EtOH_Bind1.bottom(4.8))
+    m300.dispense(175, RNA_plate['A3'].bottom(5.8))
     # m300.flow_rate.aspirate = 200
     # m300.flow_rate.dispense = 200
     # m300.mix(2, 200, EtOH_Bind1.bottom(3))
     # m300.mix(2, 200, EtOH_Bind1.bottom(5))
     # m300.mix(1, 200, EtOH_Bind1.bottom(8))
-    m300.aspirate(175, EtOH_Bind1.bottom(4))
-    m300.dispense(175, RNA_plate['A3'].bottom(5))
+    m300.aspirate(175, EtOH_Bind1.bottom(4.8))
+    m300.dispense(175, RNA_plate['A3'].bottom(5.8))
     m300.move_to(RNA_plate['A3'].top(-5))
     m300.blow_out()
     protocol.delay(seconds=5)
@@ -270,13 +289,13 @@ def run(protocol):
 
     m300.flow_rate.aspirate = 200
     m300.flow_rate.dispense = 200
-    m300.mix(2, 200, EtOH_Bind2.bottom(4))
-    m300.mix(2, 200, EtOH_Bind2.bottom(6))
-    m300.mix(2, 200, EtOH_Bind2.bottom(9))
+    m300.mix(2, 200, EtOH_Bind2.bottom(4.8))
+    m300.mix(2, 200, EtOH_Bind2.bottom(6.8))
+    m300.mix(2, 200, EtOH_Bind2.bottom(9.8))
     m300.flow_rate.aspirate = 50
     m300.flow_rate.dispense = 50
-    m300.aspirate(175, EtOH_Bind2.bottom(11))
-    m300.dispense(175, RNA_plate['A4'].bottom(5))
+    m300.aspirate(175, EtOH_Bind2.bottom(11.8))
+    m300.dispense(175, RNA_plate['A4'].bottom(5.8))
     # m300.flow_rate.aspirate = 200
     # m300.flow_rate.dispense = 200
     # m300.mix(2, 200, EtOH_Bind2.bottom(3))
@@ -284,43 +303,43 @@ def run(protocol):
     # m300.mix(1, 200, EtOH_Bind2.bottom(8))
     # m300.flow_rate.aspirate = 50
     # m300.flow_rate.dispense = 50
-    m300.aspirate(175, EtOH_Bind2.bottom(9))
-    m300.dispense(175, RNA_plate['A4'].bottom(5))
+    m300.aspirate(175, EtOH_Bind2.bottom(9.8))
+    m300.dispense(175, RNA_plate['A4'].bottom(5.8))
     m300.move_to(RNA_plate['A4'].top(-5))
     m300.blow_out()
     protocol.delay(seconds=5)
 
     m300.flow_rate.aspirate = 200
     m300.flow_rate.dispense = 200
-    m300.mix(2, 200, EtOH_Bind2.bottom(4))
-    m300.mix(2, 200, EtOH_Bind2.bottom(6))
-    m300.mix(2, 200, EtOH_Bind2.bottom(9))
+    m300.mix(2, 200, EtOH_Bind2.bottom(4.8))
+    m300.mix(2, 200, EtOH_Bind2.bottom(6.8))
+    m300.mix(2, 200, EtOH_Bind2.bottom(9.8))
     m300.flow_rate.aspirate = 50
     m300.flow_rate.dispense = 50
-    m300.aspirate(175, EtOH_Bind2.bottom(9))
-    m300.dispense(175, RNA_plate['A5'].bottom(5))
+    m300.aspirate(175, EtOH_Bind2.bottom(9.8))
+    m300.dispense(175, RNA_plate['A5'].bottom(5.8))
     # m300.flow_rate.aspirate = 200
-    # m300.flow_rate.dispense = 200
     # m300.mix(2, 200, EtOH_Bind2.bottom(3))
-    # m300.mix(2, 200, EtOH_Bind2.bottom(5))
+    # m300.flow_rate.dispense = 200
     # m300.mix(1, 200, EtOH_Bind2.bottom(8))
+    # m300.mix(2, 200, EtOH_Bind2.bottom(5))
     # m300.flow_rate.aspirate = 50
     # m300.flow_rate.dispense = 50
-    m300.aspirate(175, EtOH_Bind2.bottom(6))
-    m300.dispense(175, RNA_plate['A5'].bottom(5))
+    m300.aspirate(175, EtOH_Bind2.bottom(6.8))
+    m300.dispense(175, RNA_plate['A5'].bottom(5.8))
     m300.move_to(RNA_plate['A5'].top(-5))
     m300.blow_out()
     protocol.delay(seconds=5)
 
     m300.flow_rate.aspirate = 200
     m300.flow_rate.dispense = 200
-    m300.mix(2, 200, EtOH_Bind2.bottom(4))
-    m300.mix(2, 200, EtOH_Bind2.bottom(6))
-    m300.mix(2, 200, EtOH_Bind2.bottom(9))
+    m300.mix(2, 200, EtOH_Bind2.bottom(4.8))
+    m300.mix(2, 200, EtOH_Bind2.bottom(6.8))
+    m300.mix(2, 200, EtOH_Bind2.bottom(9.8))
     m300.flow_rate.aspirate = 150
     m300.flow_rate.dispense = 50
-    m300.aspirate(175, EtOH_Bind2.bottom(4))
-    m300.dispense(175, RNA_plate['A6'].bottom(5))
+    m300.aspirate(175, EtOH_Bind2.bottom(4.8))
+    m300.dispense(175, RNA_plate['A6'].bottom(5.8))
     # m300.flow_rate.aspirate = 200
     # m300.flow_rate.dispense = 200
     # m300.mix(2, 200, EtOH_Bind2.bottom(3))
@@ -328,8 +347,8 @@ def run(protocol):
     # m300.mix(1, 200, EtOH_Bind2.bottom(8))
     # m300.flow_rate.aspirate = 50
     # m300.flow_rate.dispense = 50
-    m300.aspirate(175, EtOH_Bind2.bottom(4))
-    m300.dispense(175, RNA_plate['A6'].bottom(5))
+    m300.aspirate(175, EtOH_Bind2.bottom(4.8))
+    m300.dispense(175, RNA_plate['A6'].bottom(5.8))
     m300.move_to(RNA_plate['A6'].top(-5))
     m300.blow_out()
     protocol.delay(seconds=5)
@@ -419,14 +438,13 @@ def run(protocol):
     #     m300.drop_tip()
 
     ## Transfer supernatant from DNA_plate to RNA_plate
-
-# first 3 cols mixed at different heights to see if the solution gets mixed properly
+    # first 3 cols mixed at different heights to see if the solution gets mixed properly
     for i in list_of_cols[:3]:
         m300.pick_up_tip(tipracks_200_3[i]) # Slow down head speed 0.5X for bead handling
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
-        m300.aspirate(200, sample_plate[i].bottom(3))
-        m300.dispense(200, RNA_plate[i].top(-5))       # is height.bottom = 8 good?
+        m300.aspirate(175, sample_plate[i].bottom(3.8))
+        m300.dispense(175, RNA_plate[i].top(-5))       # is height.bottom = 8 good?
         m300.flow_rate.aspirate = 150
         m300.flow_rate.dispense = 150
         #m300.mix(3, 200, RNA_plate[i].bottom(6)) # do not mix to avoid to touch the EtOH and in this way bring it back to the DNA_plate
@@ -435,16 +453,16 @@ def run(protocol):
         #m300.air_gap(height=2)
         m300.touch_tip(v_offset=-3)
         m300.flow_rate.dispense = 50
-        m300.aspirate(150, sample_plate[i].bottom(2))
-        m300.dispense(180, RNA_plate[i].bottom(5))
+        m300.aspirate(175, sample_plate[i].bottom(2.8))
+        m300.dispense(175, RNA_plate[i].bottom(5.8))
         #protocol.delay(seconds=5)
         #m300.blow_out(RNA_plate[i].top(-5))
-        #m300.air_gap(height=2)
         m300.flow_rate.aspirate = 80
         m300.flow_rate.dispense = 200
-        m300.mix(1, 200, RNA_plate[i].bottom(11))
-        m300.mix(1, 200, RNA_plate[i].bottom(8))
-        m300.mix(1, 200, RNA_plate[i].bottom(5))
+        #m300.air_gap(height=2)
+        m300.mix(1, 200, RNA_plate[i].bottom(11.8))
+        m300.mix(1, 200, RNA_plate[i].bottom(8.8))
+        m300.mix(1, 200, RNA_plate[i].bottom(5.8))
         m300.move_to(RNA_plate[i].top(-3))
         protocol.delay(seconds=5)
         m300.blow_out(RNA_plate[i].top(-3))
@@ -460,8 +478,8 @@ def run(protocol):
         m300.pick_up_tip(tipracks_200_3[i]) # Slow down head speed 0.5X for bead handling
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
-        m300.aspirate(200, sample_plate[i].bottom(3))
-        m300.dispense(200, RNA_plate[i].top(-5))       # is height.bottom = 8 good?
+        m300.aspirate(175, sample_plate[i].bottom(3.8))
+        m300.dispense(175, RNA_plate[i].top(-5))       # is height.bottom = 8 good?
         m300.flow_rate.aspirate = 150
         m300.flow_rate.dispense = 150
         #m300.mix(3, 200, RNA_plate[i].bottom(6)) # do not mix to avoid to touch the EtOH and in this way bring it back to the DNA_plate
@@ -470,16 +488,16 @@ def run(protocol):
         #m300.air_gap(height=2)
         m300.touch_tip(v_offset=-3)
         m300.flow_rate.dispense = 50
-        m300.aspirate(150, sample_plate[i].bottom(2))
-        m300.dispense(200, RNA_plate[i].bottom(5))
+        m300.aspirate(175, sample_plate[i].bottom(2.8))
+        m300.dispense(175, RNA_plate[i].bottom(5.8))
         #protocol.delay(seconds=5)
         #m300.blow_out(RNA_plate[i].top(-5))
         #m300.air_gap(height=2)
         m300.flow_rate.aspirate = 80
         m300.flow_rate.dispense = 200
-        m300.mix(1, 200, RNA_plate[i].bottom(5))
-        m300.mix(1, 200, RNA_plate[i].bottom(8))
-        m300.mix(1, 200, RNA_plate[i].bottom(11))
+        m300.mix(1, 200, RNA_plate[i].bottom(5.8))
+        m300.mix(1, 200, RNA_plate[i].bottom(8.8))
+        m300.mix(1, 200, RNA_plate[i].bottom(11.8))
         m300.move_to(RNA_plate[i].top(-3))
         protocol.delay(seconds=5)
         m300.blow_out(RNA_plate[i].top(-3))
