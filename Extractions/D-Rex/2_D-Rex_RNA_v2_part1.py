@@ -28,11 +28,11 @@ def run(protocol):
     #### LABWARE SETUP ####
     #elution_plate_RNA = protocol.load_labware('biorad_96_wellplate_200ul_pcr', 2)
     trough = protocol.load_labware('usascientific_12_reservoir_22ml', 2)
-    mag_deck = protocol.load_module('magdeck', 7)
+    mag_deck = protocol.load_module('magdeck', 10)
     RNA_plate = mag_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
     trash_box = protocol.load_labware('agilent_1_reservoir_290ml', 4)
     # Load a Temperature Module GEN1 in deck slot 10.
-    temp_deck = protocol.load_module('tempdeck', 10)
+    temp_deck = protocol.load_module('tempdeck', 7)
     incubation_plate = temp_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
 
     tipracks_200_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 3)
