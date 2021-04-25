@@ -144,10 +144,10 @@ def run(protocol):
 
     # Transfer all the 400ul into the rack on the magnetic module (col 1 to 6) using same tips as before
     for i in list_of_cols[:3]:
-        m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
+        m300.pick_up_tip(tipracks_200_1[i])
         m300.flow_rate.aspirate = 150
         m300.flow_rate.dispense = 150
-        m300.mix(3, 200, incubation_plate[i].bottom(5))
+        m300.mix(3, 170, incubation_plate[i].bottom(5))
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
         m300.aspirate(150, incubation_plate[i].bottom(4.8))
@@ -160,7 +160,7 @@ def run(protocol):
         m300.touch_tip(v_offset=-5, radius=0.7)
         m300.flow_rate.aspirate = 150
         m300.flow_rate.dispense = 150
-        m300.mix(3, 200, incubation_plate[i].bottom(3))
+        m300.mix(3, 150, incubation_plate[i].bottom(3))
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
         m300.aspirate(150, incubation_plate[i].bottom(2))
@@ -176,7 +176,7 @@ def run(protocol):
         m300.mix(3, 100, incubation_plate[i].bottom(2))
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
-        m300.aspirate(100, incubation_plate[i].bottom(1.8))
+        m300.aspirate(100, incubation_plate[i].bottom(1.4))
         m300.dispense(100, sample_plate[i].bottom(5.8))
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
@@ -207,7 +207,7 @@ def run(protocol):
         m300.mix(3, 150, incubation_plate[i].bottom(2))
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
-        m300.aspirate(200, incubation_plate[i].bottom(2))
+        m300.aspirate(200, incubation_plate[i].bottom(1.5))
         m300.dispense(200, sample_plate[i].bottom(5.8))
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
@@ -466,7 +466,7 @@ def run(protocol):
         #protocol.delay(seconds=5)
         m300.blow_out(RNA_plate[i].top(-3))
         #m300.air_gap(height=2)
-        m300.touch_tip(v_offset=-3)
+        m300.touch_tip(v_offset=-5, radius=0.8)
         m300.flow_rate.dispense = 50
         m300.aspirate(175, sample_plate[i].bottom(2.8))
         m300.dispense(175, RNA_plate[i].bottom(5.8))
@@ -482,7 +482,7 @@ def run(protocol):
         protocol.delay(seconds=5)
         m300.blow_out(RNA_plate[i].top(-3))
         #m300.air_gap(height=2)
-        m300.touch_tip(v_offset=-2)
+        m300.touch_tip(v_offset=-5, radius=0.8)
         protocol.delay(seconds=2)
         #m300.drop_tip()
         m300.return_tip()
@@ -501,7 +501,7 @@ def run(protocol):
         #protocol.delay(seconds=5)
         m300.blow_out(RNA_plate[i].top(-3))
         #m300.air_gap(height=2)
-        m300.touch_tip(v_offset=-3)
+        m300.touch_tip(v_offset=-5, radius=0.8)
         m300.flow_rate.dispense = 50
         m300.aspirate(175, sample_plate[i].bottom(2.8))
         m300.dispense(175, RNA_plate[i].bottom(5.8))
@@ -517,7 +517,7 @@ def run(protocol):
         protocol.delay(seconds=5)
         m300.blow_out(RNA_plate[i].top(-3))
         #m300.air_gap(height=2)
-        m300.touch_tip(v_offset=-2)
+        m300.touch_tip(v_offset=-5, radius=0.8)
         protocol.delay(seconds=2)
         #m300.drop_tip()
         m300.return_tip()

@@ -160,7 +160,7 @@ def run(protocol):
         m300.blow_out()
         protocol.delay(seconds=5)
         m300.blow_out()
-        m300.touch_tip(v_offset=-2)
+        m300.touch_tip(v_offset=-5, radius=0.8)
         m300.air_gap(height=2)
         m300.return_tip()
 
@@ -210,7 +210,7 @@ def run(protocol):
         m300.blow_out()
         protocol.delay(seconds=5)
         m300.blow_out()
-        m300.touch_tip(v_offset=-2)
+        m300.touch_tip(v_offset=-5, radius=0.8)
         m300.air_gap(height=2)
         m300.return_tip()
 
