@@ -59,8 +59,6 @@ def run(protocol):
     EtOH1 = trough['A4']                    # Wash 1 and 3 (to refill for the 3) 11 ml
     EtOH2 = trough['A5']                    # Wash 2 and 4 (to refill for the 4) 11 ml
 
-    Liquid_trash = trash_box['A1']
-
 
     #### Plate SETUP for Purification
     list_of_cols = ['A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12']
@@ -77,8 +75,8 @@ def run(protocol):
 ## Place RNA_plate with DNAse just added on the temp_deck
 
     temp_deck.set_temperature(25)
-    #protocol.delay(minutes=10)
-    protocol.delay(minutes=1)
+    protocol.delay(minutes=10)
+    #protocol.delay(minutes=1)
 
     ### Buffer C rebind, by using tiprack 1
     ### Transfer buffer C and beads to RNA_plate(incubation_plate)
@@ -100,7 +98,7 @@ def run(protocol):
     ### Transfer buffer C and beads to RNA_plate
     for i in list_of_cols[6:]:
         m300.pick_up_tip(tipracks_200_1[i])
-        m300.mix(3, BufferC_vol, BufferC_2.bottom(3))
+        #m300.mix(3, BufferC_vol, BufferC_2.bottom(3))
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
         m300.aspirate(BufferC_vol, BufferC_2.bottom(2))
@@ -114,8 +112,8 @@ def run(protocol):
         m300.return_tip()
 
     # Incubate for 10 min at 25°C (temp already set from before)
-    #protocol.delay(minutes=5)
-    protocol.delay(minutes=1)
+    protocol.delay(minutes=5)
+    #protocol.delay(minutes=1)
     mag_deck.engage(height=34)
     temp_deck.deactivate()
 
@@ -124,6 +122,7 @@ def run(protocol):
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_1[i])
+        #m300.mix(3, BufferC_vol, incubation_plate[i].bottom(3))
         m300.aspirate(125, incubation_plate[i].bottom(2))
         m300.dispense(125, RNA_plate[i].top(-4))
         protocol.delay(seconds=5)
@@ -167,7 +166,7 @@ def run(protocol):
         m300.mix(5, 170, RNA_plate[i].bottom(2))
         m300.move_to(RNA_plate[i].top(-9))
         m300.flow_rate.aspirate = 130
-        m300.flow_rate.dispense = 130
+        m300.flow_rate.dispense = 200
         m300.blow_out()
         protocol.delay(seconds=5)
         m300.touch_tip(v_offset=-2, radius=0.8)
@@ -269,8 +268,8 @@ def run(protocol):
 
     protocol.pause("Place RNA_plate on the temp_deck and add a new rack above mag_deck")
     temp_deck.set_temperature(25)
-    #protocol.delay(minutes=5)
-    protocol.delay(minutes=1)
+    protocol.delay(minutes=5)
+    #protocol.delay(minutes=1)
     mag_deck.engage(height=34)
 
     # Transfer elutes from rack above temp_deck to rack above magnetic_deck
