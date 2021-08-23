@@ -20,7 +20,7 @@ metadata = {
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
     'update': 'Martina Cardinali <martina.cardinali.4@gmail.com>',
     'apiLevel': '2.2',
-    'date': '2020/11/09',
+    'date': '2021/08/23',
     'description': 'Automation of D-Rex RNA protocol for stool samples in SHIELD',
 }
 
@@ -32,7 +32,7 @@ def run(protocol):
     RNA_plate = mag_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
     trash_box = protocol.load_labware('biorad_96_wellplate_1000ul_w_adaptor', 4)
     #EtOH_wash = protocol.load_labware('agilent_1_reservoir_290ml', 6)
-    # Load a Temperature Module GEN1 in deck slot 10.
+    # Load a Temperature Module GEN1 in deck slot 7.
     temp_deck = protocol.load_module('tempdeck', 7)
     incubation_plate = temp_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
 
@@ -52,13 +52,13 @@ def run(protocol):
     #EtOH1 = EtOH_wash['A1']                # 80% ethanol           88 ml in tot, but I would add 44 + 44
 
     #### REAGENT SETUP                             Description             Volume needed for protocol
-    DNase = trough['A6']                    # DNase Buffer          3.3 ml
-    BufferC_1 = trough['A7']                # Buffer C RNA rebind   11 ml
-    # BufferC_2 = trough['A7']                # Buffer C RNA rebind   11 ml
-    Elution_buffer = trough['A8']           # Buffer D              5.5 ml
-    EtOH1 = trough['A4']                    # Wash 1 and 3 (to refill for the 3) 11 ml
-    EtOH2 = trough['A5']                    # Wash 2 and 4 (to refill for the 4) 11 ml
-
+    DNase = trough['A6']                    # DNase Buffer                          3.3 ml
+    BufferC_1 = trough['A7']                # Buffer C RNA rebind                   11 ml
+    # BufferC_2 = trough['A7']                # Buffer C RNA rebind                 11 ml -> to use only if running full plate
+    Elution_buffer = trough['A8']           # Buffer D                              5.5 ml
+    EtOH1 = trough['A4']                    # Wash 1 and 3 (to refill for the 3)    11 ml
+    EtOH2 = trough['A5']                    # Wash 2 and 4 (to refill for the 4)    11 ml
+    # necessity to add other 2 EtOH columns if running full plate
 
     #### Plate SETUP for Purification
     list_of_cols = ['A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12']
@@ -72,11 +72,10 @@ def run(protocol):
     Elution_vol = 50
     BufferC_vol = 1.0*Sample_vol
 
-## Place RNA_plate with DNAse just added on the temp_deck
-
+    ## Place RNA_plate with DNAse just added on the temp_deck
     temp_deck.set_temperature(25)
     protocol.delay(minutes=10)
-    #protocol.delay(minutes=1)
+    #protocol.delay(minutes=1) # used for testing, while commenting the real waiting time
 
     ### Buffer C rebind, by using tiprack 1
     ### Transfer buffer C and beads to RNA_plate(incubation_plate)
@@ -103,12 +102,12 @@ def run(protocol):
         m300.flow_rate.dispense = 50
         m300.aspirate(BufferC_vol, BufferC_2.bottom(2))
         m300.dispense(BufferC_vol, incubation_plate[i].bottom(4))
-        m300.flow_rate.aspirate = 100
-        m300.flow_rate.dispense = 100
+        m300.flow_rate.aspirate = 150
+        m300.flow_rate.dispense = 150
         m300.mix(5, BufferC_vol, incubation_plate[i].bottom(2))
-        m300.blow_out(incubation_plate[i].bottom(5))
+        m300.blow_out(incubation_plate[i].bottom(10))
         protocol.delay(seconds=5)
-        #m300.air_gap(height=2)
+        m300.air_gap(height=2)
         m300.return_tip()
 
     # Incubate for 10 min at 25°C (temp already set from before)
@@ -156,8 +155,8 @@ def run(protocol):
     ## Ethanol Wash 3, using tiprack 2
     mag_deck.disengage()
 
-    for i in list_of_cols:
     ### Transfer Wash 3 to RNA_plate
+    for i in list_of_cols:
         m300.flow_rate.aspirate = 150
         m300.flow_rate.dispense = 100
         m300.pick_up_tip(tipracks_200_2[i])
@@ -190,8 +189,6 @@ def run(protocol):
         protocol.delay(seconds=5)
         m300.touch_tip(v_offset=-5, radius=0.8)
         m300.air_gap(height = 2)
-        # protocol.delay(seconds=5)
-        # m300.air_gap(height=2)
         m300.return_tip()
 
     ## Ethanol Wash 4, by using tiprack 3
@@ -231,8 +228,14 @@ def run(protocol):
         protocol.delay(seconds=5)
         m300.touch_tip(v_offset=-5, radius=0.8)
         m300.air_gap(height = 2)
-        # protocol.delay(seconds=5)
-        # m300.air_gap(height=2)
+        # repeat to avoid to leave too much supernatant not removable with 10ul pipette
+        m300.aspirate(Wash_2_vol, RNA_plate[i].bottom(1))
+        m300.dispense(Wash_2_vol, trash_box[i].top(-4))
+        m300.flow_rate.dispense = 200
+        m300.blow_out(trash_box[i].top(-4))
+        protocol.delay(seconds=5)
+        m300.touch_tip(v_offset=-5, radius=0.8)
+        m300.air_gap(height = 2)
         m300.return_tip()
 
     ### Remove the remaining supernatant with 20ul pipette
@@ -244,8 +247,6 @@ def run(protocol):
         m20.dispense(10, trash_box[i].top(-4))
         m20.blow_out()
         m20.touch_tip(v_offset=-5, radius=0.8)
-        # protocol.delay(seconds=5)
-        # m20.air_gap()
         m20.return_tip()
 
     ## Dry beads before elution (removing supernatant from all wells takes more than 5 mins, should be enough for beads to dry)

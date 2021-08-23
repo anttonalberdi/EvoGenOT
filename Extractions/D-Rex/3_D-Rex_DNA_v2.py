@@ -12,7 +12,7 @@ metadata = {
     'author': 'Jacob Agerbo Rasmussen <genomicsisawesome@gmail.com>',
     'update': 'Martina Cardinali <martina.cardinali.4@gmail.com>',
     'apiLevel': '2.2',
-    'date': '2020/11/09',
+    'date': '2021/08/23',
     'description': 'Automation of D-Rex DNA protocol',
 }
 
@@ -23,7 +23,7 @@ def run(protocol):
     trash_box = protocol.load_labware('biorad_96_wellplate_1000ul_w_adaptor', 8)
     mag_deck = protocol.load_module('magdeck', 10)
     DNA_plate = mag_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
-    # Load a Temperature Module GEN1 in deck slot 10.
+    # Load a Temperature Module GEN1 in deck slot 7.
     temp_deck = protocol.load_module('tempdeck', 7)
     incubation_plate = temp_deck.load_labware('biorad_96_wellplate_1000ul_w_adaptor')
 
@@ -44,10 +44,11 @@ def run(protocol):
     #### REAGENT SETUP                          Description             Volume needed for protocol
     EtOH1 = trough['A9']                   # 80% Ethanol           # Wash 1 11 ml
     EtOH2 = trough['A10']                   # 80% Ethanol           # Wash 2 11 ml
+    # necessity to add other 2 EtOH columns if running full plate
 
     Elution_buffer = trough['A12']            # EBT                   6 ml
     BufferC_1 = trough['A11']                    # Buffer C:             10.8 ml
-    #BufferC_2 = trough['A6']                    # Buffer C:             10.8 ml
+    #BufferC_2 = trough['A6']                    # Buffer C:             10.8 ml -> to use only if running full plate
 
 
     #### VOLUME SETUP
@@ -66,11 +67,11 @@ def run(protocol):
     ### Place DNA_plate on magnetic_deck
     mag_deck.engage(height=34)
     protocol.delay(minutes=4)
-    #protocol.delay(minutes=1)
+    #protocol.delay(minutes=1) # used for testing, while commenting the real waiting time
 
     #### Transfer remaining supernatant to trash
     for i in list_of_cols:
-        m300.pick_up_tip(tipracks_200_1[i]) # Slow down head speed 0.5X for bead handling
+        m300.pick_up_tip(tipracks_200_1[i])
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
         m300.aspirate(70, DNA_plate[i].bottom(1))
@@ -85,12 +86,12 @@ def run(protocol):
 
     ## add Buffer C to beads with DNA (col 1 to 6)
     for i in list_of_cols[:6]:
-        m300.pick_up_tip(tipracks_200_2[i]) # Slow down head speed 0.5X for bead handling
+        m300.pick_up_tip(tipracks_200_2[i])
         # m300.mix(3, BufferC_vol, BufferC_1.bottom(4))
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
-        m300.aspirate(BufferC_vol, BufferC_1.bottom(2))
-        m300.dispense(BufferC_vol, DNA_plate[i].bottom(5))   # *2 ?? check volume
+        m300.aspirate(BufferC_vol, BufferC_1.bottom(3))
+        m300.dispense(BufferC_vol, DNA_plate[i].bottom(5))
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.mix(5, 170, DNA_plate[i].bottom(3))
@@ -103,12 +104,12 @@ def run(protocol):
     for i in list_of_cols[6:]:
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
-        m300.pick_up_tip(tipracks_200_2[i]) # Slow down head speed 0.5X for bead handling
+        m300.pick_up_tip(tipracks_200_2[i])
         m300.mix(3, BufferC_vol, BufferC_2.bottom(5))
         m300.flow_rate.aspirate = 50
         m300.flow_rate.dispense = 50
         m300.aspirate(BufferC_vol, BufferC_2.bottom(3))
-        m300.dispense(BufferC_vol, DNA_plate[i].bottom(5))   # *2 ?? check volume
+        m300.dispense(BufferC_vol, DNA_plate[i].bottom(5))
         m300.flow_rate.aspirate = 100
         m300.flow_rate.dispense = 100
         m300.mix(5, BufferC_vol, DNA_plate[i].bottom(3))
@@ -126,7 +127,7 @@ def run(protocol):
     for i in list_of_cols:
         m300.flow_rate.aspirate = 25
         m300.flow_rate.dispense = 100
-        m300.pick_up_tip(tipracks_200_3[i])
+        m300.pick_up_tip(tipracks_200_2[i])
         m300.aspirate(125, DNA_plate[i].bottom(3))
         m300.dispense(125, trash_box[i].top(-3))
         m300.blow_out()
@@ -182,16 +183,12 @@ def run(protocol):
 
     mag_deck.disengage()
 
-    #protocol.pause("Please substitute tip racks 1 and 2 before continuing.")
-    ##Reset tipracks for more tips
-    #m300.reset_tipracks()
-
     ## Ethanol Wash 2, by using tiprack 1
     ### Transfer Wash 2 to DNA_plate
     for i in list_of_cols:
         m300.flow_rate.aspirate = 150
         m300.flow_rate.dispense = 100
-        m300.pick_up_tip(tipracks_200_5[i]) # Slow down head speed 0.5X for bead handling
+        m300.pick_up_tip(tipracks_200_5[i])
         m300.aspirate(Wash_2_vol, EtOH2.bottom(4))
         m300.dispense(Wash_2_vol, DNA_plate[i].top(-3))
         m300.mix(5, 170, DNA_plate[i].bottom(2))
@@ -220,11 +217,20 @@ def run(protocol):
         protocol.delay(seconds=5)
         m300.touch_tip(v_offset=-5, radius=0.8)
         m300.air_gap(height = 2)
+        # extra step to remove remaining supernatant before going in with 10ul pipette
+        m300.aspirate(Wash_2_vol, DNA_plate[i].bottom(1))
+        m300.dispense(Wash_2_vol, trash_box[i].top(-4))
+        m300.flow_rate.aspirate = 130
+        m300.flow_rate.dispense = 200
+        m300.blow_out(trash_box[i].top(-4))
+        protocol.delay(seconds=5)
+        m300.touch_tip(v_offset=-5, radius=0.8)
+        m300.air_gap(height = 2)
         m300.return_tip()
 
     # Reset the tip tracker
     m300.reset_tipracks()
-    protocol.pause("Substitute tiprack position 2 with new 200ul; tiprack position 5 with 20ul tips")
+    protocol.pause("Substitute tiprack position 2 with new 200ul; tiprack position 5 with 10ul tips")
 
     ### Remove the remaining supernatant with 10ul pipette
     for i in list_of_cols:
@@ -272,7 +278,7 @@ def run(protocol):
         m300.return_tip()
 
     protocol.delay(minutes=5)
-    #protocol.delay(minutes=1)
+    #protocol.delay(minutes=1) # used for testing, while commenting the real waiting time
     mag_deck.engage(height=34)
 
     #### Move elutes back to plate on magnetic_deck
